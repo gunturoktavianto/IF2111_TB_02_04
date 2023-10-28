@@ -1,5 +1,7 @@
 #include <stdio.h>
 #include "listlinier.h"
+#include <stdlib.h>
+
 
 Address newNode(ElType val){
     /* Definisi List : */
