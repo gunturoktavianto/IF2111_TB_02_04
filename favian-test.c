@@ -1,6 +1,6 @@
 #include <stdio.h>
 
-int main(){
+void playlist(){
 
     printf("Hello, world!");
 
