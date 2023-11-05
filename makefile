@@ -8,7 +8,8 @@ CFLAGS = -Wall -Werror -std=c11
 
 
 # # UNTUK PROGRAM UTAMA
-SRC_MAIN = main.c
+# List seluruh .c yang ingin di compile
+SRC_MAIN = ADT/LISTLINIER/driver_listlinier.c ADT/LISTLINIER/listlinier.c 
 OBJ_MAIN = $(SRC_MAIN:.c=.o)
 
 # compile 

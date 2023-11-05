@@ -1,11 +1,11 @@
 #include <stdio.h>
 #include "circular_queue.h"
 
-boolean IsEmpty (Queue Q) {
+boolean IsEmptyQueue (Queue Q) {
     return (IDX_HEAD(Q) == IDX_UNDEF) && (IDX_TAIL(Q) == IDX_UNDEF);
 }
 
-boolean IsFull (Queue Q) {
+boolean IsFullQueue (Queue Q) {
     if (IDX_HEAD(Q) > IDX_TAIL(Q)) {
         return IDX_HEAD(Q) - IDX_TAIL(Q) == 1;
     } else {
@@ -13,8 +13,8 @@ boolean IsFull (Queue Q) {
     }
 }
 
-int Length (Queue Q) {
-    if (IsEmpty(Q)) {
+int LengthQueue (Queue Q) {
+    if (IsEmptyQueue(Q)) {
         return 0;
     } else if (IDX_HEAD(Q) > IDX_TAIL(Q)) {
         return IDX_MAX - IDX_HEAD(Q) + IDX_TAIL(Q) + 2;
@@ -29,7 +29,7 @@ void CreateQueue (Queue * Q) {
 }
 
 void enqueue (Queue * Q, ElType X) {
-    if (IsEmpty(*Q)) {
+    if (IsEmptyQueue(*Q)) {
         IDX_HEAD(*Q) = 0;
         IDX_TAIL(*Q) = 0;
     } else {
@@ -58,7 +58,7 @@ ElType dequeue (Queue * Q) {
 }
 
 void displayQueue (Queue Q) {
-    if (IsEmpty(Q)) {
+    if (IsEmptyQueue(Q)) {
         printf("[]\n");
     } else {
         int i = IDX_HEAD(Q);

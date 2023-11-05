@@ -1,0 +1,117 @@
+#include "main.c"
+#include <stdio.h>
+#include <stdlib.h>
+#include <math.h>
+#include <time.h>
+
+/*PLAY merupakan command yang digunakan untuk memutar lagu atau playlist yang dipilih. Ketika command PLAY dieksekusi, queue yang ada dihapus ketika memainkan lagu atau digantikan oleh lagu dalam playlist ketika memainkan playlist. Terdapat dua jenis play, SONG dan PLAYLIST. */
+
+/*PLAY SONG
+Command PLAY SONG digunakan untuk memainkan lagu berdasarkan masukan nama penyanyi, nama album, dan id lagu. Ketika command ini berhasil dieksekusi, queue dan riwayat lagu akan menjadi kosong.
+
+>> PLAY SONG;
+
+Daftar Penyanyi :
+New Jeans
+BLACKPINK
+Central Cee
+Rich Brian
+Denny Caknan
+Via Vallen
+
+Masukkan Nama Penyanyi yang dipilih : BLACKPINK;
+
+Daftar Album oleh BLACKPINK :
+BORN PINK
+THE ALBUM
+SQUARE ONE
+SQUARE TWO
+
+Masukkan Nama Album yang dipilih : BORN PINK;
+
+Daftar Lagu Album BORN PINK oleh BLACKPINK : 
+Pink Venom
+Shut Down
+Typa Girl
+Yeah Yeah Yeah
+Hard to Love
+The Happiest Girl
+Tally
+Ready for Love
+
+Masukkan ID Lagu yang dipilih : 3;
+
+Memutar lagu “Type Girl” oleh “BLACKPINK”.
+
+*/
+void PlaySong(){
+    boolean valid = false;
+    // menampilkan penyanyi, disimpan dalam ADT list statis
+    int i=0;
+    printf("Daftar Penyanyi :\n");
+    while(Penyanyi.A[i]!=Mark){
+        printf("  %d. %d\n", i+1, Penyanyi.A[i]);
+    }
+
+    // mencari penyanyi
+    char namapenyanyi[100];
+    printf("\nMasukkan Nama Penyanyi yang dipilih : ");
+    while(valid == false){
+        scanf("%s", &namapenyanyi); /*cuma baca sampai sebelum spasi*/
+        if(Search(Penyanyi, namapenyanyi)){valid = true;}
+        else{printf("Nama Penyanyi tidak ditemukan.\n");}
+    }
+
+    // menampilkan album dari penyanyi X, disimpan dalam ADT map
+    printf("Daftar Album oleh %s :\n", namapenyanyi);
+    PrintMap(Album);
+
+    // mencari album
+    char namaalbum[100];
+    printf("\nMasukkan Nama Album yang dipilih : ");
+    valid == false;
+    while(valid == false){
+        scanf("%s", &namaalbum); /*cuma baca sampai sebelum spasi*/
+        if(IsMemberMap(Album, namaalbum)){valid = true;}
+        else{printf("Nama Album tidak ditemukan.\n");}
+    }
+
+    // menampilkan lagu dari album X, disimpan dalam ADT set
+    printf("Daftar Lagu Album %s oleh %s :\n", namaalbum, namapenyanyi);
+    PrintMap(Album);
+
+    // mencari lagu
+    int IDlagu;
+    printf("\nMasukkan ID Lagu yang dipilih : ");
+    valid == false;
+    while(valid == false){
+        scanf("%d", &IDlagu); /*cuma baca sampai sebelum spasi*/
+        if(IsMemberSet(Lagu, IDlagu)){valid = true;}
+        else{printf("ID Lagu tidak ditemukan.\n");}
+    }
+    printf("\nMemutar lagu \"%s\" oleh \"%s\".\n", Lagu.Elements[IDlagu], namapenyanyi);
+
+    //Ketika command ini berhasil dieksekusi, queue dan riwayat lagu akan menjadi kosong
+    CreateQueue(&song);
+}
+
+
+
+
+
+
+/*PLAY PLAYLIST
+Command PLAY PLAYLIST digunakan untuk memainkan lagu berdasarkan id playlist. Ketika command ini berhasil dieksekusi, queue akan berisi semua lagu yang ada dalam playlist yang dimainkan dan isi riwayat lagu sama dengan queue, tetapi dengan urxutan yang di-reverse. Jika user memanggil fungsi start sebelumnya, maka playlist kosong.
+*/
+
+
+/*
+1. daftar penyanyi dengan ADT list statis
+2. daftar playlist dengan ADT list dinamis
+3. Queue lagu dengan ADT queue
+4. Riwayat lagu dengan ADT stack
+5. Menyimpan lagu pada album dengan ADT set
+6. Menyimpan album pada penyanyi dan menyimpan lagu dengan ADT map
+7. Suatu kumpulan lagu yang kontigue dinamakan playlist, dibuat dengan ADT List dengan Struktur Berkait
+*/
+
