@@ -3,7 +3,11 @@
         {
             "type": "cppbuild",
             "label": "C/C++: gcc.exe build active file",
+<<<<<<< HEAD
             "command": "C:\\MinGW\\bin\\gcc.exe",
+=======
+            "command": "C:\\Users\\FAVIAN\\OneDrive - Institut Teknologi Bandung\\Favian\\S1\\3rd Semester\\Alstrukdat STI\\BELAJAR C\\mingw64\\bin\\gcc.exe",
+>>>>>>> origin/favian
             "args": [
                 "-fdiagnostics-color=always",
                 "-g",
