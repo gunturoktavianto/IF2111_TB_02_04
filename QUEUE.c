@@ -1,10 +1,12 @@
+//Ini masih blm lengkap semuanya dan ga tau apakah akan eror klo di jalanin ato ga (blm sempet bikin main.c)
+
 #include <stdio.h>
 #include "queue.h"
 #include "map.h"
 #include "list.h"
 #include "boolean.h"
 #include "listlinier.h"
-
+#include "listdin.h"
 
 // Fungsi untuk menambahkan lagu ke dalam queue
 void queueSong(Queue *Q, List Song) {
@@ -58,11 +60,13 @@ void queueSong(Queue *Q, List Song) {
 }
 
 // Fungsi untuk menambahkan playlist ke dalam queue
-void queuePlaylist(ListLL Playlist, Queue *Q) {
+void queuePlaylist(ListDin L, Queue *Q) {
     //soal input id dll itu masih blm kebayang
-    address P = First(*Playlist);
-    boolean found = false;
-    while (P != Nil) && (!found){
+    printf("Masukkan ID Playlist: ")
+    ADVWORD();
+    printf("\n");
+    address P = First(ELMT(L, currentWord));
+    while (P != Nil) {
         enqueue(Q, P->info);
         P = P->next;
     }
@@ -72,10 +76,10 @@ void queuePlaylist(ListLL Playlist, Queue *Q) {
 // Fungsi untuk menukar lagu pada urutan x dan y dalam queue
 void swapSongs(int x, int y, Queue *Q) {
     if (x >= 1 && x <= Length(*Q) && y >= 1 && y <= Length(*Q)) {
-        char temp[] = Q->Tab[x];
-        Q->Tab[x] = Q->Tab[y];
-        Q->Tab[y] = temp;
-        printf("Lagu %s berhasil ditukar dengan %s\n", Q->Tab[y], Q->Tab[x]);
+        char temp[] = Q->buffer[x];
+        Q->buffer[x] = Q->buffer[y];
+        Q->buffer[y] = temp;
+        printf("Lagu %s berhasil ditukar dengan %s\n", Q->buffer[y], Q->buffer[x]);
     } else {
         if ((x < 1 || x > Length(*Q)) && y >= 1 && y <= Length(*Q)){
             printf("Lagu dengan urutan ke %d tidak terdapat dalam queue!\n", x);
@@ -96,13 +100,13 @@ void removeSong(int songId, Queue *Q, Map Song) {
             for(int j = 0; j<Song.Count;j++){
                 for(int k = 0; k<MaxEl;k++){
                     if ((Song[i].Elements[j].Lagu.Elements[k].lagu) == queue.buffer[songId]){
-                        printf("Lagu \"%s\" oleh \"%s\" telah dihapus dari queue!\n", queue.Tab[songId], char(Song[i]));
+                        printf("Lagu \"%s\" oleh \"%s\" telah dihapus dari queue!\n", queue.buffer[songId], char(Song[i]));
                         Queue temp;
                         CreateQueue(*temp);
                         ElTypeQueue  val;
                         dequeue(*Q, *val);
                         enqueue(*temp, val);
-                        while (val != queue.Tab[songId]){
+                        while (val != queue.buffer[songId]){
                             dequeue(*Q, *val);
                             enqueue(*temp, val);
                         }
