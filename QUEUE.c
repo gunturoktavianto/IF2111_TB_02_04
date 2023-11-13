@@ -6,7 +6,7 @@
 #include "list.h"
 #include "boolean.h"
 #include "listlinier.h"
-#include "listdin.h"
+#include "arraydin.h"
 
 // Fungsi untuk menambahkan lagu ke dalam queue
 void queueSong(Queue *Q, List Song) {
@@ -15,7 +15,7 @@ void queueSong(Queue *Q, List Song) {
         printf("%d. %s\n", i+1, char(Song[i]));
     }
     printf("Masukkan nama penyanyi : ");
-    ADVWORD();
+    STARTWORD(stdin);
     printf("\n");
     boolean found = false;
     for(int i = FirstIdx(Song); i <= LastIdx(Song); i++){
@@ -32,7 +32,7 @@ void queueSong(Queue *Q, List Song) {
         }
     }
     printf("Masukkan Nama Album yang dipilih : ");
-    ADVWORD();
+    STARTWORD(stdin);
     printf("\n");
     boolean found1 = false;
     for(int i = 0; i < Song[idx].Count; i++){
@@ -49,7 +49,7 @@ void queueSong(Queue *Q, List Song) {
         }
     }
     printf("Masukkan ID Lagu yang dipilih: ");
-    ADVWORD();
+    STARTWORD(stdin);;
     printf("\n");
     for(int i = 0; i < Song[idx].Elements[idx1].Lagu.Count; i++){
         if ((char(Song[idx].Elements[idx1].Lagu.Elements[i].lagu)) == char(Song[idx].Elements[idx1].Lagu.Elements[int(currentWord)].lagu)){
@@ -63,7 +63,7 @@ void queueSong(Queue *Q, List Song) {
 void queuePlaylist(ListDin L, Queue *Q) {
     //soal input id dll itu masih blm kebayang
     printf("Masukkan ID Playlist: ")
-    ADVWORD();
+    STARTWORD(stdin);;
     printf("\n");
     address P = First(ELMT(L, currentWord));
     while (P != Nil) {
