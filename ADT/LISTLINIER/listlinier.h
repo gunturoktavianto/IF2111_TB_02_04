@@ -1,7 +1,7 @@
 /* File : listlinier.h */
 /* contoh ADT list berkait dengan representasi fisik pointer  */
 /* Representasi address dengan pointer */
-/* infotype adalah integer */
+/* infotypeLL adalah integer */
 
 #ifndef listlinier_H
 #define listlinier_H
@@ -10,10 +10,10 @@
 
 #define Nil NULL
 
-typedef int infotype;
+typedef int infotypeLL;
 typedef struct tElmtlist *address;
 typedef struct tElmtlist { 
-	infotype info;
+	infotypeLL info;
 	address next;
 } ElmtList;
 typedef struct {
@@ -39,7 +39,7 @@ void CreateLL (ListLL *L);
 /* F.S. Terbentuk list kosong */
 
 /****************** Manajemen Memori ******************/
-address AlokasiLL (infotype X);
+address AlokasiLL (infotypeLL X);
 /* Mengirimkan address hasil alokasi sebuah elemen */
 /* Jika alokasi berhasil, maka address tidak nil, dan misalnya */
 /* menghasilkan P, maka info(P)=X, Next(P)=Nil */
@@ -50,29 +50,29 @@ void DealokasiLL (address *P);
 /* Melakukan dealokasi/pengembalian address P */
 
 /****************** PENCARIAN SEBUAH ELEMEN LIST ******************/
-address SearchLL (ListLL L, infotype X);
+address SearchLL (ListLL L, infotypeLL X);
 /* Mencari apakah ada elemen list dengan info(P)= X */
 /* Jika ada, mengirimkan address elemen tersebut. */
 /* Jika tidak ada, mengirimkan Nil */
 
 /****************** PRIMITIF BERDASARKAN NILAI ******************/
 /*** PENAMBAHAN ELEMEN ***/
-void InsVFirst (ListLL *L, infotype X);
+void InsVFirst (ListLL *L, infotypeLL X);
 /* I.S. L mungkin kosong */
 /* F.S. Melakukan alokasi sebuah elemen dan */
 /* menambahkan elemen pertama dengan nilai X jika alokasi berhasil */
-void InsVLast (ListLL *L, infotype X);
+void InsVLast (ListLL *L, infotypeLL X);
 /* I.S. L mungkin kosong */
 /* F.S. Melakukan alokasi sebuah elemen dan */
 /* menambahkan elemen list di akhir: elemen terakhir yang baru */
 /* bernilai X jika alokasi berhasil. Jika alokasi gagal: I.S.= F.S. */
 
 /*** PENGHAPUSAN ELEMEN ***/
-void DelVFirst (ListLL *L, infotype *X);
+void DelVFirst (ListLL *L, infotypeLL *X);
 /* I.S. List L tidak kosong  */
 /* F.S. Elemen pertama list dihapus: nilai info disimpan pada X */
 /*      dan alamat elemen pertama di-dealokasi */
-void DelVLast (ListLL *L, infotype *X);
+void DelVLast (ListLL *L, infotypeLL *X);
 /* I.S. list tidak kosong */
 /* F.S. Elemen terakhir list dihapus: nilai info disimpan pada X */
 /*      dan alamat elemen terakhir di-dealokasi */
@@ -96,7 +96,7 @@ void DelFirstLL (ListLL *L, address *P);
 /* F.S. P adalah alamat elemen pertama list sebelum penghapusan */
 /*      Elemen list berkurang satu (mungkin menjadi kosong) */
 /* First element yg baru adalah suksesor elemen pertama yang lama */
-void DelP (ListLL *L, infotype X);
+void DelP (ListLL *L, infotypeLL X);
 /* I.S. Sembarang */
 /* F.S. Jika ada elemen list beraddress P, dengan info(P)=X  */
 /* Maka P dihapus dari list dan di-dealokasi */
@@ -124,11 +124,11 @@ int NbElmtLL (ListLL L);
 /* Mengirimkan banyaknya elemen list; mengirimkan 0 jika list kosong */
 
 /*** Prekondisi untuk Max/Min/rata-rata : List tidak kosong ***/
-infotype MaxLL (ListLL L);
+infotypeLL MaxLL (ListLL L);
 /* Mengirimkan nilai info(P) yang maksimum */
 address AdrMaxLL (ListLL L);
 /* Mengirimkan address P, dengan info(P) yang bernilai maksimum */
-infotype MinLL (ListLL L);
+infotypeLL MinLL (ListLL L);
 /* Mengirimkan nilai info(P) yang minimum */
 address AdrMinLL (ListLL L);
 /* Mengirimkan address P, dengan info(P) yang bernilai minimum */

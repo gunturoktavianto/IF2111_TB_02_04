@@ -1,4 +1,7 @@
 #include "main.c"
+#include "ADT/LIST/driver_list.c"
+#include "ADT/MAP/driver_map.c"
+#include "ADT/SET/driver_set.c"
 #include <stdio.h>
 #include <stdlib.h>
 #include <math.h>
@@ -86,7 +89,9 @@ void PlaySong(){
     valid == false;
     while(valid == false){
         scanf("%d", &IDlagu); /*cuma baca sampai sebelum spasi*/
-        if(IsMemberSet(Lagu, IDlagu)){valid = true;}
+        InfoLagu temp;
+        temp.lagu = IDlagu;
+        if(IsMemberSet(Lagu, temp)){valid = true;}
         else{printf("ID Lagu tidak ditemukan.\n");}
     }
     printf("\nMemutar lagu \"%s\" oleh \"%s\".\n", Lagu.Elements[IDlagu], namapenyanyi);
@@ -101,8 +106,31 @@ void PlaySong(){
 
 
 /*PLAY PLAYLIST
-Command PLAY PLAYLIST digunakan untuk memainkan lagu berdasarkan id playlist. Ketika command ini berhasil dieksekusi, queue akan berisi semua lagu yang ada dalam playlist yang dimainkan dan isi riwayat lagu sama dengan queue, tetapi dengan urxutan yang di-reverse. Jika user memanggil fungsi start sebelumnya, maka playlist kosong.
+Command PLAY PLAYLIST digunakan untuk memainkan lagu berdasarkan id playlist. Ketika command ini berhasil dieksekusi, queue akan berisi semua lagu yang ada dalam playlist yang dimainkan dan isi riwayat lagu sama dengan queue, tetapi dengan urutan yang di-reverse. Jika user memanggil fungsi start sebelumnya, maka playlist kosong.
 */
+
+void PlayPlaylist(){
+    /*Initial State*/
+    /*playlist tidak kosong*/
+    ListLL playlist; //temporary
+    boolean valid = false;
+    int IDplaylist;
+    while(valid == false){
+        printf("Masukkan ID Playlist: ");
+        scanf("%d", &IDplaylist);
+        infotypeLL temp;
+        temp = IDplaylist;
+        if(SearchLL(playlist, temp) != Nil){valid = true;}
+        else{printf("ID Playlist tidak ditemukan.\n");}
+    }
+    printf("\nMemutar playlist \"%s\".\n", Lagu.Elements[IDplaylist]);
+
+    /*Final State*/
+    /*currentsong menjadi lagu urutan pertama dalam playlist*/
+    /*queue berisi semua lagu dalam playlist*/
+    /*riwayat berisi queue yang di reverse*/
+
+}
 
 
 /*

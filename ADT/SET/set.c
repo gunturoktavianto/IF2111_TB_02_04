@@ -2,6 +2,7 @@
 #include "set.h"
 
 /* *** Konstruktor/Kreator *** */
+// Membuat album baru
 void CreateSet(Set *S){
     /* I.S. Sembarang */
     /* F.S. Membuat sebuah Set S kosong berkapasitas MaxEl */
@@ -10,12 +11,14 @@ void CreateSet(Set *S){
 }
 
 /* ********* Predikat Untuk test keadaan KOLEKSI ********* */
+// Apakah album kosong
 boolean IsEmptySet(Set S){
     /* Mengirim true jika Set S kosong*/
     /* Ciri Set kosong : count bernilai Nil */
     return (S.Count == Nil);
 }
 
+// Apakah album penuh
 boolean IsFullSet(Set S){
     /* Mengirim true jika Set S penuh */
     /* Ciri Set penuh : count bernilai MaxEl */
@@ -23,6 +26,7 @@ boolean IsFullSet(Set S){
 }
 
 /* ********** Operator Dasar Set ********* */
+// Memasukkan lagu pada album
 void InsertSet(Set *S, InfoLagu Elmt){
     /* Menambahkan Elmt sebagai elemen Set S. */
     /* I.S. S mungkin kosong, S tidak penuh
@@ -34,6 +38,7 @@ void InsertSet(Set *S, InfoLagu Elmt){
     }
 }
 
+// Menghapus lagu pada album
 void DeleteSet(Set *S, InfoLagu Elmt){
     /* Menghapus Elmt dari Set S. */
     /* I.S. S tidak kosong
@@ -43,7 +48,7 @@ void DeleteSet(Set *S, InfoLagu Elmt){
         boolean found = false;
         int i=0;
         while(found!=true && i < (*S).Count){
-            if((*S).Elements[i]==Elmt){
+            if((*S).Elements[i].lagu==Elmt.lagu){
                 found = true;
                 for(int j=i; j<(*S).Count-1; j++){
                     (*S).Elements[j] = (*S).Elements[j+1];
@@ -55,12 +60,13 @@ void DeleteSet(Set *S, InfoLagu Elmt){
     }
 }
 
+// Apakah lagu terdapat pada album tersebut
 boolean IsMemberSet(Set S, InfoLagu Elmt){
     /* Mengembalikan true jika Elmt adalah member dari S */
     boolean found = false;
     int i=0;
     while(found!=true && i < S.Count){
-        if(S.Elements[i]==Elmt){
+        if(S.Elements[i].lagu==Elmt.lagu){
             found = true;
         }
         i++;

@@ -15,8 +15,3 @@
 
 #define MAX_LINES 100
 #define MAX_LINE_LENGTH 100
-
-int main(){
-    
-}
-

@@ -16,7 +16,7 @@
 
 /* Kamus Umum */
 #define MaxEl 100
-#define Mark -9999  /* Nilai tak terdefinisi */
+#define Mark -9999  /* Nilai tak terdefinisi type str */
 #define InvalidIdx -1  /* Indeks tak terdefinisi */
 
 /* Definisi elemen dan koleksi objek */
