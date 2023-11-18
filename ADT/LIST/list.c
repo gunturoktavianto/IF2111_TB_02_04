@@ -28,7 +28,7 @@ ElType Get(List L, IdxType i) {
 	return L.A[i];
 }
 
-void Set(List *L, IdxType i, ElType v) {
+void Modify(List *L, IdxType i, ElType v) {
 	(*L).A[i] = v;
 }
 

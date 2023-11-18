@@ -11,12 +11,16 @@ void PrintMap(Map s){
     // printf("}\n");
 }
 
+Map Penyanyi;
 Map Album;
 int main(){
-    CreateMap(&Album);
+    CreateMap(&Penyanyi);
 
+    int jumlah = 4;
     int i=0;
-    while(i < Album.Count){
-        InsertMap(&Album, i, )
+    while(i<=jumlah){
+        InsertMap(&Penyanyi, i, i+20);
+        i++;
     }
+    PrintMap(Penyanyi);
 }
