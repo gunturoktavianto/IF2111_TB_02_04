@@ -7,6 +7,10 @@
 #include <math.h>
 #include <time.h>
 
+void playlistStatus(){
+    
+}
+
 int Status(){
     // Initial state : currentsong from album x from penyanyi x
     // Penyanyi.Elements[0].Lagu->Elements[0].lagu
@@ -41,7 +45,8 @@ int Status(){
 
     // Ada lagu, queue, dan playlist
     // Hanya ditampilkan ketika melakukan playlist. Tidak ditampilkan jika terdapat lagu selain dari playlist 
-    else if(){
+    // 
+    else if(isPlaylist){
         printf("Current Playlist: %d\n\nNow Playing:\n%d - %d - %d\n\nQueue:\n",Penyanyi.Elements[0].Key, Penyanyi.Elements[0].Value, Penyanyi.Elements[0].Lagu->Elements[0].lagu);
         Queue queueLagu;
         Queue status;
