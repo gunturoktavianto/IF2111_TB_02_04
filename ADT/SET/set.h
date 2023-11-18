@@ -8,11 +8,20 @@
 Deklarasi stack yang dengan implementasi array eksplisit-statik rata kiri
 */
 
+<<<<<<< HEAD
 #define MaxEl 100
 
 // typedef int bool;
 typedef int infotypeSet;  //dibekukan
 typedef int address;
+=======
+#define Nil 0
+#define MaxEl 100
+
+// typedef int bool;
+typedef int infotypeSet;
+typedef int addressSet;
+>>>>>>> 34f31173c125b02e596bcfa44df8bdbf16e391c4
 
 typedef struct 
 {
@@ -22,7 +31,11 @@ typedef struct
 typedef struct
 {
     InfoLagu Elements[MaxEl];   // array of lagu
+<<<<<<< HEAD
     address Count;              // jumlah lagu dari album
+=======
+    addressSet Count;              // jumlah lagu dari album
+>>>>>>> 34f31173c125b02e596bcfa44df8bdbf16e391c4
 } Set;          // album
 
 /* Definisi Set S kosong : S.Count = Nil */

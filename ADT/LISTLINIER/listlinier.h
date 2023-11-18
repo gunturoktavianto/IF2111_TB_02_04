@@ -1,18 +1,31 @@
 /* File : listlinier.h */
 /* contoh ADT list berkait dengan representasi fisik pointer  */
 /* Representasi address dengan pointer */
+<<<<<<< HEAD
 /* infotypeLL adalah integer */
+=======
+/* infotype adalah integer */
+>>>>>>> 34f31173c125b02e596bcfa44df8bdbf16e391c4
 
 #ifndef listlinier_H
 #define listlinier_H
 
 #include "boolean.h"
 
+<<<<<<< HEAD
 
 typedef int infotypeLL;
 typedef struct tElmtlist *address;
 typedef struct tElmtlist { 
 	infotypeLL info;
+=======
+#define Nil NULL
+
+typedef int infotype;
+typedef struct tElmtlist *address;
+typedef struct tElmtlist { 
+	infotype info;
+>>>>>>> 34f31173c125b02e596bcfa44df8bdbf16e391c4
 	address next;
 } ElmtList;
 typedef struct {
@@ -38,7 +51,11 @@ void CreateLL (ListLL *L);
 /* F.S. Terbentuk list kosong */
 
 /****************** Manajemen Memori ******************/
+<<<<<<< HEAD
 address AlokasiLL (infotypeLL X);
+=======
+address AlokasiLL (infotype X);
+>>>>>>> 34f31173c125b02e596bcfa44df8bdbf16e391c4
 /* Mengirimkan address hasil alokasi sebuah elemen */
 /* Jika alokasi berhasil, maka address tidak nil, dan misalnya */
 /* menghasilkan P, maka info(P)=X, Next(P)=Nil */
@@ -49,29 +66,49 @@ void DealokasiLL (address *P);
 /* Melakukan dealokasi/pengembalian address P */
 
 /****************** PENCARIAN SEBUAH ELEMEN LIST ******************/
+<<<<<<< HEAD
 address SearchLL (ListLL L, infotypeLL X);
+=======
+address SearchLL (ListLL L, infotype X);
+>>>>>>> 34f31173c125b02e596bcfa44df8bdbf16e391c4
 /* Mencari apakah ada elemen list dengan info(P)= X */
 /* Jika ada, mengirimkan address elemen tersebut. */
 /* Jika tidak ada, mengirimkan Nil */
 
 /****************** PRIMITIF BERDASARKAN NILAI ******************/
 /*** PENAMBAHAN ELEMEN ***/
+<<<<<<< HEAD
 void InsVFirst (ListLL *L, infotypeLL X);
 /* I.S. L mungkin kosong */
 /* F.S. Melakukan alokasi sebuah elemen dan */
 /* menambahkan elemen pertama dengan nilai X jika alokasi berhasil */
 void InsVLast (ListLL *L, infotypeLL X);
+=======
+void InsVFirst (ListLL *L, infotype X);
+/* I.S. L mungkin kosong */
+/* F.S. Melakukan alokasi sebuah elemen dan */
+/* menambahkan elemen pertama dengan nilai X jika alokasi berhasil */
+void InsVLast (ListLL *L, infotype X);
+>>>>>>> 34f31173c125b02e596bcfa44df8bdbf16e391c4
 /* I.S. L mungkin kosong */
 /* F.S. Melakukan alokasi sebuah elemen dan */
 /* menambahkan elemen list di akhir: elemen terakhir yang baru */
 /* bernilai X jika alokasi berhasil. Jika alokasi gagal: I.S.= F.S. */
 
 /*** PENGHAPUSAN ELEMEN ***/
+<<<<<<< HEAD
 void DelVFirst (ListLL *L, infotypeLL *X);
 /* I.S. List L tidak kosong  */
 /* F.S. Elemen pertama list dihapus: nilai info disimpan pada X */
 /*      dan alamat elemen pertama di-dealokasi */
 void DelVLast (ListLL *L, infotypeLL *X);
+=======
+void DelVFirst (ListLL *L, infotype *X);
+/* I.S. List L tidak kosong  */
+/* F.S. Elemen pertama list dihapus: nilai info disimpan pada X */
+/*      dan alamat elemen pertama di-dealokasi */
+void DelVLast (ListLL *L, infotype *X);
+>>>>>>> 34f31173c125b02e596bcfa44df8bdbf16e391c4
 /* I.S. list tidak kosong */
 /* F.S. Elemen terakhir list dihapus: nilai info disimpan pada X */
 /*      dan alamat elemen terakhir di-dealokasi */
@@ -95,7 +132,11 @@ void DelFirstLL (ListLL *L, address *P);
 /* F.S. P adalah alamat elemen pertama list sebelum penghapusan */
 /*      Elemen list berkurang satu (mungkin menjadi kosong) */
 /* First element yg baru adalah suksesor elemen pertama yang lama */
+<<<<<<< HEAD
 void DelP (ListLL *L, infotypeLL X);
+=======
+void DelP (ListLL *L, infotype X);
+>>>>>>> 34f31173c125b02e596bcfa44df8bdbf16e391c4
 /* I.S. Sembarang */
 /* F.S. Jika ada elemen list beraddress P, dengan info(P)=X  */
 /* Maka P dihapus dari list dan di-dealokasi */
@@ -123,11 +164,19 @@ int NbElmtLL (ListLL L);
 /* Mengirimkan banyaknya elemen list; mengirimkan 0 jika list kosong */
 
 /*** Prekondisi untuk Max/Min/rata-rata : List tidak kosong ***/
+<<<<<<< HEAD
 infotypeLL MaxLL (ListLL L);
 /* Mengirimkan nilai info(P) yang maksimum */
 address AdrMaxLL (ListLL L);
 /* Mengirimkan address P, dengan info(P) yang bernilai maksimum */
 infotypeLL MinLL (ListLL L);
+=======
+infotype MaxLL (ListLL L);
+/* Mengirimkan nilai info(P) yang maksimum */
+address AdrMaxLL (ListLL L);
+/* Mengirimkan address P, dengan info(P) yang bernilai maksimum */
+infotype MinLL (ListLL L);
+>>>>>>> 34f31173c125b02e596bcfa44df8bdbf16e391c4
 /* Mengirimkan nilai info(P) yang minimum */
 address AdrMinLL (ListLL L);
 /* Mengirimkan address P, dengan info(P) yang bernilai minimum */

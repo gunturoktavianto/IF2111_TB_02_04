@@ -1,0 +1,18 @@
+{
+	"folders": [
+		{
+			"path": "../Test Default"
+		},
+		{
+			"path": "."
+		}
+	],
+	"settings": {
+		"files.associations": {
+			"stdlib.h": "c",
+			"mesinkata.h": "c",
+			"stdio.h": "c",
+			"listplaylist.h": "c"
+		}
+	}
+}

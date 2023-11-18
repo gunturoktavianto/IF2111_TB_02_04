@@ -4,7 +4,11 @@
 /* *** Konstruktor/Kreator *** */
 void CreateMap(Map *M)
 /* I.S. Sembarang */
+<<<<<<< HEAD
 /* F.S. Membuat sebuah Map M kosong berkapasitas MaxMap */
+=======
+/* F.S. Membuat sebuah Map M kosong berkapasitas MaxEl */
+>>>>>>> 34f31173c125b02e596bcfa44df8bdbf16e391c4
 /* Ciri Map kosong : count bernilai Nil */
 {
     M->Count = Nil;
@@ -20,9 +24,15 @@ boolean IsEmptyMap(Map M)
 
 boolean IsFullMap(Map M)
 /* Mengirim true jika Map M penuh */
+<<<<<<< HEAD
 /* Ciri Map penuh : count bernilai MaxMap */
 {
     return M.Count == MaxMap;
+=======
+/* Ciri Map penuh : count bernilai MaxEl */
+{
+    return M.Count == MaxEl;
+>>>>>>> 34f31173c125b02e596bcfa44df8bdbf16e391c4
 }
 
 /* ********** Operator Dasar Map ********* */

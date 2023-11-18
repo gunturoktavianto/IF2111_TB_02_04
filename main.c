@@ -7,7 +7,10 @@
 #include "ADT/QUEUE/queue.h"
 #include "ADT/SET/set.h"
 #include "ADT/STACK/stack.h"
+<<<<<<< HEAD
 #include "ADT/ARRAYDIN/arraydin.h"
+=======
+>>>>>>> 34f31173c125b02e596bcfa44df8bdbf16e391c4
 #include "listplaylist.h"
 #include <stdio.h>
 #include <stdlib.h>
@@ -17,6 +20,7 @@
 #define MAX_LINE_LENGTH 100
 
 int main(){
+<<<<<<< HEAD
     // KAMUS
     ArrayDin arr;
     
@@ -28,4 +32,6 @@ int main(){
    InsertAtarrdin(&arr, 51, 3);
    InsertAtarrdin(&arr, 11, 4);
     DisplayDaftarPlaylist(arr);
+=======
+>>>>>>> 34f31173c125b02e596bcfa44df8bdbf16e391c4
 }

@@ -2,7 +2,10 @@
 #include "set.h"
 
 /* *** Konstruktor/Kreator *** */
+<<<<<<< HEAD
 // Membuat album baru
+=======
+>>>>>>> 34f31173c125b02e596bcfa44df8bdbf16e391c4
 void CreateSet(Set *S){
     /* I.S. Sembarang */
     /* F.S. Membuat sebuah Set S kosong berkapasitas MaxEl */
@@ -11,14 +14,20 @@ void CreateSet(Set *S){
 }
 
 /* ********* Predikat Untuk test keadaan KOLEKSI ********* */
+<<<<<<< HEAD
 // Apakah album kosong
+=======
+>>>>>>> 34f31173c125b02e596bcfa44df8bdbf16e391c4
 boolean IsEmptySet(Set S){
     /* Mengirim true jika Set S kosong*/
     /* Ciri Set kosong : count bernilai Nil */
     return (S.Count == Nil);
 }
 
+<<<<<<< HEAD
 // Apakah album penuh
+=======
+>>>>>>> 34f31173c125b02e596bcfa44df8bdbf16e391c4
 boolean IsFullSet(Set S){
     /* Mengirim true jika Set S penuh */
     /* Ciri Set penuh : count bernilai MaxEl */
@@ -26,7 +35,10 @@ boolean IsFullSet(Set S){
 }
 
 /* ********** Operator Dasar Set ********* */
+<<<<<<< HEAD
 // Memasukkan lagu pada album
+=======
+>>>>>>> 34f31173c125b02e596bcfa44df8bdbf16e391c4
 void InsertSet(Set *S, InfoLagu Elmt){
     /* Menambahkan Elmt sebagai elemen Set S. */
     /* I.S. S mungkin kosong, S tidak penuh
@@ -38,7 +50,10 @@ void InsertSet(Set *S, InfoLagu Elmt){
     }
 }
 
+<<<<<<< HEAD
 // Menghapus lagu pada album
+=======
+>>>>>>> 34f31173c125b02e596bcfa44df8bdbf16e391c4
 void DeleteSet(Set *S, InfoLagu Elmt){
     /* Menghapus Elmt dari Set S. */
     /* I.S. S tidak kosong
@@ -48,7 +63,11 @@ void DeleteSet(Set *S, InfoLagu Elmt){
         boolean found = false;
         int i=0;
         while(found!=true && i < (*S).Count){
+<<<<<<< HEAD
             if((*S).Elements[i].lagu==Elmt.lagu){
+=======
+            if((*S).Elements[i]==Elmt){
+>>>>>>> 34f31173c125b02e596bcfa44df8bdbf16e391c4
                 found = true;
                 for(int j=i; j<(*S).Count-1; j++){
                     (*S).Elements[j] = (*S).Elements[j+1];
@@ -60,13 +79,20 @@ void DeleteSet(Set *S, InfoLagu Elmt){
     }
 }
 
+<<<<<<< HEAD
 // Apakah lagu terdapat pada album tersebut
+=======
+>>>>>>> 34f31173c125b02e596bcfa44df8bdbf16e391c4
 boolean IsMemberSet(Set S, InfoLagu Elmt){
     /* Mengembalikan true jika Elmt adalah member dari S */
     boolean found = false;
     int i=0;
     while(found!=true && i < S.Count){
+<<<<<<< HEAD
         if(S.Elements[i].lagu==Elmt.lagu){
+=======
+        if(S.Elements[i]==Elmt){
+>>>>>>> 34f31173c125b02e596bcfa44df8bdbf16e391c4
             found = true;
         }
         i++;
