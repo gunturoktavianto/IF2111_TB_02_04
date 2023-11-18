@@ -6,7 +6,6 @@
 #define ADTList1
 
 #include "boolean.h"
-<<<<<<< HEAD
                 //    0 1 2 3 4 5 6
 
 // List A (awal)    = 1 2 2 1 3 4 5
@@ -18,12 +17,6 @@
 /* Kamus Umum */
 #define MaxEl 100
 #define Mark -9999  /* Nilai tak terdefinisi type str */
-=======
-
-/* Kamus Umum */
-#define MaxEl 100
-#define Mark -9999  /* Nilai tak terdefinisi */
->>>>>>> 34f31173c125b02e596bcfa44df8bdbf16e391c4
 #define InvalidIdx -1  /* Indeks tak terdefinisi */
 
 /* Definisi elemen dan koleksi objek */
@@ -60,7 +53,7 @@ ElType Get(List L, IdxType i);
 /* Mengirimkan elemen list yang ke-i */
 
 /* *** Selektor SET : Mengubah nilai list dan elemen list *** */
-void Set(List *L, IdxType i, ElType v);
+void Modify(List *L, IdxType i, ElType v);
 /* I.S. T terdefinisi, sembarang */
 /* F.S. Elemen T yang ke-i bernilai v */
 

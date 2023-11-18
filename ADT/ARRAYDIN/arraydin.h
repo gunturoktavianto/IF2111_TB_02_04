@@ -34,36 +34,36 @@ void DeallocateArrayDin(ArrayDin *array);
  * Fungsi untuk mengetahui apakah suatu array kosong.
  * Prekondisi: array terdefinisi
  */
-boolean IsEmptyArray(ArrayDin array);
+boolean IsEmptyArrDin(ArrayDin array);
 
 /**
  * Fungsi untuk mendapatkan banyaknya elemen efektif array, 0 jika tabel kosong.
  * Prekondisi: array terdefinisi
  */
-int Lengtharrdin(ArrayDin array);
+int LengthArrDin(ArrayDin array);
 
 /**
  * Mengembalikan elemen array L yang ke-I (indeks lojik).
  * Prekondisi: array tidak kosong, i di antara 0..Length(array).
  */
-ElTypeArrDin Getarrdin(ArrayDin array, IdxTypeArrDin i);
+ElTypeArrDin GetArrDin(ArrayDin array, IdxTypeArrDin i);
 
 /**
  * Fungsi untuk mendapatkan kapasitas yang tersedia.
  * Prekondisi: array terdefinisi
  */
-int GetCapacityarrdin(ArrayDin array);
+int GetCapacityArrDin(ArrayDin array);
 
 /**
  * Fungsi untuk menambahkan elemen baru di index ke-i
  * Prekondisi: array terdefinisi, i di antara 0..Length(array).
  */
-void InsertAtarrdin(ArrayDin *array, ElTypeArrDin el, IdxTypeArrDin i);
+void InsertAtArrDin(ArrayDin *array, ElTypeArrDin el, IdxTypeArrDin i);
 
 /**
  * Fungsi untuk menghapus elemen di index ke-i ArrayDin
  * Prekondisi: array terdefinisi, i di antara 0..Length(array).
  */
-void DeleteAtarrdin(ArrayDin *array, IdxTypeArrDin i);
+void DeleteAtArrDin(ArrayDin *array, IdxTypeArrDin i);
 
 #endif

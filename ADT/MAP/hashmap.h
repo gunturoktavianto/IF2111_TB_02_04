@@ -23,11 +23,11 @@ typedef struct
 {
 	keytype Key;
 	valuetype Value;
-} infotypeMap;
+} infotypeHash;
 
 typedef struct
 {
-	infotypeMap Elements[MaxEl];
+	infotypeHash Elements[MaxEl];
 	address Count;
 } HashMap;
 

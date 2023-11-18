@@ -11,11 +11,7 @@ Deklarasi stack yang dengan implementasi array eksplisit-statik rata kiri
 // #define false 0
 // #define true 1
 #define Nil 0
-<<<<<<< HEAD
-#define MaxMap 10
-=======
 #define MaxEl 10
->>>>>>> 34f31173c125b02e596bcfa44df8bdbf16e391c4
 #define Undefined -999
 
 // typedef int bool;
@@ -30,11 +26,7 @@ typedef struct {
 } InfoAlbum;
 
 typedef struct {
-<<<<<<< HEAD
-	InfoAlbum Elements[MaxMap];	// array of album
-=======
 	InfoAlbum Elements[MaxEl];	// array of album
->>>>>>> 34f31173c125b02e596bcfa44df8bdbf16e391c4
 	address Count;		// jumlah album dari penyanyi
 } Map;		// penyanyi
 
@@ -47,11 +39,7 @@ typedef struct {
 /* *** Konstruktor/Kreator *** */
 void CreateMap(Map *M);
 /* I.S. Sembarang */
-<<<<<<< HEAD
-/* F.S. Membuat sebuah Map M kosong berkapasitas MaxMap */
-=======
 /* F.S. Membuat sebuah Map M kosong berkapasitas MaxEl */
->>>>>>> 34f31173c125b02e596bcfa44df8bdbf16e391c4
 /* Ciri Map kosong : count bernilai Nil */
 
 /* ********* Predikat Untuk test keadaan KOLEKSI ********* */
@@ -61,11 +49,7 @@ boolean IsEmptyMap(Map M);
 
 boolean IsFullMap(Map M);
 /* Mengirim true jika Map M penuh */
-<<<<<<< HEAD
-/* Ciri Map penuh : count bernilai MaxMap */
-=======
 /* Ciri Map penuh : count bernilai MaxEl */
->>>>>>> 34f31173c125b02e596bcfa44df8bdbf16e391c4
 
 /* ********** Operator Dasar Map ********* */
 valuetype ValueMap(Map M, keytype k);

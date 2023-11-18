@@ -17,11 +17,7 @@ typedef int address;   /* indeks tabel */
 /* Contoh deklarasi variabel bertype stack dengan ciri TOP : */
 /* Versi I : dengan menyimpan tabel dan alamat top secara eksplisit*/
 typedef struct { 
-<<<<<<< HEAD
   infotypeStack T[MaxEl]; /* tabel penyimpan elemen */
-=======
-  infotypeStack[MaxEl]; /* tabel penyimpan elemen */
->>>>>>> 34f31173c125b02e596bcfa44df8bdbf16e391c4
   address TOP;  /* alamat TOP: elemen puncak */
 } Stack;
 /* Definisi stack S kosong : S.TOP = Nil */
@@ -49,21 +45,13 @@ boolean IsFullStack(Stack S);
 /* Mengirim true jika tabel penampung nilai elemen stack penuh */
 
 /* ************ Menambahkan sebuah elemen ke Stack ************ */
-<<<<<<< HEAD
 void Push(Stack * S, infotypeStack X);
 /* Menambahkan X sebagai elemen Stack S. */
-=======
-void Push(Stack * S, infotypeStack X)/* Menambahkan X sebagai elemen Stack S. */
->>>>>>> 34f31173c125b02e596bcfa44df8bdbf16e391c4
 /* I.S. S mungkin kosong, tabel penampung elemen stack TIDAK penuh */
 /* F.S. X menjadi TOP yang baru,TOP bertambah 1 */
 
 /* ************ Menghapus sebuah elemen Stack ************ */
-<<<<<<< HEAD
 void Pop(Stack * S, infotypeStack* X);
-=======
-void Pop(Stack * S, infotypeStack *X)
->>>>>>> 34f31173c125b02e596bcfa44df8bdbf16e391c4
 /* Menghapus X dari Stack S. */
 /* I.S. S  tidak mungkin kosong */
 /* F.S. X adalah nilai elemen TOP yang lama, TOP berkurang 1 */

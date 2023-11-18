@@ -2,16 +2,26 @@
 #include "listsong.h"
 #include <stdio.h>
 
-void DisplayDaftarPenyanyi(List L)
-{
-    // Menampilkan list penyanyi yang ada
+void DisplayDaftarPlaylist(ArrayDin Arr){
+/*
+Menampilkan daftar playlist yang ada
+*/
     // KAMUS
-    int i;
-    // ALGORITMA
-    printf("Daftar Penyanyi :\n");
-    for(i = 0;i < Length(L); i++)
+    int i = 0;
+    // ALGORITMA    
+    if(IsEmptyArray(Arr)) // kalo kosong
     {
-        printf("    %d. %s", (i+1), L.A[i]);
+        printf("Daftar playlist yang kamu miliki: \n");
+        printf("Kamu tidak memiliki playlist.\n");
+    }
+    else
+    {
+        printf("Daftar playlist yang kamu miliki: \n");
+        while(i < Lengtharrdin(Arr)) // loop unutk ngeprint playlist
+        {
+            printf("    %d. %s", i+1, Arr.A[i]);
+            i++;
+        }
     }
 }
 
@@ -91,7 +101,7 @@ void ListDefault(List Penyanyi, Map Album, Set Lagu)
         if(input == 'Y')
         {
             // menampilkan lagu dari album X, disimpan dalam ADT set
-            printf("Daftar Lagu Album %s oleh %s :\n", namaalbum, namapenyanyi);
+            printf("Daftar  Lagu Album %s oleh %s :\n", namaalbum, namapenyanyi);
             PrintMap(Album);
         }
     } 

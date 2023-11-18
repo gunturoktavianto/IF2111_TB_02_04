@@ -42,7 +42,7 @@ void DeallocateArrayDin(ArrayDin *array)
     array->Neff = 0;
 }
 
-boolean IsEmptyArray(ArrayDin array)
+boolean IsEmptyArrDin(ArrayDin array)
 {
 /**
  * Fungsi untuk mengetahui apakah suatu array kosong.
@@ -55,7 +55,7 @@ boolean IsEmptyArray(ArrayDin array)
 }
 
 
-int Lengtharrdin(ArrayDin array)
+int LengthArrDin(ArrayDin array)
 {
 /**
  * Fungsi untuk mendapatkan banyaknya elemen efektif array, 0 jika tabel kosong.
@@ -68,7 +68,7 @@ int Lengtharrdin(ArrayDin array)
 }
 
 
-ElTypeArrDin Getarrdin(ArrayDin array, IdxTypeArrDin i)
+ElTypeArrDin GetArrDin(ArrayDin array, IdxTypeArrDin i)
 {
 /**
  * Mengembalikan elemen array L yang ke-I (indeks lojik).
@@ -81,7 +81,7 @@ ElTypeArrDin Getarrdin(ArrayDin array, IdxTypeArrDin i)
 }
 
 
-int GetCapacityarrdin(ArrayDin array)
+int GetCapacityArrDin(ArrayDin array)
 {
 /**
  * Fungsi untuk mendapatkan kapasitas yang tersedia.
@@ -94,7 +94,7 @@ int GetCapacityarrdin(ArrayDin array)
 }
 
 
-void InsertAtarrdin(ArrayDin *array, ElTypeArrDin el, IdxTypeArrDin i)
+void InsertAtArrDin(ArrayDin *array, ElTypeArrDin el, IdxTypeArrDin i)
 {
 /**
  * Fungsi untuk menambahkan elemen baru di index ke-i
@@ -112,7 +112,7 @@ void InsertAtarrdin(ArrayDin *array, ElTypeArrDin el, IdxTypeArrDin i)
 }
 
 
-void DeleteAtarrdin(ArrayDin *array, IdxTypeArrDin i)
+void DeleteAtArrDin(ArrayDin *array, IdxTypeArrDin i)
 {
 /**
  * Fungsi untuk menghapus elemen di index ke-i ArrayDin

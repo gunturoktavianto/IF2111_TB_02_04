@@ -1,5 +1,3 @@
-<<<<<<< HEAD
-=======
 /* 
 NIM             : 18220048
 Nama            : Rayhan Naufal Luthfi
@@ -8,7 +6,6 @@ Topik praktikum : ADT Linked Linear List
 Deskripsi       : Pra Praktikum
 */
 
->>>>>>> 34f31173c125b02e596bcfa44df8bdbf16e391c4
 #include "listlinier.h"
 #include <stdio.h>
 #include <stdlib.h>
@@ -29,11 +26,7 @@ void CreateLL (ListLL *L){
 
 
 /****************** Manajemen Memori ******************/
-<<<<<<< HEAD
 address AlokasiLL (infotypeLL X){
-=======
-address AlokasiLL (infotype X){
->>>>>>> 34f31173c125b02e596bcfa44df8bdbf16e391c4
 /* Mengirimkan address hasil alokasi sebuah elemen */
 /* Jika alokasi berhasil, maka address tidak nil, dan misalnya */
 /* menghasilkan P, maka Info(P)=X, Next(P)=Nil */
@@ -58,11 +51,7 @@ void DealokasiLL (address *P){
 }
 
 /****************** PENCARIAN SEBUAH ELEMEN LIST ******************/
-<<<<<<< HEAD
 address SearchLL (ListLL L, infotypeLL X){
-=======
-address SearchLL (ListLL L, infotype X){
->>>>>>> 34f31173c125b02e596bcfa44df8bdbf16e391c4
 /* Mencari apakah ada elemen list dengan Info(P)= X */
 /* Jika ada, mengirimkan address elemen tersebut. */
 /* Jika tidak ada, mengirimkan Nil */
@@ -89,11 +78,7 @@ address SearchLL (ListLL L, infotype X){
 
 /****************** PRIMITIF BERDASARKAN NilAI ******************/
 /*** PENAMBAHAN ELEMEN ***/
-<<<<<<< HEAD
 void InsVFirst (ListLL *L, infotypeLL X){
-=======
-void InsVFirst (ListLL *L, infotype X){
->>>>>>> 34f31173c125b02e596bcfa44df8bdbf16e391c4
 /* I.S. L mungkin kosong */
 /* F.S. Melakukan alokasi sebuah elemen dan */
 /* menambahkan elemen pertama dengan nilai X jika alokasi berhasil */
@@ -102,11 +87,7 @@ void InsVFirst (ListLL *L, infotype X){
         InsertFirstLL(L, P);
     }
 }
-<<<<<<< HEAD
 void InsVLast (ListLL *L, infotypeLL X){
-=======
-void InsVLast (ListLL *L, infotype X){
->>>>>>> 34f31173c125b02e596bcfa44df8bdbf16e391c4
 /* I.S. L mungkin kosong */
 /* F.S. Melakukan alokasi sebuah elemen dan */
 /* menambahkan elemen list di akhir: elemen terakhir yang baru */
@@ -119,11 +100,7 @@ void InsVLast (ListLL *L, infotype X){
 }
 
 /*** PENGHAPUSAN ELEMEN ***/
-<<<<<<< HEAD
 void DelVFirst (ListLL *L, infotypeLL *X){
-=======
-void DelVFirst (ListLL *L, infotype *X){
->>>>>>> 34f31173c125b02e596bcfa44df8bdbf16e391c4
 /* I.S. List L tidak kosong  */
 /* F.S. Elemen pertama list dihapus: nilai info disimpan pada X */
 /*      dan alamat elemen pertama di-dealokasi */
@@ -133,11 +110,7 @@ void DelVFirst (ListLL *L, infotype *X){
     DealokasiLL(&P);
 }
 
-<<<<<<< HEAD
 void DelVLast (ListLL *L, infotypeLL *X){
-=======
-void DelVLast (ListLL *L, infotype *X){
->>>>>>> 34f31173c125b02e596bcfa44df8bdbf16e391c4
 /* I.S. list tidak kosong */
 /* F.S. Elemen terakhir list dihapus: nilai info disimpan pada X */
 /*      dan alamat elemen terakhir di-dealokasi */
@@ -195,11 +168,7 @@ void DelFirstLL (ListLL *L, address *P){
     *P = X;
 }
 
-<<<<<<< HEAD
 void DelP (ListLL *L, infotypeLL X){
-=======
-void DelP (ListLL *L, infotype X){
->>>>>>> 34f31173c125b02e596bcfa44df8bdbf16e391c4
 /* I.S. Sembarang */
 /* F.S. Jika ada elemen list beraddress P, dengan Info(P)=X  */
 /* Maka P dihapus dari list dan di-dealokasi */
@@ -288,17 +257,10 @@ int NbElmtLL (ListLL L){
 }
 
 /*** Prekondisi untuk Max/Min/rata-rata : List tidak kosong ***/
-<<<<<<< HEAD
 infotypeLL MaxLL (ListLL L){
 /* Mengirimkan nilai Info(P) yang maksimum */
     address P = First(L);
     infotypeLL maks = Info(P);
-=======
-infotype MaxLL (ListLL L){
-/* Mengirimkan nilai Info(P) yang maksimum */
-    address P = First(L);
-    infotype maks = Info(P);
->>>>>>> 34f31173c125b02e596bcfa44df8bdbf16e391c4
 
     while (Next(P) != Nil){
         P = Next(P);
@@ -340,17 +302,10 @@ address AdrMaxLL (ListLL L){
     return SearchLL(L, MaxLL(L));
 }
 
-<<<<<<< HEAD
 infotypeLL MinLL (ListLL L){
 /* Mengirimkan nilai info(P) yang minimum */
     address P = First(L);
     infotypeLL min = Info(P);
-=======
-infotype MinLL (ListLL L){
-/* Mengirimkan nilai info(P) yang minimum */
-    address P = First(L);
-    infotype min = Info(P);
->>>>>>> 34f31173c125b02e596bcfa44df8bdbf16e391c4
 
     while (Next(P) != Nil){
         P = Next(P);
