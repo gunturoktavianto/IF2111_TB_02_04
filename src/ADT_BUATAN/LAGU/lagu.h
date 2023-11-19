@@ -70,4 +70,8 @@ void PrintLagu(SetLagu S);
 /* Mencetak keseluruhan elemen lagu*/
 /* Format: [Penyanyi, Album, Nama]*/
 
+<<<<<<< HEAD:src/ADT _BUATAN/LAGU/lagu.h
 #endif
+=======
+#endif
+>>>>>>> 6d27f1ea2409cb88a28c3e966c6d6cc309ece220:src/ADT_BUATAN/LAGU/lagu.h

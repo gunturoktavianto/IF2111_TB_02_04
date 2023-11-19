@@ -1,4 +1,4 @@
-/* File: mesinkarakter.c */
+/* File: mesinkar.c */
 /* Implementasi Mesin Karakter */
 
 #include "mesinkarakter.h"
@@ -10,7 +10,7 @@ boolean EOP;
 static FILE *pita;
 static int retval;
 
-void START()
+void START(FILE *input)
 {
        /* Mesin siap dioperasikan. Pita disiapkan untuk dibaca.
           Karakter pertama yang ada pada pita posisinya adalah pada jendela.
@@ -19,7 +19,7 @@ void START()
                  Jika currentChar = MARK maka EOP akan menyala (true) */
 
        /* Algoritma */
-       pita = stdin;
+       pita = input;
        ADV();
 }
 
