@@ -4,11 +4,13 @@
 #ifndef __MESINKATA_H__
 #define __MESINKATA_H__
 
+#include <stdio.h>
 #include "boolean.h"
 #include "mesinkarakter.h"
 
 #define NMax 50
-#define BLANK ' '
+#define BLANK '\n'
+#define Separator ' '
 
 typedef struct
 {
@@ -25,7 +27,7 @@ void IgnoreBlanks();
    I.S. : currentChar sembarang
    F.S. : currentChar ≠ BLANK atau currentChar = MARK */
 
-void STARTWORD();
+void STARTWORD(FILE* input);
 /* I.S. : currentChar sembarang
    F.S. : EndWord = true, dan currentChar = MARK;
           atau EndWord = false, currentWord adalah kata yang sudah diakuisisi,
@@ -48,53 +50,24 @@ void CopyWord();
 
 boolean isEndWord();
 
-/* Prosedur untuk membaca input kata dari user 
- * I.S : currentChar sembarang
- * F.S : EndWord = true, dan currentChar = MARK;
- *	     atau EndWord = false, currentWord adalah kata yang sudah diakuisisi,
- *       currentChar karakter pertama sesudah karakter terakhir kata */
-void STARTINPUTKATA();
+void GetCommand();
 
-/* ********** KONVERTER ********** */
-/* Fungsi untuk merubah tipe data dari word menjadi integer. 
- * Mengembalikan nilai hasil convert dari word ke integer.
- * Prekondisi : pemrosesan telah berjalan */
-int WordToInt(Word word);
+Word AccessCommand(Word comm, int Idx);
 
-/* Fungsi untuk Merubah tipe data dari word menjadi string. 
- * Mengembalikan nilai hasil convert dari word ke string. 
- * Prekondisi : pemrosesan telah berjalan */
-char * WordToString (Word word);
+void TulisWord(Word kata);
 
-/* Fungsi untuk merubah tipe data dari string menjadi word. 
- * Mengembalikan nilai hasil convert dari string ke word.
- * Prekondisi : pemrosesan telah berjalan */
-Word StringtoWord (char*string);
+boolean IsWordEq (Word kata1, Word kata2);
 
-/* ********** SELEKTOR ********** */
-/* Fungsi untuk mengambil kata ke - {ke} dari suatu kalimat hasil input dari user. 
- * Prekondisi : pemrosesan telah berjalan */
-Word takeword(Word command, int ke);
+boolean IsWordNumber (Word kata);
 
-/* ********** OPERASI OPERASI ********** */
-/* Fungsi untuk menggabungkan dua buah variabel bertipe char.
- * Dalam program ini, kedua variabel tersebut adalah path dan filename
- * Prekondisi : pemrosesan telah berjalan */
-char * ConcateChar(char * path, char * filename);
+Word toKata(char *str); 
+/*  Fungsi yang menerima sebuah paramater str bertipe string
+    Kemudian mengembalikan elemen bertipe Word yang merupakan hasil transformasi string str */
 
-/* ********** TEST KEBENARAN ********** */
-/* Fungsi untuk mengembalikan true jika kata w tersebut sama dengan string c. 
- * Mengembalikan false jika kata w tidak sama dengan string c.
- * Prekondisi : pemrosesan telah berjalan */
-boolean IsEqual(Word w, char *c);
+Word intToWord(int n);
 
-/* Fungsi yang mengembalikan nilai kebenaran jika ada word yang dicari dalam mesin kata 
- * Prekondisi : pemrosesan telah berjalan */
-boolean IsInWord(char* dicari, Word sumber);
+int stringLength(char *str);
+/*  Fungsi yang menerima sebuah parameter str bertipe string
+    Kemudian mengembalikan panjang dari string tersebut */
 
-void capsLock(char* huruf);
-/* Membuat semua huruf menjadi uppercase */
-
-void lowerCase(char* huruf);
-/* Membuat semua huruf menjadi lowercase */
 #endif

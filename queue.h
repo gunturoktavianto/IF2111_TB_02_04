@@ -11,7 +11,7 @@
 #define CAPACITY 20
 
 /* Definisi elemen dan address */
-typedef Word ElTypeQueue;
+typedef int ElTypeQueue;
 typedef struct
 {
         ElTypeQueue buffer[CAPACITY];
@@ -37,26 +37,26 @@ void CreateQueue(Queue *q);
 
 /* ********* PROTOTYPE ********* */
 /* Fungsi yang mengirim true jika q kosong: lihat definisi di atas */
-boolean isEmpty(Queue q);
+boolean isEmptyQueue(Queue q);
 
 /* Fungsi yang mengirim true jika tabel penampung elemen q sudah penuh */
 /* yaitu IDX_TAIL akan selalu di belakang IDX_HEAD dalam buffer melingkar*/
-boolean isFull(Queue q);
+boolean isFullQueue(Queue q);
 
 /* Fungsi yang mengirimkan banyaknya elemen queue. Mengirimkan 0 jika q kosong. */
-int length(Queue q);
+int lengthQueue(Queue q);
 
 /* *** OPERASI OPERASI *** */
 /* Proses: Menambahkan val pada q dengan aturan FIFO */
 /* I.S : q mungkin kosong, tabel penampung elemen q TIDAK penuh */
 /* F.S : val menjadi TAIL yang baru, IDX_TAIL "mundur" dalam buffer melingkar. */
-void enqueue(Queue *q, ElTypeQueue val);
+void enqueueQueue(Queue *q, ElTypeQueue val);
 
 /* Proses: Menghapus val pada q dengan aturan FIFO */
 /* I.S : q tidak mungkin kosong */
 /* F.S : val = nilai elemen HEAD pd I.S., IDX_HEAD "mundur";
 		 q mungkin kosong */
-void dequeue(Queue *q, ElTypeQueue *val);
+void dequeueQueue(Queue *q, ElTypeQueue *val);
 
 /* *** Display Queue *** */
 /* Prosedur untuk menampilkan Queue secara transversal*/
@@ -71,5 +71,10 @@ void copyQueue(Queue *queueInput, Queue *queueOutput);
 
 /* Fungsi yang mengembalikan true jika x merupakan elemen dari q */
 boolean isInQueue(Queue q, ElTypeQueue x);
+
+void transferReverse(Queue* q1, Queue* q2);
+// Proses: Memindahkan tiap elemen q1 ke q2 dengan urutan yang terbalik
+// I.S.: q1 tidak kosong, q2 kosong. q1 dan q2 memiliki panjang yang sama
+// F.S.: q1 kosong, q2 berisi elemen-elemen yang tadinya milik q1 dengan urutan yang terbalik
 
 #endif

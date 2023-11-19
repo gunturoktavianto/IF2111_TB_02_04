@@ -11,7 +11,7 @@
 #define CAPACITY 20
 
 /* Definisi elemen dan address */
-typedef int ElTypeQueue;
+typedef Word ElTypeQueue;
 typedef struct
 {
         ElTypeQueue buffer[CAPACITY];

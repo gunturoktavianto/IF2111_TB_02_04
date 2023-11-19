@@ -12,7 +12,7 @@ Deklarasi stack yang dengan implementasi array eksplisit-statik rata kiri
 #define MaxEl 100
 
 // typedef int bool;
-typedef int infotype;
+typedef int infotypeSet;  //dibekukan
 typedef int address;
 
 typedef struct 

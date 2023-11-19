@@ -8,6 +8,7 @@
 
 /* Definisi elemen dan address */
 typedef Lagu ElTypeQueue;
+
 typedef struct{
     ElTypeQueue lagu;
 } Lagu;

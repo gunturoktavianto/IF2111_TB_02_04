@@ -16,7 +16,7 @@ Deklarasi stack yang dengan implementasi array eksplisit-statik rata kiri
 
 // typedef int bool;
 typedef int keytype;
-typedef int valuetype;
+typedef char valuetype;
 typedef int address;
 
 typedef struct {
