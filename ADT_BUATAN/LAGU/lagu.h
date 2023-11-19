@@ -67,7 +67,10 @@ boolean IsMemberSetLagu(SetLagu S, infotype Elmt);
 /* Mengembalikan true jika Elmt adalah member dari S */
 
 void PrintLagu(SetLagu S);
-/* Mencetak keseluruhan elemen lagu*/
+/* Mencetak keseluruhan lagu yang dimiliki suatu album*/
 /* Format: [Penyanyi, Album, Nama]*/
+
+Lagu MakeLagu(Word nama, Word album, Word penyanyi);
+/* Mengisi Lagu*/
 
 #endif
