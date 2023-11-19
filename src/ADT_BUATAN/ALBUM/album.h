@@ -22,20 +22,20 @@ typedef SetLagu valuetype;
 typedef int address;
 
 typedef struct {
-	keytype Key;
-	valuetype Value;
+	keytype Key;//NamaAlbum
+	valuetype Value;//SetLagu
 } infotype;
 
 typedef struct {
-	infotype Elements[MaxEl];
+	infotype InfoAlbum[MaxEl];
 	address Count;
 } Album;
-
+/*
 typedef struct
 {
     Album Elements[MaxEl];
     int Count;
-} SetAlbum;
+} SetAlbum;*/
 
 /* Definisi Album M kosong : M.Count = Nil */
 /* M.Count = jumlah element Album */

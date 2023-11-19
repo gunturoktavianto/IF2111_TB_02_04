@@ -17,22 +17,22 @@ Deklarasi stack yang dengan implementasi array eksplisit-statik rata kiri
 
 // typedef int bool;
 typedef Word keytype;
-typedef SetAlbum valuetype;
+typedef Album valuetype;
 typedef int address;
 
 typedef struct {
-        keytype Key;
-	valuetype Value;
+        keytype Key;//NamaPenyanyi
+	valuetype Value;//SetAlbum
 } infotype;
 
 typedef struct {
-	infotype Elements[MaxEl];
+	infotype InfoPenyanyi[MaxEl];
 	address Count;
 } Penyanyi;
 
 typedef struct
 {
-    Penyanyi Elements[MaxEl];
+    Penyanyi PenyanyiKe[MaxEl];
     int Count;
 } ListPenyanyi;
 
