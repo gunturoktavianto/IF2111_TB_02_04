@@ -77,35 +77,4 @@ void DeletePenyanyi(Penyanyi *M, keytype k);
 boolean IsMemberPenyanyi(Penyanyi M, keytype k);
 /* Mengembalikan true jika k adalah member dari M */
 
-/* *** Konstruktor/Kreator *** */
-void CreateEmptyListPenyanyi(ListPenyanyi*S);
-/* I.S. Sembarang */
-/* F.S. Membuat sebuah List S kosong berkapasitas MaxEl */
-/* Ciri List kosong : count bernilai Nil */
-
-/* ********* Predikat Untuk test keadaan KOLEKSI ********* */
-boolean IsEmptyListPenyanyi(ListPenyanyi S);
-/* Mengirim true jika List S kosong*/
-/* Ciri List kosong : count bernilai Nil */
-
-boolean IsFullListPenyanyi(ListPenyanyi S);
-/* Mengirim true jika List S penuh */
-/* Ciri List penuh : count bernilai MaxEl */
-
-/* ********** Operator Dasar List ********* */
-void InsertListPenyanyi(ListPenyanyi *S, infotype Elmt);
-/* Menambahkan Elmt sebagai elemen List S. */
-/* I.S. S mungkin kosong, S tidak penuh
-        S mungkin sudah beranggotakan Elmt */
-/* F.S. Elmt menjadi anggota dari S. Jika Elmt sudah merupakan anggota, operasi tidak dilakukan */
-
-void DeleteListPenyanyi(ListPenyanyi *S, infotype Elmt);
-/* Menghapus Elmt dari List S. */
-/* I.S. S tidak kosong
-        Elmt mungkin anggota / bukan anggota dari S */
-/* F.S. Elmt bukan anggota dari S */
-
-boolean IsMemberListPenyanyi(ListPenyanyi S, infotype Elmt);
-/* Mengembalikan true jika Elmt adalah member dari S */
-
 #endif

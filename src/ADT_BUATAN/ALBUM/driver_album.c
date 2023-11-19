@@ -1,16 +1,16 @@
-#include "lagu.h"
+#include "album.h"
 
-// Deklarasi global"
-SetLagu lagu;
+//
+Album album;
 
-int main(){
+int main() {
     // Kamus lokal
-    int i=0, N;
-    
-    // Generalisasi
-    CreateEmptySetLagu(&lagu);
+    int i=0,N;
 
-    // input sebanyak jumlah lagu
+    // Generalisasi 
+    CreateEmptyAlbum(&album);
+
+    // input sebanyak jumlah album
     printf("Jumlah lagu yang ingin dimasukkan: ");
     scanf("%d",&N);
     while(i<N){
@@ -29,22 +29,31 @@ int main(){
         lagu.InfoLagu[i].nama.TabWord[stringLength(strnama)] = '\0';
         lagu.Count++;
         i++;
-
     }
 
-    // Print the SetLagu
-    printf("\n SetLagu setelah input: \n");
-    PrintLagu(lagu);
+    // Initialize value here
+    InsertAlbum(&album, key, value);
 
-    // Insert [OLIV, BOSSCHA, RUNGKAD]
-    InsertSetLagu(&lagu, MakeLagu(toKata("OLIV"), toKata("BOSSCHA"), toKata("RUNGKAD")));
-    printf("\nSetLagu setelah ditambah lagu RUNGKAD: \n");
-    PrintLagu(lagu);
+    // Test IsMemberAlbum
+    if (IsMemberAlbum(album, key)) {
+        printf("Test IsMemberAlbum: Passed\n");
+    } else {
+        printf("Test IsMemberAlbum: Failed\n");
+    }
 
-    // Delete 
-    DeleteSetLagu(&lagu, MakeLagu(toKata("OLIV"), toKata("BOSSCHA"), toKata("RUNGKAD")));
-    printf("\nSetLagu setelah lagu RUNGKAD dihapus: \n");
-    PrintLagu(lagu);
+    // Test ValueAlbum
+    valuetype result = ValueAlbum(album, key);
+    // Check if result is as expected
+
+    // Test DeleteAlbum
+    DeleteAlbum(&album, key);
+
+    // Test IsEmptyAlbum again
+    if (IsEmptyAlbum(album)) {
+        printf("Test IsEmptyAlbum after DeleteAlbum: Passed\n");
+    } else {
+        printf("Test IsEmptyAlbum after DeleteAlbum: Failed\n");
+    }
 
     return 0;
 }

@@ -112,3 +112,15 @@ boolean IsWordEq (Word kata1, Word kata2) {
     }
     return true;
 }
+
+Word toKata(char *str) {
+/*  Fungsi yang menerima sebuah paramater str bertipe string
+    Kemudian mengembalikan elemen bertipe Word yang merupakan hasil transformasi string str */
+    Word kata;
+    kata.Length = stringLength(str);
+
+    for (int i = 0; i < kata.Length; i++) {
+        kata.TabWord[i] = str[i];
+    }
+    return kata;
+}

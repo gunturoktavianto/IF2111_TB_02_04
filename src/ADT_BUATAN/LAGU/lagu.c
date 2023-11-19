@@ -72,20 +72,14 @@ void DeleteSetLagu(SetLagu *S, infotype Elmt)
 boolean IsMemberSetLagu(SetLagu S, infotype Elmt)
 /* Mengembalikan true jika Elmt adalah member dari S */
 {
-    boolean found = false;
     address idx = 0;
-    while (!found && idx < S.Count)
+    while (idx < S.Count)
     {
         if (IsWordEq(S.InfoLagu[idx].nama, Elmt.nama) && IsWordEq(S.InfoLagu[idx].album, Elmt.album) && IsWordEq(S.InfoLagu[idx].penyanyi, Elmt.penyanyi))
-        {
-            found = true;
-        }
-        else
-        {
-            idx++;
-        }
+            return true;
+        idx++;
     }
-    return found;
+    return false;
 }
 
 void PrintLagu(SetLagu S){
@@ -99,4 +93,13 @@ void PrintLagu(SetLagu S){
         S.InfoLagu[idx].nama.TabWord);
         idx++;
     }
+}
+
+Lagu MakeLagu(Word penyanyi, Word album, Word nama){
+/* Mengisi Lagu*/
+    Lagu temp;
+    temp.nama = nama;
+    temp.album = album;
+    temp.penyanyi = penyanyi;
+    return temp;
 }

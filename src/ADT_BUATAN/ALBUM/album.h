@@ -14,7 +14,6 @@ Deklarasi stack yang dengan implementasi array eksplisit-statik rata kiri
 // #define true 1
 #define Nil 0
 #define MaxEl 10
-#define Undefined -999
 
 // typedef int bool;
 typedef Word keytype;
@@ -78,35 +77,10 @@ void DeleteAlbum(Album *M, keytype k);
 boolean IsMemberAlbum(Album M, keytype k);
 /* Mengembalikan true jika k adalah member dari M */
 
-/* *** Konstruktor/Kreator *** */
-void CreateEmptySetAlbum(SetAlbum*S);
-/* I.S. Sembarang */
-/* F.S. Membuat sebuah Set S kosong berkapasitas MaxEl */
-/* Ciri Set kosong : count bernilai Nil */
-
-/* ********* Predikat Untuk test keadaan KOLEKSI ********* */
-boolean IsEmptySetAlbum(SetAlbum S);
-/* Mengirim true jika Set S kosong*/
-/* Ciri Set kosong : count bernilai Nil */
-
-boolean IsFullSetAlbum(SetAlbum S);
-/* Mengirim true jika Set S penuh */
-/* Ciri Set penuh : count bernilai MaxEl */
-
-/* ********** Operator Dasar Set ********* */
-void InsertSetAlbum(SetAlbum *S, infotype Elmt);
-/* Menambahkan Elmt sebagai elemen Set S. */
-/* I.S. S mungkin kosong, S tidak penuh
-        S mungkin sudah beranggotakan Elmt */
-/* F.S. Elmt menjadi anggota dari S. Jika Elmt sudah merupakan anggota, operasi tidak dilakukan */
-
-void DeleteSetAlbum(SetAlbum *S, infotype Elmt);
-/* Menghapus Elmt dari Set S. */
-/* I.S. S tidak kosong
-        Elmt mungkin anggota / bukan anggota dari S */
-/* F.S. Elmt bukan anggota dari S */
-
-boolean IsMemberSetAlbum(SetAlbum S, infotype Elmt);
-/* Mengembalikan true jika Elmt adalah member dari S */
+void PrintAlbum(Album M);
+/* Mencetak keseluruhan album yang dimiliki suatu penyanyi*/
+/* Format: 
+[Penyanyi, Album, Nama]
+[Penyanyi, Album, Nama]*/
 
 #endif
