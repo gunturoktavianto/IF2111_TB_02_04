@@ -1,76 +1,126 @@
-/*#include "ADT/LIST/driver_list.c"
-#include "ADT/LISTDP/driver_listdp.c"
-#include "ADT/LISTLINIER/driver_listlinier.c"
-#include "ADT/MAP/driver_map.c"
-#include "ADT/MAP/hashmap.h"
-#include "ADT/MESINKATA/mesinkata.h"
-#include "ADT/QUEUE/driver_queue.c"
-#include "ADT/SET/driver_set.c"
-#include "ADT/STACK/driver_stack.c"*/
+#define NMax 50
+#define BLANK ' '
 
-#include "ADT/LIST/list.h"
-#include "ADT/LISTDIN/arraydin.h"
-#include "ADT/LISTLINIER/listlinier.h"
-#include "ADT/MAP/map.h"
-/*#include "ADT/MAP/hashmap.h"*/
-/*#include "ADT/MESINKATA/mesinkata.h"*/
-#include "ADT/QUEUE/queue.h"
-#include "ADT/SET/set.h"
-#include "ADT/STACK/stack.h"
+typedef struct
+{
+   char TabWord[NMax]; /* container penyimpan kata, indeks yang dipakai [0..NMax-1] */
+   int Length;
+} Word;
 
-#include "boolean.h"
+#define Nil 0
+#define MaxEl 100
 
-#include <stdio.h>
-#include <stdlib.h>
-#include <math.h>
-#include <time.h>
-#include <string.h>
+typedef struct {
+    Word nama;
+    Word album;
+    Word penyanyi;
+} Lagu;
 
-#define MAX_LINES 100
-#define MAX_LINE_LENGTH 100
+typedef Lagu infotype;
+typedef int address;
 
-// void BacaConfig(){
-//     FILE *file;
-//     file = fopen("dummy.txt", "r");
+typedef struct
+{
+    infotype Elements[MaxEl];
+    int Count;
+} SetLagu;
 
-//     int jumlahPenyanyi, jumlahAlbum, jumlahLagu;
-//     char penyanyi[100], namaAlbum[100], judulLagu[100];
-//     Set SetPenyanyi;
+#define Nil 0
+#define MaxEl 10
+#define Undefined -999
 
-//     fscanf(file, "%d", &jumlahPenyanyi);
+// typedef int bool;
+typedef Word keytype;
+typedef SetLagu valuetype;
+typedef int address;
 
-//     for (int i = 0; i < jumlahPenyanyi; i++) {
-//         fscanf(file, "%d", &jumlahAlbum);
-//         fscanf(file, " %[^\n]s", penyanyi);
-//         Insert(&SetPenyanyi, penyanyi);
+typedef struct {
+	keytype Key;//NamaAlbum
+	valuetype Value;//SetLagu
+} infotype;
 
-//         printf("%d %s\n", jumlahAlbum, penyanyi);
+typedef struct {
+	infotype InfoAlbum[MaxEl];
+	address Count;
+} Album;
 
-//         for (int j = 0; j < jumlahAlbum; j++) {
-//             fscanf(file, "%d %[^\n]s", &jumlahLagu, namaAlbum);
-//             printf("%d %s\n", jumlahLagu, namaAlbum);
+/* *** Konstruktor/Kreator *** */
+void CreateEmptyAlbum(Album *M){
+/* I.S. Sembarang */
+/* F.S. Membuat sebuah Album M kosong berkapasitas MaxEl */
+/* Ciri Album kosong : count bernilai Nil */
+    (*M).Count = Nil;
+}
 
-//             for (int k = 0; k < jumlahLagu; k++) {
-//                 fscanf(file, " %[^\n]s", judulLagu);
-//                 printf("%s\n", judulLagu);
-//             }
-//         }
-//     }
+/* ********* Predikat Untuk test keadaan KOLEKSI ********* */
+boolean IsEmptyAlbum(Album M){
+/* Mengirim true jika Album M kosong*/
+/* Ciri Album kosong : count bernilai Nil */
+    return M.Count == Nil;
+}
 
-//     fclose(file);
-// }
+boolean IsFullAlbum(Album M){
+/* Mengirim true jika Album M penuh */
+/* Ciri Album penuh : count bernilai MaxEl */
+    return M.Count == MaxEl;
+}
 
-int main() {
-    // char input[100];
-    // boolean isValid = true;
+/* ********** Operator Dasar Album ********* */
+valuetype ValueAlbum(Album M, keytype k){
+/* Mengembalikan nilai value dengan key k dari M */
+/* Jika tidak ada key k pada M, akan mengembalikan Undefined */
+    address idx = 0, iterator;
+
+    while (idx < M.Count) {
+        if (M.InfoAlbum[idx].Key == k) return M.InfoAlbum[idx].Value;
+        idx++;
+    }
+
+    return Undefined;
+}
+void InsertAlbum(Album *M, keytype k, valuetype v){
+/* Menambahkan Elmt sebagai elemen Album M. */
+/* I.S. M mungkin kosong, M tidak penuh
+        M mungkin sudah beranggotakan v dengan key k */
+/* F.S. v menjadi anggota dari M dengan key k. Jika k sudah ada, operasi tidak dilakukan */
+    if (IsMember(*M, k)) return;
+
+    M->InfoAlbum[M->Count].Key = k;
+    M->InfoAlbum[M->Count].Value = v;
+    M->Count++;
+}
+
+void DeleteAlbum(Album *M, keytype k){
+/* Menghapus Elmt dari Album M. */
+/* I.S. M tidak kosong
+        element dengan key k mungkin anggota / bukan anggota dari M */
+/* F.S. element dengan key k bukan anggota dari M */
+    if (!IsMember(*M, k)) return;
+
+    boolean found = false;
+    address idx = 0, iterator;
+
+    while (idx < M->Count) {
+        if (M->InfoAlbum[idx].Key == k) break;
+        idx++;
+    }
+
+    for (iterator = (idx + 1); iterator < M->Count; iterator++) {
+        M->InfoAlbum[iterator - 1].Key = M->InfoAlbum[iterator].Key;
+        M->InfoAlbum[iterator - 1].Value = M->InfoAlbum[iterator].Value;
+    }
+
+    M->Count--;
+}
+
+boolean IsMemberAlbum(Album M, keytype k){
+/* Mengembalikan true jika k adalah member dari M */
+    address idx = 0, iterator;
     
-    // printf("\n>> ");
-    // scanf("%s", input);
+    while (idx < M.Count) {
+        if (M.InfoAlbum[idx].Key == k) return true;
+        idx++;
+    }
     
-    // if (strcmp(input, "START") == 0) {
-        
-    //     BacaConfig();
-    // }
-
-    return 0;
+    return false;
 }
