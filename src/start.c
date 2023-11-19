@@ -7,7 +7,7 @@ void playSong(){
     FILE *file;
     char buffer;
 
-    file = fopne("dummy.txt", "r");
+    file = fopen("dummy.txt", "r");
     if (file == NULL) {
         printf("File konfigurasi aplikasi tidak berhasil dibaca.\n");
         exit(0);

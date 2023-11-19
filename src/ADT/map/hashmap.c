@@ -1,83 +1,66 @@
-#include <stdio.h>
 #include "hashmap.h"
 
+/**
+ * Modul Hash HashMap
+ * Implementasi Hash HashMap dengan Open Addressing
+*/
+
+/* Definisi HashMap M kosong : M.Count = Nil */
+/* M.Count = jumlah element HashMap */
+/* M.Elements = tempat penyimpanan element HashMap */
+
+/* ********* Prototype ********* */
+
 /* *** Konstruktor/Kreator *** */
-void CreateHash(HashMap *M){
-    /* I.S. Sembarang */
-    /* F.S. Membuat sebuah HashMap M kosong berkapasitas MaxEl */
-    /* Ciri HashMap kosong : count bernilai Nil dengan seluruh isi key & value map Undefined */
-    for (int i=0; i<MaxEl; i++)
-    {
+void CreateEmpty(HashMap *M) {
+    /* I.S. sembarang */
+    /* F.S. M kosong */
+    M->Count = 0;
+    for (int i = 0; i < MaxEl; i++) {
         M->Elements[i].Key = Undefined;
         M->Elements[i].Value = Undefined;
     }
-    M->Count = Nil;
 }
+/* I.S. Sembarang */
+/* F.S. Membuat sebuah HashMap M kosong berkapasitas MaxEl */
+/* Ciri HashMap kosong : count bernilai Nil */
 
 /* *** Index Penyimpanan dengan modulo *** */
-address Hash(keytype K){
+address Hash(keytype K) {
     /* Menghasilkan indeks penyimpanan dengan operasi modulo ke MaxEl */
-    return (K % MaxEl);
+    return K % MaxEl;
 }
 
 /* ********** Operator Dasar HashMap ********* */
-valuetype ValueHash(HashMap M, keytype k){
-    /* Mengembalikan nilai value dengan key k dari M */
+valuetype Value(HashMap M, keytype k) {
+    /* Menghasilkan nilai dari element dengan key K */
     /* Jika tidak ada key k pada M, akan mengembalikan Undefined */
-    int idx = Hash(k);
-    if (M.Elements[idx].Key == Undefined)
-    {
-        return Undefined;
+    address i = Hash(k);
+    while (M.Elements[i].Key != k && M.Elements[i].Key != Undefined) {
+        i = (i + 1) % MaxEl;
     }
-    else
-    {
-        for (int i=idx; i<MaxEl; i++)
-        {
-            if (M.Elements[i].Key == k)
-            {
-                return M.Elements[i].Value;
-            }
-        }
+    if (M.Elements[i].Key == k) {
+        return M.Elements[i].Value;
+    } else {
         return Undefined;
     }
 }
+/* Mengembalikan nilai value dengan key k dari M */
 
-void InsertHash(HashMap *M, keytype k, valuetype v){
-    /* Menambahkan Elmt sebagai elemen HashMap M. */
-    /* I.S. M mungkin kosong, M tidak penuh
-            M mungkin sudah beranggotakan v dengan key k */
-    /* F.S. v menjadi anggota dari M dengan key k. Jika k sudah ada, operasi tidak dilakukan 
-            index yang digunakan untuk menyimpan v adalah hash dari k
-            gunakan open addressing linear probing dengan interval 1 jika index sudah terisi    */
-    int idx = Hash(k);
-
-    while((*M).Elements[idx].Key != Undefined) 
-    {
-        idx = (idx + 1) % MaxEl;
-    }
-    (*M).Elements[idx].Value = v;
-    (*M).Elements[idx].Key = k;
-    (*M).Count++;
-}            
-
-int MaxSub(int *arr, int n) {
-    HashMap m;
-    CreateHash(&m);
-    int sum = 0;
-    int maxlen = 0;
-    for (int i=0; i<n; i++)
-    {   
-        sum += arr[i];
-    }
-    return maxlen;
-}
-
-void PrintHashMap(HashMap M) {
-    for (int i=0; i<MaxEl; i++)
-    {
-        if (M.Elements[i].Key != Undefined)
-        {
-            printf("<%d, %d>\n", M.Elements[i].Key, M.Elements[i].Value);
+void Insert(HashMap *M, keytype k, valuetype v) {
+    if (M->Count < MaxEl) {
+        address i = Hash(k);
+        while (M->Elements[i].Key != Undefined && M->Elements[i].Key != k) {
+            i = (i + 1) % MaxEl;
+        }
+        if (M->Elements[i].Key == Undefined) {
+            M->Elements[i].Key = k;
+            M->Elements[i].Value = v;
+            M->Count++;
         }
     }
 }
+/* Menambahkan Elmt sebagai elemen HashMap M. */
+/* I.S. M mungkin kosong, M tidak penuh
+        M mungkin sudah beranggotakan v dengan key k */
+/* F.S. v menjadi anggota dari M dengan key k. Jika k sudah ada, operasi tidak dilakukan */

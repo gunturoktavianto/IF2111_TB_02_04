@@ -1,17 +1,19 @@
-/* File : stack.h */
 /* deklarasi stack yang diimplementasi dengan tabel kontigu dan ukuran sama */
 /* TOP adalah alamat elemen puncak */
 /* Implementasi dalam bahasa C dengan alokasi statik */
-#ifndef stackt_H
-#define stackt_H
+#ifndef riwayat_H
+#define riwayat_H
 
 #include "boolean.h"
+#include "../ADT/MESINKATA/mesinkata.h"
+#include "../LAGU/lagu.h"
+
 
 #define Nil -1
 #define MaxEl 100
 /* Nil adalah stack dengan elemen kosong . */
 
-typedef int infotypeStack;
+typedef Lagu infotypeStack;
 typedef int address;   /* indeks tabel */
 
 /* Contoh deklarasi variabel bertype stack dengan ciri TOP : */

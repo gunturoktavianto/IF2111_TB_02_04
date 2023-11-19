@@ -6,13 +6,6 @@
 #define ADTList1
 
 #include "boolean.h"
-                //    0 1 2 3 4 5 6
-
-// List A (awal)    = 1 2 2 1 3 4 5
-
-// List A (akhir)   = 1 2 2 3 4 5
-
-// List B (baru) = 2 1
 
 /* Kamus Umum */
 #define MaxEl 100

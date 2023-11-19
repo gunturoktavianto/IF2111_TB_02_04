@@ -26,7 +26,7 @@ void CreateLL (ListLL *L){
 
 
 /****************** Manajemen Memori ******************/
-address AlokasiLL (infotype X){
+address AlokasiLL (infotypeLL X){
 /* Mengirimkan address hasil alokasi sebuah elemen */
 /* Jika alokasi berhasil, maka address tidak nil, dan misalnya */
 /* menghasilkan P, maka Info(P)=X, Next(P)=Nil */
@@ -51,7 +51,7 @@ void DealokasiLL (address *P){
 }
 
 /****************** PENCARIAN SEBUAH ELEMEN LIST ******************/
-address SearchLL (ListLL L, infotype X){
+address SearchLL (ListLL L, infotypeLL X){
 /* Mencari apakah ada elemen list dengan Info(P)= X */
 /* Jika ada, mengirimkan address elemen tersebut. */
 /* Jika tidak ada, mengirimkan Nil */
@@ -78,7 +78,7 @@ address SearchLL (ListLL L, infotype X){
 
 /****************** PRIMITIF BERDASARKAN NilAI ******************/
 /*** PENAMBAHAN ELEMEN ***/
-void InsVFirst (ListLL *L, infotype X){
+void InsVFirst (ListLL *L, infotypeLL X){
 /* I.S. L mungkin kosong */
 /* F.S. Melakukan alokasi sebuah elemen dan */
 /* menambahkan elemen pertama dengan nilai X jika alokasi berhasil */
@@ -87,7 +87,7 @@ void InsVFirst (ListLL *L, infotype X){
         InsertFirstLL(L, P);
     }
 }
-void InsVLast (ListLL *L, infotype X){
+void InsVLast (ListLL *L, infotypeLL X){
 /* I.S. L mungkin kosong */
 /* F.S. Melakukan alokasi sebuah elemen dan */
 /* menambahkan elemen list di akhir: elemen terakhir yang baru */
@@ -100,7 +100,7 @@ void InsVLast (ListLL *L, infotype X){
 }
 
 /*** PENGHAPUSAN ELEMEN ***/
-void DelVFirst (ListLL *L, infotype *X){
+void DelVFirst (ListLL *L, infotypeLL *X){
 /* I.S. List L tidak kosong  */
 /* F.S. Elemen pertama list dihapus: nilai info disimpan pada X */
 /*      dan alamat elemen pertama di-dealokasi */
@@ -110,7 +110,7 @@ void DelVFirst (ListLL *L, infotype *X){
     DealokasiLL(&P);
 }
 
-void DelVLast (ListLL *L, infotype *X){
+void DelVLast (ListLL *L, infotypeLL *X){
 /* I.S. list tidak kosong */
 /* F.S. Elemen terakhir list dihapus: nilai info disimpan pada X */
 /*      dan alamat elemen terakhir di-dealokasi */
@@ -168,7 +168,7 @@ void DelFirstLL (ListLL *L, address *P){
     *P = X;
 }
 
-void DelP (ListLL *L, infotype X){
+void DelP (ListLL *L, infotypeLL X){
 /* I.S. Sembarang */
 /* F.S. Jika ada elemen list beraddress P, dengan Info(P)=X  */
 /* Maka P dihapus dari list dan di-dealokasi */
@@ -257,10 +257,10 @@ int NbElmtLL (ListLL L){
 }
 
 /*** Prekondisi untuk Max/Min/rata-rata : List tidak kosong ***/
-infotype MaxLL (ListLL L){
+infotypeLL MaxLL (ListLL L){
 /* Mengirimkan nilai Info(P) yang maksimum */
     address P = First(L);
-    infotype maks = Info(P);
+    infotypeLL maks = Info(P);
 
     while (Next(P) != Nil){
         P = Next(P);
@@ -302,10 +302,10 @@ address AdrMaxLL (ListLL L){
     return SearchLL(L, MaxLL(L));
 }
 
-infotype MinLL (ListLL L){
+infotypeLL MinLL (ListLL L){
 /* Mengirimkan nilai info(P) yang minimum */
     address P = First(L);
-    infotype min = Info(P);
+    infotypeLL min = Info(P);
 
     while (Next(P) != Nil){
         P = Next(P);

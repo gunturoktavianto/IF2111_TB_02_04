@@ -1,8 +1,7 @@
 #include "map.h"
-#include <stdio.h>
 
 /* *** Konstruktor/Kreator *** */
-void CreateMap(Map *M)
+void CreateEmpty(Map *M)
 /* I.S. Sembarang */
 /* F.S. Membuat sebuah Map M kosong berkapasitas MaxEl */
 /* Ciri Map kosong : count bernilai Nil */
@@ -11,14 +10,14 @@ void CreateMap(Map *M)
 }
 
 /* ********* Predikat Untuk test keadaan KOLEKSI ********* */
-boolean IsEmptyMap(Map M)
+boolean IsEmpty(Map M)
 /* Mengirim true jika Map M kosong*/
 /* Ciri Map kosong : count bernilai Nil */
 {
     return M.Count == Nil;
 }
 
-boolean IsFullMap(Map M)
+boolean IsFull(Map M)
 /* Mengirim true jika Map M penuh */
 /* Ciri Map penuh : count bernilai MaxEl */
 {
@@ -26,7 +25,7 @@ boolean IsFullMap(Map M)
 }
 
 /* ********** Operator Dasar Map ********* */
-valuetype ValueMap(Map M, keytype k)
+valuetype Value(Map M, keytype k)
 /* Mengembalikan nilai value dengan key k dari M */
 /* Jika tidak ada key k pada M, akan mengembalikan Undefined */
 {
@@ -40,26 +39,26 @@ valuetype ValueMap(Map M, keytype k)
     return Undefined;
 }
 
-void InsertMap(Map *M, keytype k, valuetype v)
+void Insert(Map *M, keytype k, valuetype v)
 /* Menambahkan Elmt sebagai elemen Map M. */
 /* I.S. M mungkin kosong, M tidak penuh
         M mungkin sudah beranggotakan v dengan key k */
 /* F.S. v menjadi anggota dari M dengan key k. Jika k sudah ada, operasi tidak dilakukan */
 {
-    if (IsMemberMap(*M, k)) return;
+    if (IsMember(*M, k)) return;
 
     M->Elements[M->Count].Key = k;
     M->Elements[M->Count].Value = v;
     M->Count++;
 }
 
-void DeleteMap(Map *M, keytype k)
+void Delete(Map *M, keytype k)
 /* Menghapus Elmt dari Map M. */
 /* I.S. M tidak kosong
         element dengan key k mungkin anggota / bukan anggota dari M */
 /* F.S. element dengan key k bukan anggota dari M */
 {
-    if (!IsMemberMap(*M, k)) return;
+    if (!IsMember(*M, k)) return;
 
     boolean found = false;
     address idx = 0, iterator;
@@ -77,7 +76,7 @@ void DeleteMap(Map *M, keytype k)
     M->Count--;
 }
 
-boolean IsMemberMap(Map M, keytype k)
+boolean IsMember(Map M, keytype k)
 /* Mengembalikan true jika k adalah member dari M */
 {
     address idx = 0, iterator;

@@ -1,9 +1,5 @@
-/* File : queue.h */
-/* Definisi ADT Queue dengan representasi array secara eksplisit dan alokasi statik */
-
-#ifndef QUEUE_H
-#define QUEUE_H
-
+#ifndef queuelagu_H
+#define queuelagu_H
 #include "boolean.h"
 #include "../mesinkata/mesinkata.h"
 
@@ -11,7 +7,11 @@
 #define CAPACITY 20
 
 /* Definisi elemen dan address */
-typedef int ElTypeQueue;
+typedef Lagu ElTypeQueue;
+typedef struct{
+    ElTypeQueue lagu;
+} Lagu;
+
 typedef struct
 {
         ElTypeQueue buffer[CAPACITY];
