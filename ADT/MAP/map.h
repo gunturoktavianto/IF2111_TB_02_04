@@ -1,8 +1,8 @@
 #ifndef map_H
 #define map_H
-#include <stdio.h>
-#include "boolean.h"
-#include "../SET/set.h"
+// #include <stdio.h>
+// #include "boolean.h"
+#include "set.h"
 
 /* MODUL Map
 Deklarasi stack yang dengan implementasi array eksplisit-statik rata kiri
@@ -10,25 +10,32 @@ Deklarasi stack yang dengan implementasi array eksplisit-statik rata kiri
 
 // #define false 0
 // #define true 1
-#define Nil 0
-#define MaxEl 10
-#define Undefined -999
+#define mapNil 0
+#define mapMaxEl 10
+#define mapUndefined -999
 
 // typedef int bool;
-typedef int keytype;
-typedef int valuetype;
-typedef int address;
+typedef char* mapkeytype;
+typedef int mapvaluetype;
+// typedef int mapaddress;
 
 typedef struct {
-	keytype Key;		//	nomor album
-	valuetype Value;	// 	nama album
-	Set* Lagu;	//	LINKED KE SET LAGU
-} InfoAlbum;
+    Word NamaAlbum;
+    int jumlahLagu;
+    // modified mapvaluetype Value;
+    SetInfoLagu InfoLagu;
+    // modified mapkeytype Key;
+    mapkeytype KeyAlbum;
+} MapInfoAlbum;
 
 typedef struct {
-	InfoAlbum Elements[MaxEl];	// array of album
-	address Count;		// jumlah album dari penyanyi
-} Map;		// penyanyi
+    Word NamaPenyanyi;
+    int jumlahAlbum;
+    //  modified mapvaluetype Value;
+    MapInfoAlbum InfoAlbum;
+    //  modified mapkeytype Key;
+    mapkeytype KeyPenyanyi;
+} MapInfoPenyanyi; //List penyanyi
 
 /* Definisi Map M kosong : M.Count = Nil */
 /* M.Count = jumlah element Map */
@@ -36,39 +43,76 @@ typedef struct {
 
 /* ********* Prototype ********* */
 
-/* *** Konstruktor/Kreator *** */
-void CreateMap(Map *M);
+/* *** Konstruktor/Kreator Album*** */
+void CreateMapAlbum(MapInfoAlbum *M);
 /* I.S. Sembarang */
 /* F.S. Membuat sebuah Map M kosong berkapasitas MaxEl */
 /* Ciri Map kosong : count bernilai Nil */
 
 /* ********* Predikat Untuk test keadaan KOLEKSI ********* */
-boolean IsEmptyMap(Map M);
+boolean IsEmptyMapAlbum(MapInfoAlbum M);
 /* Mengirim true jika Map M kosong*/
 /* Ciri Map kosong : count bernilai Nil */
 
-boolean IsFullMap(Map M);
+boolean IsFullMapAlbum(MapInfoAlbum M);
 /* Mengirim true jika Map M penuh */
 /* Ciri Map penuh : count bernilai MaxEl */
 
 /* ********** Operator Dasar Map ********* */
-valuetype ValueMap(Map M, keytype k);
+mapvaluetype ValueMapAlbum(MapInfoAlbum M, mapkeytype k);
 /* Mengembalikan nilai value dengan key k dari M */
 /* Jika tidak ada key k pada M, akan mengembalikan Undefined */
 
-void InsertMap(Map *M, keytype k, valuetype v);
+void InsertMapAlbum(MapInfoAlbum *M, mapkeytype k, mapvaluetype v);
 /* Menambahkan Elmt sebagai elemen Map M. */
 /* I.S. M mungkin kosong, M tidak penuh
         M mungkin sudah beranggotakan v dengan key k */
 /* F.S. v menjadi anggota dari M dengan key k. Jika k sudah ada, operasi tidak dilakukan */
 
-void DeleteMap(Map *M, keytype k);
+void DeleteMapAlbum(MapInfoAlbum *M, mapkeytype k);
 /* Menghapus Elmt dari Map M. */
 /* I.S. M tidak kosong
         element dengan key k mungkin anggota / bukan anggota dari M */
 /* F.S. element dengan key k bukan anggota dari M */
 
-boolean IsMemberMap(Map M, keytype k);
+boolean IsMemberMapAlbum(MapInfoAlbum M, mapkeytype k);
 /* Mengembalikan true jika k adalah member dari M */
+
+
+/* *** Konstruktor/Kreator Penyanyi*** */
+void CreateMapPenyanyi(MapInfoPenyanyi *M);
+/* I.S. Sembarang */
+/* F.S. Membuat sebuah Map M kosong berkapasitas MaxEl */
+/* Ciri Map kosong : count bernilai Nil */
+
+/* ********* Predikat Untuk test keadaan KOLEKSI ********* */
+boolean IsEmptyMapPenyanyi(MapInfoPenyanyi M);
+/* Mengirim true jika Map M kosong*/
+/* Ciri Map kosong : count bernilai Nil */
+
+boolean IsFullMapPenyanyi(MapInfoPenyanyi M);
+/* Mengirim true jika Map M penuh */
+/* Ciri Map penuh : count bernilai MaxEl */
+
+/* ********** Operator Dasar Map ********* */
+mapvaluetype ValueMapPenyanyi(MapInfoPenyanyi M, mapkeytype k);
+/* Mengembalikan nilai value dengan key k dari M */
+/* Jika tidak ada key k pada M, akan mengembalikan Undefined */
+
+void InsertMapPenyanyi(MapInfoPenyanyi *M, mapkeytype k, mapvaluetype v);
+/* Menambahkan Elmt sebagai elemen Map M. */
+/* I.S. M mungkin kosong, M tidak penuh
+        M mungkin sudah beranggotakan v dengan key k */
+/* F.S. v menjadi anggota dari M dengan key k. Jika k sudah ada, operasi tidak dilakukan */
+
+void DeleteMapPenyanyi(MapInfoPenyanyi *M, mapkeytype k);
+/* Menghapus Elmt dari Map M. */
+/* I.S. M tidak kosong
+        element dengan key k mungkin anggota / bukan anggota dari M */
+/* F.S. element dengan key k bukan anggota dari M */
+
+boolean IsMemberMapPenyanyi(MapInfoPenyanyi M, mapkeytype k);
+/* Mengembalikan true jika k adalah member dari M */
+
 
 #endif

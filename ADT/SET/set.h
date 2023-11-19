@@ -2,29 +2,46 @@
 #define set_H
 #include <stdio.h>
 #include "boolean.h"
-#include "../LIST/list.h"       /*berisi album dari penyanyi*/
+#include "../MESINKATA/mesinkata.h"
+// #include "../LIST/list.h"       /*berisi album dari penyanyi*/
 
 /* MODUL Set
 Deklarasi stack yang dengan implementasi array eksplisit-statik rata kiri
 */
 
-#define Nil 0
-#define MaxEl 100
+#define setNil 0
+#define setMaxEl 100
 
-// typedef int bool;
-typedef int infotypeSet;  //dibekukan
-typedef int address;
+typedef int setinfotype;
+typedef int setaddress;
 
-typedef struct 
-{
-        int* lagu;
-} InfoLagu;     // lagu
+typedef struct {
+    setinfotype ke[setMaxEl];
+    setaddress Count;
+} SetInfoLagu;
 
-typedef struct
-{
-    InfoLagu Elements[MaxEl];   // array of lagu
-    address Count;              // jumlah lagu dari album
-} Set;          // album
+// typedef struct {
+//     Word NamaAlbum;
+//     int jumlahLagu;
+//     // modified mapvaluetype Value;
+//     SetInfoLagu InfoLagu;
+//     // modified mapkeytype Key;
+//     mapkeytype KeyAlbum;
+// } MapInfoAlbum;
+
+// typedef struct {
+//     Word NamaPenyanyi;
+//     int jumlahAlbum;
+//     //  modified mapvaluetype Value;
+//     MapInfoAlbum InfoAlbum;
+//     //  modified mapkeytype Key;
+//     mapkeytype KeyPenyanyi;
+// } MapInfoPenyanyi; //List penyanyi
+
+// typedef struct {
+//     int jumlahPenyanyi;
+//     MapInfoPenyanyi InfoPenyanyi[setMaxEl];
+// } ListPenyanyi; 
 
 /* Definisi Set S kosong : S.Count = Nil */
 /* S.Count = jumlah element Set */
@@ -33,39 +50,34 @@ typedef struct
 /* ********* Prototype ********* */
 
 /* *** Konstruktor/Kreator *** */
-void CreateSet(Set *S);
+void CreateSet(SetInfoLagu *S);
 /* I.S. Sembarang */
 /* F.S. Membuat sebuah Set S kosong berkapasitas MaxEl */
 /* Ciri Set kosong : count bernilai Nil */
 
 /* ********* Predikat Untuk test keadaan KOLEKSI ********* */
-boolean IsEmptySet(Set S);
+boolean IsEmptySet(SetInfoLagu S);
 /* Mengirim true jika Set S kosong*/
 /* Ciri Set kosong : count bernilai Nil */
 
-boolean IsFullSet(Set S);
+boolean IsFullSet(SetInfoLagu S);
 /* Mengirim true jika Set S penuh */
 /* Ciri Set penuh : count bernilai MaxEl */
 
 /* ********** Operator Dasar Set ********* */
-void InsertSet(Set *S, InfoLagu Elmt);
+void InsertSet(SetInfoLagu *S, setinfotype Elmt);
 /* Menambahkan Elmt sebagai elemen Set S. */
 /* I.S. S mungkin kosong, S tidak penuh
         S mungkin sudah beranggotakan Elmt */
 /* F.S. Elmt menjadi anggota dari S. Jika Elmt sudah merupakan anggota, operasi tidak dilakukan */
 
-void DeleteSet(Set *S, InfoLagu Elmt);
+void DeleteSet(SetInfoLagu *S, setinfotype Elmt);
 /* Menghapus Elmt dari Set S. */
 /* I.S. S tidak kosong
         Elmt mungkin anggota / bukan anggota dari S */
 /* F.S. Elmt bukan anggota dari S */
 
-boolean IsMemberSet(Set S, InfoLagu Elmt);
+boolean IsMemberSet(SetInfoLagu S, setinfotype Elmt);
 /* Mengembalikan true jika Elmt adalah member dari S */
-
-Set SetUnion(Set s1, Set s2);
-Set SetIntersection(Set s1, Set s2);
-Set SetSymmetricDifference(Set s1, Set s2);
-Set SetSubtract(Set s1, Set s2);
 
 #endif

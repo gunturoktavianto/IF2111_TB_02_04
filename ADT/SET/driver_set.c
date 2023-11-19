@@ -1,13 +1,13 @@
 #include <stdio.h>
 #include "set.h"
 
-Set Lagu;
+SetInfoLagu Lagu;
 
-void PrintSet(Set s){
+void PrintSet(SetInfoLagu s){
     int i=0;
     // printf("{ ");
     while(i!=s.Count){
-        printf("%d. %d\n", i+1, s.Elements[i]);
+        printf("%d. %d\n", i+1, s.ke[i]);
         i++;
     }
     // printf("}\n");

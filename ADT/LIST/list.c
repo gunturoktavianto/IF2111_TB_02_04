@@ -3,61 +3,61 @@
 
 // Konstruktor
 
-List MakeList() {
-	List L;
+ListPenyanyi MakeList() {
+	ListPenyanyi L;
 	IdxType i;
 	for (i = 0; i < MaxEl; i++) {
-		L.A[i] = Mark;
+		L.InfoPenyanyi[i] = Mark;
 	}
 	return L;
 }
 
-boolean IsEmpty(List L) {
-	return (L.A[0] == Mark);
+boolean IsEmpty(ListPenyanyi L) {
+	return (L.InfoPenyanyi[0] == Mark);
 }
 
-int Length(List L) {
+int Length(ListPenyanyi L) {
 	int i = 0;
-	while (L.A[i] != Mark) {
+	while (L.InfoPenyanyi[i] != Mark) {
 		i += 1;
 	}
 	return i;
 }
 
-ElType Get(List L, IdxType i) {
-	return L.A[i];
+ElType Get(ListPenyanyi L, IdxType i) {
+	return L.InfoPenyanyi[i];
 }
 
-void Modify(List *L, IdxType i, ElType v) {
-	(*L).A[i] = v;
+void Modify(ListPenyanyi *L, IdxType i, ElType v) {
+	(*L).InfoPenyanyi[i] = v;
 }
 
-IdxType FirstIdx(List L) {
+IdxType FirstIdx(ListPenyanyi L) {
     return 0;
 }
 
-IdxType LastIdx(List L) {
+IdxType LastIdx(ListPenyanyi L) {
 	int i = FirstIdx(L);
-	while ((i < MaxEl) && (L.A[i+1] != Mark)) {
+	while ((i < MaxEl) && (L.InfoPenyanyi[i+1] != Mark)) {
 		i += 1;
 	}
 	return i;
 }
 
-boolean IsIdxValid (List L, IdxType i) {
+boolean IsIdxValid (ListPenyanyi L, IdxType i) {
 	return (0 <= i) && (MaxEl >= i);
 }
 
-boolean IsIdxEff (List L, IdxType i) {
+boolean IsIdxEff (ListPenyanyi L, IdxType i) {
 	return (FirstIdx(L) <= i) && (LastIdx(L) >= i);
 }
 
-boolean Search(List L, ElType X) {
+boolean Search(ListPenyanyi L, ElType X) {
 	int i = FirstIdx(L);
 	int j = LastIdx(L);
 	boolean found = false;
 	while ((i <= j) && !found) {
-		if (L.A[i] == X) {
+		if (L.InfoPenyanyi[i] == X) {
 			found = true;
 		}
 		i += 1;
@@ -65,7 +65,7 @@ boolean Search(List L, ElType X) {
     return found;
 }
 
-void InsertFirst(List *L, ElType X) {
+void InsertFirst(ListPenyanyi *L, ElType X) {
 	IdxType i = LastIdx(*L);
 	while (i >= 0) {
 		Set(L, i+1, Get(*L, i));
@@ -74,7 +74,7 @@ void InsertFirst(List *L, ElType X) {
 	Set(L, 0, X);
 }
 
-void InsertAt(List *L, ElType X, IdxType i) {
+void InsertAt(ListPenyanyi *L, ElType X, IdxType i) {
     IdxType j = LastIdx(*L);
 	while (i <= j) {
 		Set(L, j+1, Get(*L, j));
@@ -83,47 +83,47 @@ void InsertAt(List *L, ElType X, IdxType i) {
 	Set(L, i, X);
 }
 
-void InsertLast(List *L, ElType X) {
+void InsertLast(ListPenyanyi *L, ElType X) {
     if (IsEmpty(*L)) {
         InsertFirst(L, X);
     } else {
-        (*L).A[LastIdx(*L) + 1] = X;
+        (*L).InfoPenyanyi[LastIdx(*L) + 1] = X;
     }
 }
 
-void DeleteFirst(List *L) {
+void DeleteFirst(ListPenyanyi *L) {
 	int i = FirstIdx(*L);
 	while (i < LastIdx(*L)) {
-		(*L).A[i] = (*L).A[i+1];
+		(*L).InfoPenyanyi[i] = (*L).InfoPenyanyi[i+1];
         i++;
 	}
-    (*L).A[i] = Mark;
+    (*L).InfoPenyanyi[i] = Mark;
 }
 
-void DeleteAt(List *L, IdxType i) {
+void DeleteAt(ListPenyanyi *L, IdxType i) {
 	int j = LastIdx(*L);
 	while (i <= j) {
-		(*L).A[i] = (*L).A[i+1];
+		(*L).InfoPenyanyi[i] = (*L).InfoPenyanyi[i+1];
         i++;
 	}
 }
 
-void DeleteLast(List *L) {
-	(*L).A[LastIdx(*L)] = Mark;
+void DeleteLast(ListPenyanyi *L) {
+	(*L).InfoPenyanyi[LastIdx(*L)] = Mark;
 }
 
-List Concat(List L1, List L2) {
-	List L3 = MakeList();
+ListPenyanyi Concat(ListPenyanyi L1, ListPenyanyi L2) {
+	ListPenyanyi L3 = MakeList();
 	int i = FirstIdx(L1);
 	int j = FirstIdx(L2);
 	int idx = 0;
 	while (i <= LastIdx(L1)) {
-		L3.A[idx] = L1.A[i];
+		L3.InfoPenyanyi[idx] = L1.InfoPenyanyi[i];
         idx++;
         i++;
 	}
 	while (j <= LastIdx(L2)) {
-		L3.A[idx] = L2.A[j];
+		L3.InfoPenyanyi[idx] = L2.InfoPenyanyi[j];
         idx++;
         j++;
 	}
