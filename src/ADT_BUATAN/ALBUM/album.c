@@ -22,9 +22,9 @@ boolean IsFullAlbum(Album M){
 }
 
 /* ********** Operator Dasar Album ********* */
-valuetype ValueAlbum(Album M, keytype k){
+valuetypeAlbum ValueAlbum(Album M, keytype k){
 /* Mengembalikan nilai value dengan key k dari M */
-/* Jika tidak ada key k pada M, akan valuetype.Count == 0 */
+/* Jika tidak ada key k pada M, akan valuetypeAlbum.Count == 0 */
     address idx = 0;
 
     while (idx < M.Count) {
@@ -32,16 +32,28 @@ valuetype ValueAlbum(Album M, keytype k){
             return M.InfoAlbum[idx].Value;
         idx++;
     }
-    valuetype temp;
+    valuetypeAlbum temp;
     temp.Count=0;
     return temp;
 }
-void InsertAlbum(Album *M, keytype k, valuetype v){
+
+boolean IsMemberAlbum(Album M, keytype k){
+/* Apakah NamaAlbum tertentu terdapat pada album penyanyi tertentu*/
+/* Mengembalikan true jika k adalah member dari M */
+    address idx = 0;
+    while (idx < M.Count) {
+        if (IsWordEq(M.InfoAlbum[idx].Key,k)) return true;
+        idx++;
+    }
+    return false;
+}
+
+void InsertAlbum(Album *M, keytype k, valuetypeAlbum v){
 /* Menambahkan Elmt sebagai elemen Album M. */
 /* I.S. M mungkin kosong, M tidak penuh
         M mungkin sudah beranggotakan v dengan key k */
 /* F.S. v menjadi anggota dari M dengan key k. Jika k sudah ada, operasi tidak dilakukan */
-    if (IsMember(*M, k)) return;
+    if (IsMemberAlbum(*M, k)) return;
 
     M->InfoAlbum[M->Count].Key = k;
     M->InfoAlbum[M->Count].Value = v;
@@ -54,9 +66,7 @@ void DeleteAlbum(Album *M, keytype k){
         element dengan key k mungkin anggota / bukan anggota dari M 
         (Map, NamaAlbum) yang ingin dihapus*/
 /* F.S. element dengan key k bukan anggota dari M */
-    if (!IsMember(*M, k)) return;
-
-    boolean found = false;
+    if (!IsMemberAlbum(*M, k)) return;
     address idx = 0, i;
 
     // mencari index
@@ -73,17 +83,6 @@ void DeleteAlbum(Album *M, keytype k){
     (*M).Count--;
 }
 
-boolean IsMemberAlbum(Album M, keytype k){
-/* Apakah NamaAlbum tertentu terdapat pada album penyanyi tertentu*/
-/* Mengembalikan true jika k adalah member dari M */
-    address idx = 0;
-    while (idx < M.Count) {
-        if (IsWordEq(M.InfoAlbum[idx].Key,k)) return true;
-        idx++;
-    }
-    return false;
-}
-
 void PrintAlbum(Album M){
 /* Mencetak keseluruhan elemen album*/
 /* Format: 
@@ -91,6 +90,7 @@ void PrintAlbum(Album M){
 [Penyanyi, Album, Nama]*/
     int idx = 0;
     while (idx < M.Count){
+        printf("%s\n",M.InfoAlbum[idx].Key.TabWord);
         PrintLagu(M.InfoAlbum[idx].Value);
         idx++;
     }

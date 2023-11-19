@@ -2,8 +2,6 @@
 #define setlagu_H
 
 #include "../../ADT/mesinkata/mesinkata.h"
-
-
 #include <stdio.h>
 
 /* MODUL SetLagu

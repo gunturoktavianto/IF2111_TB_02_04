@@ -11,48 +11,51 @@ int main() {
     CreateEmptyAlbum(&album);
 
     // input sebanyak jumlah album
-    printf("Jumlah lagu yang ingin dimasukkan: ");
+    printf("Jumlah album yang ingin dimasukkan: ");
     scanf("%d",&N);
     while(i<N){
-        char strnama[30], stralbum[30], strpenyanyi[30]; 
-        printf("Input penyanyi lagu ke-%d: ", i+1);
-        scanf(" %[^\n]",strpenyanyi);
-        lagu.InfoLagu[i].penyanyi=toKata(strpenyanyi);
-        lagu.InfoLagu[i].penyanyi.TabWord[stringLength(strpenyanyi)] = '\0';
-        printf("Input album lagu ke-%d: ", i+1);
-        scanf(" %[^\n]",stralbum);
-        lagu.InfoLagu[i].album=toKata(stralbum);
-        lagu.InfoLagu[i].album.TabWord[stringLength(stralbum)] = '\0';
-        printf("Input nama lagu ke-%d: ", i+1);
-        scanf(" %[^\n]",strnama);
-        lagu.InfoLagu[i].nama=toKata(strnama);
-        lagu.InfoLagu[i].nama.TabWord[stringLength(strnama)] = '\0';
-        lagu.Count++;
+        char strkey[30]; 
+        printf("Input nama album ke-%d: ", i+1);
+        scanf(" %[^\n]",strkey);
+        album.InfoAlbum[i].Key=toKata(strkey);
+        album.InfoAlbum[i].Key.TabWord[stringLength(strkey)] = '\0';
+        album.Count++;
         i++;
     }
 
+    // Print the Album
+    printf("\nAlbum setelah input: \n");
+    PrintAlbum(album);
+
+    // Buat lagu dummy
+    SetLagu lagu;
+    CreateEmptySetLagu(&lagu);
+    lagu.Count = 1;
+    lagu.InfoLagu[0].penyanyi = toKata("OLIV");
+    lagu.InfoLagu[0].album = toKata("BOSSCHA");
+    lagu.InfoLagu[0].nama = toKata("RUNGKAD");
+
     // Initialize value here
-    InsertAlbum(&album, key, value);
+    InsertAlbum(&album, toKata("HARTA"), lagu);
+
+    printf("\nAlbum setelah insert: \n");
+    PrintAlbum(album);
 
     // Test IsMemberAlbum
-    if (IsMemberAlbum(album, key)) {
+    if (IsMemberAlbum(album, toKata("HARTA"))) {
         printf("Test IsMemberAlbum: Passed\n");
     } else {
         printf("Test IsMemberAlbum: Failed\n");
     }
 
-    // Test ValueAlbum
-    valuetype result = ValueAlbum(album, key);
-    // Check if result is as expected
-
     // Test DeleteAlbum
-    DeleteAlbum(&album, key);
+    DeleteAlbum(&album, toKata("HARTA"));
 
     // Test IsEmptyAlbum again
     if (IsEmptyAlbum(album)) {
-        printf("Test IsEmptyAlbum after DeleteAlbum: Passed\n");
+        printf("Album kosong\n");
     } else {
-        printf("Test IsEmptyAlbum after DeleteAlbum: Failed\n");
+        printf("Album tidak kosong\n");
     }
 
     return 0;

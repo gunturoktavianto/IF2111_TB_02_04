@@ -1,8 +1,5 @@
 #ifndef album_H
 #define album_H
-#include <stdio.h>
-#include "boolean.h"
-#include "../ADT/MESINKATA/mesinkata.h"
 #include "../LAGU/lagu.h"
 
 
@@ -12,21 +9,19 @@ Deklarasi stack yang dengan implementasi array eksplisit-statik rata kiri
 
 // #define false 0
 // #define true 1
-#define Nil 0
-#define MaxEl 10
 
 // typedef int bool;
 typedef Word keytype;
-typedef SetLagu valuetype;
+typedef SetLagu valuetypeAlbum;
 typedef int address;
 
 typedef struct {
 	keytype Key;//NamaAlbum
-	valuetype Value;//SetLagu
-} infotype;
+	valuetypeAlbum Value;//SetLagu
+} infotypeAlbum;
 
 typedef struct {
-	infotype InfoAlbum[MaxEl];
+	infotypeAlbum InfoAlbum[MaxEl];
 	address Count;
 } Album;
 /*
@@ -58,11 +53,14 @@ boolean IsFullAlbum(Album M);
 /* Ciri Album penuh : count bernilai MaxEl */
 
 /* ********** Operator Dasar Album ********* */
-valuetype ValueAlbum(Album M, keytype k);
+valuetypeAlbum ValueAlbum(Album M, keytype k);
 /* Mengembalikan nilai value dengan key k dari M */
 /* Jika tidak ada key k pada M, akan mengembalikan Undefined */
 
-void InsertAlbum(Album *M, keytype k, valuetype v);
+boolean IsMemberAlbum(Album M, keytype k);
+/* Mengembalikan true jika k adalah member dari M */
+
+void InsertAlbum(Album *M, keytype k, valuetypeAlbum v);
 /* Menambahkan Elmt sebagai elemen Album M. */
 /* I.S. M mungkin kosong, M tidak penuh
         M mungkin sudah beranggotakan v dengan key k */
@@ -73,9 +71,6 @@ void DeleteAlbum(Album *M, keytype k);
 /* I.S. M tidak kosong
         element dengan key k mungkin anggota / bukan anggota dari M */
 /* F.S. element dengan key k bukan anggota dari M */
-
-boolean IsMemberAlbum(Album M, keytype k);
-/* Mengembalikan true jika k adalah member dari M */
 
 void PrintAlbum(Album M);
 /* Mencetak keseluruhan album yang dimiliki suatu penyanyi*/
