@@ -4,6 +4,7 @@
 #ifndef __MESINKATA_H__
 #define __MESINKATA_H__
 
+#include "boolean.h"
 #include "mesinkarakter.h"
 
 #define NMax 50
@@ -49,5 +50,16 @@ int stringLength(char *str);
 int WordtoInt(Word w);
 Word GetWords();
 boolean IsWordEq (Word kata1, Word kata2);
+Word toKata(char *str); 
+/*  Fungsi yang menerima sebuah paramater str bertipe string
+    Kemudian mengembalikan elemen bertipe Word yang merupakan hasil transformasi string str */
+int stringLength(char *str);
+/*  Fungsi yang menerima sebuah parameter str bertipe string
+    Kemudian mengembalikan panjang dari string tersebut */
 
+void GetCommand();
+   
+Word AccessCommand(int Idx);
+
+Word GetInput();
 #endif

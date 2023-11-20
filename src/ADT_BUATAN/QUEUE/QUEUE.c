@@ -1,15 +1,8 @@
 //Ini masih blm lengkap semuanya dan ga tau apakah akan eror klo di jalanin ato ga (blm sempet bikin main.c)
-
+#include "QUEUE.h"
 #include <stdio.h>
-#include "queuelagu.h"
-#include "../PENYANYI/penyanyi.h"
-#include "../ALBUM/album.h"
-#include "../PLAYLIST/playlist.h"
-#include "../LAGU/lagu.h"
-#include "arraydin.h"
-#include "HEADERQUEUE.h"
-
 // Fungsi untuk menambahkan lagu ke dalam queue
+/*
 void queueSong(Queue *Q, ListPenyanyi P) {
     printf("Daftar Penyanyi :\n");
     int i = 0;
@@ -66,76 +59,70 @@ void queueSong(Queue *Q, ListPenyanyi P) {
         }
     }
 }
+*/
 
 // Fungsi untuk menambahkan playlist ke dalam queue
 void queuePlaylist(ArrayDin L, Queue *Q) {
     //soal input id dll itu masih blm kebayang
     printf("Masukkan ID Playlist: ");
-    GetCommand();
+    GetInput();
+    int id=WordtoInt(currentWord);
     printf("\n");
-    address P = First(GetArrDin(L, int(currentWord))); //Pake ADT Dilla
+    alamat P = First(L.A[id-1]); //Pake ADT Dilla
     while (P != Nil) {
-        enqueueQueue(Q, P->info);
+        enqueueLagu(Q, P->infolagu);
         P = P->next;
     }
-    printf("Berhasil menambahkan playlist “%s” ke queue.", char(Playlist));
+    printf("Berhasil menambahkan playlist “%s” ke queue.\n", L.A[id-1].NamaPlaylist.TabWord);
 }
 
 // Fungsi untuk menukar lagu pada urutan x dan y dalam queue
 void swapSongs(int x, int y, Queue *Q) {
-    if (x >= 1 && x <= lengthQueue(*Q) && y >= 1 && y <= lengthQueue(*Q)) {
-        Word temp = Q->buffer[x];
-        Q->buffer[x] = Q->buffer[y];
-        Q->buffer[y] = temp;
-        printf("Lagu %s berhasil ditukar dengan %s\n", Q->buffer[y], Q->buffer[x]);
+    if (x >= 1 && x <= lengthQueueLagu(*Q) && y >= 1 && y <= lengthQueueLagu(*Q)) {
+        ElTypeQueue temp = Q->buffer[x-1];
+        Q->buffer[x-1] = Q->buffer[y-1];
+        Q->buffer[y-1] = temp;
+        printf("Lagu %s berhasil ditukar dengan %s\n", Q->buffer[y].nama.TabWord, Q->buffer[x].nama.TabWord);
     } else {
-        if ((x < 1 || x > lengthQueue(*Q)) && y >= 1 && y <= lengthQueue(*Q)){
+        if ((x < 1 || x > lengthQueueLagu(*Q)) && y >= 1 && y <= lengthQueueLagu(*Q)){
             printf("Lagu dengan urutan ke %d tidak terdapat dalam queue!\n", x);
         }
-        else if (x >= 1 && x <= lengthQueue(*Q) && (y < 1 || y > lengthQueue(*Q))){
+        else if (x >= 1 && x <= lengthQueueLagu(*Q) && (y < 1 || y > lengthQueueLagu(*Q))){
             printf("Lagu dengan urutan ke %d tidak terdapat dalam queue!\n", y);
         }
-        else if ((x < 1 || x > lengthQueue(*Q)) && (y < 1 || y > lengthQueue(*Q))){
+        else if ((x < 1 || x > lengthQueueLagu(*Q)) && (y < 1 || y > lengthQueueLagu(*Q))){
             printf("Lagu dengan urutan ke %d dan %d tidak terdapat dalam queue!\n", y, x );
         }
     }
 }
 
 // Fungsi untuk menghapus lagu dari queue berdasarkan ID
-void removeSong(int songId, Queue *Q, Map Song) {
-    if (songId >= 1 && songId <= lengthQueue(*Q)) { //Nanti dibwhnya bikin loop bistu bikin kondisi yang menyakan if Q->Tab[songId] == Song.Elements[i].keytype then
-        for (int i = 0; i<MaxElMap;i++){
-            for(int j = 0; j<Song.Count;j++){
-                for(int k = 0; k<MaxEl;k++){
-                    if ((Song[i].Elements[j].Lagu.Elements[k].lagu) == queue.buffer[songId]){
-                        printf("Lagu \"%s\" oleh \"%s\" telah dihapus dari queue!\n", queue.buffer[songId], char(Song[i]));
-                        Queue temp;
-                        CreateQueue(*temp);
-                        ElTypeQueue  val;
-                        dequeueQueue(*Q, *val);
-                        enqueueQueue(*temp, val);
-                        while (val != queue.buffer[songId]){
-                            dequeueQueue(*Q, *val);
-                            enqueueQueue(*temp, val);
-                        }
-                        dequeueQueue(*Q, *val);
-                        enqueueQueue(*temp, val);
-                        dequeueQueue(*temp,val);
-                        while (!isEmptyQueue(temp)){
-                            dequeueQueue(*temp, *val);
-                            enqueueQueue(*Q, val);
-                        }
-                        return;
-                    }
-                }
-            }
+void removeSong(int songId, Queue *Q) {
+    if (songId >= 1 && songId <= lengthQueueLagu(*Q)) { //Nanti dibwhnya bikin loop bistu bikin kondisi yang menyakan if Q->Tab[songId] == Song.Elements[i].keytype then
+        printf("Lagu \"%s\" oleh \"%s\" telah dihapus dari queue!\n", Q->buffer[songId-1].nama.TabWord, Q->buffer[songId-1].penyanyi.TabWord);
+        Queue temp;
+        CreateQueueLagu(&temp);
+        ElTypeQueue  val;
+        dequeueLagu(Q, &val);
+        enqueueLagu(&temp, val);
+        while (!isInQueueLagu(temp,Q->buffer[songId-1])){
+            dequeueLagu(Q, &val);
+            enqueueLagu(&temp, val);
         }
+        dequeueLagu(&temp,&val);
+        while (!isEmptyQueueLagu(temp)){
+            dequeueLagu(&temp, &val);
+            enqueueLagu(Q, val);
+        }
+        
     }
-    printf("Lagu dengan urutan ke %d tidak ada.\n", songId);
+    else{
+        printf("Lagu dengan urutan ke %d tidak ada.\n", songId);
+    }
 }
 
 // Fungsi untuk mengosongkan queue
 void clearQueue(Queue *Q) {
-    CreateQueue(Q);
+    CreateQueueLagu(Q);
     printf("Queue berhasil dikosongkan.\n");
 }

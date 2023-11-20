@@ -2,8 +2,6 @@
 #define setlagu_H
 
 #include "../../ADT/mesinkata/mesinkata.h"
-
-
 #include <stdio.h>
 
 /* MODUL SetLagu
@@ -67,11 +65,10 @@ boolean IsMemberSetLagu(SetLagu S, infotype Elmt);
 /* Mengembalikan true jika Elmt adalah member dari S */
 
 void PrintLagu(SetLagu S);
-/* Mencetak keseluruhan elemen lagu*/
+/* Mencetak keseluruhan lagu yang dimiliki suatu album*/
 /* Format: [Penyanyi, Album, Nama]*/
 
-<<<<<<< HEAD:src/ADT _BUATAN/LAGU/lagu.h
+Lagu MakeLagu(Word nama, Word album, Word penyanyi);
+/* Mengisi Lagu*/
+
 #endif
-=======
-#endif
->>>>>>> 6d27f1ea2409cb88a28c3e966c6d6cc309ece220:src/ADT_BUATAN/LAGU/lagu.h
