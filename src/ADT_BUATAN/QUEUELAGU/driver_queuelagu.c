@@ -2,7 +2,7 @@
 
 int main() {
     // Create a queue
-    Queue myQueue;
+    Queuelagu myQueue;
     CreateQueueLagu(&myQueue);
 
     // Enqueue some elements

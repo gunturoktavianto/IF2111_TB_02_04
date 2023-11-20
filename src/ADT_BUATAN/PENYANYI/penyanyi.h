@@ -101,7 +101,7 @@ void DeleteListPenyanyi(ListPenyanyi *S, infotypePenyanyi *Elmt);
         Elmt mungkin anggota / bukan anggota dari S */
 /* F.S. Elmt bukan anggota dari S */
 
-boolean IsMemberListPenyanyi(ListPenyanyi *S, infotypePenyanyi *Elmt);
+boolean IsMemberListPenyanyi(ListPenyanyi *S, infotypePenyanyi Elmt);
 /* Mengembalikan true jika Elmt adalah member dari S */
 
 int IdxPenyanyi(ListPenyanyi *S, keytype kp);

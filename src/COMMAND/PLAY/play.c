@@ -40,9 +40,7 @@ Masukkan ID Lagu yang dipilih : 3;
 Memutar lagu “Type Girl” oleh “BLACKPINK”.
 
 */
-int currentsong;
 void PlaySong(){
-    boolean valid = false;
     // menampilkan penyanyi, disimpan dalam ADT penyanyi, berperan juga sebagai key
     int i=0;
     printf("Daftar Penyanyi :\n");
@@ -55,7 +53,7 @@ void PlaySong(){
     infotypePenyanyi namapenyanyi;
     printf("\nMasukkan Nama Penyanyi yang dipilih : ");
     namapenyanyi.Key = GetWords();
-    while(!IsMemberListPenyanyi(&l, &namapenyanyi.Key)){
+    while(!IsMemberListPenyanyi(&l, namapenyanyi)){
         printf("Nama Penyanyi tidak ditemukan.\n");
         printf("\nMasukkan Nama Penyanyi yang dipilih : ");
         namapenyanyi.Key = GetWords();
@@ -64,7 +62,7 @@ void PlaySong(){
     // menampilkan album dari penyanyi X, disimpan dalam ADT map
     printf("Daftar Album oleh %s :\n", namapenyanyi.Key.TabWord);
     while(i<l.PenyanyiKe[idxp].InfoPenyanyi[idxp].Value.Count){
-        printf("  %d. %s\n", i+1, l.PenyanyiKe[idxp].InfoPenyanyi[idxp].Value.InfoAlbum[i].Key);
+        printf("  %d. %s\n", i+1, l.PenyanyiKe[idxp].InfoPenyanyi[idxp].Value.InfoAlbum[i].Key.TabWord);
         i++;
     } i=0;
 
@@ -81,7 +79,7 @@ void PlaySong(){
     // menampilkan lagu dari album X, disimpan dalam ADT set
     printf("Daftar Lagu Album %s oleh %s :\n", namaalbum.Key.TabWord, namapenyanyi.Key.TabWord);
     while(i<l.PenyanyiKe[idxp].InfoPenyanyi[idxp].Value.Count){
-        printf("  %d. %s\n", i+1, l.PenyanyiKe[idxp].InfoPenyanyi[idxp].Value.InfoAlbum[idxa].Value.InfoLagu[i].nama);
+        printf("  %d. %s\n", i+1, l.PenyanyiKe[idxp].InfoPenyanyi[idxp].Value.InfoAlbum[idxa].Value.InfoLagu[i].nama.TabWord);
         i++;
     } i=0;
 
@@ -93,66 +91,72 @@ void PlaySong(){
         printf("Nama Lagu tidak ditemukan.\n");
         printf("\nMasukkan ID Lagu  yang dipilih : ");
         namalagu.nama = GetWords();
-    }   int idxl = IdxLagu(&l, idxp, idxa, namalagu.nama);
+    }   /*int idxl = IdxLagu(&l, idxp, idxa, namalagu.nama);*/
     printf("\nMemutar lagu \"%s\" oleh \"%s\".\n", namalagu.nama.TabWord, namapenyanyi.Key.TabWord);
 
     // Final State
     //Ketika command ini berhasil dieksekusi, queue dan riwayat lagu akan menjadi kosong
-    Queue q;
-    CreateQueue(&playPlaylist);
-    // Update currentsong
-    currentsong = IDlagu;
+    // Queuelagu q;
+    // CreateQueue(&q);
+    // // Update currentsong
+    // currentsong = namalagu;
 }
 
+
+int main(){
+    printf("main bisa\n");
+    startconfig();
+    PlaySong();
+}
 /*PLAY PLAYLIST
 Command PLAY PLAYLIST digunakan untuk memainkan lagu berdasarkan id playlist. Ketika command ini berhasil dieksekusi, queue akan berisi semua lagu yang ada dalam playlist yang dimainkan dan isi riwayat lagu sama dengan queue, tetapi dengan urutan yang di-reverse. Jika user memanggil fungsi start sebelumnya, maka playlist kosong.
 */
 
-void PlayPlaylist(){
-    /*Initial State*/
-    /*playlist tidak kosong*/
-    ListLL playlist; //temporary
-    boolean valid = false;
-    int IDplaylist;
-    while(valid == false){
-        printf("Masukkan ID Playlist: ");
-        scanf("%d", &IDplaylist);
-        infotypeLL temp;
-        temp = IDplaylist;
-        if(SearchLL(playlist, temp) != Nil){valid = true;}
-        else{printf("ID Playlist tidak ditemukan.\n");}
-    }
-    printf("\nMemutar playlist \"%s\".\n", Lagu.Elements[IDplaylist]);
+// void PlayPlaylist(){
+//     /*Initial State*/
+//     /*playlist tidak kosong*/
+//     ListLL playlist; //temporary
+//     boolean valid = false;
+//     int IDplaylist;
+//     while(valid == false){
+//         printf("Masukkan ID Playlist: ");
+//         scanf("%d", &IDplaylist);
+//         infotypeLL temp;
+//         temp = IDplaylist;
+//         if(SearchLL(playlist, temp) != Nil){valid = true;}
+//         else{printf("ID Playlist tidak ditemukan.\n");}
+//     }
+//     printf("\nMemutar playlist \"%s\".\n", Lagu.Elements[IDplaylist]);
 
-    /*Final State*/
-    /*currentsong menjadi lagu urutan pertama dalam playlist*/
-    currentsong = Info(First(playlist));
+//     /*Final State*/
+//     /*currentsong menjadi lagu urutan pertama dalam playlist*/
+//     currentsong = Info(First(playlist));
 
-    /*queue berisi semua lagu dalam playlist*/
-    Queue queueLagu;
-    Queue playPlaylist;
-    address p = First(playlist);
-    while(p!=Nil){
-        enqueue(&playPlaylist, Info(p));
-        p = Next(p);
-    }
-    Queue tempPlaylist;
-    copyQueue(&playPlaylist, &tempPlaylist);
-    // masukin playlist ke queuelagu
+//     /*queue berisi semua lagu dalam playlist*/
+//     Queue queueLagu;
+//     Queue playPlaylist;
+//     address p = First(playlist);
+//     while(p!=Nil){
+//         enqueue(&playPlaylist, Info(p));
+//         p = Next(p);
+//     }
+//     Queue tempPlaylist;
+//     copyQueue(&playPlaylist, &tempPlaylist);
+//     // masukin playlist ke queuelagu
 
-    /*riwayat berisi queue yang di reverse*/
-    Queue reversedPlaylist;
-    Stack riwayat;
-    transferReverse(&tempPlaylist, &reversedPlaylist);
+//     /*riwayat berisi queue yang di reverse*/
+//     Queue reversedPlaylist;
+//     Stack riwayat;
+//     transferReverse(&tempPlaylist, &reversedPlaylist);
 
-    while(lengthQueue(reversedPlaylist)){
-        int Elmt;
-        dequeue(&reversedPlaylist, &Elmt);
-        Push(&riwayat,Elmt);
-    }
+//     while(lengthQueue(reversedPlaylist)){
+//         int Elmt;
+//         dequeue(&reversedPlaylist, &Elmt);
+//         Push(&riwayat,Elmt);
+//     }
 
     
-}
+// }
 
 
 /*

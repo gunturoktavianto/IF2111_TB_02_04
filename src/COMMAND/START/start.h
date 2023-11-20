@@ -1,13 +1,22 @@
 #ifndef start_H
 #define start_H
-#include <stdio.h>
-#include <stdlib.h>
-#include <math.h>
-#include <time.h>
-#include "../src/ADT_BUATAN/PENYANYI/penyanyi.h"
+#include "../../ADT_BUATAN/RIWAYAT/riwayat.h"
 #include "../HELP/help.h"
+#include "../INVALID/invalid.h"
+#include "../LIST/list.h"
+#include "../LOAD/load.h"
+#include "../PLAY/play.h"
+#include "../PLAYLIST/playlist.h"
+#include "../QUEUE/queue.h"
+#include "../QUIT/quit.h"
+#include "../SAVE/save.h"
+#include "../SONG/song.h"
+#include "../STATUS/status.h"
 
+Lagu currentsong;
 ListPenyanyi l;
+Queuelagu q;
+Stack r;
 
 void startconfig();
 

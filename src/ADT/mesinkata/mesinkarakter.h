@@ -5,8 +5,11 @@
 #define __MESIN_KAR_H_
 
 #include "boolean.h"
-#include <stdlib.h>
 #include <stdio.h>
+#include <stdlib.h>
+#include <math.h>
+#include <time.h>
+
 #define MARK EOF
 /* State Mesin */
 extern char currentChar;

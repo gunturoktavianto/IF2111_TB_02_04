@@ -141,7 +141,7 @@ void InsertListPenyanyi(ListPenyanyi *S, infotypePenyanyi *Elmt){
     // KAMUS
 
     // ALGORITMA
-    if (IsMemberListPenyanyi(S, Elmt)) return;
+    if (IsMemberListPenyanyi(S, (*Elmt))) return;
     S->PenyanyiKe[S->Count].InfoPenyanyi[S->Count].Key = (*Elmt).Key;
     S->PenyanyiKe[S->Count].InfoPenyanyi[S->Count].Value = (*Elmt).Value;
     S->Count++;
@@ -156,7 +156,7 @@ void DeleteListPenyanyi(ListPenyanyi *S, infotypePenyanyi *Elmt){
     address idx = 0, i;
 
     // ALGORITMA
-    if (!IsMemberListPenyanyi(S, Elmt)) return;
+    if (!IsMemberListPenyanyi(S, (*Elmt))) return;
     
     while (idx < S->Count) {
         if (IsWordEq(S->PenyanyiKe[idx].InfoPenyanyi[idx].Key, (*Elmt).Key)) break;
@@ -170,14 +170,14 @@ void DeleteListPenyanyi(ListPenyanyi *S, infotypePenyanyi *Elmt){
     S->Count--;
 }
 
-boolean IsMemberListPenyanyi(ListPenyanyi *S, infotypePenyanyi *Elmt){
+boolean IsMemberListPenyanyi(ListPenyanyi *S, infotypePenyanyi Elmt){
 /* Mengembalikan true jika Elmt adalah member dari S */
     // KAMUS
     address idx = 0;
     
     // ALGORITMA
     while (idx < S->Count) {
-        if (IsWordEq(S->PenyanyiKe[idx].InfoPenyanyi[idx].Key, Elmt->Key )) return true;
+        if (IsWordEq(S->PenyanyiKe[idx].InfoPenyanyi[idx].Key, Elmt.Key )) return true;
         idx++;
     }
     

@@ -4,7 +4,7 @@
 #ifndef riwayat_H
 #define riwayat_H
 
-#include "../LAGU/lagu.h"
+#include "../QUEUELAGU/queuelagu.h"
 
 
 #define MaxEl 100
