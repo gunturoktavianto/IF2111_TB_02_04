@@ -5,6 +5,7 @@
 #include <math.h>
 #include <time.h>
 #include "../src/ADT_BUATAN/PENYANYI/penyanyi.h"
+#include "../HELP/help.h"
 
 ListPenyanyi l;
 

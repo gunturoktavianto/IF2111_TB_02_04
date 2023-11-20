@@ -1,6 +1,6 @@
 #ifndef QUEUE_H
 #define QUEUE_H
-#include "queuelagu.h"
+#include "../START/start.h"
 // Fungsi untuk menambahkan lagu ke dalam queue
 void queuePlaylist(ArrayDin L, Queue *Q);
 // Fungsi untuk menukar lagu pada urutan x dan y dalam queue

@@ -1,7 +1,7 @@
 #ifndef playlist_H
 #define playlist_H
 
-#include "../LAGU/lagu.h"
+#include "../PENYANYI/penyanyi.h"
 
 #define First(L) ((L).First)
 #define Info(P) (P)->infolagu
