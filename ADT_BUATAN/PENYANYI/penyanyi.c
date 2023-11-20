@@ -239,3 +239,50 @@ int IdxDaftarPenyanyi(ListPenyanyi *M, keytype k){
     
     return idx;
 }
+
+void MakePenyanyiDummy()
+{
+    // KAMUS
+    Penyanyi penyanyi;
+    Word namapenyanyi1,namapenyanyi2;
+    Album albumRamadhan, FavianRuleTheWorld;
+    // ALGORITMA
+    CreateEmptyPenyanyi(&penyanyi);
+    namapenyanyi1 = toKata("Ramadhan Bintang");
+    namapenyanyi2 = toKata("Favian Ganz");
+    InsertPenyanyi(&penyanyi, &namapenyanyi1, &albumRamadhan);
+    InsertPenyanyi(&penyanyi, &namapenyanyi2, &FavianRuleTheWorld);
+}
+
+void makeListPenyanyi()
+{
+    Word namapenyanyi1,namapenyanyi2;
+    ListPenyanyi daftarpenyanyi;
+    Album albumRamadhan, FavianRuleTheWorld;
+    infotypePenyanyi elmt1, elmt2;
+    // ALGORITMA
+    CreateEmptyListPenyanyi(&daftarpenyanyi);
+    namapenyanyi1 = toKata("Ramadhan Bintang");
+    namapenyanyi2 = toKata("Favian Ganz");
+    elmt1.Key = namapenyanyi1;
+    elmt2.Key = namapenyanyi2;
+    elmt1.Value = albumRamadhan;
+    elmt2.Value = FavianRuleTheWorld;   
+    InsertListPenyanyi(&daftarpenyanyi, &elmt1);
+    InsertListPenyanyi(&daftarpenyanyi, &elmt2);
+}
+
+boolean AnggotaListPenyanyi(ListPenyanyi *M, keytype *k)
+{
+    /* Mengembalikan true jika k adalah member dari M */
+    // KAMUS
+    address idx = 0;
+    
+    // ALGORITMA
+    while (idx < (*M).Count) {
+        if (IsWordEq((*M).PenyanyiKe[idx].InfoPenyanyi[idx].Key,*k)) return true;
+        idx++;
+    }
+    
+    return false;
+}

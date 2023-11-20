@@ -1,13 +1,14 @@
 #ifndef queuelagu_H
 #define queuelagu_H
 #include "boolean.h"
-#include "../mesinkata/mesinkata.h"
+#include "../../ADT/mesinkata/mesinkata.h"
 
 #define IDX_UNDEF -1
 #define CAPACITY 20
 
 /* Definisi elemen dan address */
 typedef Lagu ElTypeQueue;
+
 // typedef struct{
 //     ElTypeQueue lagu;
 // } Lagu;

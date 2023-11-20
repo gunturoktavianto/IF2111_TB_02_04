@@ -1,6 +1,7 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include "penyanyi.h"
+
 // void DisplayDaftarPenyanyi(Penyanyi Penyanyi)
 // {
 //     // Menampilkan list penyanyi yang ada
@@ -41,7 +42,6 @@ int main()
     InsertListPenyanyi(&daftarpenyanyi, &elmt1);
     InsertListPenyanyi(&daftarpenyanyi, &elmt2);
     // Menampilkan list singer yang ada
-    // printf("Daftar Penyanyi :\n");
     printPenyanyi(&penyanyi);
     if(IsMemberPenyanyi(&penyanyi, &namapenyanyi2))
     {
@@ -49,10 +49,10 @@ int main()
     }
 
     indeks = IdxPenyanyi(&penyanyi, namapenyanyi1);
-    printf("\nindeks penyanyi = %d", indeks);
+    printf("\nindeks penyanyi = %d\n", indeks);
     printdaftarPenyanyi(&daftarpenyanyi);
     i =0;
-    if(IsMemberListPenyanyi(&daftarpenyanyi, &elmt1))
+    if(AnggotaListPenyanyi(&daftarpenyanyi, &namapenyanyi1))
     {
         printf("%s ada di list penyanyi\n", elmt1.Key.TabWord);
     }

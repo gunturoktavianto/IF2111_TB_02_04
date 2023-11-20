@@ -3,17 +3,14 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <math.h>
-
+Lagu currentSong;
 void songNext(Queue queueLagu, Stack riwayat)
 {
     // KAMUS    
-    Lagu currentSong, song;
+    Lagu song;
     // ALGORITMA
     if(isEmptyQueue(queueLagu)) // jika queueu kosong
     {
-        // Pop(&riwayat, &lagudiputars); // ambil lagu saat ini
-        // currentSong
-        // tadinya mikir lagu yang bakal diputar di tambahin ke riwayat
         Push(&riwayat, currentSong);
         printf("Queue kosong, memutar kembali lagu \n %s oleh %s", currentSong.nama.TabWord, currentSong.penyanyi.TabWord);
         // memainkan lagu saat ini
@@ -34,7 +31,7 @@ void songNext(Queue queueLagu, Stack riwayat)
 void songPrevious(Queue queueLagu, Stack riwayat)
 {
     // KAMUS    
-    Lagu currentSong, song;
+    Lagu song;
     ElTypeQueue val;
     int i;
     // ALGORITMA
@@ -75,32 +72,44 @@ void song()
 {
     // KAMUS
     boolean valid = false;
+    Word command;
     Queue queueLagu; // sementara
-    Stack riwayat;
+    Stack riwayat; // sementara
     // ALGORITMA
     load();
     printf("====[ SELAMAT DATANG DI FUNGSI SONG ]====\n");
     printf("----TERDAPAT DUA FUNGSI YANG BISA DIAKSES---- \n");
     printf("    1. SONG NEXT \n");
     printf("    2. SONG PREVIOUS \n");
+    printf("    3. QUIT \n");
     printf("> SILAHKAN MASUKAN COMMAND: \n");
-    GetCommand();
+    command = GetInput();
     while(!valid)
     {
-        if (IsWordEq(toKata("SONG NEXT"), currentWord))
+        if (IsWordEq(toKata("SONG NEXT"), command))
         {
             songNext(queueLagu, riwayat);
             valid = true;
         } 
-        else if(IsWordEq(toKata("SONG PREVIOUS"), currentWord))
+        else if(IsWordEq(toKata("SONG PREVIOUS"), command))
         {
             songPrevious(queueLagu, riwayat);
+            valid = true;
+        } 
+        else if(IsWordEq(toKata("QUIT"), command))
+        {
+            printf("\n>> Keluar dari Fungsi");
             valid = true;
         } 
         else
         {
             printf("> COMMAND TIDAK VALID SILAHKAN MASUKAN ULANG\n");
-            GetCommand();
+            command = GetInput();
         }
     }
+}
+
+int main()
+{
+    song();
 }

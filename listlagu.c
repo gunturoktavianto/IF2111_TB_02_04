@@ -1,7 +1,5 @@
 #include "ADT_BUATAN/PLAYLIST/playlist.h"
-#include "ADT_BUATAN/PENYANYI/penyanyi.h"
-#include "ADT_BUATAN/ALBUM/album.h"
-#include "ADT/mesinkata/mesinkata.h"
+#include "start.h"
 #include <stdio.h>
 #include <stdlib.h>
 
@@ -28,48 +26,35 @@ Menampilkan daftar playlist yang ada
     }
 }
 
-void DisplayDaftarPenyanyi(Penyanyi Penyanyi)
-{
-    // Menampilkan list penyanyi yang ada
-    // KAMUS
-    int i;
-    // ALGORITMA
-    printf("Daftar Penyanyi :\n");
-    for(i = 0; i< Penyanyi.Count ; i++)
-    {
-        printf("    %d. %s\n", i+1, Penyanyi.InfoPenyanyi[i].Key.TabWord);
-    }   
-}
+// int SearchIndexPenyanyi(Penyanyi Penyanyi, Word namapenyanyi)
+// {
+//     // KAMUS
+//     int i=0;
+//     boolean found;
+//     // ALGORITMA
+//     while(i < Penyanyi.Count && !found)
+//     {   
+//         if(IsWordEq(Penyanyi.InfoPenyanyi[i].Key,namapenyanyi))
+//         {
+//             found = true;
+//         }
+//         else
+//         {
+//             i++;
+//         }
+//     }
+//     return i;
+// }
 
-int SearchIndexPenyanyi(Penyanyi Penyanyi, Word namapenyanyi)
-{
-    // KAMUS
-    int i=0;
-    boolean found;
-    // ALGORITMA
-    while(i < Penyanyi.Count && !found)
-    {   
-        if(IsWordEq(Penyanyi.InfoPenyanyi[i].Key,namapenyanyi))
-        {
-            found = true;
-        }
-        else
-        {
-            i++;
-        }
-    }
-    return i;
-}
-
-int SearchIndexAlbum(Penyanyi Penyanyi, Word album, int indekspenyanyi)
+int SearchIndexAlbum(ListPenyanyi penyanyi, Word album, int indekspenyanyi)
 {
     // KAMUS
     int idx = 0;
     boolean found;
     // ALGORITMA
-    while(idx < Penyanyi.InfoPenyanyi[indekspenyanyi].Value.Count && !found)
+    while(idx < penyanyi.PenyanyiKe[indekspenyanyi].InfoPenyanyi[indekspenyanyi].Value.Count && !found)
     {   
-        if(IsWordEq(Penyanyi.InfoPenyanyi[indekspenyanyi].Value.InfoAlbum[idx].Key,album))
+        if(IsWordEq(penyanyi.PenyanyiKe[indekspenyanyi].InfoPenyanyi[indekspenyanyi].Value.InfoAlbum[idx].Key,album))
         {
             found = true;
         }
@@ -81,7 +66,8 @@ int SearchIndexAlbum(Penyanyi Penyanyi, Word album, int indekspenyanyi)
     return idx;
 }
 
-void DisplayDaftarAlbum(Penyanyi Penyanyi, Word namapenyanyi, int indekspenyanyi)
+void DisplayDaftarAlbum(ListPenyanyi penyanyi, Word namapenyanyi, int indekspenyanyi) 
+// print daftar album berdasarkan masukan nama penyanyi dan indeks penyanyi yang ada di function list
 {
     // Menampilkan list penyanyi yang ada
     // KAMUS
@@ -92,14 +78,14 @@ void DisplayDaftarAlbum(Penyanyi Penyanyi, Word namapenyanyi, int indekspenyanyi
     
     if(found)
     {
-        for(idx = 0; idx<Penyanyi.InfoPenyanyi[i].Value.Count; i++)
+        for(idx = 0; idx<penyanyi.PenyanyiKe[indekspenyanyi].InfoPenyanyi[indekspenyanyi].Value.Count; i++)
         {
-            printf("    %d. %s\n", idx+1, Penyanyi.InfoPenyanyi[i].Value.InfoAlbum[idx].Key.TabWord);
+            printf("    %d. %s\n", idx+1, penyanyi.PenyanyiKe[indekspenyanyi].InfoPenyanyi[indekspenyanyi].Value.InfoAlbum[idx].Key.TabWord);
         }
     }
 }
 
-void DisplayDaftarLagu(SetLagu lagu, Word namaalbum)
+void DisplayDaftarLagu(SetLagu lagu, Word namaalbum) // untuk print daftar lagu berdasarkan album masukan 
 {
     // Menampilkan list penyanyi yang ada
     // KAMUS
@@ -119,16 +105,17 @@ void DisplayDaftarLagu(SetLagu lagu, Word namaalbum)
 char yesorno ()
 {
     // KAMUS
+    Word command;
     char input;
     boolean valid = false;
     // ALGORITMA
-    GetCommand();
+    command = GetInput(); // udah nerima input
     while(!valid)
     {
-        if(currentWord.Length > 1) GetCommand();
+        if(currentWord.Length > 1) command = GetInput();
         else
         {
-            input = currentWord.TabWord[0];
+            input = command.TabWord[0];
             if(input == 'Y' || input == 'y')
             {
                 valid = true;
@@ -139,23 +126,25 @@ char yesorno ()
             }
             else
             {
-                GetCommand();
+                command = GetInput();
             }
         } 
     }
     return input;
 }
 
-void ListLagu(Penyanyi Penyanyi, Album Album, SetLagu Lagu)
+
+void ListLagu()
 {
-    // menampilkan penyanyi, disimpan dalam ADT list statis
+    printf("jalan");
+
     // KAMUS
     boolean valid = false;
     char inputyn;
     int i=0, j=1,indekspenyanyi, indeksalbum;
+    Word command;
     // ALGORTIMA
-    DisplayDaftarPenyanyi(Penyanyi);
-
+    printdaftarPenyanyi(&l);
     // mencari penyanyi
     printf("Ingin melihat album yang ada?(Y/N): ");
     inputyn = yesorno();
@@ -164,13 +153,13 @@ void ListLagu(Penyanyi Penyanyi, Album Album, SetLagu Lagu)
         printf("\nPilih penyanyi untuk melihat album mereka:  ");
         while(valid == false)
         {
-            GetCommand(); /*cuma baca sampai sebelum spasi*/
-            if(IsMemberPenyanyi(Penyanyi, currentWord)){valid = true;}
+            command = GetInput(); /*cuma baca sampai sebelum spasi*/
+            if(AnggotaListPenyanyi(&l, &command)){valid = true;}
             else{printf("Nama Penyanyi tidak ditemukan.\n");}
         }
-        Word namapenyanyi = currentWord;
-        indekspenyanyi = SearchIndexPenyanyi(Penyanyi, namapenyanyi);
-        DisplayDaftarAlbum(Penyanyi, namapenyanyi, indekspenyanyi); // menampilkan album dari penyanyi X, disimpan dalam ADT map
+        Word namapenyanyi = command;
+        indekspenyanyi = IdxDaftarPenyanyi(&l, namapenyanyi);
+        DisplayDaftarAlbum(l, namapenyanyi, indekspenyanyi); // menampilkan album dari penyanyi X, disimpan dalam ADT map
 
         // mencari album
         printf("Ingin melihat lagu yang ada?(Y/N): ");
@@ -182,56 +171,58 @@ void ListLagu(Penyanyi Penyanyi, Album Album, SetLagu Lagu)
             valid = false;
             while(valid == false)
             {
-                GetCommand();  /*cuma baca sampai sebelum spasi*/
-                if(IsMemberAlbum(Penyanyi.InfoPenyanyi[indekspenyanyi].Value, currentWord)){valid = true;}
+                command = GetInput();  /*cuma baca sampai sebelum spasi*/
+                if(IsMemberAlbum(l.PenyanyiKe[indekspenyanyi].InfoPenyanyi[indekspenyanyi].Value, currentWord)){valid = true;}
                 else{printf("Nama Album tidak ditemukan.\n");}
             }
-            Word namaalbum = currentWord;
-            indeksalbum = SearchIndexAlbum(Penyanyi, namaalbum, indekspenyanyi);
-            DisplayDaftarLagu(Lagu, namaalbum);
+            Word namaalbum = command;
+            indeksalbum = SearchIndexAlbum(l, namaalbum, indekspenyanyi);
+            DisplayDaftarLagu(l.PenyanyiKe[indekspenyanyi].InfoPenyanyi[indekspenyanyi].Value.InfoAlbum[indeksalbum].Value, namaalbum);
         }
     }
 }
-
-void list()
+;
+void list() // yang dipanggil
 {
     // KAMUS
+    Word command;
     boolean valid = false;
-    // ArrayDin playlist;
-    Penyanyi Penyanyi;
-    // Album Album;
-    // SetLagu Lagu;
-    // ALGORITMA
     printf("====[ SELAMAT DATANG DI FUNGSI LIST ]====\n");
     printf("----TERDAPAT DUA FUNGSI YANG BISA DIAKSES---- \n");
     printf("        1. LIST DEFAULT\n");
     printf("        2. LIST PLAYLIST \n");
+    printf("        3. QUIT \n");
     printf("> SILAHKAN MASUKAN COMMAND: \n");\
 
-    GetCommand();
+    command = GetInput();
     while(!valid)
     {
-        if (IsWordEq(toKata("LIST DEFAULT"), currentWord))
+        if (IsWordEq(toKata("LIST DEFAULT"), command))
         {
-            printf("\nlist default jalan");
-            // ListLagu(Penyanyi,Album,Lagu);
+            ListLagu();
             valid = true;
         } 
-        else if(IsWordEq(toKata("LIST PLAYLIST"), currentWord))
+        else if(IsWordEq(toKata("LIST PLAYLIST"), command))
         {
-            printf("\nlist default jalan");
+            printf("\nlist playlist jalan");
             // DisplayDaftarPlaylist(playlist);
+            valid = true;
+        } 
+        else if(IsWordEq(toKata("QUIT"), command))
+        {
+            printf("\n>> Keluar dari Fungsi");
             valid = true;
         } 
         else
         {
             printf("> COMMAND TIDAK VALID SILAHKAN MASUKAN ULANG\n");
-            GetCommand();
+            command = GetInput();
         }
     }
 }
 
 int main()
 {
+    startconfig();
     list();
 }

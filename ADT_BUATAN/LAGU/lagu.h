@@ -3,9 +3,6 @@
 
 #include "../../ADT/mesinkata/mesinkata.h"
 
-
-#include <stdio.h>
-
 /* MODUL SetLagu
 Deklarasi stack yang dengan implementasi array eksplisit-statik rata kiri
 */
@@ -73,4 +70,6 @@ void PrintLagu(SetLagu S);
 Lagu MakeLagu(Word nama, Word album, Word penyanyi);
 /* Mengisi Lagu*/
 
+SetLagu MakeSetLagu(int jumlahlagu);
+/* Mengisi SetLagu*/
 #endif

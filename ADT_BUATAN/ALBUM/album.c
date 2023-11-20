@@ -95,3 +95,36 @@ void PrintAlbum(Album M){
         idx++;
     }
 }
+
+Album MakeAlbum(valuetypeAlbum setlagu, int jumlahalbum){
+/* Mengisi Lagu*/
+    Album temp;
+    int i=0;
+    while (i<jumlahalbum){
+        temp.Count++;
+        // Buat album baru
+        char strnama[30];
+        printf("Input nama album ke-%d: ", i+1);
+        scanf(" %[^\n]",strnama);
+        temp.InfoAlbum[i].Key=toKata(strnama);
+        temp.InfoAlbum[i].Key.TabWord[stringLength(strnama)] = '\0';
+
+        // Isi album baru dengan setlagu
+        int N;
+        printf("Input jumlah lagu dalam album ke-%d: ", i+1);
+        scanf("%d",&N);
+        temp.InfoAlbum[i].Value=MakeSetLagu(N); 
+
+        // Crosscheck nama album baru = nama album dalam setlagu baru
+        int j=0;
+        while(!IsMemberAlbum(temp, temp.InfoAlbum[i].Value.InfoLagu[j].album)){
+            printf("Nama album lagu harus sesuai dengan nama album baru\n");
+            temp.InfoAlbum[i].Value=MakeSetLagu(N); 
+            j++;
+        }
+        
+        printf("\n");
+        i++;
+    }
+    return temp;
+}

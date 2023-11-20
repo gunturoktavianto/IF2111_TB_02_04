@@ -103,3 +103,19 @@ Lagu MakeLagu(Word penyanyi, Word album, Word nama){
     temp.penyanyi = penyanyi;
     return temp;
 }
+
+SetLagu MakeSetLagu(int jumlahlagu){
+/* Mengisi Lagu*/
+    SetLagu temp;
+    int i=0;
+    while (i<jumlahlagu){
+        char strnama[30], stralbum[30], strpenyanyi[30]; 
+        printf("Input penyanyi, album, dan nama lagu ke-%d:\n", i+1);
+        scanf(" %[^\n]",strpenyanyi);
+        scanf(" %[^\n]",stralbum);
+        scanf(" %[^\n]",strnama);
+        temp.InfoLagu[i]=MakeLagu(toKata(strpenyanyi),toKata(stralbum),toKata(strnama));
+        i++;
+    }
+    return temp;
+}
