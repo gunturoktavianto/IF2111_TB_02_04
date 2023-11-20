@@ -9,8 +9,11 @@ CFLAGS = -Wall -Werror -std=c11
 
 # # UNTUK PROGRAM UTAMA
 # List seluruh .c yang ingin di compile
-# SRC_MAIN = ../src/ADT/mesinkata/mesinkata.c ../src/ADT/mesinkata/mesinkarakter.c ../src/ADT_BUATAN/LAGU/lagu.c ../src/ADT_BUATAN/LAGU/driver_lagu.c
-SRC_MAIN = ../src/ADT/mesinkata/mesinkata.c ../src/ADT/mesinkata/mesinkarakter.c ../src/ADT_BUATAN/LAGU/lagu.c ../src/ADT_BUATAN/ALBUM/album.c ../src/ADT_BUATAN/ALBUM/driver_album.c
+# ../src/ADT_BUATAN/LAGU/lagu.c ../src/ADT_BUATAN/LAGU/driver_lagu.c
+# ../src/ADT_BUATAN/ALBUM/album.c ../src/ADT_BUATAN/ALBUM/driver_album.c
+# ../src/ADT_BUATAN/PENYANYI/penyanyi.c ../src/ADT_BUATAN/PENYANYI/driver_penyanyi.c
+SRC_MAIN = ../src/ADT/mesinkata/mesinkata.c ../src/ADT/mesinkata/mesinkarakter.c ../src/ADT_BUATAN/LAGU/lagu.c ../src/ADT_BUATAN/ALBUM/album.c ../src/ADT_BUATAN/PENYANYI/penyanyi.c ../src/ADT_BUATAN/PENYANYI/driver_penyanyi.c
+
 OBJ_MAIN = $(SRC_MAIN:.c=.o)
 
 # compile 
