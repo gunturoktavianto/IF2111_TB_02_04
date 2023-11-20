@@ -89,6 +89,33 @@ void DeletePenyanyi(Penyanyi *M, keytype *k){
     M->Count--;
 }
 
+void printPenyanyi(Penyanyi *penyanyi)
+{
+    // Menampilkan list penyanyi yang ada
+    // KAMUS
+    int i =0;
+    // ALGORITMA
+    printf("Daftar Penyanyi :\n");
+    for(i = 0; i< penyanyi->Count ; i++)
+    {
+        printf("    %d. %s\n", i+1,penyanyi->InfoPenyanyi[i].Key.TabWord);
+    }   
+}
+
+int IdxPenyanyi(Penyanyi *M, keytype k){
+/* Mengembalikan true jika k adalah member dari M */
+    // KAMUS
+    address idx = 0, iterator;
+    boolean found = false;
+    // ALGORITMA
+    while (idx < M->Count && !found) {
+        if (IsWordEq(M->InfoPenyanyi[idx].Key,k)) found = true;
+        else idx++;
+    }
+    
+    return idx;
+}
+
 boolean IsMemberPenyanyi(Penyanyi *M, keytype *k){
 /* Mengembalikan true jika k adalah member dari M */
     // KAMUS
@@ -186,54 +213,27 @@ boolean IsMemberListPenyanyi(ListPenyanyi *S, infotypePenyanyi *Elmt){
     return false;
 }
 
-void printPenyanyi(Penyanyi penyanyi)
+void printdaftarPenyanyi(ListPenyanyi *daftarpenyanyi)
 {
     // Menampilkan list penyanyi yang ada
     // KAMUS
     int i =0;
     // ALGORITMA
-    printf("Daftar Penyanyi :\n");
-    for(i = 0; i< penyanyi.Count ; i++)
+    printf("Daftar List Penyanyi :\n");
+    for(i = 0; i< daftarpenyanyi->Count ; i++)
     {
-        printf("    %d. %s\n", i+1, penyanyi.InfoPenyanyi[i].Key.TabWord);
+        printf("    %d. %s\n", i+1, daftarpenyanyi->PenyanyiKe[i].InfoPenyanyi[i].Key.TabWord);
     }   
 }
 
-int IdxPenyanyi(Penyanyi M, keytype k){
+int IdxDaftarPenyanyi(ListPenyanyi *M, keytype k){
 /* Mengembalikan true jika k adalah member dari M */
     // KAMUS
     address idx = 0, iterator;
     boolean found = false;
     // ALGORITMA
-    while (idx < M.Count && !found) {
-        if (IsWordEq(M.InfoPenyanyi[idx].Key,k)) found = true;
-        else idx++;
-    }
-    
-    return idx;
-}
-
-void printdaftarPenyanyi(ListPenyanyi daftarpenyanyi)
-{
-    // Menampilkan list penyanyi yang ada
-    // KAMUS
-    int i =0;
-    // ALGORITMA
-    printf("Daftar Penyanyi :\n");
-    for(i = 0; i< daftarpenyanyi.Count ; i++)
-    {
-        printf("    %d. %s\n", i+1, daftarpenyanyi.PenyanyiKe[i].InfoPenyanyi[i].Key.TabWord);
-    }   
-}
-
-int IdxDaftarPenyanyi(ListPenyanyi M, keytype k){
-/* Mengembalikan true jika k adalah member dari M */
-    // KAMUS
-    address idx = 0, iterator;
-    boolean found = false;
-    // ALGORITMA
-    while (idx < M.Count && !found) {
-        if (IsWordEq(M.PenyanyiKe[idx].InfoPenyanyi[idx].Key,k)) found = true;
+    while (idx < M->Count && !found) {
+        if (IsWordEq(M->PenyanyiKe[idx].InfoPenyanyi[idx].Key,k)) found = true;
         else idx++;
     }
     

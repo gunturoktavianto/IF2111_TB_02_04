@@ -70,6 +70,10 @@ void DeletePenyanyi(Penyanyi *M, keytype *k);
         element dengan key k mungkin anggota / bukan anggota dari M */
 /* F.S. element dengan key k bukan anggota dari M */
 
+void printPenyanyi(Penyanyi *penyanyi);
+
+int IdxPenyanyi(Penyanyi *M, keytype k);
+
 boolean IsMemberPenyanyi(Penyanyi *M, keytype *k);
 /* Mengembalikan true jika k adalah member dari M */
 
@@ -104,11 +108,9 @@ void DeleteListPenyanyi(ListPenyanyi *S, infotypePenyanyi *Elmt);
 boolean IsMemberListPenyanyi(ListPenyanyi *S, infotypePenyanyi *Elmt);
 /* Mengembalikan true jika Elmt adalah member dari S */
 
-void printPenyanyi(Penyanyi penyanyi);
 
-int IdxPenyanyi(Penyanyi M, keytype k);
 
-void printdaftarPenyanyi(ListPenyanyi daftarpenyanyi);
+void printdaftarPenyanyi(ListPenyanyi *daftarpenyanyi);
 
-int IdxDaftarPenyanyi(ListPenyanyi M, keytype k);
+int IdxDaftarPenyanyi(ListPenyanyi *M, keytype k);
 #endif

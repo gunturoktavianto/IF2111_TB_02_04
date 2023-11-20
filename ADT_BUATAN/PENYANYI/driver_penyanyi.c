@@ -42,41 +42,22 @@ int main()
     InsertListPenyanyi(&daftarpenyanyi, &elmt2);
     // Menampilkan list singer yang ada
     // printf("Daftar Penyanyi :\n");
-    printPenyanyi(penyanyi);
-    // printf("Daftar Penyanyi :\n");
-    // for(i = 0; i< penyanyi.Count ; i++)
-    // {
-    //     printf("    %d. %s\n", i+1, penyanyi.InfoPenyanyi[i].Key.TabWord);
-    // }  
+    printPenyanyi(&penyanyi);
     if(IsMemberPenyanyi(&penyanyi, &namapenyanyi2))
     {
-        printf("%s ada di penyanyi", namapenyanyi2.TabWord);
+        printf("%s ada di penyanyi\n", namapenyanyi2.TabWord);
     }
-    
+
+    indeks = IdxPenyanyi(&penyanyi, namapenyanyi1);
+    printf("\nindeks penyanyi = %d", indeks);
+    printdaftarPenyanyi(&daftarpenyanyi);
     i =0;
-    // ALGORITMA
-    // printf("\nDaftar List Penyanyi :\n");
-    // for(i = 0; i< daftarpenyanyi.Count ; i++)
-    // {
-    //     printf("    %d. %s\n", i+1, daftarpenyanyi.PenyanyiKe[i].InfoPenyanyi[i].Key.TabWord);
-    // }  
     if(IsMemberListPenyanyi(&daftarpenyanyi, &elmt1))
     {
-        printf("%s ada di list penyanyi", elmt1.Key.TabWord);
+        printf("%s ada di list penyanyi\n", elmt1.Key.TabWord);
     }
-    indeks = IdxPenyanyi(penyanyi, namapenyanyi1);
-    printf("indeks penyanti = %d", indeks);
-    // printdaftarPenyanyi(daftarpenyanyi);
-    // address idx = 0, iterator;
-    // boolean found = false;
-    // // ALGORITMA
-    // while (idx < penyanyi.Count && !found) {
-    //     if (IsWordEq(penyanyi.InfoPenyanyi[idx].Key,namapenyanyi1)) found = true;
-    //     else idx++;
-    // }
-    // printf("\n %d", idx);
     DeletePenyanyi(&penyanyi, &namapenyanyi2);
-    DeleteListPenyanyi(&daftarpenyanyi, &elmt2);
-
-    // printPenyanyi(penyanyi);
+    DeleteListPenyanyi(&daftarpenyanyi, &elmt1);
+    printPenyanyi(&penyanyi);
+    printdaftarPenyanyi(&daftarpenyanyi);
 }
