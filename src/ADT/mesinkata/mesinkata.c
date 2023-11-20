@@ -1,5 +1,5 @@
 #include "mesinkata.h"
-
+#include <stdio.h>
 boolean EndWord;
 Word currentWord;
 
@@ -10,16 +10,16 @@ void IgnoreBlanks()
 {
     while(currentChar==BLANK) ADV();
 }
-void STARTWORD(FILE *input)
+void STARTWORD(FILE *Command)
 /* I.S. : currentChar sembarang
    F.S. : EndWord = true, dan currentChar = MARK;
           atau EndWord = false, currentWord adalah kata yang sudah diakuisisi,
           currentChar karakter pertama sesudah karakter terakhir kata */
 {
-    START(input);
+    START(Command);
     IgnoreBlanks();
     if(currentChar==MARK) EndWord=true;
-    else {EndWord=false; ADVWORD();}
+    else {EndWord=false;}
 }
 void ADVWORD()
 /* I.S. : currentChar adalah karakter pertama kata yang akan diakuisisi
@@ -87,7 +87,6 @@ Word GetWords()
     Word temp;
     for (int i=0; i<NMax; i++) temp.TabWord[i]='\0';
     temp.Length=0;
-    // int idx=0;
     while(currentChar!='\n')
     {
         ADVWORD();
@@ -122,6 +121,40 @@ Word toKata(char *str) {
     for (int i = 0; i < kata.Length; i++) {
         kata.TabWord[i] = str[i];
     }
-    kata.TabWord[kata.Length]='\0'; 
     return kata;
+}
+
+void GetCommand() {
+    currentWord.Length = 0;
+    STARTWORD(stdin);
+}
+
+Word AccessCommand(int Idx) {
+    Word comm=GetWords();
+    int count = 0, i = 0;
+    Word out;
+    out.Length = 0;
+
+    while (i < comm.Length && count <= Idx) {
+        out.TabWord[out.Length] = comm.TabWord[i];
+        if (comm.TabWord[i] != ' ') {
+            out.Length++;
+        }
+        if (comm.TabWord[i] == ' ') {
+            if (count < Idx) {
+                out.Length = 0;
+            }
+            count++;
+        }
+        i++;
+    }
+    out.TabWord[out.Length]='\0';
+    return out;
+}
+
+Word GetInput()
+{
+    STARTWORD(stdin);
+    Word w=GetWords();
+    return w;
 }

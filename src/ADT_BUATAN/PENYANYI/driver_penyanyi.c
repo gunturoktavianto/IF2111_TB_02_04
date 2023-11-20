@@ -13,11 +13,10 @@ void DisplayDaftarPenyanyi(Penyanyi Penyanyi)
     }   
 }
 
+Penyanyi penyanyi;
 int main()
 {
     printf("1. \n");
-    // KAMUS
-    Penyanyi penyanyi;
     Word namapenyanyi1,namapenyanyi2;
     Album albumRamadhan, FavianRuleTheWorld;
     
@@ -25,9 +24,9 @@ int main()
     CreateEmptyPenyanyi(&penyanyi);
     namapenyanyi1 = toKata("Ramadhan Bintang");
     namapenyanyi2 = toKata("Favian Ganz");
-    InsertPenyanyi(&penyanyi, namapenyanyi1, albumRamadhan);
-    InsertPenyanyi(&penyanyi, namapenyanyi2, FavianRuleTheWorld);
+    InsertPenyanyi(&penyanyi, &namapenyanyi1, &albumRamadhan);
+    InsertPenyanyi(&penyanyi, &namapenyanyi2, &FavianRuleTheWorld);
     
-    //DisplayDaftarPenyanyi(penyanyi);
     printf("2. \n");
+    // DisplayDaftarPenyanyi(penyanyi);
 }

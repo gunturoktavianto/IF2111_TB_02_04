@@ -22,13 +22,13 @@ typedef struct {
 } infotypePenyanyi;
 
 typedef struct {
-	infotypePenyanyi InfoPenyanyi[MaxEl];
+	infotypePenyanyi InfoPenyanyi[10];
 	address Count;
 } Penyanyi;
 
 typedef struct
 {
-    Penyanyi PenyanyiKe[MaxEl];
+    Penyanyi PenyanyiKe[10];
     int Count;
 } ListPenyanyi;
 
@@ -54,23 +54,23 @@ boolean IsFullPenyanyi(Penyanyi M);
 /* Ciri Penyanyi penuh : count bernilai MaxEl */
 
 /* ********** Operator Dasar Penyanyi ********* */
-valuetypePenyanyi ValuePenyanyi(Penyanyi M, keytype k);
+valuetypePenyanyi ValuePenyanyi(Penyanyi *M, keytype *k);
 /* Mengembalikan nilai value dengan key k dari M */
 /* Jika tidak ada key k pada M, akan mengembalikan Undefined */
 
-void InsertPenyanyi(Penyanyi *M, keytype k, valuetypePenyanyi v);
+void InsertPenyanyi(Penyanyi *M, keytype *k, valuetypePenyanyi *v);
 /* Menambahkan Elmt sebagai elemen Penyanyi M. */
 /* I.S. M mungkin kosong, M tidak penuh
         M mungkin sudah beranggotakan v dengan key k */
 /* F.S. v menjadi anggota dari M dengan key k. Jika k sudah ada, operasi tidak dilakukan */
 
-void DeletePenyanyi(Penyanyi *M, keytype k);
+void DeletePenyanyi(Penyanyi *M, keytype *k);
 /* Menghapus Elmt dari Penyanyi M. */
 /* I.S. M tidak kosong
         element dengan key k mungkin anggota / bukan anggota dari M */
 /* F.S. element dengan key k bukan anggota dari M */
 
-boolean IsMemberPenyanyi(Penyanyi M, keytype k);
+boolean IsMemberPenyanyi(Penyanyi *M, keytype *k);
 /* Mengembalikan true jika k adalah member dari M */
 
 /* *** Konstruktor/Kreator *** */
@@ -95,7 +95,7 @@ void InsertListPenyanyi(ListPenyanyi *S, infotypePenyanyi *Elmt);
         S mungkin sudah beranggotakan Elmt */
 /* F.S. Elmt menjadi anggota dari S. Jika Elmt sudah merupakan anggota, operasi tidak dilakukan */
 
-void DeleteListPenyanyi(ListPenyanyi *S, infotypePenyanyi Elmt);
+void DeleteListPenyanyi(ListPenyanyi *S, infotypePenyanyi *Elmt);
 /* Menghapus Elmt dari List S. */
 /* I.S. S tidak kosong
         Elmt mungkin anggota / bukan anggota dari S */

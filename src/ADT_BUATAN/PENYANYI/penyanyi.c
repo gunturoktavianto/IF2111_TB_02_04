@@ -31,7 +31,7 @@ boolean IsFullPenyanyi(Penyanyi M){
 }
 
 /* ********** Operator Dasar Penyanyi ********* */
-valuetypePenyanyi ValuePenyanyi(Penyanyi M, keytype k){
+valuetypePenyanyi ValuePenyanyi(Penyanyi *M, keytype *k){
 /* Mengembalikan nilai value dengan key k dari M */
 /* Jika tidak ada key k pada M, akan mengembalikan Undefined */
    /* Mengembalikan nilai value dengan key k dari M */
@@ -39,9 +39,9 @@ valuetypePenyanyi ValuePenyanyi(Penyanyi M, keytype k){
     // KAMUS
     address idx = 0;
     // ALGORTIMA
-    while (idx < M.Count) {
-        if (IsWordEq(M.InfoPenyanyi[idx].Key,k)) 
-            return M.InfoPenyanyi[idx].Value;
+    while (idx < (*M).Count) {
+        if (IsWordEq((*M).InfoPenyanyi[idx].Key,(*k))) 
+            return (*M).InfoPenyanyi[idx].Value;
         idx++;
     }
     valuetypePenyanyi temp;
@@ -49,7 +49,7 @@ valuetypePenyanyi ValuePenyanyi(Penyanyi M, keytype k){
     return temp;
 }
 
-void InsertPenyanyi(Penyanyi *M, keytype k, valuetypePenyanyi v){
+void InsertPenyanyi(Penyanyi *M, keytype *k, valuetypePenyanyi *v){
 /* Menambahkan Elmt sebagai elemen Penyanyi M. */
 /* I.S. M mungkin kosong, M tidak penuh
         M mungkin sudah beranggotakan v dengan key k */
@@ -57,14 +57,14 @@ void InsertPenyanyi(Penyanyi *M, keytype k, valuetypePenyanyi v){
     // KAMUS
 
     // ALGORITMA
-    if (IsMemberPenyanyi(*M, k)) return;
+    if (IsMemberPenyanyi(M, k)) return;
 
-    M->InfoPenyanyi[M->Count].Key = k;
-    M->InfoPenyanyi[M->Count].Value = v;
+    M->InfoPenyanyi[M->Count].Key = *k;
+    M->InfoPenyanyi[M->Count].Value = *v;
     M->Count++;
 }
 
-void DeletePenyanyi(Penyanyi *M, keytype k){
+void DeletePenyanyi(Penyanyi *M, keytype *k){
 /* Menghapus Elmt dari Penyanyi M. */
 /* I.S. M tidak kosong
         element dengan key k mungkin anggota / bukan anggota dari M */
@@ -73,10 +73,10 @@ void DeletePenyanyi(Penyanyi *M, keytype k){
     address idx = 0, i;
 
     // ALGORITMA
-    if (!IsMemberPenyanyi(*M, k)) return;
+    if (!IsMemberPenyanyi(M, k)) return;
     
     while (idx < M->Count) {
-        if (IsWordEq(M->InfoPenyanyi[idx].Key, k)) break;
+        if (IsWordEq(M->InfoPenyanyi[idx].Key, *k)) break;
         idx++;
     }
 
@@ -88,19 +88,23 @@ void DeletePenyanyi(Penyanyi *M, keytype k){
     M->Count--;
 }
 
-boolean IsMemberPenyanyi(Penyanyi M, keytype k){
+boolean IsMemberPenyanyi(Penyanyi *M, keytype *k){
 /* Mengembalikan true jika k adalah member dari M */
     // KAMUS
     address idx = 0;
     
     // ALGORITMA
-    while (idx < M.Count) {
-        if (IsWordEq(M.InfoPenyanyi[idx].Key,k)) return true;
+    while (idx < (*M).Count) {
+        if (IsWordEq((*M).InfoPenyanyi[idx].Key,*k)) return true;
         idx++;
     }
     
     return false;
 }
+
+
+
+
 
 /* *** Konstruktor/Kreator *** */
 void CreateEmptyListPenyanyi(ListPenyanyi*S){
@@ -147,7 +151,7 @@ void InsertListPenyanyi(ListPenyanyi *S, infotypePenyanyi *Elmt){
     S->Count++;
 }
 
-void DeleteListPenyanyi(ListPenyanyi *S, infotypePenyanyi Elmt){
+void DeleteListPenyanyi(ListPenyanyi *S, infotypePenyanyi *Elmt){
 /* Menghapus Elmt dari List S. */
 /* I.S. S tidak kosong
         Elmt mungkin anggota / bukan anggota dari S */
@@ -156,10 +160,10 @@ void DeleteListPenyanyi(ListPenyanyi *S, infotypePenyanyi Elmt){
     address idx = 0, i;
 
     // ALGORITMA
-    if (!IsMemberListPenyanyi(S, &Elmt)) return;
+    if (!IsMemberListPenyanyi(S, Elmt)) return;
     
     while (idx < S->Count) {
-        if (IsWordEq(S->PenyanyiKe[idx].InfoPenyanyi[idx].Key, Elmt.Key)) break;
+        if (IsWordEq(S->PenyanyiKe[idx].InfoPenyanyi[idx].Key, (*Elmt).Key)) break;
         idx++;
     }
 

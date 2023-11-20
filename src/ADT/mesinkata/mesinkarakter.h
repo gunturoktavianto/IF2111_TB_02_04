@@ -3,9 +3,10 @@
 
 #ifndef __MESIN_KAR_H_
 #define __MESIN_KAR_H_
+
+#include "boolean.h"
 #include <stdlib.h>
 #include <stdio.h>
-#include "boolean.h"
 #define MARK EOF
 /* State Mesin */
 extern char currentChar;
