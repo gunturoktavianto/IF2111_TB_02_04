@@ -49,6 +49,7 @@ void nextLine();
 int stringLength(char *str);
 int WordtoInt(Word w);
 Word GetWords();
+boolean IsWordEq (Word kata1, Word kata2);
 Word toKata(char *str); 
 /*  Fungsi yang menerima sebuah paramater str bertipe string
     Kemudian mengembalikan elemen bertipe Word yang merupakan hasil transformasi string str */
@@ -61,4 +62,5 @@ void GetCommand();
 Word AccessCommand(int Idx);
 
 Word GetInput();
+
 #endif
