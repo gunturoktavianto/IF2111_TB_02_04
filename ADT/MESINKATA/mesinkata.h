@@ -4,13 +4,11 @@
 #ifndef __MESINKATA_H__
 #define __MESINKATA_H__
 
-#include <stdio.h>
 #include "boolean.h"
 #include "mesinkarakter.h"
 
 #define NMax 50
-#define BLANK '\n'
-#define Separator ' '
+#define BLANK ' '
 
 typedef struct
 {
@@ -27,7 +25,7 @@ void IgnoreBlanks();
    I.S. : currentChar sembarang
    F.S. : currentChar ≠ BLANK atau currentChar = MARK */
 
-void STARTWORD(FILE* input);
+void STARTWORD();
 /* I.S. : currentChar sembarang
    F.S. : EndWord = true, dan currentChar = MARK;
           atau EndWord = false, currentWord adalah kata yang sudah diakuisisi,
@@ -47,27 +45,21 @@ void CopyWord();
           currentChar = BLANK atau currentChar = MARK;
           currentChar adalah karakter sesudah karakter terakhir yang diakuisisi.
           Jika panjang kata melebihi NMax, maka sisa kata "dipotong" */
-
-boolean isEndWord();
-
-void GetCommand();
-
-Word AccessCommand(Word comm, int Idx);
-
-void TulisWord(Word kata);
-
+void nextLine();
+int stringLength(char *str);
+int WordtoInt(Word w);
+Word GetWords();
 boolean IsWordEq (Word kata1, Word kata2);
-
-boolean IsWordNumber (Word kata);
-
 Word toKata(char *str); 
 /*  Fungsi yang menerima sebuah paramater str bertipe string
     Kemudian mengembalikan elemen bertipe Word yang merupakan hasil transformasi string str */
-
-Word intToWord(int n);
-
 int stringLength(char *str);
 /*  Fungsi yang menerima sebuah parameter str bertipe string
     Kemudian mengembalikan panjang dari string tersebut */
 
+void GetCommand();
+
+Word AccessCommand(int Idx);
+
+Word GetInput();
 #endif

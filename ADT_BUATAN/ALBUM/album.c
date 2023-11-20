@@ -36,6 +36,18 @@ valuetypeAlbum ValueAlbum(Album M, keytype k){
     temp.Count=0;
     return temp;
 }
+
+boolean IsMemberAlbum(Album M, keytype k){
+/* Apakah NamaAlbum tertentu terdapat pada album penyanyi tertentu*/
+/* Mengembalikan true jika k adalah member dari M */
+    address idx = 0;
+    while (idx < M.Count) {
+        if (IsWordEq(M.InfoAlbum[idx].Key,k)) return true;
+        idx++;
+    }
+    return false;
+}
+
 void InsertAlbum(Album *M, keytype k, valuetypeAlbum v){
 /* Menambahkan Elmt sebagai elemen Album M. */
 /* I.S. M mungkin kosong, M tidak penuh
@@ -55,8 +67,6 @@ void DeleteAlbum(Album *M, keytype k){
         (Map, NamaAlbum) yang ingin dihapus*/
 /* F.S. element dengan key k bukan anggota dari M */
     if (!IsMemberAlbum(*M, k)) return;
-
-    boolean found = false;
     address idx = 0, i;
 
     // mencari index
@@ -73,25 +83,15 @@ void DeleteAlbum(Album *M, keytype k){
     (*M).Count--;
 }
 
-boolean IsMemberAlbum(Album M, keytype k){
-/* Apakah NamaAlbum tertentu terdapat pada album penyanyi tertentu*/
-/* Mengembalikan true jika k adalah member dari M */
-    address idx = 0;
-    while (idx < M.Count) {
-        if (IsWordEq(M.InfoAlbum[idx].Key,k)) return true;
+void PrintAlbum(Album M){
+/* Mencetak keseluruhan elemen album*/
+/* Format: 
+[Penyanyi, Album, Nama]
+[Penyanyi, Album, Nama]*/
+    int idx = 0;
+    while (idx < M.Count){
+        printf("%s\n",M.InfoAlbum[idx].Key.TabWord);
+        PrintLagu(M.InfoAlbum[idx].Value);
         idx++;
     }
-    return false;
 }
-
-// void PrintAlbum(Album M){
-// /* Mencetak keseluruhan elemen album*/
-// /* Format: 
-// [Penyanyi, Album, Nama]
-// [Penyanyi, Album, Nama]*/
-//     int idx = 0;
-//     while (idx < M.Count){
-//         PrintLagu(M.InfoAlbum[idx].Value);
-//         idx++;
-//     }
-// }

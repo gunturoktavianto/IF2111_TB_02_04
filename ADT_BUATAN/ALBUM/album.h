@@ -1,6 +1,5 @@
 #ifndef album_H
 #define album_H
-
 #include "../LAGU/lagu.h"
 
 
@@ -58,6 +57,9 @@ valuetypeAlbum ValueAlbum(Album M, keytype k);
 /* Mengembalikan nilai value dengan key k dari M */
 /* Jika tidak ada key k pada M, akan mengembalikan Undefined */
 
+boolean IsMemberAlbum(Album M, keytype k);
+/* Mengembalikan true jika k adalah member dari M */
+
 void InsertAlbum(Album *M, keytype k, valuetypeAlbum v);
 /* Menambahkan Elmt sebagai elemen Album M. */
 /* I.S. M mungkin kosong, M tidak penuh
@@ -69,9 +71,6 @@ void DeleteAlbum(Album *M, keytype k);
 /* I.S. M tidak kosong
         element dengan key k mungkin anggota / bukan anggota dari M */
 /* F.S. element dengan key k bukan anggota dari M */
-
-boolean IsMemberAlbum(Album M, keytype k);
-/* Mengembalikan true jika k adalah member dari M */
 
 void PrintAlbum(Album M);
 /* Mencetak keseluruhan album yang dimiliki suatu penyanyi*/

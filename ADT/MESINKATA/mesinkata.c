@@ -1,82 +1,128 @@
-#include <stdio.h>
 #include "mesinkata.h"
-
-boolean endWord;
+#include <stdio.h>
+boolean EndWord;
 Word currentWord;
 
 void IgnoreBlanks()
+/* Mengabaikan satu atau beberapa BLANK
+   I.S. : currentChar sembarang
+   F.S. : currentChar ≠ BLANK atau currentChar = MARK */
 {
-    /* Mengabaikan satu atau beberapa BLANK
-       I.S. : currentChar sembarang
-       F.S. : currentChar ≠ BLANK atau currentChar = MARK */
-    while (currentChar == BLANK || currentChar == '\r')
-    {
-        ADV();
-    }
+    while(currentChar==BLANK) ADV();
 }
-
-void STARTWORD(FILE* input)
+void STARTWORD(FILE *Command)
+/* I.S. : currentChar sembarang
+   F.S. : EndWord = true, dan currentChar = MARK;
+          atau EndWord = false, currentWord adalah kata yang sudah diakuisisi,
+          currentChar karakter pertama sesudah karakter terakhir kata */
 {
-    /* I.S. : currentChar sembarang
-       F.S. : endWord = true, dan currentChar = MARK;
-              atau endWord = false, currentWord adalah kata yang sudah diakuisisi,
-              currentChar karakter pertama sesudah karakter terakhir kata */
-    START(input);
+    START(Command);
     IgnoreBlanks();
-    if (currentChar == MARK)
-    {
-        endWord = true;
-    }
-    else
-    {
-        endWord = false;
-        CopyWord();
-    }
+    if(currentChar==MARK) EndWord=true;
+    else {EndWord=false;}
 }
-
 void ADVWORD()
+/* I.S. : currentChar adalah karakter pertama kata yang akan diakuisisi
+   F.S. : currentWord adalah kata terakhir yang sudah diakuisisi,
+          currentChar adalah karakter pertama dari kata berikutnya, mungkin MARK
+          Jika currentChar = MARK, EndWord = true.
+   Proses : Akuisisi kata menggunakan procedure SalinWord */
 {
-    /* I.S. : currentChar adalah karakter pertama kata yang akan diakuisisi
-       F.S. : currentWord adalah kata terakhir yang sudah diakuisisi,
-              currentChar adalah karakter pertama dari kata berikutnya, mungkin MARK
-              Jika currentChar = MARK, endWord = true.
-       Proses : Akuisisi kata menggunakan procedure CopyWord */
     IgnoreBlanks();
-    if (currentChar == MARK)
+    if(currentChar==MARK) EndWord=true;
+    else 
     {
-        endWord = true;
-    }
-    else
-    {
-        endWord = false;
+        EndWord=false;
         CopyWord();
         IgnoreBlanks();
     }
 }
-
 void CopyWord()
+/* Mengakuisisi kata, menyimpan dalam currentWord
+   I.S. : currentChar adalah karakter pertama dari kata
+   F.S. : currentWord berisi kata yang sudah diakuisisi;
+          currentChar = BLANK atau currentChar = MARK;
+          currentChar adalah karakter sesudah karakter terakhir yang diakuisisi.
+          Jika panjang kata melebihi NMax, maka sisa kata "dipotong" */
 {
-    /* Mengakuisisi kata, menyimpan dalam currentWord
-       I.S. : currentChar adalah karakter pertama dari kata
-       F.S. : currentWord berisi kata yang sudah diakuisisi;
-              currentChar = BLANK atau currentChar = MARK;
-              currentChar adalah karakter sesudah karakter terakhir yang diakuisisi.
-              Jika panjang kata melebihi CAPACITY, maka sisa kata terpotong */
-    currentWord.Length = 0;
-    while (currentChar != BLANK && currentChar != '\r' && currentChar != MARK)
+    for (int i=0; i<NMax; i++) currentWord.TabWord[i]='\0';
+    int i=0;
+    while(currentChar!=MARK && currentChar!=BLANK && currentChar!='\n')
     {
-        if (currentWord.Length < NMax)
-        { // jika lebih akan terpotong
-            currentWord.TabWord[currentWord.Length++] = currentChar;
-            ADV();
+        if(i<NMax)
+        {
+            currentWord.TabWord[i]=currentChar; i++;
         }
-        else
-            break;
+        ADV();
     }
+    currentWord.Length=i;
+}
+void nextLine()
+{
+    ADV();
+}
+int stringLength(char *str) {
+/*  Fungsi yang menerima sebuah parameter str bertipe string
+    Kemudian mengembalikan panjang dari string tersebut */
+    int len = 0;
+    while (str[len] != '\0') {
+        len++;
+    }
+    return len;
 }
 
-boolean isEndWord() {
-    return endWord;
+int WordtoInt(Word w)
+{
+    int x=0;
+    for(int i=0; i<w.Length; i++)
+    {
+        x*=10;
+        x+=w.TabWord[i]-'0';
+    }
+    return x;
+}
+
+Word GetWords()
+{
+    Word temp;
+    for (int i=0; i<NMax; i++) temp.TabWord[i]='\0';
+    temp.Length=0;
+    int idx=0;
+    while(currentChar!='\n')
+    {
+        ADVWORD();
+        for (int i=0; i<currentWord.Length; i++)
+        {
+            temp.TabWord[temp.Length]=currentWord.TabWord[i];
+            temp.Length++;
+        }
+        if (currentChar!='\n') {temp.TabWord[temp.Length]=' '; temp.Length++;}
+    }
+    return temp;
+}
+
+boolean IsWordEq (Word kata1, Word kata2) {
+    if (kata1.Length != kata2.Length) {
+        return false;
+    }
+    for (int i = 0; i < kata1.Length; i++) {
+        if (kata1.TabWord[i] != kata2.TabWord[i]) {
+            return false;
+        }
+    }
+    return true;
+}
+
+Word toKata(char *str) {
+/*  Fungsi yang menerima sebuah paramater str bertipe string
+    Kemudian mengembalikan elemen bertipe Word yang merupakan hasil transformasi string str */
+    Word kata;
+    kata.Length = stringLength(str);
+
+    for (int i = 0; i < kata.Length; i++) {
+        kata.TabWord[i] = str[i];
+    }
+    return kata;
 }
 
 void GetCommand() {
@@ -84,7 +130,8 @@ void GetCommand() {
     STARTWORD(stdin);
 }
 
-Word AccessCommand(Word comm, int Idx) {
+Word AccessCommand(int Idx) {
+    Word comm=GetWords();
     int count = 0, i = 0;
     Word out;
     out.Length = 0;
@@ -102,69 +149,13 @@ Word AccessCommand(Word comm, int Idx) {
         }
         i++;
     }
+    out.TabWord[out.Length]='\0';
     return out;
 }
 
-void TulisWord(Word kata) {
-    for (int i = 0; i < kata.Length; i++) {
-        printf("%c", kata.TabWord[i]);
-    }
-}
-
-boolean IsWordEq (Word kata1, Word kata2) {
-    if (kata1.Length != kata2.Length) {
-        return false;
-    }
-    for (int i = 0; i < kata1.Length; i++) {
-        if (kata1.TabWord[i] != kata2.TabWord[i]) {
-            return false;
-        }
-    }
-    return true;
-}
-
-boolean IsWordNumber (Word kata) {
-    for (int i = 0; i < kata.Length; i++) {
-        if (kata.TabWord[i] - '0' < 0 || kata.TabWord[i] - '0' > 9) return false;
-    }
-    return kata.Length > 0;
-}
-
-Word toKata(char *str) {
-/*  Fungsi yang menerima sebuah paramater str bertipe string
-    Kemudian mengembalikan elemen bertipe Word yang merupakan hasil transformasi string str */
-    Word kata;
-    kata.Length = stringLength(str);
-
-    for (int i = 0; i < kata.Length; i++) {
-        kata.TabWord[i] = str[i];
-    }
-    return kata;
-}
-
-Word intToWord(int n) {
-    Word num; num.Length = 0;
-    if (n == 0) {
-        num.TabWord[num.Length] = '0'; num.Length++;
-    } else {
-        while (n != 0) {
-            for (int i = num.Length; i > 0; i--) {
-                num.TabWord[i] = num.TabWord[i-1];
-            }
-            num.Length++;
-            num.TabWord[0] = (n % 10) + '0';
-            n = n / 10;
-        }
-    }
-    return num;
-}
-
-int stringLength(char *str) {
-/*  Fungsi yang menerima sebuah parameter str bertipe string
-    Kemudian mengembalikan panjang dari string tersebut */
-    int len = 0;
-    while (str[len] != '\0') {
-        len++;
-    }
-    return len;
+Word GetInput()
+{
+    STARTWORD(stdin);
+    Word w=GetWords();
+    return w;
 }
