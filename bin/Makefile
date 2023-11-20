@@ -12,7 +12,7 @@ CFLAGS = -Wall -Werror -std=c11
 # ../src/ADT_BUATAN/LAGU/lagu.c ../src/ADT_BUATAN/LAGU/driver_lagu.c
 # ../src/ADT_BUATAN/ALBUM/album.c ../src/ADT_BUATAN/ALBUM/driver_album.c
 # ../src/ADT_BUATAN/PENYANYI/penyanyi.c ../src/ADT_BUATAN/PENYANYI/driver_penyanyi.c
-SRC_MAIN = ../src/ADT/mesinkata/mesinkata.c ../src/ADT/mesinkata/mesinkarakter.c ../src/ADT_BUATAN/LAGU/lagu.c ../src/ADT_BUATAN/ALBUM/album.c ../src/ADT_BUATAN/PENYANYI/penyanyi.c ../src/ADT_BUATAN/PENYANYI/driver_penyanyi.c
+SRC_MAIN = ../src/ADT/mesinkata/mesinkata.c ../src/ADT/mesinkata/mesinkarakter.c ../src/ADT_BUATAN/LAGU/lagu.c ../src/ADT_BUATAN/ALBUM/album.c ../src/ADT_BUATAN/ALBUM/driver_album.c
 
 OBJ_MAIN = $(SRC_MAIN:.c=.o)
 

@@ -78,4 +78,6 @@ void PrintAlbum(Album M);
 [Penyanyi, Album, Nama]
 [Penyanyi, Album, Nama]*/
 
+Album MakeAlbum(valuetypeAlbum setlagu, int jumlahalbum);
+
 #endif

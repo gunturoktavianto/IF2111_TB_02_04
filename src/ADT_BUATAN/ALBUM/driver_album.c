@@ -43,9 +43,9 @@ int main() {
 
     // Test IsMemberAlbum
     if (IsMemberAlbum(album, toKata("HARTA"))) {
-        printf("Test IsMemberAlbum: Passed\n");
+        printf("\nTest IsMemberAlbum: Passed\n");
     } else {
-        printf("Test IsMemberAlbum: Failed\n");
+        printf("\nTest IsMemberAlbum: Failed\n");
     }
 
     // Test DeleteAlbum
@@ -53,10 +53,15 @@ int main() {
 
     // Test IsEmptyAlbum again
     if (IsEmptyAlbum(album)) {
-        printf("Album kosong\n");
+        printf("Album kosong\n\n");
     } else {
-        printf("Album tidak kosong\n");
+        printf("Album tidak kosong\n\n");
     }
 
+
+    // Test MakeAlbum
+    Album make = MakeAlbum(lagu, 3);
+    PrintAlbum(make);
+    
     return 0;
 }
