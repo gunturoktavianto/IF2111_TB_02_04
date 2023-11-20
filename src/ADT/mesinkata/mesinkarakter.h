@@ -6,10 +6,11 @@
 
 #include "boolean.h"
 
-#define MARK '.'
+#define MARK ';'
 /* State Mesin */
 extern char currentChar;
 extern boolean EOP;
+
 
 void START();
 /* Mesin siap dioperasikan. Pita disiapkan untuk dibaca.
@@ -20,6 +21,13 @@ void START();
           Jika currentChar = MARK maka EOP akan menyala (true) */
 
 void ADV();
+/* Pita dimajukan satu karakter.
+   I.S. : Karakter pada jendela = currentChar, currentChar != MARK
+   F.S. : currentChar adalah karakter berikutnya dari currentChar yang lama,
+          currentChar mungkin = MARK
+          Jika  currentChar = MARK maka EOP akan menyala (true) */
+
+void ADVLOAD();
 /* Pita dimajukan satu karakter.
    I.S. : Karakter pada jendela = currentChar, currentChar != MARK
    F.S. : currentChar adalah karakter berikutnya dari currentChar yang lama,

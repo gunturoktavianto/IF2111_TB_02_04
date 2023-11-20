@@ -29,48 +29,48 @@
 #define MAX_LINES 100
 #define MAX_LINE_LENGTH 100
 
-// void BacaConfig(){
-//     FILE *file;
-//     file = fopen("dummy.txt", "r");
+void BacaConfig(){
+    FILE *file;
+    file = fopen("dummy.txt", "r");
 
-//     int jumlahPenyanyi, jumlahAlbum, jumlahLagu;
-//     char penyanyi[100], namaAlbum[100], judulLagu[100];
-//     Set SetPenyanyi;
+    int jumlahPenyanyi, jumlahAlbum, jumlahLagu;
+    char penyanyi[100], namaAlbum[100], judulLagu[100];
+    Set SetPenyanyi;
 
-//     fscanf(file, "%d", &jumlahPenyanyi);
+    fscanf(file, "%d", &jumlahPenyanyi);
 
-//     for (int i = 0; i < jumlahPenyanyi; i++) {
-//         fscanf(file, "%d", &jumlahAlbum);
-//         fscanf(file, " %[^\n]s", penyanyi);
-//         Insert(&SetPenyanyi, penyanyi);
+    for (int i = 0; i < jumlahPenyanyi; i++) {
+        fscanf(file, "%d", &jumlahAlbum);
+        fscanf(file, " %[^\n]s", penyanyi);
+        Insert(&SetPenyanyi, penyanyi);
 
-//         printf("%d %s\n", jumlahAlbum, penyanyi);
+        printf("%d %s\n", jumlahAlbum, penyanyi);
 
-//         for (int j = 0; j < jumlahAlbum; j++) {
-//             fscanf(file, "%d %[^\n]s", &jumlahLagu, namaAlbum);
-//             printf("%d %s\n", jumlahLagu, namaAlbum);
+        for (int j = 0; j < jumlahAlbum; j++) {
+            fscanf(file, "%d %[^\n]s", &jumlahLagu, namaAlbum);
+            printf("%d %s\n", jumlahLagu, namaAlbum);
 
-//             for (int k = 0; k < jumlahLagu; k++) {
-//                 fscanf(file, " %[^\n]s", judulLagu);
-//                 printf("%s\n", judulLagu);
-//             }
-//         }
-//     }
+            for (int k = 0; k < jumlahLagu; k++) {
+                fscanf(file, " %[^\n]s", judulLagu);
+                printf("%s\n", judulLagu);
+            }
+        }
+    }
 
-//     fclose(file);
-// }
+    fclose(file);
+}
 
 int main() {
-    // char input[100];
-    // boolean isValid = true;
+    char input[100];
+    boolean isValid = true;
     
-    // printf("\n>> ");
-    // scanf("%s", input);
+    printf("\n>> ");
+    scanf("%s", input);
     
-    // if (strcmp(input, "START") == 0) {
+    if (strcmp(input, "START") == 0) {
         
-    //     BacaConfig();
-    // }
+        BacaConfig();
+    }
 
     return 0;
 }
