@@ -1,5 +1,5 @@
-#ifndef setlagu_H
-#define setlagu_H
+#ifndef lagu_H
+#define lagu_H
 
 #include "../../ADT/mesinkata/mesinkata.h"
 

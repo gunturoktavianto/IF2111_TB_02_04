@@ -104,4 +104,15 @@ void DeleteListPenyanyi(ListPenyanyi *S, infotypePenyanyi *Elmt);
 boolean IsMemberListPenyanyi(ListPenyanyi *S, infotypePenyanyi *Elmt);
 /* Mengembalikan true jika Elmt adalah member dari S */
 
+int IdxPenyanyi(ListPenyanyi *S, keytype kp);
+/* I.S. ListPenyanyi tidak kosong, Nama Penyanyi terdefinisi
+   F.S. index penyanyi*/
+
+int IdxAlbum(ListPenyanyi *S, int idxp, keytype ka);
+/* I.S. ListPenyanyi tidak kosong, index penyanyi dan Nama Album terdefinisi
+   F.S. index album*/
+
+int IdxLagu(ListPenyanyi *S, int idxp, int idxa, Word kl);
+/* I.S. ListPenyanyi tidak kosong, index penyanyi dan Nama Album terdefinisi
+   F.S. index album*/
 #endif

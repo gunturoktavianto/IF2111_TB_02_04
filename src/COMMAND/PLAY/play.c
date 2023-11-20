@@ -1,13 +1,4 @@
-#include "ADT/LIST/driver_list.c"
-#include "ADT/MAP/driver_map.c"
-#include "ADT/SET/driver_set.c"
-#include "ADT/QUEUE/driver_queue.c"
-#include "ADT/STACK/driver_stack.c"
-#include "ADT/LISTLINIER/driver_listlinier.c"
-#include <stdio.h>
-#include <stdlib.h>
-#include <math.h>
-#include <time.h>
+#include "play.h"
 
 /*PLAY merupakan command yang digunakan untuk memutar lagu atau playlist yang dipilih. Ketika command PLAY dieksekusi, queue yang ada dihapus ketika memainkan lagu atau digantikan oleh lagu dalam playlist ketika memainkan playlist. Terdapat dua jenis play, SONG dan PLAYLIST. */
 
@@ -52,56 +43,62 @@ Memutar lagu “Type Girl” oleh “BLACKPINK”.
 int currentsong;
 void PlaySong(){
     boolean valid = false;
-    // menampilkan penyanyi, disimpan dalam ADT list statis
+    // menampilkan penyanyi, disimpan dalam ADT penyanyi, berperan juga sebagai key
     int i=0;
     printf("Daftar Penyanyi :\n");
-    while(ListPenyanyi.A[i]!=Mark){
-        printf("  %d. %d\n", i+1, ListPenyanyi.A[i]);
-    }
+    while(i<l.Count){
+        printf("  %d. %s\n", i+1, l.PenyanyiKe[i].InfoPenyanyi[i].Key.TabWord);
+        i++;
+    } i=0;
 
     // mencari penyanyi
-    char namapenyanyi[100];
+    infotypePenyanyi namapenyanyi;
     printf("\nMasukkan Nama Penyanyi yang dipilih : ");
-    while(valid == false){
-        scanf("%s", &namapenyanyi); /*cuma baca sampai sebelum spasi*/
-        if(Search(ListPenyanyi, namapenyanyi)){valid = true;}
-        else{printf("Nama Penyanyi tidak ditemukan.\n");}
-    }
+    namapenyanyi.Key = GetWords();
+    while(!IsMemberListPenyanyi(&l, &namapenyanyi.Key)){
+        printf("Nama Penyanyi tidak ditemukan.\n");
+        printf("\nMasukkan Nama Penyanyi yang dipilih : ");
+        namapenyanyi.Key = GetWords();
+    }   int idxp = IdxPenyanyi(&l, namapenyanyi.Key);
 
     // menampilkan album dari penyanyi X, disimpan dalam ADT map
-    printf("Daftar Album oleh %s :\n", namapenyanyi);
-    PrintMap(Album);
+    printf("Daftar Album oleh %s :\n", namapenyanyi.Key.TabWord);
+    while(i<l.PenyanyiKe[idxp].InfoPenyanyi[idxp].Value.Count){
+        printf("  %d. %s\n", i+1, l.PenyanyiKe[idxp].InfoPenyanyi[idxp].Value.InfoAlbum[i].Key);
+        i++;
+    } i=0;
 
     // mencari album
-    char namaalbum[100];
+    infotypeAlbum namaalbum;
     printf("\nMasukkan Nama Album yang dipilih : ");
-    valid == false;
-    while(valid == false){
-        scanf("%s", &namaalbum); /*cuma baca sampai sebelum spasi*/
-        if(IsMemberMap(Album, namaalbum)){valid = true;}
-        else{printf("Nama Album tidak ditemukan.\n");}
-    }
+    namaalbum.Key = GetWords();
+    while(!IsMemberAlbum(l.PenyanyiKe[idxp].InfoPenyanyi[idxp].Value, namaalbum.Key)){
+        printf("Nama Album tidak ditemukan.\n");
+        printf("\nMasukkan Nama Album yang dipilih : ");
+        namaalbum.Key = GetWords();
+    }   int idxa = IdxAlbum(&l, idxp, namaalbum.Key);
 
     // menampilkan lagu dari album X, disimpan dalam ADT set
-    printf("Daftar Lagu Album %s oleh %s :\n", namaalbum, namapenyanyi);
-    PrintMap(Album);
+    printf("Daftar Lagu Album %s oleh %s :\n", namaalbum.Key.TabWord, namapenyanyi.Key.TabWord);
+    while(i<l.PenyanyiKe[idxp].InfoPenyanyi[idxp].Value.Count){
+        printf("  %d. %s\n", i+1, l.PenyanyiKe[idxp].InfoPenyanyi[idxp].Value.InfoAlbum[idxa].Value.InfoLagu[i].nama);
+        i++;
+    } i=0;
 
     // mencari lagu
-    int IDlagu;
+    infotype namalagu;
     printf("\nMasukkan ID Lagu yang dipilih : ");
-    valid == false;
-    while(valid == false){
-        scanf("%d", &IDlagu); /*cuma baca sampai sebelum spasi*/
-        InfoLagu temp;
-        temp.lagu = IDlagu;
-        if(IsMemberSet(Lagu, temp)){valid = true;}
-        else{printf("ID Lagu tidak ditemukan.\n");}
-    }
-    printf("\nMemutar lagu \"%s\" oleh \"%s\".\n", Lagu.Elements[IDlagu], namapenyanyi);
+    namalagu.nama = GetWords();
+    while(!IsMemberSetLagu(l.PenyanyiKe[idxp].InfoPenyanyi[idxp].Value.InfoAlbum[idxa].Value, namalagu)){
+        printf("Nama Lagu tidak ditemukan.\n");
+        printf("\nMasukkan ID Lagu  yang dipilih : ");
+        namalagu.nama = GetWords();
+    }   int idxl = IdxLagu(&l, idxp, idxa, namalagu.nama);
+    printf("\nMemutar lagu \"%s\" oleh \"%s\".\n", namalagu.nama.TabWord, namapenyanyi.Key.TabWord);
 
     // Final State
     //Ketika command ini berhasil dieksekusi, queue dan riwayat lagu akan menjadi kosong
-    Queue playPlaylist;
+    Queue q;
     CreateQueue(&playPlaylist);
     // Update currentsong
     currentsong = IDlagu;

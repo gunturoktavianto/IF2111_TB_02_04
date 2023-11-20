@@ -4,12 +4,9 @@
 #ifndef riwayat_H
 #define riwayat_H
 
-#include "boolean.h"
-#include "../ADT/MESINKATA/mesinkata.h"
 #include "../LAGU/lagu.h"
 
 
-#define Nil -1
 #define MaxEl 100
 /* Nil adalah stack dengan elemen kosong . */
 

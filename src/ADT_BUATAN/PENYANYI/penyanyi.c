@@ -102,10 +102,6 @@ boolean IsMemberPenyanyi(Penyanyi *M, keytype *k){
     return false;
 }
 
-
-
-
-
 /* *** Konstruktor/Kreator *** */
 void CreateEmptyListPenyanyi(ListPenyanyi*S){
 /* I.S. Sembarang */
@@ -186,4 +182,49 @@ boolean IsMemberListPenyanyi(ListPenyanyi *S, infotypePenyanyi *Elmt){
     }
     
     return false;
+}
+
+int IdxPenyanyi(ListPenyanyi *S, keytype kp){
+/* I.S. ListPenyanyi tidak kosong, Nama Penyanyi terdefinisi
+   F.S. index penyanyi*/
+    // KAMUS
+    address idx = 0;
+    boolean found = false;
+    // ALGORITMA
+    while (idx < (*S).Count && !found) {
+        if (IsWordEq((*S).PenyanyiKe->InfoPenyanyi[idx].Key,kp))     found = true;
+        else idx++;
+    }
+    
+    return idx;
+}
+
+int IdxAlbum(ListPenyanyi *S, int idxp, keytype ka){
+/* I.S. ListPenyanyi tidak kosong, index penyanyi dan Nama Album terdefinisi
+   F.S. index album*/
+    // KAMUS
+    address idx = 0;
+    boolean found = false;
+    // ALGORITMA
+    while (idx < (*S).PenyanyiKe[idxp].InfoPenyanyi[idxp].Value.Count && !found) {
+        if (IsWordEq((*S).PenyanyiKe[idxp].InfoPenyanyi[idxp].Value.InfoAlbum[idx].Key, ka))     found = true;
+        else idx++;
+    }
+    
+    return idx;
+}
+
+int IdxLagu(ListPenyanyi *S, int idxp, int idxa, Word kl){
+/* I.S. ListPenyanyi tidak kosong, index penyanyi dan Nama Album terdefinisi
+   F.S. index album*/
+    // KAMUS
+    address idx = 0;
+    boolean found = false;
+    // ALGORITMA
+    while (idx < (*S).PenyanyiKe[idxp].InfoPenyanyi[idxp].Value.InfoAlbum[idxa].Value.Count && !found) {
+        if (IsWordEq((*S).PenyanyiKe[idxp].InfoPenyanyi[idxp].Value.InfoAlbum[idxa].Value.InfoLagu[idx].nama, kl))     found = true;
+        else idx++;
+    }
+    
+    return idx;
 }
