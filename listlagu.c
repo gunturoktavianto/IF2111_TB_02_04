@@ -47,6 +47,7 @@ Menampilkan daftar playlist yang ada
 // }
 
 int SearchIndexAlbum(ListPenyanyi penyanyi, Word album, int indekspenyanyi)
+// cari album yang ada di miliki penyanyi
 {
     // KAMUS
     int idx = 0;
