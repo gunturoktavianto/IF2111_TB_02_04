@@ -1,17 +1,19 @@
 #include "start.h"
-//void playSong(){
+boolean stateWayangWave;
+
 void startconfig()
 {
-    FILE *input=fopen("dummy.txt","r");
+    FILE *input=fopen("../../../save/config.txt","r");
     STARTWORD(input);
-    ADVWORD(); //2
+    ADVWORD();
     l.Count=WordtoInt(currentWord);
     nextLine();
     for (int i=0; i<l.Count; i++)
     {
         ADVWORD();
-        l.PenyanyiKe[i].InfoPenyanyi[i].Value.Count=WordtoInt(currentWord);//2
-        l.PenyanyiKe[i].InfoPenyanyi[i].Key =GetWords();//BLACKPINK
+        l.PenyanyiKe[i].Count=l.Count;
+        l.PenyanyiKe[i].InfoPenyanyi[i].Value.Count=WordtoInt(currentWord);
+        l.PenyanyiKe[i].InfoPenyanyi[i].Key =GetWords();
         nextLine();
         for (int j=0; j<l.PenyanyiKe[i].InfoPenyanyi[i].Value.Count; j++)
         {
@@ -26,13 +28,8 @@ void startconfig()
                 l.PenyanyiKe[i].InfoPenyanyi[i].Value.InfoAlbum[j].Value.InfoLagu[k].nama=w;
                 l.PenyanyiKe[i].InfoPenyanyi[i].Value.InfoAlbum[j].Value.InfoLagu[k].album=l.PenyanyiKe[i].InfoPenyanyi[i].Value.InfoAlbum[j].Key;
                 l.PenyanyiKe[i].InfoPenyanyi[i].Value.InfoAlbum[j].Value.InfoLagu[k].penyanyi=l.PenyanyiKe[i].InfoPenyanyi[i].Key;
-                //InfoPenyanyi[i].InfoAlbum[j].lagu[k]=w;
-                //mapInsert(&LagutoAlbum, NamaLagu, NamaAlbum);
                 nextLine();
             }
         }
     }
 }
-//}
-            //printf("%d\n",InfoPenyanyi[i].InfoAlbum[j].lagu.Count);
-            //printf("%s %s\n",NamaPenyanyi.TabWord,NamaAlbum.TabWord);

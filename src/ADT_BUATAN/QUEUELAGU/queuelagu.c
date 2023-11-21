@@ -1,5 +1,6 @@
 #include "queuelagu.h"
 
+Queuelagu q;
 void CreateQueueLagu(Queuelagu *q){
     IDX_HEAD(*q) = IDX_UNDEF;
 	IDX_TAIL(*q) = IDX_UNDEF;

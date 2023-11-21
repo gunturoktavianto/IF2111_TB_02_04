@@ -15,6 +15,7 @@ typedef struct
         int idxTail;
 } Queuelagu;
 
+extern Queuelagu q;
 /* ********* AKSES (Selektor) ********* */
 /* Jika q adalah Queue, maka akses elemen : */
 #define IDX_HEAD(q) (q).idxHead

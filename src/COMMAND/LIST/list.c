@@ -222,8 +222,8 @@ void list() // yang dipanggil
     }
 }
 
-int main()
-{
-    startconfig();
-    list();
-}
+// int main()
+// {
+//     startconfig();
+//     list();
+// }

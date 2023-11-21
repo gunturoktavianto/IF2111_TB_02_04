@@ -26,6 +26,7 @@ typedef struct
     int Count;
 } SetLagu;
 
+extern Lagu currentsong;
 /* Definisi SetLagu S kosong : S.Count = Nil */
 /* S.Count = jumlah element SetLagu */
 /* S.Elements = tempat penyimpanan element SetLagu */

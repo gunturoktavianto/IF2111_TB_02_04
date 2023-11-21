@@ -13,11 +13,7 @@
 #include "../SONG/song.h"
 #include "../STATUS/status.h"
 
-Lagu currentsong;
-ListPenyanyi l;
-Queuelagu q;
-Stack r;
-
+extern boolean stateWayangWave;
 void startconfig();
 
 #endif

@@ -10,13 +10,13 @@ void IgnoreBlanks()
 {
     while(currentChar==BLANK) ADV();
 }
-void STARTWORD(FILE *Command)
+void STARTWORD(FILE *input)
 /* I.S. : currentChar sembarang
    F.S. : EndWord = true, dan currentChar = MARK;
           atau EndWord = false, currentWord adalah kata yang sudah diakuisisi,
           currentChar karakter pertama sesudah karakter terakhir kata */
 {
-    START(Command);
+    START(input);
     IgnoreBlanks();
     if(currentChar==MARK) EndWord=true;
     else {EndWord=false;}
@@ -57,6 +57,58 @@ void CopyWord()
     }
     currentWord.Length=i;
 }
+
+void STARTWORDLOAD(FILE *input)
+/* I.S. : currentChar sembarang
+   F.S. : EndWord = true, dan currentChar = MARK;
+          atau EndWord = false, currentWord adalah kata yang sudah diakuisisi,
+          currentChar karakter pertama sesudah karakter terakhir kata */
+{
+    START(input);
+    
+    if(currentChar==MARK) EndWord=true;
+    else {EndWord=false; ADVWORDLOAD();}
+}
+void ADVWORDLOAD()
+/* I.S. : currentChar adalah karakter pertama kata yang akan diakuisisi
+   F.S. : currentWord adalah kata terakhir yang sudah diakuisisi,
+          currentChar adalah karakter pertama dari kata berikutnya, mungkin MARK
+          Jika currentChar = MARK, EndWord = true.
+   Proses : Akuisisi kata menggunakan procedure SalinWord */
+{
+    
+    if(currentChar==MARK) EndWord=true;
+    else 
+    {
+        EndWord=false;
+        CopyWordLoad();
+        
+    }
+}
+void CopyWordLoad()
+/* Mengakuisisi kata, menyimpan dalam currentWord
+   I.S. : currentChar adalah karakter pertama dari kata
+   F.S. : currentWord berisi kata yang sudah diakuisisi;
+          currentChar = BLANK atau currentChar = MARK;
+          currentChar adalah karakter sesudah karakter terakhir yang diakuisisi.
+          Jika panjang kata melebihi NMax, maka sisa kata "dipotong" */
+{
+    for (int i=0; i<NMax; i++) currentWord.TabWord[i]='\0';
+    int i=0;
+    while(currentChar!=MARK && currentChar!='\n')
+    {
+        if(i<NMax)
+        {
+            currentWord.TabWord[i]=currentChar; i++;
+        }
+        ADVLOAD();
+        
+
+    }
+    ADVLOAD();
+    currentWord.Length=i;
+}
+
 void nextLine()
 {
     ADV();
@@ -73,6 +125,9 @@ int stringLength(char *str) {
 
 int WordtoInt(Word w)
 {
+    for (int i = 0; i < w.Length; i++) {
+        if (w.TabWord[i] - '0' < 0 || w.TabWord[i] - '0' > 9) return false;
+    }
     int x=0;
     for(int i=0; i<w.Length; i++)
     {
@@ -87,6 +142,7 @@ Word GetWords()
     Word temp;
     for (int i=0; i<NMax; i++) temp.TabWord[i]='\0';
     temp.Length=0;
+    int idx=0;
     while(currentChar!='\n')
     {
         ADVWORD();
@@ -124,37 +180,16 @@ Word toKata(char *str) {
     return kata;
 }
 
-void GetCommand() {
-    currentWord.Length = 0;
-    STARTWORD(stdin);
-}
-
-Word AccessCommand(int Idx) {
-    Word comm=GetWords();
-    int count = 0, i = 0;
-    Word out;
-    out.Length = 0;
-
-    while (i < comm.Length && count <= Idx) {
-        out.TabWord[out.Length] = comm.TabWord[i];
-        if (comm.TabWord[i] != ' ') {
-            out.Length++;
-        }
-        if (comm.TabWord[i] == ' ') {
-            if (count < Idx) {
-                out.Length = 0;
-            }
-            count++;
-        }
-        i++;
-    }
-    out.TabWord[out.Length]='\0';
-    return out;
-}
-
 Word GetInput()
 {
     STARTWORD(stdin);
     Word w=GetWords();
     return w;
+}
+
+boolean IsWordNumber (Word kata) {
+    for (int i = 0; i < kata.Length; i++) {
+        if (kata.TabWord[i] - '0' < 0 || kata.TabWord[i] - '0' > 9) return false;
+    }
+    return kata.Length > 0;
 }

@@ -1,5 +1,5 @@
 #include "lagu.h"
-
+Lagu currentsong;
 /* *** Konstruktor/Kreator *** */
 void CreateEmptySetLagu(SetLagu *S)
 /* I.S. Sembarang */

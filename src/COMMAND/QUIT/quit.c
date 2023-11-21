@@ -8,7 +8,7 @@ void QUIT(Word command) {
         // memanggil save
         //save();
     }
-
+    stateWayangWave=false;
     printf("Kamu keluar dari WayangWave.\nDadah ^_^/\n");
     exit(0);
 }

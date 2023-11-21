@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "riwayat.h"
-
+ Stack r;
 /* ************ Prototype ************ */
 /* *** Konstruktor/Kreator *** */
 void CreateStack(Stack *S){
