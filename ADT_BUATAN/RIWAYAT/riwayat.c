@@ -117,7 +117,7 @@ void displayStackUrutan(Stack *S)
     while(!IsEmptyStack(temp))
     {
         Pop(&temp, &X);
-        printf("    %d. %s oleh %s\n", j, X.nama, X.penyanyi);
+        printf("    %d. \"%s\" oleh \"%s\"\n", j, X.nama, X.penyanyi);
         Push(S, X);
         j++;
     } 
@@ -139,7 +139,7 @@ void displayRiwayat(Stack *S)
     while(!IsEmptyStack(*S))
     {
         Pop(S, &X);
-        printf("    -) %s oleh %s\n", X.nama, X.penyanyi);
+        printf("    -) \"%s\" oleh \"%s\"\n", X.nama, X.penyanyi);
         Push(&temp, X);
         j++;
     }   

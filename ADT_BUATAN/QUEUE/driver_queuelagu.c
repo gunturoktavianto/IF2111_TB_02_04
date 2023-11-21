@@ -7,7 +7,7 @@ int main() {
 
     // Enqueue some elements
     ElTypeQueue newLagu;
-    newLagu.nama.Length = 9;
+    newLagu.nama.Length = 15;
     for (int i = 0; i < newLagu.nama.Length; i++) {
         newLagu.nama.TabWord[i] = "Nama Lagu"[i];
     }

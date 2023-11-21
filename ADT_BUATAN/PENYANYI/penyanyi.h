@@ -32,6 +32,7 @@ typedef struct
     int Count;
 } ListPenyanyi;
 
+extern ListPenyanyi l;
 /* Definisi Penyanyi M kosong : M.Count = Nil */
 /* M.Count = jumlah element Penyanyi */
 /* M.Elements = tempat penyimpanan element Penyanyi */

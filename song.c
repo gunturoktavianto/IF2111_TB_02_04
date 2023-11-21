@@ -11,7 +11,7 @@ void songNext(Queue *queueLagu, Stack *riwayat)
     {
         if(currentSong.penyanyi.Length == Nil && currentSong.album.Length == Nil && currentSong.nama.Length == Nil)
         {
-            printf("Queue kosong, dan tidak ada lagu yang dimainkan saat ini. Silahkan masukkan fungsi lain");
+            printf(">> Queue lagu kamu kosong, dan tidak ada lagu yang dimainkan saat ini. Silahkan masukkan fungsi lain");
             
         }
         else
@@ -51,11 +51,11 @@ void songPrevious(Queue *queueLagu, Stack *riwayat)
     {
         if(currentSong.penyanyi.Length == Nil && currentSong.album.Length == Nil && currentSong.nama.Length == Nil)
         {
-            printf("Queue kosong, dan tidak ada lagu yang dimainkan saat ini. Silahkan masukkan fungsi lain");
+            printf(">> Riwayat lagu kamu kosong, dan tidak ada lagu yang dimainkan saat ini. Silahkan masukkan fungsi lain");
         }
         else
         {
-             // Push (&riwayat, nowplaying); // tadinya mikir lagu yang bakal diputar di tamabhin ke riwayat
+            Push (riwayat, currentSong); // tadinya mikir lagu yang bakal diputar di tamabhin ke riwayat
             enqueueLagu(queueLagu, currentSong); // nambahin lagu yang diputar ke queue
             if(!isEmptyQueueLagu(*queueLagu))
             {

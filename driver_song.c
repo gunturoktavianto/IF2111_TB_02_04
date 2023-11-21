@@ -13,6 +13,7 @@ int main()
     currentSong.penyanyi = toKata("ELDWIN BET");
     currentSong.album = toKata("POKOKE ELDWIN");
     CreateStack(&riwayat);
+
     song1.nama = toKata("Namaku Favian");
     song1.penyanyi = toKata("Favian Ga");
     song1.album = toKata("Perjalan favian menguasai dunia kelinci");
@@ -21,19 +22,19 @@ int main()
     song2.penyanyi = toKata("Almin heavy metal");
     song2.album = toKata("my motorbike is rock");
     Push(&riwayat, song2);
-    // displayRiwayat(&riwayat);
     
-    // DUMMY QUEUE
+    // // DUMMY QUEUE
     Queue myQueue;
     CreateQueueLagu(&myQueue);
     ElTypeQueue newLagu;
-    newLagu.nama.Length = 9;
+
+    newLagu.nama.Length = 11;
     for (int i = 0; i < newLagu.nama.Length; i++) {
         newLagu.nama.TabWord[i] = "LOLA PADAMU"[i];
     }
     newLagu.nama.TabWord[newLagu.nama.Length] = '\0';
 
-    newLagu.album.Length = 10;
+    newLagu.album.Length = 12;
     for (int i = 0; i < newLagu.album.Length; i++) {
         newLagu.album.TabWord[i] = "FAVIAN DABES"[i];
     }
@@ -41,15 +42,11 @@ int main()
 
     newLagu.penyanyi.Length = 13;
     for (int i = 0; i < newLagu.penyanyi.Length; i++) {
-        newLagu.penyanyi.TabWord[i] = "RIZA BANG"[i];
+        newLagu.penyanyi.TabWord[i] = "RIZA BANGET"[i];
     }
     newLagu.penyanyi.TabWord[newLagu.penyanyi.Length] = '\0';
-    // Initialize the elements with appropriate values
-
+    // // Initialize the elements with appropriate values
     enqueueLagu(&myQueue, newLagu);
-
-    // Display the queue
-    // displayQueueLagu(myQueue);
 
     song(&myQueue, &riwayat);
     displayQueueLagu(myQueue);
