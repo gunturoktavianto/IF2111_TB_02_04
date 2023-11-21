@@ -216,6 +216,7 @@ void swapSongs(Queue *Q) {
 
 // Fungsi untuk menghapus lagu dari queue berdasarkan ID
 void removeSong(Queue *Q) {
+    printf(">> QUEUE REMOVE;\n");
     boolean found = false;
     while (!found){
         printf("Masukkan id lagu yang ingin dihapus dari queue : ");
@@ -249,6 +250,7 @@ void removeSong(Queue *Q) {
 
 // Fungsi untuk mengosongkan queue
 void clearQueue(Queue *Q) {
+    printf(">> QUEUE CLEAR;\n");
     CreateQueueLagu(Q);
     printf("Queue berhasil dikosongkan.\n");
 }
