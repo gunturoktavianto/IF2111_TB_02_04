@@ -6,8 +6,8 @@
 #include <time.h>
 #include "../../ADT/mesinkata/mesinkata.h"
 #include "../../ADT/mesinkata/mesinkarakter.h"
-
-
+#include "../../ADT_BUATAN/RIWAYAT/riwayat.h"
+#include "../../ADT_BUATAN/QUEUELAGU/queuelagu.h"
 
 void load();
 

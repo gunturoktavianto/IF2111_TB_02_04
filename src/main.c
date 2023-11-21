@@ -6,8 +6,8 @@
 int main() {
     stateWayangWave = false;
     CreateEmptyPenyanyi(&l);
-    CreateQueueLagu(&q);
-    CreateStack(&r);
+    CreateQueueLagu(&qs);
+    CreateStack(&rw);
     Word command;
     while (!stateWayangWave) {
         do {

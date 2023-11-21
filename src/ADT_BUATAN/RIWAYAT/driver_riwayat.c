@@ -2,20 +2,23 @@
 
 int main(){
     // KAMUS
-    Lagu song;
+    Word lagu, penyanyi, album;
+    Lagu song1, song2;
+    infotypeStack X;
     Stack riwayat, temp;
+    int i=0, j=1;
     // ALGORITMA
     CreateStack(&riwayat);
-    song.nama = toKata("Namaku Favian");
-    song.penyanyi = toKata("Favian Izza");
-    song.album = toKata("Perjalan favian menguasai dunia kelinci");
-    Push(&riwayat, song);
-    while(!IsEmptyStack(riwayat))
-    {
-        Pop(&riwayat, &song);
-        printf("lagu yang ada di playlist : %s\n", song.nama.TabWord);
-        printf("Penyanyinya : %s\n", song.penyanyi.TabWord);
-        printf("Albumnya : %s\n", song.album.TabWord);
-    }
-    return 0;
+    song1.nama = toKata("Namaku Favian");
+    song1.penyanyi = toKata("Favian Ga");
+    song1.album = toKata("Perjalan favian menguasai dunia kelinci");
+    Push(&riwayat, song1);
+    song2.nama = toKata("I am the strongest");
+    song2.penyanyi = toKata("Almin heavy metal");
+    song2.album = toKata("my motorbike is rock");
+    
+    Push(&riwayat, song2);
+    displayRiwayat(&riwayat);
+    Pop(&riwayat, &X);
+    displayRiwayat(&riwayat);   
 }

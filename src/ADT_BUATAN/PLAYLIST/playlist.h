@@ -1,6 +1,7 @@
 #ifndef playlist_H
 #define playlist_H
-
+#include <stdlib.h>
+#include <stdio.h>
 #include "../PENYANYI/penyanyi.h"
 
 #define First(L) ((L).First)
@@ -29,6 +30,7 @@ typedef struct {
     int Neff;
 } ArrayDin;
 
+extern ArrayDin daftarPlaylist;
 /* Definisi list : */
 /* List kosong : First(L) = Nil */
 /* Setiap elemen dengan alamat P dapat diacu Info(P), Next(P) */
@@ -170,5 +172,7 @@ void DelAfter (List *L, alamat *Pdel, alamat Prec);
 int NbElmt (List L);
 /* Mengirimkan banyaknya elemen list; mengirimkan 0 jika list kosong */
 
+void DisplayDaftarPlaylist();
 void DisplayLaguPlaylist(List L);
+alamat alamatIndeksKe (List l, int idx);
 #endif

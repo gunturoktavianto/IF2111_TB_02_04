@@ -2,14 +2,6 @@
 #include <stdlib.h>
 #include "load.h"
 
-void displayWord(Word W)
-{
-    for(int i=0;i<W.Length;i++)
-    {
-        printf("%c",W.TabWord[i]);
-    };
-}
-
 void load()
 {
     printf("Masukkan nama file yang ingin diload: ");
@@ -27,7 +19,6 @@ void load()
         dir[14+i]=file.TabWord[i];
     }
     dir[14 + i] = '\0';
-    printf("%s",dir);
     int jumlahLaguQueue, jumlahLaguRiwayat, jumlahPlaylist, jumlahLaguPlaylist ;
     FILE *input =fopen(dir,"r");
     if (input == NULL) printf("File tidak ditemukan. ");
@@ -40,95 +31,64 @@ void load()
         Word penyanyiPlaylist, albumPlaylist, laguPlaylist;
         Word namaPlaylist;
         penyanyiSekarang = currentWord;
-        printf("\n");
         ADVWORDLOAD();
         albumSekarang = currentWord;
-        displayWord(albumSekarang);
-        printf("\n");
         ADVWORDLOAD();
         laguSekarang = currentWord;
-        displayWord(laguSekarang);
-        printf("\n");
+        currentsong= MakeLagu(penyanyiSekarang, albumSekarang, laguSekarang);
         ADVWORD();
         jumlahLaguQueue = WordtoInt(currentWord); //Jumlah record lagu dalam queue
-        printf("%d", jumlahLaguQueue);
-        printf("\n");
         nextLine();
         
         //record lagu dalam queue
         for (int i = 0; i<jumlahLaguQueue; i++){
-            printf("Record queue ke %d", i+1);
-            printf("\n");
             ADVWORDLOAD();
             penyanyiQueue = currentWord;
-            displayWord(penyanyiQueue);
-            printf("\n");
             ADVWORDLOAD();
             albumQueue = currentWord;
-            displayWord(albumQueue);
-            printf("\n");
             ADVWORDLOAD();
             laguQueue = currentWord;
-            displayWord(laguQueue);
-            printf("\n");
-            printf("\n");
+            enqueueLagu(&qs, MakeLagu(penyanyiQueue, albumQueue, laguQueue));
         }
 
         ADVWORD();
         jumlahLaguRiwayat = WordtoInt(currentWord); //Jumlah record lagu dalam riwayat
-        printf("%d\n", jumlahLaguRiwayat);
         nextLine();
 
         // record lagu dalam riwayat
         for (int i = 0; i<jumlahLaguRiwayat; i++){
-            printf("Record queue ke %d", i+1);
-            printf("\n");
             ADVWORDLOAD();
             penyanyiRiwayat = currentWord;
-            displayWord(penyanyiRiwayat);
-            printf("\n");
+            
             ADVWORDLOAD();
             albumRiwayat = currentWord;
-            displayWord(albumRiwayat);
-            printf("\n");
+
             ADVWORDLOAD();
             laguRiwayat = currentWord;
-            displayWord(laguRiwayat);
-            printf("\n");
-            printf("\n");
+
+            Push(&rw, MakeLagu(penyanyiRiwayat, albumRiwayat, laguRiwayat));
         }
 
         ADVWORD();
         jumlahPlaylist = WordtoInt(currentWord); //Jumlah playlist
-        printf("%d\n", jumlahPlaylist);
         nextLine();
         for (int i=0; i<jumlahPlaylist; i++){
             ADVWORD();
             jumlahLaguPlaylist = WordtoInt(currentWord);
-            printf("%d\n", jumlahLaguPlaylist);
             ADVWORDLOAD();
             namaPlaylist = currentWord;
-            displayWord(namaPlaylist);
-            printf("\n");
-
+            List PlaylistRiwayat;
+            CreateEmptyPlaylist(namaPlaylist, &PlaylistRiwayat);
+            InsertAtArrayDin(&daftarPlaylist, PlaylistRiwayat, LengthArrayDin(daftarPlaylist));
             for (int j=0; j<jumlahLaguPlaylist; j++){
-                printf("Playlist ke %d record ke %d", i+1, j+1);
-                printf("\n");
                 ADVWORDLOAD();
                 penyanyiRiwayat = currentWord;
-                displayWord(penyanyiRiwayat);
-                printf("\n");
                 ADVWORDLOAD();
                 albumRiwayat = currentWord;
-                displayWord(albumRiwayat);
-                printf("\n");
                 ADVWORDLOAD();
                 laguRiwayat = currentWord;
-                displayWord(laguRiwayat);
-                printf("\n");
-                printf("\n");       
+                InsVLast(&daftarPlaylist.A[j], MakeLagu(penyanyiRiwayat, albumRiwayat, laguRiwayat));
             }
-        
         }
     }
 }

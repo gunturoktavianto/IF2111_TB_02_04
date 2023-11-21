@@ -1,25 +1,24 @@
 #include "queuelagu.h"
-
-Queuelagu q;
-void CreateQueueLagu(Queuelagu *q){
+Queue qs;
+void CreateQueueLagu(Queue *q){
     IDX_HEAD(*q) = IDX_UNDEF;
 	IDX_TAIL(*q) = IDX_UNDEF;
 }
 
 /* ********* PROTOTYPE ********* */
 /* Fungsi yang mengirim true jika q kosong: lihat definisi di atas */
-boolean isEmptyQueueLagu(Queuelagu q){
+boolean isEmptyQueueLagu(Queue q){
     return ((IDX_HEAD(q) == IDX_UNDEF) && (IDX_TAIL(q) == IDX_UNDEF));
 }
 
 /* Fungsi yang mengirim true jika tabel penampung elemen q sudah penuh */
 /* yaitu IDX_TAIL akan selalu di belakang IDX_HEAD dalam buffer melingkar*/
-boolean isFullQueueLagu(Queuelagu q){
+boolean isFullQueueLagu(Queue q){
     return (lengthQueueLagu(q) == CAPACITY);
 }
 
 /* Fungsi yang mengirimkan banyaknya elemen queue. Mengirimkan 0 jika q kosong. */
-int lengthQueueLagu(Queuelagu q){
+int lengthQueueLagu(Queue q){
     if (isEmptyQueueLagu(q))
 	{
 		return 0;
@@ -41,7 +40,7 @@ int lengthQueueLagu(Queuelagu q){
 /* Proses: Menambahkan val pada q dengan aturan FIFO */
 /* I.S : q mungkin kosong, tabel penampung elemen q TIDAK penuh */
 /* F.S : val menjadi TAIL yang baru, IDX_TAIL "mundur" dalam buffer melingkar. */
-void enqueueLagu(Queuelagu *q, ElTypeQueue val){
+void enqueueLagu(Queue *q, ElTypeQueue val){
     if (isEmptyQueueLagu(*q))
 	{
 		IDX_HEAD(*q) = 0;
@@ -54,8 +53,8 @@ void enqueueLagu(Queuelagu *q, ElTypeQueue val){
 		IDX_TAIL(*q) = (IDX_TAIL(*q) + 1) % CAPACITY;
 	}
 	TAIL(*q).nama.Length = val.nama.Length;
-    TAIL(*q).album.Length = val.penyanyi.Length;
-    TAIL(*q).penyanyi.Length = val.nama.Length;
+    TAIL(*q).album.Length = val.album.Length;
+    TAIL(*q).penyanyi.Length = val.penyanyi.Length;
 	int i;
 	for (i = 0; i < val.nama.Length; i++)
 	{
@@ -78,7 +77,7 @@ void enqueueLagu(Queuelagu *q, ElTypeQueue val){
 /* I.S : q tidak mungkin kosong */
 /* F.S : val = nilai elemen HEAD pd I.S., IDX_HEAD "mundur";
 		 q mungkin kosong */
-void dequeueLagu(Queuelagu *q, ElTypeQueue *val){
+void dequeueLagu(Queue *q, ElTypeQueue *val){
     (*val).nama.Length = HEAD(*q).nama.Length;
     (*val).album.Length = HEAD(*q).album.Length;
     (*val).penyanyi.Length = HEAD(*q).penyanyi.Length;
@@ -115,13 +114,15 @@ void dequeueLagu(Queuelagu *q, ElTypeQueue *val){
 /* Prosedur untuk menampilkan Queue secara transversal*/
 /* I.S : Queue terdefinisi */
 /* F.S : Queue terlihat dilayar */
-void displayQueueLagu(Queuelagu q){
-    int temp1, temp2;
+void displayQueueLagu(Queue q){
+    int i, temp1, temp2;
 	ElTypeQueue val;
+	Queue q1;
 	/*ALGORITMA*/
 	if (isEmptyQueueLagu(q))
 	{
 		printf("[]\n");
+		printf("Queue kosong\n");
 	}
 	else
 	{
@@ -130,7 +131,12 @@ void displayQueueLagu(Queuelagu q){
 		while (IDX_HEAD(q) != IDX_UNDEF)
 		{
 			dequeueLagu(&q, &val);
-			printf("[%s,%s,%s]\n", val.nama.TabWord,val.album.TabWord,val.penyanyi.TabWord);
+			enqueueLagu(&q1, val);
+			printf("%s - %s - %s\n", val.nama.TabWord,val.album.TabWord,val.penyanyi.TabWord);
+		}
+		while (IDX_HEAD(q1) != IDX_UNDEF){
+			dequeueLagu(&q1, &val);
+			enqueueLagu(&q, val);
 		}
 		IDX_HEAD(q) = temp1;
 		IDX_TAIL(q) = temp2;
@@ -140,10 +146,10 @@ void displayQueueLagu(Queuelagu q){
 /* Proses: Menyalin isi dari queueInput ke queueOutput */
 /* I.S : queueInput mungkin kosong, tabel penampung elemen queueInput TIDAK penuh */
 /* F.S : queueOutput memiliki isi queue yang sama */
-void copyQueueLagu(Queuelagu *queueInput, Queuelagu *queueOutput){
+void copyQueueLagu(Queue *queueInput, Queue *queueOutput){
     /*KAMUS LOKAL*/
 	int i, len;
-	Queuelagu q;
+	Queue q;
 	ElTypeQueue val;
 	CreateQueueLagu(&q);
 	len = lengthQueueLagu(*queueInput);
@@ -163,7 +169,7 @@ void copyQueueLagu(Queuelagu *queueInput, Queuelagu *queueOutput){
 }
 
 /* Fungsi yang mengembalikan true jika x merupakan elemen dari q */
-boolean isInQueueLagu(Queuelagu q, ElTypeQueue x){
+boolean isInQueueLagu(Queue q, ElTypeQueue x){
     /*KAMUS LOKAL*/
 	ElTypeQueue val;
 	boolean notfound = true;
@@ -179,7 +185,7 @@ boolean isInQueueLagu(Queuelagu q, ElTypeQueue x){
 	return !notfound;
 }
 
-void transferReverseQueueLagu(Queuelagu* q1, Queuelagu* q2){
+void transferReverseQueueLagu(Queue* q1, Queue* q2){
     int q1length = lengthQueueLagu(*q1);
 
     IDX_HEAD(*q2) = IDX_HEAD(*q1);

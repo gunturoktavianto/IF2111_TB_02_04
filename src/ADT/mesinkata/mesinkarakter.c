@@ -3,7 +3,7 @@
 
 #include "mesinkarakter.h"
 #include <stdio.h>
-
+#include <stdlib.h>
 char currentChar;
 boolean EOP;
 

@@ -1,12 +1,15 @@
-#include "playlist.h"
-
+#include "playlist.c"
+#include "../../ADT/mesinkata/mesinkata.c"
+#include "../../ADT/mesinkata/mesinkarakter.c"
+#include "../PENYANYI/penyanyi.c"
+#include "../LAGU/lagu.c"
 int main()
 {
-    ArrayDin daftarPlaylist=MakeArrayDin();
+    daftarPlaylist=MakeArrayDin();
     List playlist,p;
     Lagu l,m;
-    l=MakeLagu(toKata("Pink Venom"),toKata("BORN PINK"), toKata("BLACKPINK"));
-    m=MakeLagu(toKata("Shut Down"),toKata("BORN PINK"), toKata("BLACKPINK"));
+    l=MakeLagu(toKata("BLACKPINK"),toKata("BORN PINK"), toKata("Pink Venom"));
+    m=MakeLagu(toKata("BLACKPINK"),toKata("BORN PINK"), toKata("Shut Down"));
     //l.album=toKata("BORN PINK");
     //l.nama=toKata("Shut Down");
     //l.penyanyi=toKata("BLACKPINK");
