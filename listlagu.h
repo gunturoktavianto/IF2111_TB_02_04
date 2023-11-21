@@ -4,6 +4,7 @@
 #include "ADT_BUATAN/RIWAYAT/riwayat.h"
 #include "ADT_BUATAN/QUEUE/queuelagu.h"
 #include "ADT_BUATAN/PENYANYI/penyanyi.h"
+#include "ADT_BUATAN/PLAYLIST/playlistcmd.h"
 #include "start.h"
 
 void DisplayDaftarPlaylist(ArrayDin Arr);

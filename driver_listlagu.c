@@ -2,6 +2,7 @@
 
 int main()
 {
+    // startPlaylist();
     startconfig();
     list();
 }

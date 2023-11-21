@@ -2,28 +2,28 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-void DisplayDaftarPlaylist(ArrayDin Arr){
-/*
-Menampilkan daftar playlist yang ada
-*/
-    // KAMUS
-    int i = 0;
-    // ALGORITMA    
-    if(IsEmptyArrayDin(Arr)) // kalo kosong
-    {
-        printf("Daftar playlist yang kamu miliki: \n");
-        printf("Kamu tidak memiliki playlist.\n");
-    }
-    else
-    {   
-        printf("Daftar playlist yang kamu miliki: \n");
-        while(i < LengthArrayDin(Arr)) // loop unutk ngeprint playlist
-        {
-            printf("    %d. %s", i+1, Arr.A[i].NamaPlaylist.TabWord);
-            i++;
-        }
-    }
-}
+// void DisplayDaftarPlaylist(ArrayDin Arr){
+// /*
+// Menampilkan daftar playlist yang ada
+// */
+//     // KAMUS
+//     int i = 0;
+//     // ALGORITMA    
+//     if(IsEmptyArrayDin(Arr)) // kalo kosong
+//     {
+//         printf("Daftar playlist yang kamu miliki: \n");
+//         printf("Kamu tidak memiliki playlist.\n");
+//     }
+//     else
+//     {   
+//         printf("Daftar playlist yang kamu miliki: \n");
+//         while(i < LengthArrayDin(Arr)) // loop unutk ngeprint playlist
+//         {
+//             printf("    %d. %s", i+1, Arr.A[i].NamaPlaylist.TabWord);
+//             i++;
+//         }
+//     }
+// }
 
 // int SearchIndexPenyanyi(Penyanyi Penyanyi, Word namapenyanyi)
 // {
@@ -121,7 +121,11 @@ char yesorno ()
     command = GetInput(); // udah nerima input
     while(!valid)
     {
-        if(currentWord.Length > 1) command = GetInput();
+        if(currentWord.Length > 1) 
+        {
+            printf("\nInput tidak valid masukkan input ulang (Y/N):");
+            command = GetInput();
+        }
         else
         {
             input = command.TabWord[0];
@@ -131,11 +135,12 @@ char yesorno ()
             }
             else if(input == 'N' || input == 'n')
             {
+                printf("\n>> Keluar dari Fungsi LIST");
                 valid = true;
             }
             else
             {
-                printf("Input tidak valid masukkan input ulang (Y/N):");
+                printf("\n Input tidak valid masukkan input ulang (Y/N):");
                 command = GetInput();
             }
         } 
@@ -151,7 +156,6 @@ void ListLagu()
     int i=0, j=1,indekspenyanyi, indeksalbum;
     Word command;
     // ALGORTIMA
-    printf("list default jalan\n");
     printdaftarPenyanyi(&l);
     // mencari penyanyi
     printf("Ingin melihat album yang ada?(Y/N): ");
@@ -220,8 +224,7 @@ void list() // yang dipanggil
         } 
         else if(IsWordEq(toKata("LIST PLAYLIST"), command))
         {
-            printf("\nlist playlist jalan");
-            // DisplayDaftarPlaylist(playlist);
+            DisplayDaftarPlaylist(daftarPlaylist);
             valid = true;
         } 
         else if(IsWordEq(toKata("QUIT"), command))

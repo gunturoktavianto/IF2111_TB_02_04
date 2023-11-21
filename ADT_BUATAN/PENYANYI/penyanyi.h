@@ -115,8 +115,6 @@ void printdaftarPenyanyi(ListPenyanyi *daftarpenyanyi);
 
 int IdxDaftarPenyanyi(ListPenyanyi *M, keytype k);
 
-void MakePenyanyiDummy();
-void makeListPenyanyi();
 boolean AnggotaListPenyanyi(ListPenyanyi *M, keytype *k);
 /* Mengembalikan true jika Elmt adalah member dari S */
 

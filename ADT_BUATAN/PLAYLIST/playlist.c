@@ -1,4 +1,5 @@
 #include "playlist.h"
+ArrayDin daftarPlaylist;
 /**
  * Konstruktor
  * I.S. sembarang
@@ -295,12 +296,35 @@ void DelAfter (List *L, alamat *Pdel, alamat Prec)
     Next(Prec)=Next(*Pdel);
 }
 
+void DisplayDaftarPlaylist()
+{
+    printf("Daftar playlist yang kamu miliki:\n");
+    for(int i=0; i<LengthArrayDin(daftarPlaylist); i++)
+    {
+        printf("    %d. %s\n",i+1,daftarPlaylist.A[i].NamaPlaylist.TabWord);
+    }
+}
 void DisplayLaguPlaylist(List L)
 {
+    printf("Daftar lagu pada playlist %s:\n",L.NamaPlaylist.TabWord);
     alamat P=First(L);
+    int i=1;
     while(P!=Nil)
     {
-        printf("%s\n",Info(P).nama.TabWord);
+        printf("%d. %s\n",i,Info(P).nama.TabWord);
+        P=Next(P);
+        i++;
+    }
+}
+
+alamat alamatIndeksKe (List l, int idx)
+{
+    alamat P=First(l);
+    int cnt=0;
+    while(P!=Nil)
+    {
+        if(cnt==idx) return P;
+        cnt++;
         P=Next(P);
     }
 }

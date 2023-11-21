@@ -122,7 +122,7 @@ void displayQueueLagu(Queue q){
  printf("\nDaftar Queue lagu :\n");
  if (isEmptyQueueLagu(q))
  {
-  printf("\n>> Queue lagu kamu kosong\n");
+  printf(">> Queue lagu kamu kosong\n");
  }
  else
  {

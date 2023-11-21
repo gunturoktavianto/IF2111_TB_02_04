@@ -16,7 +16,7 @@ void songNext(Queue *queueLagu, Stack *riwayat)
         }
         else
         {
-            Push(riwayat, currentSong);
+            // Push(riwayat, currentSong);
             printf("Queue kosong, memutar kembali lagu \n\"%s\" oleh \"%s\"", currentSong.nama.TabWord, currentSong.penyanyi.TabWord);
             // memainkan lagu saat ini
             // Push(&riwayat, lagudiputars);
@@ -55,16 +55,16 @@ void songPrevious(Queue *queueLagu, Stack *riwayat)
         }
         else
         {
-            Push (riwayat, currentSong); // tadinya mikir lagu yang bakal diputar di tamabhin ke riwayat
-            enqueueLagu(queueLagu, currentSong); // nambahin lagu yang diputar ke queue
-            if(!isEmptyQueueLagu(*queueLagu))
-            {
-                for(i = 0; i < lengthQueueLagu(*queueLagu)-1; i++) // loop untuk ngubah posisi lagu yang dimainkan ke posisi pertama di queue
-                {
-                    dequeueLagu(queueLagu, &val);
-                    enqueueLagu(queueLagu, val);
-                }
-            }
+            // Push (riwayat, currentSong); // tadinya mikir lagu yang bakal diputar di tamabhin ke riwayat
+            // enqueueLagu(queueLagu, currentSong); // nambahin lagu yang diputar ke queue
+            // if(!isEmptyQueueLagu(*queueLagu))
+            // {
+            //     for(i = 0; i < lengthQueueLagu(*queueLagu)-1; i++) // loop untuk ngubah posisi lagu yang dimainkan ke posisi pertama di queue
+            //     {
+            //         dequeueLagu(queueLagu, &val);
+            //         enqueueLagu(queueLagu, val);
+            //     }
+            // }
             printf("Riwayat lagu kosong, memutar kembali lagu\n\"%s\" oleh \"%s\"\n", currentSong.nama.TabWord, currentSong.penyanyi.TabWord); // memainkan lagu
             printf("CURRENT SONG : \"%s\" di album \"%s\" oleh \"%s\"", currentSong.nama.TabWord, currentSong.album.TabWord, currentSong.penyanyi.TabWord);
             // displayQueueLagu(*queueLagu);
