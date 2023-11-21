@@ -2,24 +2,24 @@
 #include "QUEUE.h"
 #include <stdio.h>
 // Fungsi untuk menambahkan lagu ke dalam queue
-void getCommandQueue(Queue *QueueLagu, ListPenyanyi P, ArrayDin L)
+void getCommandQueue(Queue *Q, ListPenyanyi P, ArrayDin L)
 {
     printf("> SILAHKAN MASUKAN COMMAND: ");
     boolean state=false;
     while(!state)
     {
         Word command=GetInput();
-        if(IsWordEq(command, toKata("QUEUE SONG"))) {queueSong(QueueLagu,P,L); state=true;}
-        else if(IsWordEq(command, toKata("QUEUE PLAYLIST"))) {queuePlaylist(QueueLagu,P,L); state=true;}
-        else if(IsWordEq(command,toKata("QUEUE SWAP"))) {swapSongs(QueueLagu,P,L); state=true;}
-        else if(IsWordEq(command,toKata("QUEUE REMOVE"))) {removeSong(QueueLagu,P,L); state=true;}
-        else if(IsWordEq(command,toKata("QUEUE CLEAR"))) {clearQueue(QueueLagu,P,L); state=true;}
+        if(IsWordEq(command, toKata("QUEUE SONG"))) {queueSong(Q,P,L); state=true;}
+        else if(IsWordEq(command, toKata("QUEUE PLAYLIST"))) {queuePlaylist(Q,P,L); state=true;}
+        else if(IsWordEq(command,toKata("QUEUE SWAP"))) {swapSongs(Q,P,L); state=true;}
+        else if(IsWordEq(command,toKata("QUEUE REMOVE"))) {removeSong(Q,P,L); state=true;}
+        else if(IsWordEq(command,toKata("QUEUE CLEAR"))) {clearQueue(Q,P,L); state=true;}
         else if (IsWordEq(command,toKata("QUEUE QUIT"))) {state=false;}
         else printf("Invalid command. Silahkan masukkan command kembali.\n> SILAHKAN MASUKAN COMMAND: ");   
     }
 }
 
-void startQueue(Queue *QueueLagu, ListPenyanyi P, ArrayDin L)
+void startQueue(Queue *Q, ListPenyanyi P, ArrayDin L)
 {
     printf("====[ SELAMAT DATANG DI FUNGSI PLAYLIST ]====\n");
     printf("----TERDAPAT LIMA FUNGSI YANG BISA DIAKSES---- \n");
@@ -29,7 +29,7 @@ void startQueue(Queue *QueueLagu, ListPenyanyi P, ArrayDin L)
     printf("4. QUEUE REMOVE -> untuk menghapus lagu dari queue\n");
     printf("5. QUEUE CLEAR -> untuk mengosongkan queue\n");
     printf("6. QUEUE QUIT -> untuk keluar dari fungsi queue\n");
-    getCommandQueue(QueueLagu, P, L);
+    getCommandQueue(Q, P, L);
 }
 void queueSong(Queue *Q, ListPenyanyi P, ArrayDin L) {
     printf(">> QUEUE SONG;\n");
