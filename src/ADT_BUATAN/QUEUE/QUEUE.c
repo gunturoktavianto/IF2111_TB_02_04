@@ -2,46 +2,36 @@
 #include "QUEUE.h"
 #include <stdio.h>
 // Fungsi untuk menambahkan lagu ke dalam queue
-
-void startQueue(Queue *QueueLagu, ListPenyanyi P, ArrayDin L){
-    printf("====[ SELAMAT DATANG DI FUNGSI QUEUE ]====\n");
-    printf("----TERDAPAT 5 FUNGSI YANG BISA DIAKSES---- \n");
-    printf("    1. QUEUE SONG \n");
-    printf("    2. QUEUE PLAYLIST \n");
-    printf("    3. QUEUE SWAP \n");
-    printf("    4. QUEUE REMOVE \n");
-    printf("    5. QUEUE CLEAR \n");
-    printf("> SILAHKAN MASUKAN COMMAND: \n");
-    Word input = GetInput();
-    boolean state = false;
-    while(!state){
-        if (IsWordEq(input, toKata("QUEUE SONG"))){
-            queueSong(QueueLagu,P);
-            state = true;
-        }
-        else if (IsWordEq(input, toKata("QUEUE PLAYLIST"))){
-            queuePlaylist(L, QueueLagu);
-            state = true;
-        }
-        else if (IsWordEq(input, toKata("QUEUE SWAP"))){
-            swapSongs(QueueLagu);
-            state = true;
-        }
-        else if (IsWordEq(input, toKata("QUEUE REMOVE"))){
-            removeSong(QueueLagu);
-            state = true;
-        }
-        else if (IsWordEq(input, toKata("QUEUE CLEAR"))){
-            clearQueue(QueueLagu);
-            state = true;
-        }
-        else{
-            printf("Input Anda Salah. Silahkan mencoba kembali\n");
-        }
+void getCommandQueue(Queue *QueueLagu, ListPenyanyi P, ArrayDin L)
+{
+    printf("> SILAHKAN MASUKAN COMMAND: ");
+    boolean state=false;
+    while(!state)
+    {
+        Word command=GetInput();
+        if(IsWordEq(command, toKata("QUEUE SONG"))) {queueSong(QueueLagu,P,L); state=true;}
+        else if(IsWordEq(command, toKata("QUEUE PLAYLIST"))) {queuePlaylist(QueueLagu,P,L); state=true;}
+        else if(IsWordEq(command,toKata("QUEUE SWAP"))) {swapSongs(QueueLagu,P,L); state=true;}
+        else if(IsWordEq(command,toKata("QUEUE REMOVE"))) {removeSong(QueueLagu,P,L); state=true;}
+        else if(IsWordEq(command,toKata("QUEUE CLEAR"))) {clearQueue(QueueLagu,P,L); state=true;}
+        else if (IsWordEq(command,toKata("QUEUE QUIT"))) {state=false;}
+        else printf("Invalid command. Silahkan masukkan command kembali.\n> SILAHKAN MASUKAN COMMAND: ");   
     }
-
 }
-void queueSong(Queue *Q, ListPenyanyi P) {
+
+void startQueue(Queue *QueueLagu, ListPenyanyi P, ArrayDin L)
+{
+    printf("====[ SELAMAT DATANG DI FUNGSI PLAYLIST ]====\n");
+    printf("----TERDAPAT LIMA FUNGSI YANG BISA DIAKSES---- \n");
+    printf("1. QUEUE SONG -> untuk menambahkan lagu ke dalam queue\n");
+    printf("2. QUEUE PLAYLIST -> untuk menambahkan lagu yang ada dalam playlist ke dalam queue\n");
+    printf("3. QUEUE SWAP -> untuk menukar lagu pada urutan ke x dan juga urutan ke y\n");
+    printf("4. QUEUE REMOVE -> untuk menghapus lagu dari queue\n");
+    printf("5. QUEUE CLEAR -> untuk mengosongkan queue\n");
+    printf("6. QUEUE QUIT -> untuk keluar dari fungsi queue\n");
+    getCommandQueue(QueueLagu, P, L);
+}
+void queueSong(Queue *Q, ListPenyanyi P, ArrayDin L) {
     printf(">> QUEUE SONG;\n");
     // menampilkan penyanyi, disimpan dalam ADT penyanyi, berperan juga sebagai key
     int i=0;
@@ -98,12 +88,12 @@ void queueSong(Queue *Q, ListPenyanyi P) {
 
     /* Final State */
     printf("Berhasil menambahkan lagu \"%s\" oleh \"%s\" ke queue.\n", P.PenyanyiKe[idxp].InfoPenyanyi[idxp].Value.InfoAlbum[idxa].Value.InfoLagu[idxl].nama.TabWord, namapenyanyi.Key.TabWord);
-
+    getCommandQueue(Q, P, L);
 }
 
 
 // Fungsi untuk menambahkan playlist ke dalam queue
-void queuePlaylist(ArrayDin L, Queue *Q) {
+void queuePlaylist(Queue *Q, ListPenyanyi P, ArrayDin L) {
     //soal input id dll itu masih blm kebayang
     printf(">> QUEUE PLAYLIST;\n");
     boolean found = false;
@@ -125,10 +115,11 @@ void queuePlaylist(ArrayDin L, Queue *Q) {
             printf("Input Anda Salah. Silahkan mencoba kembali\n");
         }
     }
+    getCommandQueue(Q, P, L);
 }
 
 // Fungsi untuk menukar lagu pada urutan x dan y dalam queue
-void swapSongs(Queue *Q) {
+void swapSongs(Queue *Q, ListPenyanyi P, ArrayDin L) {
     printf(">> QUEUE SWAP;\n");
     boolean found = false;
     while (!found){
@@ -209,10 +200,11 @@ void swapSongs(Queue *Q) {
             printf("Input Anda Salah. Silahkan mencoba kembali\n");
         }
     }
+    getCommandQueue(Q, P, L);
 }
 
 // Fungsi untuk menghapus lagu dari queue berdasarkan ID
-void removeSong(Queue *Q) {
+void removeSong(Queue *Q, ListPenyanyi P, ArrayDin L) {
     printf(">> QUEUE REMOVE;\n");
     boolean found = false;
     while (!found){
@@ -243,11 +235,13 @@ void removeSong(Queue *Q) {
             printf("Input Anda Salah. Silahkan mencoba kembali\n");
         }
     }
+    getCommandQueue(Q, P, L);
 }
 
 // Fungsi untuk mengosongkan queue
-void clearQueue(Queue *Q) {
+void clearQueue(Queue *Q, ListPenyanyi P, ArrayDin L) {
     printf(">> QUEUE CLEAR;\n");
     CreateQueueLagu(Q);
     printf("Queue berhasil dikosongkan.\n");
+    getCommandQueue(Q, P, L);
 }
