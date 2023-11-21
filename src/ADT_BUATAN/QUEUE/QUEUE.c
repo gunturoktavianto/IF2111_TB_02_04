@@ -43,64 +43,61 @@ void startQueue(Queue *QueueLagu, ListPenyanyi P, ArrayDin L){
 }
 void queueSong(Queue *Q, ListPenyanyi P) {
     printf(">> QUEUE SONG;\n");
-    int idx1,idx2;
-    boolean found = false;
-    Word penyanyi, album, lagu;
-    Lagu lagu1;
-    while(!found){
-        printdaftarPenyanyi(&P);
-        printf("Masukkan nama penyanyi : ");
-        penyanyi = GetInput();
-        printf("\n");
-        address idx = 0;
-        while ((idx < P.Count)&&(!found)) {
-            if (IsWordEq(P.PenyanyiKe[idx].InfoPenyanyi[idx].Key, penyanyi )){
-                idx1 = idx;
-                found = true;
-            }
-            idx++;
-        }
-        if (!found){
-            printf("Input Anda Salah. Silahkan mencoba kembali\n");
-        }
-    }
-    boolean found1 = false;
-    while (!found1){
-        PrintAlbum(P.PenyanyiKe[idx1].InfoPenyanyi[idx1].Value);
-        printf("Masukkan Nama Album yang dipilih : ");
-        album = GetInput();
-        printf("\n");
-        if (IsMemberAlbum(P.PenyanyiKe[idx1].InfoPenyanyi[idx1].Value, album)){
-            found1 = true;
-        }
-        else{
-            printf("Input Anda Salah. Silahkan mencoba kembali\n");
-        }
-    }
-    SetLagu setlagu = ValueAlbum(P.PenyanyiKe[idx1].InfoPenyanyi[idx1].Value, album);
-    boolean found2 = false;
-    while (!found2){
-        PrintLagu(setlagu);
-        printf("Masukkan index lagu yang dipilih : ");
-        lagu = GetInput();
-        int idxlagu = WordtoInt(lagu);
-        if ((idxlagu < setlagu.Count) && (idxlagu> 0)){
-            lagu1 = MakeLagu(lagu,album,penyanyi);
-            printf("\n");
-            if (IsMemberSetLagu(setlagu,lagu1)){
-                enqueueLagu(Q, lagu1);
-                found2 = true;
-            }
-            else{
-                printf("Input Anda Salah. Silahkan mencoba kembali\n");
-            }
-        }
-        else{
-            printf("Input Anda Salah. Silahkan mencoba kembali\n");
-        }
-    
-    }
-    printf("Berhasil menambahkan lagu “%s” oleh “%s” ke queue.\n", lagu1.nama.TabWord, lagu1.penyanyi.TabWord);
+    // menampilkan penyanyi, disimpan dalam ADT penyanyi, berperan juga sebagai key
+    int i=0;
+    printf("Daftar Penyanyi :\n");
+    while(i<P.Count){
+        printf("  %d. %s\n", i+1, P.PenyanyiKe[i].InfoPenyanyi[i].Key.TabWord);
+        i++;
+    } i=0;
+
+    // mencari penyanyi
+    infotypePenyanyi namapenyanyi;
+    printf("\nMasukkan Nama Penyanyi yang dipilih : ");
+    namapenyanyi.Key = GetInput();
+    while(!IsMemberListPenyanyi(&P, &namapenyanyi)){
+        printf("Nama Penyanyi tidak ditemukan.\n");
+        printf("\nMasukkan Nama Penyanyi yang dipilih : ");
+        namapenyanyi.Key = GetInput();
+    }   int idxp = IdxPenyanyi(&P, namapenyanyi.Key);
+
+    // menampilkan album dari penyanyi X, disimpan dalam ADT map
+    printf("Daftar Album oleh %s :\n", namapenyanyi.Key.TabWord);
+    while(i<P.PenyanyiKe[idxp].InfoPenyanyi[idxp].Value.Count){
+        printf("  %d. %s\n", i+1, P.PenyanyiKe[idxp].InfoPenyanyi[idxp].Value.InfoAlbum[i].Key.TabWord);
+        i++;
+    } i=0;
+
+    // mencari album
+    infotypeAlbum namaalbum;
+    printf("\nMasukkan Nama Album yang dipilih : ");
+    namaalbum.Key = GetInput();
+    while(!IsMemberAlbum(P.PenyanyiKe[idxp].InfoPenyanyi[idxp].Value, namaalbum.Key)){
+        printf("Nama Album tidak ditemukan.\n");
+        printf("\nMasukkan Nama Album yang dipilih : ");
+        namaalbum.Key = GetInput();
+    }   int idxa = IdxAlbum(&P, idxp, namaalbum.Key);
+
+    // menampilkan lagu dari album X, disimpan dalam ADT set
+    printf("Daftar Lagu Album %s oleh %s :\n", namaalbum.Key.TabWord, namapenyanyi.Key.TabWord);
+    while(i<P.PenyanyiKe[idxp].InfoPenyanyi[idxp].Value.Count){
+        printf("  %d. %s\n", i+1, P.PenyanyiKe[idxp].InfoPenyanyi[idxp].Value.InfoAlbum[idxa].Value.InfoLagu[i].nama.TabWord);
+        i++;
+    } i=0;
+
+    // mencari lagu
+    printf("\nMasukkan ID Lagu yang dipilih : ");
+    int idxl = WordtoInt(GetInput());
+    while(idxl > P.PenyanyiKe[idxp].InfoPenyanyi[idxp].Value.InfoAlbum[idxa].Value.Count && idxl < 0 ){
+        printf("Nama ID Lagu tidak ditemukan.\n");
+        printf("\nMasukkan ID Lagu  yang dipilih : ");
+        idxl = WordtoInt(GetInput());
+    }   /*int idxl = IdxLagu(&l, idxp, idxa, namalagu.nama);*/
+
+    enqueueLagu(Q, P.PenyanyiKe[idxp].InfoPenyanyi[idxp].Value.InfoAlbum[idxa].Value.InfoLagu[idxl]);
+
+    /* Final State */
+    printf("Berhasil menambahkan lagu \"%s\" oleh \"%s\" ke queue.\n", P.PenyanyiKe[idxp].InfoPenyanyi[idxp].Value.InfoAlbum[idxa].Value.InfoLagu[idxl].nama.TabWord, namapenyanyi.Key.TabWord);
 
 }
 
