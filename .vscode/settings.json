@@ -1,0 +1,23 @@
+<<<<<<< HEAD
+{
+    "files.associations": {
+        "string.h": "c"
+    }
+}
+=======
+{
+    "files.associations": {
+        "time.h": "c",
+        "stdlib.h": "c",
+        "math.h": "c",
+        "stack.h": "c",
+        "stdio.h": "c",
+        "listdp.h": "c",
+        "mesinkata.h": "c",
+        "queue.h": "c",
+        "listlinier.h": "c",
+        "map.h": "c",
+        "set.h": "c"
+    }
+}
+>>>>>>> origin/favian
