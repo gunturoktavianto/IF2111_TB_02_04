@@ -50,9 +50,13 @@ void Push(Stack * S, infotypeStack X);
 /* F.S. X menjadi TOP yang baru,TOP bertambah 1 */
 
 /* ************ Menghapus sebuah elemen Stack ************ */
-void Pop(Stack * S, infotypeStack* X);
+void Pop(Stack *S, infotypeStack *X);
 /* Menghapus X dari Stack S. */
 /* I.S. S  tidak mungkin kosong */
 /* F.S. X adalah nilai elemen TOP yang lama, TOP berkurang 1 */
 
+Stack copyStack(Stack *input, Stack *hasil);
+int NbElmtStack(Stack *S);
+void displayStackUrutan(Stack *S);
+void displayRiwayat(Stack *S);
 #endif

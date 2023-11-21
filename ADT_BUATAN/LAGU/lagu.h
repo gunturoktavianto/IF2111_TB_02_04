@@ -25,13 +25,13 @@ typedef struct
     infotype InfoLagu[MaxEl];
     int Count;
 } SetLagu;
-
+extern Lagu currentSong;
 /* Definisi SetLagu S kosong : S.Count = Nil */
 /* S.Count = jumlah element SetLagu */
 /* S.Elements = tempat penyimpanan element SetLagu */
 
-/* ********* Prototype ********* */
 
+/* ********* Prototype ********* */
 /* *** Konstruktor/Kreator *** */
 void CreateEmptySetLagu(SetLagu *S);
 /* I.S. Sembarang */

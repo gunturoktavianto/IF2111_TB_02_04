@@ -1,82 +1,105 @@
-#include "ADT_BUATAN/RIWAYAT/riwayat.h"
-#include "ADT_BUATAN/QUEUE/queuelagu.h"
 #include <stdio.h>
+#include "song.h"
 #include <stdlib.h>
-#include <math.h>
-Lagu currentSong;
-void songNext(Queue queueLagu, Stack riwayat)
+
+void songNext(Queue *queueLagu, Stack *riwayat)
 {
     // KAMUS    
     Lagu song;
     // ALGORITMA
-    if(isEmptyQueue(queueLagu)) // jika queueu kosong
+    if(isEmptyQueueLagu(*queueLagu)) // jika queueu kosong
     {
-        Push(&riwayat, currentSong);
-        printf("Queue kosong, memutar kembali lagu \n %s oleh %s", currentSong.nama.TabWord, currentSong.penyanyi.TabWord);
-        // memainkan lagu saat ini
-        // Push(&riwayat, lagudiputars);
+        if(currentSong.penyanyi.Length == Nil && currentSong.album.Length == Nil && currentSong.nama.Length == Nil)
+        {
+            printf("Queue kosong, dan tidak ada lagu yang dimainkan saat ini. Silahkan masukkan fungsi lain");
+            
+        }
+        else
+        {
+            Push(riwayat, currentSong);
+            printf("Queue kosong, memutar kembali lagu \n\"%s\" oleh \"%s\"", currentSong.nama.TabWord, currentSong.penyanyi.TabWord);
+            // memainkan lagu saat ini
+            // Push(&riwayat, lagudiputars);
+            printf("\nCURRENT SONG : \"%s\" di album \"%s\" oleh \"%s\"", currentSong.nama.TabWord, currentSong.album.TabWord, currentSong.penyanyi.TabWord);
+            // displayQueueLagu(queueLagu);
+            // displayRiwayat(&riwayat);
+        }
     }
+
     else
     {
-        dequeue(&queueLagu, &song);
+        dequeueLagu(queueLagu, &song);
         // lagudiputars = lagudiputarq;
          // tadinya mikir lagu yang bakal diputar di tambahin ke riwayat
-        Push(&riwayat, currentSong);
-        printf("Memutar lagu selanjutnya \n %s oleh %s", song.nama.TabWord, song.penyanyi.TabWord);
+        Push(riwayat, currentSong);
+        printf("Memutar lagu selanjutnya\n\"%s\" oleh \"%s\"", song.nama.TabWord, song.penyanyi.TabWord);
         currentSong = song;
-        // Push(&riwayat, lagudiputars);
+        printf("\nCURRENT SONG : \"%s\" di album \"%s\" oleh \"%s\"", currentSong.nama.TabWord, currentSong.album.TabWord, currentSong.penyanyi.TabWord);
+        // displayQueueLagu(queueLagu);
+        // displayRiwayat(&riwayat);
     }
 }
 
-void songPrevious(Queue queueLagu, Stack riwayat)
+void songPrevious(Queue *queueLagu, Stack *riwayat)
 {
     // KAMUS    
     Lagu song;
     ElTypeQueue val;
     int i;
     // ALGORITMA
-    if(IsEmptyStack(riwayat))
+    if(IsEmptyStack(*riwayat))
     {
-        // Push (&riwayat, nowplaying); // tadinya mikir lagu yang bakal diputar di tamabhin ke riwayat
-        enqueue(&queueLagu, currentSong); // nambahin lagu yang diputar ke queue
-        if(!isEmptyQueue(queueLagu))
+        if(currentSong.penyanyi.Length == Nil && currentSong.album.Length == Nil && currentSong.nama.Length == Nil)
         {
-            for(i = 0; i < length(queueLagu)-1; i++) // loop untuk ngubah posisi lagu yang dimainkan ke posisi pertama di queue
-            {
-                dequeue(&queueLagu, &val);
-                enqueue(&queueLagu, val);
-            }
+            printf("Queue kosong, dan tidak ada lagu yang dimainkan saat ini. Silahkan masukkan fungsi lain");
         }
-        printf("Riwayat lagu kosong, memutar kembali lagu \n %s oleh %s\n", currentSong.nama.TabWord, currentSong.penyanyi.TabWord); // memainkan lagu
+        else
+        {
+             // Push (&riwayat, nowplaying); // tadinya mikir lagu yang bakal diputar di tamabhin ke riwayat
+            enqueueLagu(queueLagu, currentSong); // nambahin lagu yang diputar ke queue
+            if(!isEmptyQueueLagu(*queueLagu))
+            {
+                for(i = 0; i < lengthQueueLagu(*queueLagu)-1; i++) // loop untuk ngubah posisi lagu yang dimainkan ke posisi pertama di queue
+                {
+                    dequeueLagu(queueLagu, &val);
+                    enqueueLagu(queueLagu, val);
+                }
+            }
+            printf("Riwayat lagu kosong, memutar kembali lagu\n\"%s\" oleh \"%s\"\n", currentSong.nama.TabWord, currentSong.penyanyi.TabWord); // memainkan lagu
+            printf("CURRENT SONG : \"%s\" di album \"%s\" oleh \"%s\"", currentSong.nama.TabWord, currentSong.album.TabWord, currentSong.penyanyi.TabWord);
+            // displayQueueLagu(*queueLagu);
+            // displayRiwayat(riwayat);
+        }
+       
     }   
-
     else
     {
-        Pop(&riwayat, &song); // ambi lagu dari riwayat
-        enqueue(&queueLagu, currentSong); // nambahin lagu ke queue
-        if(!isEmptyQueue(queueLagu))
+        Pop(riwayat, &song); // ambi lagu dari riwayat
+        enqueueLagu(queueLagu, currentSong); // nambahin lagu ke queue
+        if(!isEmptyQueueLagu(*queueLagu))
         {
-            for(i = 0; i < length(queueLagu)-1; i++) // loop untuk ngubah posisi lagu yang dimainkan ke posisi pertama di queue
+            for(i = 0; i < lengthQueueLagu(*queueLagu)-1; i++) // loop untuk ngubah posisi lagu yang dimainkan ke posisi pertama di queue
             {
-                dequeue(&queueLagu, &val);
-                enqueue(&queueLagu, val);
+                dequeueLagu(queueLagu, &val);
+                enqueueLagu(queueLagu, val);
             }
         }
-        printf("Memutar lagu sebelumnya \n %s oleh %s", song.nama.TabWord, song.penyanyi.TabWord);
-        Push(&riwayat, currentSong);
+        printf("Memutar lagu sebelumnya \n\"%s\" oleh \"%s\"", song.nama.TabWord, song.penyanyi.TabWord);
+        Push(riwayat, currentSong);
         currentSong = song;
+        printf("\nCURRENT SONG : \"%s\" di album \"%s\" oleh \"%s\"", currentSong.nama.TabWord, currentSong.album.TabWord, currentSong.penyanyi.TabWord);
+        // displayQueueLagu(queueLagu);
+        // displayRiwayat(&riwayat);
     }
 }
 
-void song()
+void song(Queue *queueLagu, Stack *riwayat)
 {
     // KAMUS
     boolean valid = false;
     Word command;
-    Queue queueLagu; // sementara
-    Stack riwayat; // sementara
+   
     // ALGORITMA
-    load();
     printf("====[ SELAMAT DATANG DI FUNGSI SONG ]====\n");
     printf("----TERDAPAT DUA FUNGSI YANG BISA DIAKSES---- \n");
     printf("    1. SONG NEXT \n");
@@ -107,9 +130,4 @@ void song()
             command = GetInput();
         }
     }
-}
-
-int main()
-{
-    song();
 }

@@ -1,5 +1,6 @@
-#include "ADT/mesinkata/mesinkata.h"
 
+#include "ADT_BUATAN/RIWAYAT/riwayat.h"
+#include "ADT_BUATAN/QUEUE/queuelagu.h"
 char yesorno ()
 {
     // KAMUS
@@ -33,27 +34,21 @@ char yesorno ()
 
 int main()
 {
-    // Word kalimat, command;
-    // boolean valid = false;
-    // printf("masukkan command :\n");
-    // command = GetInput();
-    // while(!valid)
-    // {
-        
-    //     if(IsWordEq(toKata("PAK ARMIEN"), command))
-    //     {
-    //         printf("\n jalan");
-    //         kalimat = command;
-    //         printf("\n kalimat yng muncul adalah : %s", kalimat.TabWord);
-    //         valid = true;
-    //     }
-    //     else
-    //     {
-    //         printf("\n> INPUT COMMAND LAGI\n");;
-    //     }
-    //     command = GetInput();
-    // }
-    printf("masukkan input : ");
-    char input = yesorno();
-    printf("output adalah %c", input);
+    // KAMUS
+    Queue queueLagu;
+    ElTypeQueue newLagu;
+    Lagu song;
+    Stack riwayat, temp;
+    // ALGORITMA
+   CreateQueueLagu(&queueLagu);
+    newLagu.nama = toKata("aku anak menteng");
+    newLagu.penyanyi = toKata("Almien Izza");
+    newLagu.album = toKata("my tour to ibizza");
+   CreateStack(&riwayat);
+    song.nama = toKata("Namaku Favian");
+    song.penyanyi = toKata("Favian Izza");
+    song.album = toKata("Perjalan favian menguasai dunia kelinci");
+    Push(&riwayat, song);
+    displayQueueLagu(queueLagu);
+    
 }

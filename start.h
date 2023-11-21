@@ -5,7 +5,8 @@
 #include <math.h>
 #include <time.h>
 #include "ADT_BUATAN/PENYANYI/penyanyi.h"
-extern ListPenyanyi l;
+Lagu currentSong;
+ListPenyanyi l;
 void startconfig();
 
 #endif

@@ -1,5 +1,4 @@
 #include "queuelagu.h"
-#include <stdio.h>
 
 void CreateQueueLagu(Queue *q){
     IDX_HEAD(*q) = IDX_UNDEF;
@@ -53,22 +52,25 @@ void enqueueLagu(Queue *q, ElTypeQueue val){
 		// circular buffer
 		IDX_TAIL(*q) = (IDX_TAIL(*q) + 1) % CAPACITY;
 	}
-	TAIL(*q).lagu.nama.Length = val.lagu.nama.Length;
-    TAIL(*q).lagu.album.Length = val.lagu.penyanyi.Length;
-    TAIL(*q).lagu.penyanyi.Length = val.lgu.nama.Length;
+	TAIL(*q).nama.Length = val.nama.Length;
+    TAIL(*q).album.Length = val.penyanyi.Length;
+    TAIL(*q).penyanyi.Length = val.nama.Length;
 	int i;
-	for (i = 0; i < val.lagu.nama.Length; i++)
+	for (i = 0; i < val.nama.Length; i++)
 	{
-		TAIL(*q).lagu.nama.TabWord[i] = val.lagu.nama.TabWord[i];
+		TAIL(*q).nama.TabWord[i] = val.nama.TabWord[i];
 	}
-    for (i = 0; i < val.lagu.album.Length; i++)
+	TAIL(*q).nama.TabWord[TAIL(*q).nama.Length]='\0';
+    for (i = 0; i < val.album.Length; i++)
 	{
-		TAIL(*q).lagu.album.TabWord[i] = val.lagu.album.TabWord[i];
+		TAIL(*q).album.TabWord[i] = val.album.TabWord[i];
 	}
-    for (i = 0; i < val.lagu.penyanyi.Length; i++)
+	TAIL(*q).album.TabWord[TAIL(*q).album.Length]='\0';
+    for (i = 0; i < val.penyanyi.Length; i++)
 	{
-		TAIL(*q).lagu.penyanyi.TabWord[i] = val.lagu.penyanyi.TabWord[i];
+		TAIL(*q).penyanyi.TabWord[i] = val.penyanyi.TabWord[i];
 	}
+	TAIL(*q).penyanyi.TabWord[TAIL(*q).penyanyi.Length]='\0';
 }
 
 /* Proses: Menghapus val pada q dengan aturan FIFO */
@@ -76,22 +78,25 @@ void enqueueLagu(Queue *q, ElTypeQueue val){
 /* F.S : val = nilai elemen HEAD pd I.S., IDX_HEAD "mundur";
 		 q mungkin kosong */
 void dequeueLagu(Queue *q, ElTypeQueue *val){
-    (*val).lagu.nama.Length = HEAD(*q).lagu.nama.Length;
-    (*val).lagu.album.Length = HEAD(*q).lagu.album.Length;
-    (*val).lagu.penyanyi.Length = HEAD(*q).lagu.penyanyi.Length;
+    (*val).nama.Length = HEAD(*q).nama.Length;
+    (*val).album.Length = HEAD(*q).album.Length;
+    (*val).penyanyi.Length = HEAD(*q).penyanyi.Length;
 	int i;
-	for (i = 0; i < (*val).lagu.nama.Length; i++)
+	for (i = 0; i < (*val).nama.Length; i++)
 	{
-		(*val).lagu.nama.TabWord[i] = HEAD(*q).lagu.nama.TabWord[i];
+		(*val).nama.TabWord[i] = HEAD(*q).nama.TabWord[i];
 	}
-    for (i = 0; i < (*val).lagu.album.Length; i++)
+	(*val).nama.TabWord[(*val).nama.Length]='\0';
+    for (i = 0; i < (*val).album.Length; i++)
 	{
-		(*val).lagu.album.TabWord[i] = HEAD(*q).lagu.album.TabWord[i];
+		(*val).album.TabWord[i] = HEAD(*q).album.TabWord[i];
 	}
-    for (i = 0; i < (*val).lagu.penyanyi.Length; i++)
+	(*val).album.TabWord[(*val).album.Length]='\0';
+    for (i = 0; i < (*val).penyanyi.Length; i++)
 	{
-		(*val).lagu.penyanyi.TabWord[i] = HEAD(*q).lagu.penyanyi.TabWord[i];
+		(*val).penyanyi.TabWord[i] = HEAD(*q).penyanyi.TabWord[i];
 	}
+	(*val).penyanyi.TabWord[(*val).penyanyi.Length]='\0';
 
 	if (IDX_HEAD(*q) == IDX_TAIL(*q))
 	{
@@ -112,11 +117,11 @@ void dequeueLagu(Queue *q, ElTypeQueue *val){
 void displayQueueLagu(Queue q){
     int i, temp1, temp2;
 	ElTypeQueue val;
-	char* valchar,valchar1,valchar2;
 	/*ALGORITMA*/
-	if (isEmptyQueue(q))
+	printf("\nQueue lagu kamu :\n");
+	if(isEmptyQueueLagu(q))
 	{
-		printf("[]\n");
+		printf("QUEUE LAGU KAMU KOSONG\n");
 	}
 	else
 	{
@@ -125,10 +130,7 @@ void displayQueueLagu(Queue q){
 		while (IDX_HEAD(q) != IDX_UNDEF)
 		{
 			dequeueLagu(&q, &val);
-			valchar = WordToString(val.lagu.nama.Tabword);
-            valchar1 = WordToString(val.lagu.album.Tabword);
-            valchar2 = WordToString(val.lagu.penyanyi.Tabword);
-			printf("[%s,%s, %s]\n", valchar,valchar1,valchar2);
+			printf("[%s,%s,%s]\n", val.nama.TabWord,val.album.TabWord,val.penyanyi.TabWord);
 		}
 		IDX_HEAD(q) = temp1;
 		IDX_TAIL(q) = temp2;
@@ -138,7 +140,7 @@ void displayQueueLagu(Queue q){
 /* Proses: Menyalin isi dari queueInput ke queueOutput */
 /* I.S : queueInput mungkin kosong, tabel penampung elemen queueInput TIDAK penuh */
 /* F.S : queueOutput memiliki isi queue yang sama */
-void copyQueue(Queue *queueInput, Queue *queueOutput){
+void copyQueueLagu(Queue *queueInput, Queue *queueOutput){
     /*KAMUS LOKAL*/
 	int i, len;
 	Queue q;
@@ -164,15 +166,12 @@ void copyQueue(Queue *queueInput, Queue *queueOutput){
 boolean isInQueueLagu(Queue q, ElTypeQueue x){
     /*KAMUS LOKAL*/
 	ElTypeQueue val;
-	char *xchar = WordToString(x.lagu.nama.Tabword);
-    char *xchar1 = WordToString(x.lagu.album.Tabword);
-    char *xchar2 = WordToString(x.lagu.penyanyi.Tabword);
 	boolean notfound = true;
 	/*ALGORITMA*/
 	while ((IDX_HEAD(q) != IDX_UNDEF) && notfound)
 	{
 		dequeueLagu(&q, &val);
-		if (IsEqual(val.lagu.nama.Tabword, xchar) && IsEqual(val.lagu.album.Tabword, xchar) && IsEqual(val.lagu.penyanyi.Tabword, xchar))
+		if (IsWordEq(val.nama, x.nama) && IsWordEq(val.album, x.album) && IsWordEq(val.penyanyi, x.penyanyi))
 		{
 			notfound = false;
 		}
@@ -180,7 +179,7 @@ boolean isInQueueLagu(Queue q, ElTypeQueue x){
 	return !notfound;
 }
 
-void transferReverse(Queue* q1, Queue* q2){
+void transferReverseQueueLagu(Queue* q1, Queue* q2){
     int q1length = lengthQueueLagu(*q1);
 
     IDX_HEAD(*q2) = IDX_HEAD(*q1);
@@ -197,4 +196,4 @@ void transferReverse(Queue* q1, Queue* q2){
 }
 // Proses: Memindahkan tiap elemen q1 ke q2 dengan urutan yang terbalik
 // I.S.: q1 tidak kosong, q2 kosong. q1 dan q2 memiliki panjang yang sama
-// F.S.: q1 kosong, q2 berisi elemen-elemen yang tadinya milik q1 dengan urutan yang terbalik
+// F.S.: q1 kosong, q2 berisi elemen-elemen yang tadinya milik q1 dengan urutan yang terbalik	
