@@ -53,8 +53,8 @@ void enqueueLagu(Queue *q, ElTypeQueue val){
 		IDX_TAIL(*q) = (IDX_TAIL(*q) + 1) % CAPACITY;
 	}
 	TAIL(*q).nama.Length = val.nama.Length;
-    TAIL(*q).album.Length = val.penyanyi.Length;
-    TAIL(*q).penyanyi.Length = val.nama.Length;
+    TAIL(*q).album.Length = val.album.Length;
+    TAIL(*q).penyanyi.Length = val.penyanyi.Length;
 	int i;
 	for (i = 0; i < val.nama.Length; i++)
 	{
@@ -117,10 +117,12 @@ void dequeueLagu(Queue *q, ElTypeQueue *val){
 void displayQueueLagu(Queue q){
     int i, temp1, temp2;
 	ElTypeQueue val;
+	Queue q1;
 	/*ALGORITMA*/
 	if (isEmptyQueueLagu(q))
 	{
 		printf("[]\n");
+		printf("Queue kosong\n");
 	}
 	else
 	{
@@ -129,7 +131,12 @@ void displayQueueLagu(Queue q){
 		while (IDX_HEAD(q) != IDX_UNDEF)
 		{
 			dequeueLagu(&q, &val);
-			printf("[%s,%s,%s]\n", val.nama.TabWord,val.album.TabWord,val.penyanyi.TabWord);
+			enqueueLagu(&q1, val);
+			printf("%s - %s - %s\n", val.nama.TabWord,val.album.TabWord,val.penyanyi.TabWord);
+		}
+		while (IDX_HEAD(q1) != IDX_UNDEF){
+			dequeueLagu(&q1, &val);
+			enqueueLagu(&q, val);
 		}
 		IDX_HEAD(q) = temp1;
 		IDX_TAIL(q) = temp2;

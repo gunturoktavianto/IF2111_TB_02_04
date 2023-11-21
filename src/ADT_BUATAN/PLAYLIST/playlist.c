@@ -123,8 +123,8 @@ void CreateEmptyPlaylist (Word w, List *L)
 /* I.S. sembarang             */
 /* F.S. Terbentuk list kosong */
 {
-    for(int i=0; i<NMax; i++) (*L).NamaPlaylist.TabWord[i]='\0';
     (*L).NamaPlaylist=w;
+    (*L).NamaPlaylist.TabWord[(*L).NamaPlaylist.Length]='\0';
     First(*L)=Nil;
 }
 /****************** Manajemen Memori ******************/

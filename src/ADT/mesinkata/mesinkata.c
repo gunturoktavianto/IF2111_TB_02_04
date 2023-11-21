@@ -122,7 +122,7 @@ Word toKata(char *str) {
     for (int i = 0; i < kata.Length; i++) {
         kata.TabWord[i] = str[i];
     }
-    kata.TabWord[kata.Length]='\0';
+    //kata.TabWord[kata.Length]='\0';
     return kata;
 }
 

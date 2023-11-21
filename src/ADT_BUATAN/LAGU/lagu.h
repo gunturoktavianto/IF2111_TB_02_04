@@ -71,4 +71,6 @@ void PrintLagu(SetLagu S);
 Lagu MakeLagu(Word nama, Word album, Word penyanyi);
 /* Mengisi Lagu*/
 
+SetLagu MakeSetLagu(int jumlahlagu);
+/* Mengisi SetLagu*/
 #endif
