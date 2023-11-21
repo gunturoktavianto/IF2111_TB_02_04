@@ -76,4 +76,8 @@ Word toKata(char *str);
 int stringLength(char *str);
 /*  Fungsi yang menerima sebuah parameter str bertipe string
     Kemudian mengembalikan panjang dari string tersebut */
+
+char* wordToString(Word word);
+
+Word concatWord(Word w1, Word w2);
 #endif

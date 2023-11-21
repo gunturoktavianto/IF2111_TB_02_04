@@ -177,3 +177,30 @@ Word toKata(char *str) {
     return kata;
 }
 
+char* wordToString(Word word)
+{
+    char *str = (char *)malloc(sizeof(char) * word.Length);
+    for (int i = 0; i < word.Length; i++)
+    {
+        str[i] = word.TabWord[i];
+        if (i == word.Length - 1)
+        {
+            str[i + 1] = '\0';
+        }
+    }
+    return str;
+}
+
+Word concatWord(Word w1, Word w2)
+{
+    Word ans;
+    ans.Length = w1.Length + w2.Length;
+    int i;
+    for(i = 0; i < w1.Length; i++){
+        ans.TabWord[i] = w1.TabWord[i];
+    }
+    for(i = 0; i < w2.Length;i++){
+        ans.TabWord[i+w1.Length] = w2.TabWord[i];
+    }
+    return ans;
+}
