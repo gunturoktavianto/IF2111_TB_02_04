@@ -34,7 +34,6 @@ boolean IsPlaylistinQueue(Queuelagu ql){
 
 /* MAIN SECTION */
 void startStatus(){
-    printf("%s\n",currentsong.nama.TabWord);
     Word namacp = toKata("currentplaylist");
     CreateEmptyPlaylist(namacp, &currentplaylist);
     /* I.S. Tidak ada lagu yang diputar */
