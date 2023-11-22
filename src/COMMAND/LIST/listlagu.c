@@ -117,15 +117,15 @@ void ListLagu()
     inputyn = yesorno();
     if(inputyn == 'Y' || inputyn == 'y')
     {
+        infotypePenyanyi command;
         while(valid == false)
         {
             printf("\nPilih penyanyi untuk melihat album mereka:  ");
-            infotypePenyanyi command;
-            command.Key = GetInput(); /*cuma baca sampai sebelum spasi*/
+            command.Key = GetInput(); 
             if(IsMemberListPenyanyi(&l, command)){valid = true;}
             else{printf("\nNama Penyanyi tidak ditemukan.\n");}
         }
-        Word namapenyanyi = command;
+        Word namapenyanyi = command.Key;
         indekspenyanyi = IdxPenyanyi(&l, namapenyanyi);
         printf("Daftar Album oleh %s :\n", namapenyanyi.TabWord);
         DisplayDaftarAlbum(&l, indekspenyanyi); // menampilkan album dari penyanyi X, disimpan dalam ADT map
@@ -140,8 +140,8 @@ void ListLagu()
             while(valid == false)
             {
                 printf("\nMasukkan Nama Album yang dipilih : ");
-                command = GetInput();  /*cuma baca sampai sebelum spasi*/
-                if(IsMemberAlbum(l.PenyanyiKe[indekspenyanyi].InfoPenyanyi[indekspenyanyi].Value, command))
+                command.Value.InfoAlbum[0].Key = GetInput();  /*cuma baca sampai sebelum spasi*/
+                if(IsMemberAlbum(l.PenyanyiKe[indekspenyanyi].InfoPenyanyi[indekspenyanyi].Value, command.Value.InfoAlbum[0].Key))
                 {
                     valid = true;    
                 }
@@ -150,7 +150,7 @@ void ListLagu()
                     printf("\nNama Album tidak ditemukan.\n");
                 }
             }
-            Word namaalbum = command;
+            Word namaalbum = command.Value.InfoAlbum[0].Key;
             indeksalbum = SearchIndexAlbum(&l, namaalbum, indekspenyanyi);
             DisplayDaftarLagu(l.PenyanyiKe[indekspenyanyi].InfoPenyanyi[indekspenyanyi].Value.InfoAlbum[indeksalbum].Value, namaalbum);
         }

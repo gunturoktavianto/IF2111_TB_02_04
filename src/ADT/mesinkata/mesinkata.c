@@ -64,6 +64,7 @@ void STARTWORDFILE(char *fileaddress)
     if(currentChar==MARK) EndWord=true;
     else {EndWord=false;}
 }
+
 void ADVWORD()
 /* I.S. : currentChar adalah karakter pertama kata yang akan diakuisisi
    F.S. : currentWord adalah kata terakhir yang sudah diakuisisi,
@@ -112,7 +113,7 @@ void STARTWORDLOAD(FILE *input)
     START(input);
     
     if(currentChar==MARK) EndWord=true;
-    else {EndWord=false; ADVWORDLOAD();}
+    else {EndWord=false;}
 }
 void ADVWORDLOAD()
 /* I.S. : currentChar adalah karakter pertama kata yang akan diakuisisi

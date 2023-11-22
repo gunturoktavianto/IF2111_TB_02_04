@@ -90,4 +90,5 @@ boolean IsWordNumber (Word kata);
 char* wordToString(Word word);
 
 Word concatWord(Word w1, Word w2);
+
 #endif

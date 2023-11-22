@@ -25,8 +25,6 @@ int main() {
     }
     printf("%d\n",l.Count);
     if (stateWayangWave) {
-        printdaftarPenyanyi(&l);
-        DisplayDaftarAlbum(&l, 1);
         SessionHelp();
         while (stateWayangWave) {
             ListCommand();

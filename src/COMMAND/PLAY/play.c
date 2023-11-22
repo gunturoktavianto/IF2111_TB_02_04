@@ -21,13 +21,12 @@ void getCommandPlay()
         if(IsWordEq(command, toKata("PLAY SONG"))) {PlaySong(); state=true;}
         else if(IsWordEq(command, toKata("PLAY PLAYLIST"))) {PlayPlaylist(); state=true;}
         else if(IsWordEq(command,toKata("PLAY QUIT"))) { state=false;}
-        else printf("Invalid command. Silahkan masukkan command kembali.\n> SILAHKAN MASUKAN COMMAND: ");   
+        else printf("Invalid command. Silahkan masukkan command kembali.\n");   
     }
 }
 
 /* PRIMARY SECTION*/
 void PlaySong(){
-    printf("playsong bisa\n");
     // menampilkan penyanyi, disimpan dalam ADT penyanyi, berperan juga sebagai key
     int i=0;
     printf("Daftar Penyanyi :\n");
@@ -35,7 +34,7 @@ void PlaySong(){
         printf("  %d. %s\n", i+1, l.PenyanyiKe[i].InfoPenyanyi[i].Key.TabWord);
         i++;
     } i=0;
-
+    
     // mencari penyanyi
     infotypePenyanyi namapenyanyi;
     printf("\nMasukkan Nama Penyanyi yang dipilih : ");
@@ -65,20 +64,35 @@ void PlaySong(){
 
     // menampilkan lagu dari album X, disimpan dalam ADT set
     printf("Daftar Lagu Album %s oleh %s :\n", namaalbum.Key.TabWord, namapenyanyi.Key.TabWord);
-    while(i<l.PenyanyiKe[idxp].InfoPenyanyi[idxp].Value.Count){
+    while(i<l.PenyanyiKe[idxp].InfoPenyanyi[idxp].Value.InfoAlbum[idxa].Value.Count){
         printf("  %d. %s\n", i+1, l.PenyanyiKe[idxp].InfoPenyanyi[idxp].Value.InfoAlbum[idxa].Value.InfoLagu[i].nama.TabWord);
         i++;
     } i=0;
 
     // mencari lagu
     printf("\nMasukkan ID Lagu yang dipilih : ");
-    int idxl = WordtoInt(GetInput());
-    while(idxl > l.PenyanyiKe[idxp].InfoPenyanyi[idxp].Value.InfoAlbum[idxa].Value.Count && idxl < 0 ){
-        printf("Nama ID Lagu tidak ditemukan.\n");
-        printf("\nMasukkan ID Lagu  yang dipilih : ");
-        idxl = WordtoInt(GetInput());
-    }   /*int idxl = IdxLagu(&l, idxp, idxa, namalagu.nama);*/
-    printf("\nMemutar lagu \"%s\" oleh \"%s\".\n", l.PenyanyiKe[idxp].InfoPenyanyi[idxp].Value.InfoAlbum[idxa].Value.InfoLagu[idxl].nama.TabWord, l.PenyanyiKe[idxp].InfoPenyanyi[idxp].Key.TabWord);
+    Word idlagu = GetInput();
+    int idxl;
+    boolean valid = false;
+    while(!valid){
+        if (IsWordNumber(idlagu)){
+            idxl = WordtoInt(idlagu);
+            printf("%d\n",idxl);
+            if (idxl>0 && idxl<=l.PenyanyiKe[idxp].InfoPenyanyi[idxp].Value.InfoAlbum[idxa].Value.Count){valid = true;}
+            else{
+                printf("Nama ID Lagu tidak ditemukan.\n");
+                printf("\nMasukkan ID Lagu  yang dipilih : ");
+                idlagu = GetInput();
+            }
+        }
+        else{
+            printf("Nama ID Lagu tidak ditemukan.\n");
+            printf("\nMasukkan ID Lagu  yang dipilih : ");
+            idlagu = GetInput();
+        }
+    }
+    printf("idxl: %d\n",idxl);
+    printf("\nMemutar lagu \"%s\" oleh \"%s\".\n", l.PenyanyiKe[idxp].InfoPenyanyi[idxp].Value.InfoAlbum[idxa].Value.InfoLagu[idxl-1].nama.TabWord, l.PenyanyiKe[idxp].InfoPenyanyi[idxp].Key.TabWord);
 
     /* Final State */
     //Ketika command ini berhasil dieksekusi, queue dan riwayat lagu akan menjadi kosong
