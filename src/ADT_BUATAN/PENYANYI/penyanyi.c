@@ -189,13 +189,13 @@ int IdxPenyanyi(ListPenyanyi *S, keytype kp){
    F.S. index penyanyi*/
     // KAMUS
     address idx = 0;
-    boolean found = false;
     // ALGORITMA
-    while (idx < (*S).Count && !found) {
-        if (IsWordEq((*S).PenyanyiKe->InfoPenyanyi[idx].Key,kp))     found = true;
-        else idx++;
+    while (idx < (*S).Count) {
+        if (IsWordEq((*S).PenyanyiKe[idx].InfoPenyanyi[idx].Key,kp)){
+            return idx;
+        }  
+        idx++;
     }
-    
     return idx;
 }
 
@@ -204,13 +204,13 @@ int IdxAlbum(ListPenyanyi *S, int idxp, keytype ka){
    F.S. index album*/
     // KAMUS
     address idx = 0;
-    boolean found = false;
     // ALGORITMA
-    while (idx < (*S).PenyanyiKe[idxp].InfoPenyanyi[idxp].Value.Count && !found) {
-        if (IsWordEq((*S).PenyanyiKe[idxp].InfoPenyanyi[idxp].Value.InfoAlbum[idx].Key, ka))     found = true;
-        else idx++;
+    while (idx < (*S).PenyanyiKe[idxp].InfoPenyanyi[idxp].Value.Count) {
+        if (IsWordEq((*S).PenyanyiKe[idxp].InfoPenyanyi[idxp].Value.InfoAlbum[idx].Key, ka)){
+            return idx;
+        }  
+        idx++;
     }
-    
     return idx;
 }
 
@@ -219,15 +219,16 @@ int IdxLagu(ListPenyanyi *S, int idxp, int idxa, Word kl){
    F.S. index album*/
     // KAMUS
     address idx = 0;
-    boolean found = false;
     // ALGORITMA
-    while (idx < (*S).PenyanyiKe[idxp].InfoPenyanyi[idxp].Value.InfoAlbum[idxa].Value.Count && !found) {
-        if (IsWordEq((*S).PenyanyiKe[idxp].InfoPenyanyi[idxp].Value.InfoAlbum[idxa].Value.InfoLagu[idx].nama, kl))     found = true;
-        else idx++;
+    while (idx < (*S).PenyanyiKe[idxp].InfoPenyanyi[idxp].Value.InfoAlbum[idxa].Value.Count) {
+        if (IsWordEq((*S).PenyanyiKe[idxp].InfoPenyanyi[idxp].Value.InfoAlbum[idxa].Value.InfoLagu[idx].nama, kl)){
+            return idx;
+        }  
+        idx++;
     }
-    
     return idx;
 }
+
 void printdaftarPenyanyi(ListPenyanyi *S){
     int i=0;
     printf("Daftar Penyanyi :\n");

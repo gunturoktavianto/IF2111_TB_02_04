@@ -1,7 +1,7 @@
 #include "console.h"
 
 void ListCommand() {
-    printf("> ENTER COMMAND: ");
+    printf("\n> ENTER COMMAND: ");
     Word command=GetInput();
     if (IsWordEq(toKata("LIST"),command)) startList();
     else if(IsWordEq(toKata("PLAY"),command)) startPlay();

@@ -2,6 +2,7 @@
 #define play_H
 
 #include "../../ADT_BUATAN/RIWAYAT/riwayat.h"
+#include "../LIST/listlagu.h"
 
 void PlaySong();
 /* I.S. listpenyanyi terdefinisi dan tidak kosong

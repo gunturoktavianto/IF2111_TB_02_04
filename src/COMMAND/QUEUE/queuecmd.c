@@ -93,27 +93,29 @@ void queueSong() {
 
 // Fungsi untuk menambahkan playlist ke dalam queue
 void queuePlaylist() {
-    //soal input id dll itu masih blm kebayang
     printf(">> QUEUE PLAYLIST;\n");
-    boolean found = false;
-    while (!found){
+    printf("Masukkan ID Playlist: ");
+    Word kata = GetInput();
+    int id=WordtoInt(kata);
+    while ((id> LengthArrayDin(daftarPlaylist)) && (id < 1)){
+        printf("Input Id salah. Silahkan mencoba kembali\n");
         printf("Masukkan ID Playlist: ");
         Word kata = GetInput();
         int id=WordtoInt(kata);
-        printf("\n");
-        alamat P = First(daftarPlaylist.A[id-1]); //Pake ADT Dilla
-        if (P != Nil){
-            while (P != Nil) {
-                enqueueLagu(&q, P->infolagu);
-                P = P->next;
-            }
-            printf("Berhasil menambahkan playlist \"%s\" ke queue.\n", daftarPlaylist.A[id-1].NamaPlaylist.TabWord); //ini msh aneh outputnya
-            found = true;
-        }
-        else{
-            printf("Input Anda Salah. Silahkan mencoba kembali\n");
-        }
     }
+    printf("\n");
+    alamat P = First(daftarPlaylist.A[id-1]); //Pake ADT Dilla
+    if (P != Nil){
+        while (P != Nil) {
+            enqueueLagu(&q, P->infolagu);
+            P = P->next;
+        }
+        printf("Berhasil menambahkan playlist \"%s\" ke queue.\n", daftarPlaylist.A[id-1].NamaPlaylist.TabWord); 
+    }
+    else{
+        printf("Playlist kosong. Tidak ada lagu dari playlist yang ditambahkan ke dalam queue\n");
+    }
+    getCommandQueue();
 }
 
 // Fungsi untuk menukar lagu pada urutan x dan y dalam queue
