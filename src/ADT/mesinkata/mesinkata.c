@@ -8,18 +8,61 @@ void IgnoreBlanks()
    I.S. : currentChar sembarang
    F.S. : currentChar ≠ BLANK atau currentChar = MARK */
 {
-    while(currentChar==BLANK) ADV();
+    while((currentChar==BLANK) && (currentChar!=MARK)) 
+        ADV();
 }
-void STARTWORD(FILE *input)
+
+void IgnoreCR()
+/* Mengabaikan satu atau beberapa BLANK
+   I.S. : currentChar sembarang
+   F.S. : currentChar ≠ BLANK atau currentChar = MARK */
+{
+    while((currentChar==CR) && (currentChar!=MARK)) 
+        ADV();
+}
+
+void IgnoreEOL()
+/* Mengabaikan satu atau beberapa BLANK
+   I.S. : currentChar sembarang
+   F.S. : currentChar ≠ BLANK atau currentChar = MARK */
+{
+    if((currentChar==EOL) && (currentChar!=MARK)) 
+        ADV();
+}
+
+void IgnoreSC()
+/* Mengabaikan satu atau beberapa BLANK
+   I.S. : currentChar sembarang
+   F.S. : currentChar ≠ BLANK atau currentChar = MARK */
+{
+    if((currentChar==SC) && (currentChar!=MARK)) 
+        ADV();
+}
+
+void STARTWORD()
 /* I.S. : currentChar sembarang
    F.S. : EndWord = true, dan currentChar = MARK;
           atau EndWord = false, currentWord adalah kata yang sudah diakuisisi,
           currentChar karakter pertama sesudah karakter terakhir kata */
 {
-    START(input);
+    START();
     IgnoreBlanks();
+    IgnoreCR();
     if(currentChar==MARK) EndWord=true;
-    else {EndWord=false; ADVWORD();}
+    else {EndWord=false;}
+}
+
+void STARTWORDFILE(char *fileaddress)
+/* I.S. : currentChar sembarang
+   F.S. : EndWord = true, dan currentChar = MARK;
+          atau EndWord = false, currentWord adalah kata yang sudah diakuisisi,
+          currentChar karakter pertama sesudah karakter terakhir kata */
+{
+    STARTFILE(fileaddress);
+    IgnoreBlanks();
+    IgnoreCR();
+    if(currentChar==MARK) EndWord=true;
+    else {EndWord=false;}
 }
 void ADVWORD()
 /* I.S. : currentChar adalah karakter pertama kata yang akan diakuisisi
@@ -29,6 +72,7 @@ void ADVWORD()
    Proses : Akuisisi kata menggunakan procedure SalinWord */
 {
     IgnoreBlanks();
+    IgnoreCR();
     if(currentChar==MARK) EndWord=true;
     else 
     {
@@ -45,9 +89,10 @@ void CopyWord()
           currentChar adalah karakter sesudah karakter terakhir yang diakuisisi.
           Jika panjang kata melebihi NMax, maka sisa kata "dipotong" */
 {
+    IgnoreSC();
     for (int i=0; i<NMax; i++) currentWord.TabWord[i]='\0';
     int i=0;
-    while(currentChar!=MARK && currentChar!=BLANK && currentChar!='\n')
+    while(currentChar!=MARK && currentChar!=BLANK && currentChar!=EOL && currentChar!= CR && currentChar!=SC)
     {
         if(i<NMax)
         {
@@ -125,6 +170,9 @@ int stringLength(char *str) {
 
 int WordtoInt(Word w)
 {
+    for (int i = 0; i < w.Length; i++) {
+        if (w.TabWord[i] - '0' < 0 || w.TabWord[i] - '0' > 9) return false;
+    }
     int x=0;
     for(int i=0; i<w.Length; i++)
     {
@@ -139,7 +187,6 @@ Word GetWords()
     Word temp;
     for (int i=0; i<NMax; i++) temp.TabWord[i]='\0';
     temp.Length=0;
-    int idx=0;
     while(currentChar!='\n')
     {
         ADVWORD();
@@ -174,7 +221,22 @@ Word toKata(char *str) {
     for (int i = 0; i < kata.Length; i++) {
         kata.TabWord[i] = str[i];
     }
+    kata.TabWord[kata.Length]='\0';
     return kata;
+}
+
+Word GetInput()
+{
+    STARTWORD(stdin);
+    Word w=GetWords();
+    return w;
+}
+
+boolean IsWordNumber (Word kata) {
+    for (int i = 0; i < kata.Length; i++) {
+        if (kata.TabWord[i] - '0' < 0 || kata.TabWord[i] - '0' > 9) return false;
+    }
+    return kata.Length > 0;
 }
 
 char* wordToString(Word word)

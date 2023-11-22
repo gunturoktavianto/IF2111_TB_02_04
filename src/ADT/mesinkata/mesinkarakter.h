@@ -3,7 +3,8 @@
 
 #ifndef __MESIN_KAR_H_
 #define __MESIN_KAR_H_
-
+#include <stdio.h>
+#include <stdlib.h>
 #include "boolean.h"
 
 #define MARK ';'
@@ -19,6 +20,7 @@ void START();
    F.S. : currentChar adalah karakter pertama pada pita
           Jika currentChar != MARK maka EOP akan padam (false)
           Jika currentChar = MARK maka EOP akan menyala (true) */
+void STARTFILE(char *fileaddress);
 
 void ADV();
 /* Pita dimajukan satu karakter.

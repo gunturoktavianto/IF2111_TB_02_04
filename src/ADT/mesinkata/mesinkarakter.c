@@ -3,7 +3,7 @@
 
 #include "mesinkarakter.h"
 #include <stdio.h>
-
+#include <stdlib.h>
 char currentChar;
 boolean EOP;
 
@@ -20,6 +20,11 @@ void START(FILE* f)
 
        /* Algoritma */
        pita = f;
+       ADV();
+}
+
+void STARTFILE(char *fileaddress){
+       pita = fopen(fileaddress,"r");
        ADV();
 }
 
