@@ -110,7 +110,7 @@ void load()
                 albumPlaylist = currentWord;
                 ADVWORDLOAD();
                 laguPlaylist = currentWord;
-                InsVLast(&daftarPlaylist.A[j], MakeLagu(penyanyiPlaylist, albumPlaylist, laguPlaylist));
+                InsVLast(&daftarPlaylist.A[i], MakeLagu(penyanyiPlaylist, albumPlaylist, laguPlaylist));
             }
         }
 }
