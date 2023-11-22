@@ -4,10 +4,10 @@
 // Fungsi untuk menambahkan lagu ke dalam queue
 void getCommandQueue()
 {
-    printf("> SILAHKAN MASUKAN COMMAND: ");
-    boolean state=false;
-    while(!state)
+    boolean state=true;
+    while(state)
     {
+        printf("> SILAHKAN MASUKAN COMMAND: ");
         Word command=GetInput();
         if(IsWordEq(command, toKata("QUEUE SONG"))) {queueSong(); state=true;}
         else if(IsWordEq(command, toKata("QUEUE PLAYLIST"))) {queuePlaylist(); state=true;}
@@ -15,13 +15,13 @@ void getCommandQueue()
         else if(IsWordEq(command,toKata("QUEUE REMOVE"))) {removeSong(); state=true;}
         else if(IsWordEq(command,toKata("QUEUE CLEAR"))) {clearQueue(); state=true;}
         else if (IsWordEq(command,toKata("QUEUE QUIT"))) {state=false;}
-        else printf("Invalid command. Silahkan masukkan command kembali.\n> SILAHKAN MASUKAN COMMAND: ");   
+        else printf("> COMMAND TIDAK VALID SILAHKAN MASUKAN ULANG!\n");   
     }
 }
 
 void startQueue()
 {
-    printf("====[ SELAMAT DATANG DI FUNGSI PLAYLIST ]====\n");
+    printf("====[ SELAMAT DATANG DI FUNGSI QUEUE ]====\n");
     printf("----TERDAPAT LIMA FUNGSI YANG BISA DIAKSES---- \n");
     printf("1. QUEUE SONG -> untuk menambahkan lagu ke dalam queue\n");
     printf("2. QUEUE PLAYLIST -> untuk menambahkan lagu yang ada dalam playlist ke dalam queue\n");
@@ -77,40 +77,65 @@ void queueSong() {
 
     // mencari lagu
     printf("\nMasukkan ID Lagu yang dipilih : ");
-    int idxl = WordtoInt(GetInput());
-    while(idxl > l.PenyanyiKe[idxp].InfoPenyanyi[idxp].Value.InfoAlbum[idxa].Value.Count && idxl < 0 ){
-        printf("Nama ID Lagu tidak ditemukan.\n");
-        printf("\nMasukkan ID Lagu  yang dipilih : ");
-        idxl = WordtoInt(GetInput());
-    }   /*int idxl = IdxLagu(&l, idxp, idxa, namalagu.nama);*/
+    Word idlagu = GetInput();
+    int idxl;
+    boolean valid = false;
+    while(!valid){
+        if (IsWordNumber(idlagu)){
+            idxl = WordtoInt(idlagu);
+            if (idxl>0 && idxl<=l.PenyanyiKe[idxp].InfoPenyanyi[idxp].Value.InfoAlbum[idxa].Value.Count){valid = true;}
+            else{
+                printf("Nama ID Lagu tidak ditemukan.\n");
+                printf("\nMasukkan ID Lagu  yang dipilih : ");
+                idlagu = GetInput();
+            }
+        }
+        else{
+            printf("Nama ID Lagu tidak ditemukan.\n");
+            printf("\nMasukkan ID Lagu  yang dipilih : ");
+            idlagu = GetInput();
+        }
+    }
 
-    enqueueLagu(&q, l.PenyanyiKe[idxp].InfoPenyanyi[idxp].Value.InfoAlbum[idxa].Value.InfoLagu[idxl]);
+    enqueueLagu(&q, l.PenyanyiKe[idxp].InfoPenyanyi[idxp].Value.InfoAlbum[idxa].Value.InfoLagu[idxl-1]);
 
     /* Final State */
-    printf("Berhasil menambahkan lagu \"%s\" oleh \"%s\" ke queue.\n", l.PenyanyiKe[idxp].InfoPenyanyi[idxp].Value.InfoAlbum[idxa].Value.InfoLagu[idxl].nama.TabWord, namapenyanyi.Key.TabWord);
+    printf("Berhasil menambahkan lagu \"%s\" oleh \"%s\" ke queue.\n", l.PenyanyiKe[idxp].InfoPenyanyi[idxp].Value.InfoAlbum[idxa].Value.InfoLagu[idxl-1].nama.TabWord, namapenyanyi.Key.TabWord);
 }
 
 
 // Fungsi untuk menambahkan playlist ke dalam queue
 void queuePlaylist() {
-    printf(">> QUEUE PLAYLIST;\n");
+    printf("Daftar Playlist Pengguna :\n");
+    DisplayDaftarPlaylist(daftarPlaylist);
     printf("Masukkan ID Playlist: ");
     Word kata = GetInput();
-    int id=WordtoInt(kata);
-    while ((id> LengthArrayDin(daftarPlaylist)) && (id < 1)){
-        printf("Input Id salah. Silahkan mencoba kembali\n");
-        printf("Masukkan ID Playlist: ");
-        Word kata = GetInput();
-        int id=WordtoInt(kata);
+    int idxpl;
+    boolean valid = false; 
+    while(!valid){
+        if (IsWordNumber(kata)){
+            idxpl = WordtoInt(kata);
+            if (idxpl>0 && idxpl <= LengthArrayDin(daftarPlaylist)){valid = true;}
+            else{
+                printf("Input Id salah. Silahkan mencoba kembali\n");
+            printf("Masukkan ID Playlist: ");
+                kata = GetInput();
+            }
+        }
+        else{
+            printf("Input Id salah. Silahkan mencoba kembali\n");
+            printf("Masukkan ID Playlist: ");
+            kata = GetInput();
+        }
     }
     printf("\n");
-    alamat P = First(daftarPlaylist.A[id-1]); //Pake ADT Dilla
+    alamat P = First(daftarPlaylist.A[idxpl-1]); //Pake ADT Dilla
     if (P != Nil){
         while (P != Nil) {
             enqueueLagu(&q, P->infolagu);
             P = P->next;
         }
-        printf("Berhasil menambahkan playlist \"%s\" ke queue.\n", daftarPlaylist.A[id-1].NamaPlaylist.TabWord); 
+        printf("Berhasil menambahkan playlist \"%s\" ke queue.\n", daftarPlaylist.A[idxpl-1].NamaPlaylist.TabWord); 
     }
     else{
         printf("Playlist kosong. Tidak ada lagu dari playlist yang ditambahkan ke dalam queue\n");
@@ -121,120 +146,146 @@ void queuePlaylist() {
 // Fungsi untuk menukar lagu pada urutan x dan y dalam queue
 void swapSongs() {
     printf(">> QUEUE SWAP;\n");
-    boolean found = false;
-    while (!found){
-        printf("Masukkan index lagu pertama yang ingin dihapus dari queue : ");
-        Word idx1 = GetInput();
-        int x = WordtoInt(idx1);
-        printf("Masukkan index lagu kedua yang ingin dihapus dari queue : ");
-        Word idx2 = GetInput();
-        int y = WordtoInt(idx2);
-        if (x >= 1 && x <= lengthQueueLagu(q) && y >= 1 && y <= lengthQueueLagu(q)) {
-            ElTypeQueue temp;
-            int i;
-            temp.nama.Length = q.buffer[x-1].nama.Length;
-            temp.album.Length = q.buffer[x-1].album.Length;
-            temp.penyanyi.Length = q.buffer[x-1].penyanyi.Length;
-            for (i = 0; i < temp.nama.Length; i++)
-            {
-                temp.nama.TabWord[i] = q.buffer[x-1].nama.TabWord[i];
+    printf("Masukkan index lagu pertama yang ingin dihapus dari queue : ");
+    int x, y;
+    Word idx1, idx2;
+    idx1 = GetInput();
+    boolean valid = false;
+    while(!valid){
+        if(IsWordNumber(idx1)){
+            x = WordtoInt(idx1);
+            if(x > 0 && x <= lengthQueueLagu(q)){
+                printf("Masukkan index lagu kedua yang ingin dihapus dari queue : ");
+                idx2 = GetInput();
+                if(IsWordNumber(idx2)){
+                    y = WordtoInt(idx2);
+                    if((y > 0 && y <= lengthQueueLagu(q)) && y != x){
+                        valid = true;
+                        break;
+                    }
+                    else{
+                    printf("index invalid.\n");
+                    printf("Masukkan index lagu kedua yang ingin dihapus dari queue : ");
+                    idx2 = GetInput();
+                    }
+                }
+                else{
+                    printf("index invalid.\n");
+                    printf("Masukkan index lagu kedua yang ingin dihapus dari queue : ");
+                    idx2 = GetInput();
+                }
             }
-            temp.nama.TabWord[temp.album.Length]='\0';
-            for (i = 0; i < temp.album.Length; i++)
-            {
-                temp.album.TabWord[i] = q.buffer[x-1].album.TabWord[i];
+            else{
+                printf("index invalid.\n");
+                printf("Masukkan index lagu pertama yang ingin dihapus dari queue : ");
+                idx1 = GetInput();
             }
-            temp.album.TabWord[temp.album.Length]='\0';
-            for (i = 0; i < temp.penyanyi.Length; i++)
-            {
-                temp.penyanyi.TabWord[i] = q.buffer[x-1].penyanyi.TabWord[i];
-            }
-            temp.penyanyi.TabWord[temp.penyanyi.Length]='\0';
-            q.buffer[x-1].nama.Length = q.buffer[y-1].nama.Length;
-            q.buffer[x-1].album.Length = q.buffer[y-1].album.Length;
-            q.buffer[x-1].penyanyi.Length = q.buffer[y-1].penyanyi.Length;
-            for (i = 0; i < q.buffer[x-1].nama.Length; i++)
-            {
-                q.buffer[x-1].nama.TabWord[i] = q.buffer[y-1].nama.TabWord[i];
-            }
-            q.buffer[x-1].nama.TabWord[q.buffer[x-1].nama.Length]='\0';
-            for (i = 0; i < q.buffer[x-1].album.Length; i++)
-            {
-                q.buffer[x-1].album.TabWord[i] = q.buffer[y-1].album.TabWord[i];
-            }
-            q.buffer[x-1].album.TabWord[q.buffer[x-1].album.Length]='\0';
-            for (i = 0; i < q.buffer[x-1].penyanyi.Length; i++)
-            {
-                q.buffer[x-1].penyanyi.TabWord[i] = q.buffer[y-1].penyanyi.TabWord[i];
-            }
-            q.buffer[y-1].nama.Length = temp.nama.Length;
-            q.buffer[y-1].album.Length = temp.album.Length;
-            q.buffer[y-1].penyanyi.Length = temp.penyanyi.Length;
-            for (i = 0; i < q.buffer[y-1].nama.Length; i++)
-            {
-                q.buffer[y-1].nama.TabWord[i] = temp.nama.TabWord[i];
-            }
-            q.buffer[y-1].nama.TabWord[q.buffer[y-1].nama.Length]='\0';
-            for (i = 0; i < q.buffer[y-1].album.Length; i++)
-            {
-                q.buffer[y-1].album.TabWord[i] = temp.album.TabWord[i];
-            }
-            q.buffer[y-1].album.TabWord[q.buffer[y-1].album.Length]='\0';
-            for (i = 0; i < q.buffer[y-1].nama.Length; i++)
-            {
-                q.buffer[y-1].penyanyi.TabWord[i] = temp.penyanyi.TabWord[i];
-            }
-            q.buffer[y-1].penyanyi.TabWord[q.buffer[y-1].penyanyi.Length]='\0';
-            printf("Lagu %s berhasil ditukar dengan %s\n", q.buffer[y-1].nama.TabWord, q.buffer[x-1].nama.TabWord);
-            found = true;
-        } else {
-            if ((x < 1 || x > lengthQueueLagu(q)) && y >= 1 && y <= lengthQueueLagu(q)){
-                printf("Lagu dengan urutan ke %d tidak terdapat dalam queue!\n", x);
-            }
-            else if (x >= 1 && x <= lengthQueueLagu(q) && (y < 1 || y > lengthQueueLagu(q))){
-                printf("Lagu dengan urutan ke %d tidak terdapat dalam queue!\n", y);
-            }
-            else if ((x < 1 || x > lengthQueueLagu(q)) && (y < 1 || y > lengthQueueLagu(q))){
-                printf("Lagu dengan urutan ke %d dan %d tidak terdapat dalam queue!\n", y, x );
-            }
-            printf("Input Anda Salah. Silahkan mencoba kembali\n");
+        }
+        else{
+            printf("index invalid.\n");
+            printf("Masukkan index lagu pertama yang ingin dihapus dari queue : ");
+            idx1 = GetInput();
         }
     }
+    ElTypeQueue temp;
+    int i;
+    temp.nama.Length = q.buffer[x-1].nama.Length;
+    temp.album.Length = q.buffer[x-1].album.Length;
+    temp.penyanyi.Length = q.buffer[x-1].penyanyi.Length;
+    for (i = 0; i < temp.nama.Length; i++)
+    {
+        temp.nama.TabWord[i] = q.buffer[x-1].nama.TabWord[i];
+    }
+    temp.nama.TabWord[temp.album.Length]='\0';
+    for (i = 0; i < temp.album.Length; i++)
+    {
+        temp.album.TabWord[i] = q.buffer[x-1].album.TabWord[i];
+    }
+    temp.album.TabWord[temp.album.Length]='\0';
+    for (i = 0; i < temp.penyanyi.Length; i++)
+    {
+        temp.penyanyi.TabWord[i] = q.buffer[x-1].penyanyi.TabWord[i];
+    }
+    temp.penyanyi.TabWord[temp.penyanyi.Length]='\0';
+    q.buffer[x-1].nama.Length = q.buffer[y-1].nama.Length;
+    q.buffer[x-1].album.Length = q.buffer[y-1].album.Length;
+    q.buffer[x-1].penyanyi.Length = q.buffer[y-1].penyanyi.Length;
+    for (i = 0; i < q.buffer[x-1].nama.Length; i++)
+    {
+        q.buffer[x-1].nama.TabWord[i] = q.buffer[y-1].nama.TabWord[i];
+    }
+    q.buffer[x-1].nama.TabWord[q.buffer[x-1].nama.Length]='\0';
+    for (i = 0; i < q.buffer[x-1].album.Length; i++)
+    {
+        q.buffer[x-1].album.TabWord[i] = q.buffer[y-1].album.TabWord[i];
+    }
+    q.buffer[x-1].album.TabWord[q.buffer[x-1].album.Length]='\0';
+    for (i = 0; i < q.buffer[x-1].penyanyi.Length; i++)
+    {
+        q.buffer[x-1].penyanyi.TabWord[i] = q.buffer[y-1].penyanyi.TabWord[i];
+    }
+    q.buffer[y-1].nama.Length = temp.nama.Length;
+    q.buffer[y-1].album.Length = temp.album.Length;
+    q.buffer[y-1].penyanyi.Length = temp.penyanyi.Length;
+    for (i = 0; i < q.buffer[y-1].nama.Length; i++)
+    {
+        q.buffer[y-1].nama.TabWord[i] = temp.nama.TabWord[i];
+    }
+    q.buffer[y-1].nama.TabWord[q.buffer[y-1].nama.Length]='\0';
+    for (i = 0; i < q.buffer[y-1].album.Length; i++)
+    {
+        q.buffer[y-1].album.TabWord[i] = temp.album.TabWord[i];
+    }
+    q.buffer[y-1].album.TabWord[q.buffer[y-1].album.Length]='\0';
+    for (i = 0; i < q.buffer[y-1].nama.Length; i++)
+    {
+        q.buffer[y-1].penyanyi.TabWord[i] = temp.penyanyi.TabWord[i];
+    }
+    q.buffer[y-1].penyanyi.TabWord[q.buffer[y-1].penyanyi.Length]='\0';
+    printf("Lagu %s berhasil ditukar dengan %s\n", q.buffer[y-1].nama.TabWord, q.buffer[x-1].nama.TabWord);
 }
 
 // Fungsi untuk menghapus lagu dari queue berdasarkan ID
 void removeSong() {
     printf(">> QUEUE REMOVE;\n");
-    boolean found = false;
-    while (!found){
-        printf("Masukkan id lagu yang ingin dihapus dari queue : ");
-        Word id = GetInput();
-        int songId = WordtoInt(id);
-        printf("\n");
-        if (songId >= 1 && songId <= lengthQueueLagu(q)) { //Nanti dibwhnya bikin loop bistu bikin kondisi yang menyakan if q.Tab[songId] == Song.Elements[i].keytype then
-            printf("Lagu \"%s\" oleh \"%s\" telah dihapus dari queue!\n", q.buffer[songId-1].nama.TabWord, q.buffer[songId-1].penyanyi.TabWord);
-            Queuelagu temp;
-            CreateQueueLagu(&temp);
-            ElTypeQueue  val;
-            dequeueLagu(&q, &val);
-            enqueueLagu(&temp, val);
-            while (!isInQueueLagu(temp,q.buffer[songId-1])){
-                dequeueLagu(&q, &val);
-                enqueueLagu(&temp, val);
+    printf("Masukkan urutan lagu yang ingin dihapus dari queue : ");
+    Word idlagu = GetInput();
+    int idxl;
+    boolean valid = false;
+    while(!valid){
+        if (IsWordNumber(idlagu)){
+            idxl = WordtoInt(idlagu);
+            if (idxl > 0 && idxl <= lengthQueueLagu(q)){valid = true;}
+            else{
+                printf("Urutan lagu invalid");
+                printf("Masukkan urutan lagu yang ingin dihapus dari queue : \n");
+                idlagu = GetInput();
             }
-            dequeueLagu(&temp,&val);
-            while (!isEmptyQueueLagu(temp)){
-                dequeueLagu(&temp, &val);
-                enqueueLagu(&q, val);
-            }
-            found = true;
         }
         else{
-            printf("Lagu dengan urutan ke %d tidak ada.\n", songId);
-            printf("Input Anda Salah. Silahkan mencoba kembali\n");
+            printf("Urutan lagu invalid\n");
+            printf("Masukkan urutan lagu yang ingin dihapus dari queue : \n");
+            idlagu = GetInput();
         }
     }
+        printf("\n");
+        printf("Lagu \"%s\" oleh \"%s\" telah dihapus dari queue!\n", q.buffer[idxl-1].nama.TabWord, q.buffer[idxl-1].penyanyi.TabWord);
+        Queuelagu temp;
+        CreateQueueLagu(&temp);
+        ElTypeQueue  val;
+        dequeueLagu(&q, &val);
+        enqueueLagu(&temp, val);
+        while (!isInQueueLagu(temp,q.buffer[idxl-1])){
+            dequeueLagu(&q, &val);
+            enqueueLagu(&temp, val);
+        }
+        dequeueLagu(&temp,&val);
+        while (!isEmptyQueueLagu(temp)){
+            dequeueLagu(&temp, &val);
+            enqueueLagu(&q, val);
+        }
 }
+
 
 // Fungsi untuk mengosongkan queue
 void clearQueue() {

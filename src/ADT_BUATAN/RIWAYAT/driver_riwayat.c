@@ -16,9 +16,11 @@ int main(){
     song2.nama = toKata("I am the strongest");
     song2.penyanyi = toKata("Almin heavy metal");
     song2.album = toKata("my motorbike is rock");
-    
     Push(&riwayat, song2);
-    displayRiwayat(&riwayat);
     Pop(&riwayat, &X);
-    displayRiwayat(&riwayat);   
+    printf("song = %s, %s, %s", X.album.TabWord, X.nama.TabWord, X.penyanyi.TabWord);
+   
+    // displayRiwayat(&riwayat);
+    // Pop(&riwayat, &X);
+    // displayRiwayat(&riwayat);   
 }

@@ -5,9 +5,10 @@ void startPlay()
 {
     printf("\n====[ SELAMAT DATANG DI FUNGSI PLAY ]====\n");
     printf("----TERDAPAT DUA FUNGSI YANG BISA DIAKSES---- \n");
-    printf("1. PLAY SONG -> untuk memainkan lagu berdasarkan masukan detail lagu\n");
-    printf("2. PLAY PLAYLIST -> untuk memainkan lagu berdasarkan id playlist\n");
-    printf("3. PLAY QUIT -> untuk keluar dari fungsi PLAY\n\n");
+    printf("    1. PLAY SONG -> untuk memainkan lagu berdasarkan masukan detail lagu\n");
+    printf("    2. PLAY PLAYLIST -> untuk memainkan lagu berdasarkan id playlist\n");
+    printf("    3. PLAY QUIT -> untuk keluar dari fungsi PLAY\n\n");
+    printf("> SILAHKAN MASUKAN COMMAND: ");
     getCommandPlay();
 }
 
@@ -21,7 +22,7 @@ void getCommandPlay()
         if(IsWordEq(command, toKata("PLAY SONG"))) {PlaySong(); state=true;}
         else if(IsWordEq(command, toKata("PLAY PLAYLIST"))) {PlayPlaylist(); state=true;}
         else if(IsWordEq(command,toKata("PLAY QUIT"))) { state=false;}
-        else printf("Invalid command. Silahkan masukkan command kembali.\n");   
+        else printf("> COMMAND TIDAK VALID SILAHKAN MASUKAN ULANG: \n");   
     }
 }
 
@@ -105,6 +106,7 @@ void PlayPlaylist(){
     /*Initial State*/
     /*playlist tidak kosong*/
     if(!IsEmptyArrayDin(daftarPlaylist)){
+        printf("Daftar Playlist Pengguna :\n");
         DisplayDaftarPlaylist(daftarPlaylist);
         printf("Masukkan ID Playlist: ");
         Word idplaylist = GetInput();

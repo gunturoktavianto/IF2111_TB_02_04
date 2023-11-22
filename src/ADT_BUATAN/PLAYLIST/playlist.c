@@ -298,7 +298,6 @@ void DelAfter (List *L, alamat *Pdel, alamat Prec)
 
 void DisplayDaftarPlaylist()
 {
-    printf("Daftar playlist yang kamu miliki:\n");
     for(int i=0; i<LengthArrayDin(daftarPlaylist); i++)
     {
         printf("    %d. %s\n",i+1,daftarPlaylist.A[i].NamaPlaylist.TabWord);

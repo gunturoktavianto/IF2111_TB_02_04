@@ -117,31 +117,33 @@ void dequeueLagu(Queuelagu *q, ElTypeQueue *val){
 /* I.S : Queue terdefinisi */
 /* F.S : Queue terlihat dilayar */
 void displayQueueLagu(Queuelagu q){
-    int temp1, temp2;
+	int i, temp1, temp2;
 	ElTypeQueue val;
 	Queuelagu q1;
 	/*ALGORITMA*/
 	if (isEmptyQueueLagu(q))
 	{
-		printf("[]\n");
-		printf("Queue kosong\n");
+	printf("[]\n");
+	printf("Queue kosong\n");
 	}
 	else
 	{
-		temp1 = IDX_HEAD(q);
-		temp2 = IDX_TAIL(q);
-		while (IDX_HEAD(q) != IDX_UNDEF)
-		{
-			dequeueLagu(&q, &val);
-			enqueueLagu(&q1, val);
-			printf("%s - %s - %s\n", val.nama.TabWord,val.album.TabWord,val.penyanyi.TabWord);
-		}
-		while (IDX_HEAD(q1) != IDX_UNDEF){
-			dequeueLagu(&q1, &val);
-			enqueueLagu(&q, val);
-		}
-		IDX_HEAD(q) = temp1;
-		IDX_TAIL(q) = temp2;
+	temp1 = IDX_HEAD(q);
+	temp2 = IDX_TAIL(q);
+	int i = 1;
+	while (IDX_HEAD(q) != IDX_UNDEF)
+	{
+	dequeueLagu(&q, &val);
+	enqueueLagu(&q1, val);
+	printf("%d. %s - %s - %s\n", i, val.penyanyi.TabWord,val.nama.TabWord,val.album.TabWord);
+	i++;
+	}
+	while (IDX_HEAD(q1) != IDX_UNDEF){
+	dequeueLagu(&q1, &val);
+	enqueueLagu(&q, val);
+	}
+	IDX_HEAD(q) = temp1;
+	IDX_TAIL(q) = temp2;
 	}
 }
 
