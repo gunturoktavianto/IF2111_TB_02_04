@@ -7,8 +7,8 @@
 #include "COMMAND/PLAY/play.h"
 #include "COMMAND/PLAYLIST/playlistcmd.h"
 #include "COMMAND/QUEUE/queuecmd.h"
-// #include "COMMAND/QUIT/quit.h"
-// #include "COMMAND/SAVE/save.h"
+#include "COMMAND/QUIT/quit.h"
+#include "COMMAND/SAVE/save.h"
 #include "COMMAND/SONG/song.h"
 #include "COMMAND/STATUS/status.h"
 

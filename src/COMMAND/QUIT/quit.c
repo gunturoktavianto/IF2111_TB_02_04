@@ -6,7 +6,8 @@ void startQuit() {
     if (command.TabWord[0] == 'Y' || command.TabWord[0] == 'y') {
         startSave();
     }
-
+    stateWayangWave=false;
+    
     printf("Kamu keluar dari WayangWave.\nDadah ^_^/\n");
     exit(0);
 }
