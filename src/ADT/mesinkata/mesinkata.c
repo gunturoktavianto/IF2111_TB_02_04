@@ -113,7 +113,7 @@ void STARTWORDLOAD(FILE *input)
     START(input);
     
     if(currentChar==MARK) EndWord=true;
-    else {EndWord=false; ADVWORDLOAD();}
+    else {EndWord=false;}
 }
 void ADVWORDLOAD()
 /* I.S. : currentChar adalah karakter pertama kata yang akan diakuisisi

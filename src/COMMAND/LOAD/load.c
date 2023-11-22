@@ -47,7 +47,6 @@ void load()
                 }
             }
         }
-        nextLine();
         ADVWORDLOAD();
         int jumlahLaguQueue, jumlahLaguRiwayat, jumlahPlaylist, jumlahLaguPlaylist ;
         Word penyanyiSekarang, albumSekarang, laguSekarang;
@@ -56,7 +55,6 @@ void load()
         Word penyanyiPlaylist, albumPlaylist, laguPlaylist;
         Word namaPlaylist;
         penyanyiSekarang = currentWord;
-        printf("%s",penyanyiSekarang.TabWord);
         ADVWORDLOAD();
         albumSekarang = currentWord;
         ADVWORDLOAD();
@@ -65,7 +63,6 @@ void load()
         ADVWORD();
         jumlahLaguQueue = WordtoInt(currentWord); //Jumlah record lagu dalam queue
         nextLine();
-        
         //record lagu dalam queue
         for (int i = 0; i<jumlahLaguQueue; i++){
             ADVWORDLOAD();
