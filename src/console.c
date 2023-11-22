@@ -1,7 +1,7 @@
 #include "console.h"
 
 void ListCommand() {
-    printf("> ENTER COMMAND: ");
+    printf("\n> ENTER COMMAND: ");
     Word command=GetInput();
     if (IsWordEq(toKata("LIST"),command)) startList();
     else if(IsWordEq(toKata("PLAY"),command)) startPlay();
@@ -9,8 +9,8 @@ void ListCommand() {
     else if(IsWordEq(toKata("SONG"),command)) startSong(); 
     else if(IsWordEq(toKata("PLAYLIST"),command)) startPlaylist(); 
     else if(IsWordEq(toKata("STATUS"),command)) startStatus();
-    // else if(IsWordEq(toKata("SAVE"),command)) startSave();
-    // else if(IsWordEq(toKata("QUIT"),command)) startQuit();
+    else if(IsWordEq(toKata("SAVE"),command)) startSave();
+    else if(IsWordEq(toKata("QUIT"),command)) startQuit();
     else if(IsWordEq(toKata("HELP"),command)) SessionHelp();
     else printf("Command tidak dikenali, silahkan masukkan command yang valid.\nGunakan HELP untuk menunjukan list command.\n\n");
 }

@@ -90,7 +90,6 @@ void PlaySong(){
             idlagu = GetInput();
         }
     }
-    printf("idxl: %d\n",idxl);
     printf("\nMemutar lagu \"%s\" oleh \"%s\".\n", l.PenyanyiKe[idxp].InfoPenyanyi[idxp].Value.InfoAlbum[idxa].Value.InfoLagu[idxl-1].nama.TabWord, l.PenyanyiKe[idxp].InfoPenyanyi[idxp].Key.TabWord);
 
     /* Final State */
@@ -99,6 +98,7 @@ void PlaySong(){
     CreateQueueLagu(&q);
     // // Update currentsong
     currentsong = l.PenyanyiKe[idxp].InfoPenyanyi[idxp].Value.InfoAlbum[idxa].Value.InfoLagu[idxl-1];
+    printf("%s\n",currentsong.nama.TabWord);
 }
 
 void PlayPlaylist(){
