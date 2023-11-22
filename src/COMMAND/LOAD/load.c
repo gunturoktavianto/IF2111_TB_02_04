@@ -4,28 +4,22 @@
 
 void load()
 {
-    printf("Masukkan nama file yang ingin diload: ");
-    Word file=GetInput();
-    file.TabWord[file.Length]='.';
-    file.TabWord[file.Length+1]='t';
-    file.TabWord[file.Length+2]='x';
-    file.TabWord[file.Length+3]='t';
-    file.Length+=4;
-    file.TabWord[file.Length+4]='\0';
-    char dir[50] = "../../../save/";
-    int i = 0;
-    for (i=0; i<file.Length; i++)
+    FILE *input;
+    char dir[50] = "../save/";
+    do
     {
-        dir[14+i]=file.TabWord[i];
-    }
-    dir[14 + i] = '\0';
-    printf("%s",dir);
-    int jumlahLaguQueue, jumlahLaguRiwayat, jumlahPlaylist, jumlahLaguPlaylist ;
-    FILE *input =fopen(dir,"r");
-    if (input == NULL) printf("File tidak ditemukan. ");
-    else
-    {
-        STARTWORD(input);
+        printf("Masukkan nama file yang ingin diload: ");
+        Word file=GetInput();
+        int i = 0;
+        for (i=0; i<file.Length; i++)
+        {
+            dir[8+i]=file.TabWord[i];
+        }
+        dir[8 + i] = '\0';
+        input =fopen(dir,"r");
+        if (input == NULL) printf("File tidak ditemukan. Silahkan coba lagi!\n");
+    } while (input==NULL);
+        STARTWORDFILE(dir);
         ADVWORD();
         l.Count=WordtoInt(currentWord);
         nextLine();
@@ -54,13 +48,15 @@ void load()
             }
         }
         nextLine();
-        STARTWORDLOAD(input);
+        ADVWORDLOAD();
+        int jumlahLaguQueue, jumlahLaguRiwayat, jumlahPlaylist, jumlahLaguPlaylist ;
         Word penyanyiSekarang, albumSekarang, laguSekarang;
         Word penyanyiQueue, albumQueue, laguQueue;
         Word penyanyiRiwayat, albumRiwayat, laguRiwayat;
         Word penyanyiPlaylist, albumPlaylist, laguPlaylist;
         Word namaPlaylist;
         penyanyiSekarang = currentWord;
+        printf("%s",penyanyiSekarang.TabWord);
         ADVWORDLOAD();
         albumSekarang = currentWord;
         ADVWORDLOAD();
@@ -120,5 +116,4 @@ void load()
                 InsVLast(&daftarPlaylist.A[j], MakeLagu(penyanyiPlaylist, albumPlaylist, laguPlaylist));
             }
         }
-    }
 }
