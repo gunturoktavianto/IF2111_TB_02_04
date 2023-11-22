@@ -3,5 +3,6 @@
 int main()
 {
     Word namaPenyanyi=GetInput();
-    printf("%s",namaPenyanyi.TabWord);
+    Word s=namaPenyanyi;
+    printf("%s",s.TabWord);
 }

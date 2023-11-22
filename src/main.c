@@ -5,9 +5,9 @@
 
 int main() {
     stateWayangWave = false;
-    CreateEmptyPenyanyi(&l);
-    CreateQueueLagu(&qs);
-    CreateStack(&rw);
+    CreateEmptyListPenyanyi(&l);
+    CreateQueueLagu(&q);
+    CreateStack(&r);
     Word command;
     while (!stateWayangWave) {
         do {
@@ -21,11 +21,12 @@ int main() {
             }
         } while (!IsWordEq(toKata("START"), command) && !IsWordEq(toKata("LOAD"), command));
 
-        if (IsWordEq(toKata("START"), command)) startconfig();
-        else load();
+        if (IsWordEq(toKata("START"), command)) {startconfig(); stateWayangWave=true;}
+        else {load(); stateWayangWave=true;};
     }
-
+    printf("%d\n",l.Count);
     if (stateWayangWave) {
+        SessionHelp();
         while (stateWayangWave) {
             ListCommand();
         }

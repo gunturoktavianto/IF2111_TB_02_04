@@ -3,7 +3,8 @@
 
 #ifndef __MESIN_KAR_H_
 #define __MESIN_KAR_H_
-
+#include <stdio.h>
+#include <stdlib.h>
 #include "boolean.h"
 
 #define MARK ';'

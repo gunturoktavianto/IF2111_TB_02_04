@@ -116,4 +116,5 @@ int IdxAlbum(ListPenyanyi *S, int idxp, keytype ka);
 int IdxLagu(ListPenyanyi *S, int idxp, int idxa, Word kl);
 /* I.S. ListPenyanyi tidak kosong, index penyanyi dan Nama Album terdefinisi
    F.S. index album*/
+void printdaftarPenyanyi(ListPenyanyi *S);
 #endif

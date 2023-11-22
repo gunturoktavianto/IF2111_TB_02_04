@@ -79,4 +79,8 @@ Word GetInput();
 
 boolean IsWordNumber (Word kata);
 /* Mengecek Word adalah angka atau bukan*/
+
+char* wordToString(Word word);
+
+Word concatWord(Word w1, Word w2);
 #endif

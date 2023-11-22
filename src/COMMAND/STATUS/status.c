@@ -1,110 +1,81 @@
-include "ADT/LISTLINIER/driver_listlinier.c"
-#include "ADT/LIST/driver_list.c"
-#include "ADT/MAP/driver_map.c"
-#include "ADT/SET/driver_set.c"
-#include "ADT/QUEUE/driver_queue.c"
-#include <stdio.h>
-#include <stdlib.h>
-#include <math.h>
-#include <time.h>
+#include "status.h"
 
-boolean playlistStatus(){
-    // I.S. currentsong, queueLagu
-    // F.S. mengirimkan true jika currentsong beserta keseluruhan queue berada dalam satu playlist yang sama
-    int currentsong;
-    Queue queueLagu;
-    boolean found = false;
-    ListLL playlist;
-    address p = First(playlist);
+/* SUPPORTING SECTION */
+List currentplaylist;
 
-    if (!IsEmptyLL(playlist) && currentsong == Info(p))
-    {   Queue queueTemp;
-        copyQueue(&queueLagu, &queueTemp);
-        p = Next(p);
-        while ((!found) && (p != Nil))
-        {
-            int X;
-            dequeue(&queueTemp, &X);
-            if (Info(p) != X)
-            {
-                found = true;}
-            else
-            {
-                p = Next(p);
-            }
-        }
-    }
-    return found;
-}
+boolean IsPlaylistinQueue(Queuelagu ql){
+	int i=0;
+	ElTypeQueue val;
+	/*ALGORITMA*/
+	while (IDX_HEAD(ql) != IDX_UNDEF)
+	{
+	    dequeueLagu(&ql, &val);
 
-void Mapping(int currentsong, int idxp, int idxa, int idxl){
-    // I.S. mencari lokasi suatu lagu disimpan, lagu terdefinisi. input berupa address of index
-    // Inisiasi index penyanyi, album, dan lagu
-    int currentsong;
-    int idxp = 0, idxa = 0, idxl = 0;
-    boolean found = false;
-    while(idxp < Length(ListPenyanyi) && !found){
-        while(idxa < Penyanyi.Count && !found){
-            while(idxl < Lagu.Count && !found){
-                if(Lagu.ke[idxl] == currentsong){
-                    found = true;
-                    break;
+        /* MASIH SALAH*/
+        /* 1. MENCARI PLAYLIST DENGAN ELEMEN PERTAMA = CURRENTSONG*/
+        if (i==0){
+            int j=0;
+            while(!IsWordEq(currentsong.nama, Info(First(daftarPlaylist.A[j])).nama) && (j<daftarPlaylist.Neff)){
+                if(j == daftarPlaylist.Neff-1 && !IsWordEq(currentsong.nama, Info(First(daftarPlaylist.A[j+1])).nama)){
+                    return false;
                 }
-                idxl++;
+                j++;
             }
-            idxa++;
+            currentplaylist = daftarPlaylist.A[j];
         }
-        idxp++;
-    }
-    // F.S. index penyanyi, album, dan lagu 
+        /* 2. MEMERIKSA KESELURUHAN ISI QUEUE APAKAH SAMA DENGAN PLAYLIST SEBELUMNYA*/
+        else if (i>0 && SearchPlaylist(currentplaylist, val) == Nil){
+            return false;
+        }
+        i++;
+	}
+    return true;
 }
 
-int Status(){
-    // Initial state : currentsong from album x from penyanyi x
-    // Penyanyi.Elements[0].Lagu->Elements[0].lagu
-    // dummy var
-    int currentsong, idxp, idxa, idxl;
-    Mapping(currentsong, &idxp, &idxa, &idxl);
-    Queue playPlaylist;
-
-    // Tidak ada lagu yang diputar
-    if(currentsong == Nil){
+/* MAIN SECTION */
+void startStatus(){
+    Word namacp = toKata("currentplaylist");
+    CreateEmptyPlaylist(namacp, &currentplaylist);
+    /* I.S. Tidak ada lagu yang diputar */
+    if(isEmptyQueueLagu(q)){
         printf("Now Playing:\nNo songs have been played yet. Please search for a song to begin playback.\n\nQueue:\nYour queue is empty.\n");
-    }
-
-    // Ada lagu, tapi queue kosong
-    else if(currentsong != Nil && isEmpty(playPlaylist)){
-        printf("Now Playing:\n%d - %d - %d\n\nQueue:\nYour queue is empty.",
-        Penyanyi.NamaPenyanyi);
-    }
-    
-    // Ada lagu dan ada queue
-    else if(currentsong != Nil && !isEmpty(playPlaylist) && playlistStatus()){
-        printf("Now Playing:\n%d - %d - %d\n\nQueue:\n",Penyanyi.Elements[0].Key, Penyanyi.Elements[0].Value, Penyanyi.Elements[0].Lagu->Elements[0].lagu);
-        Queue queueLagu;
-        Queue status;
-        int i = 0;
-        while(!isEmpty(status)){
-            // anggap val = elemen lagu di set 
-            int val;
-            enqueue(&queueLagu,val);
-            printf("%d. %d - %d - %d\n",i+1, Penyanyi.Elements[0].Key, Penyanyi.Elements[0].Value, Penyanyi.Elements[0].Lagu->Elements[0].lagu);
+    } else{
+        /* I.S. Ada lagu yang diputar */
+        // I.S. Queue kosong
+        if(isEmptyQueueLagu(q)){
+            printf("Now Playing:\n%s - %s - %s\n\nQueue:\nYour queue is empty.", currentsong.penyanyi, currentsong.album, currentsong.nama);
+        } else{
+            /* I.S. Queue tidak kosong */
+            // I.S. Tidak memutar playlist //
+            if (IsPlaylistinQueue(q)){
+                printf("Now Playing:\n%s - %s - %s\n\nQueue:\n", currentsong.penyanyi, currentsong.album, currentsong.nama);
+                /* Queue untuk print*/
+                int i=0;
+                ElTypeQueue val;
+                Queuelagu qq;
+                CreateQueueLagu(&qq);
+                copyQueueLagu(&q, &qq);
+                while (IDX_HEAD(qq) != IDX_UNDEF)
+                {
+                    dequeueLagu(&qq, &val);
+                    printf("%d. %s - %s - %s\n", i+1, val.penyanyi, val.album, val.nama);
+                    i++;
+                }
+            } else{
+                /* I.S. Sedang memutar playlist */
+                printf("Current Playlist: %s\n\nNow Playing:\n%s - %s - %s\n\nQueue:\n",currentplaylist.NamaPlaylist.TabWord, currentsong.penyanyi, currentsong.album, currentsong.nama);
+                }
+            int i=0;
+            ElTypeQueue val;
+            Queuelagu qq;
+            CreateQueueLagu(&qq);
+            copyQueueLagu(&q, &qq);
+            while (IDX_HEAD(qq) != IDX_UNDEF)
+            {
+                dequeueLagu(&qq, &val);
+                printf("%d. %s - %s - %s\n", i+1, val.penyanyi, val.album, val.nama);
+                i++;
+            }
+            }
         }
-    }
-
-    // Ada lagu, queue, dan playlist
-    // Hanya ditampilkan ketika melakukan playlist. Tidak ditampilkan jika terdapat lagu selain dari playlist 
-    // 
-    else if(playlistStatus()){
-        printf("Current Playlist: %d\n\nNow Playing:\n%d - %d - %d\n\nQueue:\n",Penyanyi.Elements[0].Key, Penyanyi.Elements[0].Value, Penyanyi.Elements[0].Lagu->Elements[0].lagu);
-        Queue queueLagu;
-        Queue status;
-        int i = 0;
-        while(!isEmpty(status)){
-            // anggap val = elemen lagu di set 
-            int val;
-            enqueue(&queueLagu,val);
-            printf("%d. %d - %d - %d\n",i+1, Penyanyi.Elements[0].Key, Penyanyi.Elements[0].Value, Penyanyi.Elements[0].Lagu->Elements[0].lagu);
-        }
-    }
 }

@@ -7,7 +7,8 @@ void ListCommand() {
     else if(IsWordEq(toKata("PLAY"),command)) startPlay();
     else if(IsWordEq(toKata("QUEUE"),command)) startQueue();
     else if(IsWordEq(toKata("SONG"),command)) startSong(); 
-    else if(IsWordEq(toKata("STATUS"),command)) startPlaylist();
+    else if(IsWordEq(toKata("PLAYLIST"),command)) startPlaylist(); 
+    else if(IsWordEq(toKata("STATUS"),command)) startStatus();
     else if(IsWordEq(toKata("SAVE"),command)) startSave();
     else if(IsWordEq(toKata("QUIT"),command)) startQuit();
     else if(IsWordEq(toKata("HELP"),command)) SessionHelp;

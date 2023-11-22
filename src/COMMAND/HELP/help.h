@@ -1,7 +1,7 @@
 #ifndef help_H
 #define help_H
 
-#include "../START/start.h"
+#include <stdio.h>
 
 void InitialHelp();
 // Fungsi untuk menampilkan menu help saat belum memasuki sesi

@@ -1,7 +1,7 @@
-#include <stdio.h>
-#include <stdlib.h>
 #include "riwayat.h"
-Stack rw;
+
+Stack r;
+
 /* ************ Prototype ************ */
 /* *** Konstruktor/Kreator *** */
 void CreateStack(Stack *S){
@@ -148,4 +148,12 @@ void displayRiwayat(Stack *S)
         Pop(&temp, &X);
         Push(S, X);
     } 
+}
+
+void ReplaceCS(Stack *S, Lagu L){
+/* Mengganti currentsong dengan Lagu L*/
+/* Jika tidak Nil, menempatkan currentsong pada stack riwayat paling atas*/
+    if (!isEmptyQueueLagu(q))
+        Push(S, currentsong);
+    currentsong = L;
 }

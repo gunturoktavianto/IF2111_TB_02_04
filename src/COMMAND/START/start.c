@@ -32,4 +32,5 @@ void startconfig()
             }
         }
     }
+    printf("di header %d\n",l.Count);
 }

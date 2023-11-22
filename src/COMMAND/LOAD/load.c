@@ -19,11 +19,41 @@ void load()
         dir[14+i]=file.TabWord[i];
     }
     dir[14 + i] = '\0';
+    printf("%s",dir);
     int jumlahLaguQueue, jumlahLaguRiwayat, jumlahPlaylist, jumlahLaguPlaylist ;
     FILE *input =fopen(dir,"r");
     if (input == NULL) printf("File tidak ditemukan. ");
     else
     {
+        STARTWORD(input);
+        ADVWORD();
+        l.Count=WordtoInt(currentWord);
+        nextLine();
+        for (int i=0; i<l.Count; i++)
+        {
+            ADVWORD();
+            l.PenyanyiKe[i].Count=l.Count;
+            l.PenyanyiKe[i].InfoPenyanyi[i].Value.Count=WordtoInt(currentWord);
+            l.PenyanyiKe[i].InfoPenyanyi[i].Key =GetWords();
+            nextLine();
+            for (int j=0; j<l.PenyanyiKe[i].InfoPenyanyi[i].Value.Count; j++)
+            {
+                ADVWORD();
+                l.PenyanyiKe[i].InfoPenyanyi[i].Value.InfoAlbum[j].Value.Count=WordtoInt(currentWord);//4
+                l.PenyanyiKe[i].InfoPenyanyi[i].Value.InfoAlbum[j].Key=GetWords();//BORN PINK
+                nextLine();
+                int jumlahLagu=l.PenyanyiKe[i].InfoPenyanyi[i].Value.InfoAlbum[j].Value.Count;
+                for(int k=0; k<jumlahLagu; k++)
+                {
+                    Word w=GetWords();
+                    l.PenyanyiKe[i].InfoPenyanyi[i].Value.InfoAlbum[j].Value.InfoLagu[k].nama=w;
+                    l.PenyanyiKe[i].InfoPenyanyi[i].Value.InfoAlbum[j].Value.InfoLagu[k].album=l.PenyanyiKe[i].InfoPenyanyi[i].Value.InfoAlbum[j].Key;
+                    l.PenyanyiKe[i].InfoPenyanyi[i].Value.InfoAlbum[j].Value.InfoLagu[k].penyanyi=l.PenyanyiKe[i].InfoPenyanyi[i].Key;
+                    nextLine();
+                }
+            }
+        }
+        nextLine();
         STARTWORDLOAD(input);
         Word penyanyiSekarang, albumSekarang, laguSekarang;
         Word penyanyiQueue, albumQueue, laguQueue;
@@ -48,7 +78,7 @@ void load()
             albumQueue = currentWord;
             ADVWORDLOAD();
             laguQueue = currentWord;
-            enqueueLagu(&qs, MakeLagu(penyanyiQueue, albumQueue, laguQueue));
+            enqueueLagu(&q, MakeLagu(penyanyiQueue, albumQueue, laguQueue));
         }
 
         ADVWORD();
@@ -66,7 +96,7 @@ void load()
             ADVWORDLOAD();
             laguRiwayat = currentWord;
 
-            Push(&rw, MakeLagu(penyanyiRiwayat, albumRiwayat, laguRiwayat));
+            Push(&r, MakeLagu(penyanyiRiwayat, albumRiwayat, laguRiwayat));
         }
 
         ADVWORD();

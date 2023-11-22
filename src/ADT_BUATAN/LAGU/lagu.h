@@ -1,6 +1,6 @@
 #ifndef lagu_H
 #define lagu_H
-
+#include <stdio.h>
 #include "../../ADT/mesinkata/mesinkata.h"
 
 /* MODUL SetLagu
@@ -9,7 +9,7 @@ Deklarasi stack yang dengan implementasi array eksplisit-statik rata kiri
 
 
 #define Nil 0
-#define MaxEl 100
+#define MaxEl 30
 
 typedef struct {
     Word nama;

@@ -4,11 +4,7 @@
 #ifndef riwayat_H
 #define riwayat_H
 
-#include "../LAGU/lagu.h"
-
-
-#define MaxEl 100
-/* Nil adalah stack dengan elemen kosong . */
+#include "../QUEUELAGU/queuelagu.h"
 
 typedef Lagu infotypeStack;
 typedef int address;   /* indeks tabel */
@@ -20,7 +16,7 @@ typedef struct {
   address TOP;  /* alamat TOP: elemen puncak */
 } Stack;
 
-extern Stack rw;
+extern Stack r;
 /* Definisi stack S kosong : S.TOP = Nil */
 /* Elemen yang dipakai menyimpan nilai Stack T[0]..T[MaxEl-1] */
 /* Jika S adalah Stack maka akses elemen : */
@@ -61,4 +57,10 @@ Stack copyStack(Stack *input, Stack *hasil);
 int NbElmtStack(Stack *S);
 void displayStackUrutan(Stack *S);
 void displayRiwayat(Stack *S);
+
+
+void ReplaceCS(Stack *S, Lagu L);
+/* Mengganti currentsong dengan Lagu L*/
+/* Jika tidak Nil, menempatkan currentsong pada stack riwayat paling atas*/
+
 #endif

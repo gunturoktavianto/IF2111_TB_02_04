@@ -3,6 +3,6 @@
 
 #include "../START/start.h"
 
-void QUIT(Word command);
+void startQuit();
 
 #endif

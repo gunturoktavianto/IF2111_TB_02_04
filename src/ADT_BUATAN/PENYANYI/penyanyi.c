@@ -228,3 +228,11 @@ int IdxLagu(ListPenyanyi *S, int idxp, int idxa, Word kl){
     
     return idx;
 }
+void printdaftarPenyanyi(ListPenyanyi *S){
+    int i=0;
+    printf("Daftar Penyanyi :\n");
+    while(i<S->Count){
+        printf("  %d. %s\n", i+1, S->PenyanyiKe[i].InfoPenyanyi[i].Key.TabWord);
+        i++;
+    };
+}
