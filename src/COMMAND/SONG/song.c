@@ -9,7 +9,7 @@ void songNext()
     // ALGORITMA
     if(isEmptyQueueLagu(q)) // jika queueu kosong
     {
-        if(currentsong.penyanyi.Length == Nil && currentsong.album.Length == Nil && currentsong.nama.Length == Nil)
+        if(currentsong.penyanyi.Length == 0 && currentsong.album.Length == 0 && currentsong.nama.Length == 0)
         {
             printf(">> Queue lagu kamu kosong, dan tidak ada lagu yang dimainkan saat ini. Silahkan masukkan fungsi lain");
             
@@ -31,25 +31,26 @@ void songNext()
         dequeueLagu(&q, &song);
         // lagudiputars = lagudiputarq;
          // tadinya mikir lagu yang bakal diputar di tambahin ke riwayat
-        Push(&r, currentsong);
+        if(currentsong.penyanyi.Length != 0 && currentsong.album.Length != 0 && currentsong.nama.Length != 0) Push(&r, currentsong);
+        
         printf("Memutar lagu selanjutnya\n\"%s\" oleh \"%s\"", song.nama.TabWord, song.penyanyi.TabWord);
         currentsong = song;
         printf("\nCURRENT SONG : \"%s\" di album \"%s\" oleh \"%s\"", currentsong.nama.TabWord, currentsong.album.TabWord, currentsong.penyanyi.TabWord);
         // displayQueueLagu(queueLagu);
-        // displayRiwayat(&riwayat);
+        // displayRiwayat(&r);
     }
 }
 
 void songPrevious()
 {
     // KAMUS    
-    Lagu song;
+    infotypeStack song;
     ElTypeQueue val;
     int i;
     // ALGORITMA
     if(IsEmptyStack(r))
     {
-        if(currentsong.penyanyi.Length == Nil && currentsong.album.Length == Nil && currentsong.nama.Length == Nil)
+        if(currentsong.penyanyi.Length == 0 && currentsong.album.Length == 0 && currentsong.nama.Length == 0)
         {
             printf(">> Riwayat lagu kamu kosong, dan tidak ada lagu yang dimainkan saat ini. Silahkan masukkan fungsi lain");
         }
@@ -85,7 +86,7 @@ void songPrevious()
             }
         }
         printf("Memutar lagu sebelumnya \n\"%s\" oleh \"%s\"", song.nama.TabWord, song.penyanyi.TabWord);
-        Push(&r, currentsong);
+        if(currentsong.penyanyi.Length != 0 && currentsong.album.Length != 0 && currentsong.nama.Length != 0) Push(&r, currentsong);
         currentsong = song;
         printf("\nCURRENT SONG : \"%s\" di album \"%s\" oleh \"%s\"", currentsong.nama.TabWord, currentsong.album.TabWord, currentsong.penyanyi.TabWord);
         // displayQueueLagu(queueLagu);
