@@ -3,7 +3,7 @@
 /* MAIN SECTION */
 void startPlay()
 {
-    printf("====[ SELAMAT DATANG DI FUNGSI PLAY ]====\n");
+    printf("\n====[ SELAMAT DATANG DI FUNGSI PLAY ]====\n");
     printf("----TERDAPAT DUA FUNGSI YANG BISA DIAKSES---- \n");
     printf("1. PLAY SONG -> untuk memainkan lagu berdasarkan masukan detail lagu\n");
     printf("2. PLAY PLAYLIST -> untuk memainkan lagu berdasarkan id playlist\n");
@@ -77,7 +77,6 @@ void PlaySong(){
     while(!valid){
         if (IsWordNumber(idlagu)){
             idxl = WordtoInt(idlagu);
-            printf("%d\n",idxl);
             if (idxl>0 && idxl<=l.PenyanyiKe[idxp].InfoPenyanyi[idxp].Value.InfoAlbum[idxa].Value.Count){valid = true;}
             else{
                 printf("Nama ID Lagu tidak ditemukan.\n");
@@ -99,22 +98,35 @@ void PlaySong(){
     CreateStack(&r);
     CreateQueueLagu(&q);
     // // Update currentsong
-    currentsong = l.PenyanyiKe[idxp].InfoPenyanyi[idxp].Value.InfoAlbum[idxa].Value.InfoLagu[idxl];
+    currentsong = l.PenyanyiKe[idxp].InfoPenyanyi[idxp].Value.InfoAlbum[idxa].Value.InfoLagu[idxl-1];
 }
 
 void PlayPlaylist(){
     /*Initial State*/
     /*playlist tidak kosong*/
     if(!IsEmptyArrayDin(daftarPlaylist)){
-
+        DisplayDaftarPlaylist(daftarPlaylist);
         printf("Masukkan ID Playlist: ");
-        int IDPlaylist = WordtoInt(GetInput());
-        while(IDPlaylist > LengthArrayDin(daftarPlaylist) && IDPlaylist < 0){
-            printf("ID Playlist INVALID\n");
-            printf("Masukkan ID Playlist: ");
-            IDPlaylist = WordtoInt(GetInput());
+        Word idplaylist = GetInput();
+        int IDPlaylist;
+        boolean valid = false;
+        while(!valid){
+            if (IsWordNumber(idplaylist)){
+                IDPlaylist = WordtoInt(idplaylist);
+                if (IDPlaylist <= LengthArrayDin(daftarPlaylist) && IDPlaylist > 0){valid = true;}
+                else{
+                    printf("ID Playlist INVALID\n");
+                    printf("Masukkan ID Playlist: ");
+                    idplaylist = GetInput();
+                }
+            }
+            else{
+                printf("ID Playlist INVALID\n");
+                printf("Masukkan ID Playlist: ");
+                idplaylist = GetInput();
+            }
         }
-        printf("Memutar playlist \"%s\".\n", daftarPlaylist.A[IDPlaylist].NamaPlaylist.TabWord);
+        printf("Memutar playlist \"%s\".\n", daftarPlaylist.A[IDPlaylist-1].NamaPlaylist.TabWord);
     
 
 
@@ -122,13 +134,12 @@ void PlayPlaylist(){
         /*queue berisi semua lagu dalam playlist*/
         CreateQueueLagu(&q);
         // masukin playlist ke queuelagu
-        queueKnownPlaylist(daftarPlaylist, &q, IDPlaylist);
+        queueKnownPlaylist(daftarPlaylist, &q, IDPlaylist-1);
 
         /*currentsong menjadi lagu urutan pertama dalam playlist*/
-        ReplaceCS(&r, daftarPlaylist.A[IDPlaylist].First->infolagu);
+        ReplaceCS(&r, daftarPlaylist.A[IDPlaylist-1].First->infolagu);
         // hapus el pertama queueLagu untuk menempati currentsong 
         dequeueLagu(&q, &currentsong);
-
 
         /* isi riwayat lagu (keseluruhan) sama dengan queue, tetapi dengan urutan yang di-reverse. */
         // Pembuatan queue sementara yang sudah di-reverse
@@ -145,5 +156,5 @@ void PlayPlaylist(){
             Push(&r,val);
         }
     }
-    
+    else{printf("\nPlaylist Kosong.\n");}
 }
