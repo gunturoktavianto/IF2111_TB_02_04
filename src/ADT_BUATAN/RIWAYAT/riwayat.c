@@ -54,23 +54,24 @@ void Pop(Stack *S, infotypeStack *X){
     Top(*S)--;
 }
 
-Stack copyStack(Stack *input, Stack *hasil)
+Stack copyStack(Stack input, Stack *hasil)
 {
     // KAMUS
-    infotypeStack *X;
-    Stack *temp;
+    infotypeStack X;
+    Stack temp;
     // ALGORITMA
-    CreateStack(temp);
-    while(!IsEmptyStack(*input))
+    CreateStack(&temp);
+    while(!IsEmptyStack(input))
     {
-        Pop(input, X);
-        Push(temp, *X);
+        Pop(&input, &X);
+        Push(&temp, X);
     }   
-    while(!IsEmptyStack(*temp))
+    while(!IsEmptyStack(temp))
     {
-        Pop(temp, X);
-        Push(hasil, *X);
-    }   
+        Pop(&temp, &X);
+        Push(hasil, X);
+    }  
+    return *hasil; 
 }
 
 int NbElmtStack(Stack *S)
@@ -100,7 +101,7 @@ void displayStackUrutan(Stack *S)
 {
     // KAMUS
     infotypeStack X;
-    int i= 0, j= 1;
+    int j= 1;
     Stack temp;
     // ALGORITMA
     CreateStack(&temp);
@@ -117,7 +118,7 @@ void displayStackUrutan(Stack *S)
     while(!IsEmptyStack(temp))
     {
         Pop(&temp, &X);
-        printf("    %d. \"%s\" oleh \"%s\"\n", j, X.nama, X.penyanyi);
+        printf("    %d. \"%s\" oleh \"%s\"\n", j, X.nama.TabWord, X.penyanyi.TabWord);
         Push(S, X);
         j++;
     } 
@@ -127,7 +128,7 @@ void displayRiwayat(Stack *S)
 {
     // KAMUS
     infotypeStack X;
-    int i= 0, j= 1;
+    int j= 1;
     Stack temp;
     // ALGORITMA
     CreateStack(&temp);
@@ -139,7 +140,7 @@ void displayRiwayat(Stack *S)
     while(!IsEmptyStack(*S))
     {
         Pop(S, &X);
-        printf("    -) \"%s\" oleh \"%s\"\n", X.nama, X.penyanyi);
+        printf("    -) \"%s\" oleh \"%s\"\n", X.nama.TabWord, X.penyanyi.TabWord);
         Push(&temp, X);
         j++;
     }   

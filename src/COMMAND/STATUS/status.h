@@ -1,7 +1,7 @@
 #ifndef status_H
 #define status_H
 
-#include "../START/start.h"
+#include "../../ADT_BUATAN/RIWAYAT/riwayat.h"
 
 boolean IsPlaylistinQueue(Queuelagu ql);
 /* I.S. queue terdefinisi

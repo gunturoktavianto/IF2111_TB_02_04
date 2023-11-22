@@ -219,7 +219,6 @@ void removePlaylist()
     id=WordtoInt(GetInput());
     if(id>LengthArrayDin(daftarPlaylist)) printf("Tidak ada playlist dengan ID %d.",id);
     int n=WordtoInt(GetWords());
-    alamat Prec;
     alamat Loc=First(daftarPlaylist.A[id]);
     if(Loc==Nil) printf("Tidak ada lagu dengan urutan %d di playlist “%s”!",n,daftarPlaylist.A[id].NamaPlaylist.TabWord);
     if(n==1) DelFirst(&daftarPlaylist.A[id],&Loc);

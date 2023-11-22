@@ -43,12 +43,12 @@ void startStatus(){
         /* I.S. Ada lagu yang diputar */
         // I.S. Queue kosong
         if(isEmptyQueueLagu(q)){
-            printf("Now Playing:\n%s - %s - %s\n\nQueue:\nYour queue is empty.", currentsong.penyanyi, currentsong.album, currentsong.nama);
+            printf("Now Playing:\n%s - %s - %s\n\nQueue:\nYour queue is empty.", currentsong.penyanyi.TabWord, currentsong.album.TabWord, currentsong.nama.TabWord);
         } else{
             /* I.S. Queue tidak kosong */
             // I.S. Tidak memutar playlist //
             if (IsPlaylistinQueue(q)){
-                printf("Now Playing:\n%s - %s - %s\n\nQueue:\n", currentsong.penyanyi, currentsong.album, currentsong.nama);
+                printf("Now Playing:\n%s - %s - %s\n\nQueue:\n", currentsong.penyanyi.TabWord, currentsong.album.TabWord, currentsong.nama.TabWord);
                 /* Queue untuk print*/
                 int i=0;
                 ElTypeQueue val;
@@ -58,12 +58,12 @@ void startStatus(){
                 while (IDX_HEAD(qq) != IDX_UNDEF)
                 {
                     dequeueLagu(&qq, &val);
-                    printf("%d. %s - %s - %s\n", i+1, val.penyanyi, val.album, val.nama);
+                    printf("%d. %s - %s - %s\n", i+1, val.penyanyi.TabWord, val.album.TabWord, val.nama.TabWord);
                     i++;
                 }
             } else{
                 /* I.S. Sedang memutar playlist */
-                printf("Current Playlist: %s\n\nNow Playing:\n%s - %s - %s\n\nQueue:\n",currentplaylist.NamaPlaylist.TabWord, currentsong.penyanyi, currentsong.album, currentsong.nama);
+                printf("Current Playlist: %s\n\nNow Playing:\n%s - %s - %s\n\nQueue:\n",currentplaylist.NamaPlaylist.TabWord, currentsong.penyanyi.TabWord, currentsong.album.TabWord, currentsong.nama.TabWord);
                 }
             int i=0;
             ElTypeQueue val;
@@ -73,7 +73,7 @@ void startStatus(){
             while (IDX_HEAD(qq) != IDX_UNDEF)
             {
                 dequeueLagu(&qq, &val);
-                printf("%d. %s - %s - %s\n", i+1, val.penyanyi, val.album, val.nama);
+                printf("%d. %s - %s - %s\n", i+1, val.penyanyi.TabWord, val.album.TabWord, val.nama.TabWord);
                 i++;
             }
             }

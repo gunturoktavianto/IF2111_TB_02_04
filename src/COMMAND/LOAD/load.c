@@ -112,12 +112,12 @@ void load()
             InsertAtArrayDin(&daftarPlaylist, PlaylistRiwayat, LengthArrayDin(daftarPlaylist));
             for (int j=0; j<jumlahLaguPlaylist; j++){
                 ADVWORDLOAD();
-                penyanyiRiwayat = currentWord;
+                penyanyiPlaylist = currentWord;
                 ADVWORDLOAD();
-                albumRiwayat = currentWord;
+                albumPlaylist = currentWord;
                 ADVWORDLOAD();
-                laguRiwayat = currentWord;
-                InsVLast(&daftarPlaylist.A[j], MakeLagu(penyanyiRiwayat, albumRiwayat, laguRiwayat));
+                laguPlaylist = currentWord;
+                InsVLast(&daftarPlaylist.A[j], MakeLagu(penyanyiPlaylist, albumPlaylist, laguPlaylist));
             }
         }
     }

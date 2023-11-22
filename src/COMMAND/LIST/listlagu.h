@@ -1,7 +1,7 @@
 #ifndef list_H
 #define list_H
 
-#include "../START/start.h"
+#include "../../ADT_BUATAN/RIWAYAT/riwayat.h"
 
 int SearchIndexAlbum(ListPenyanyi *penyanyi, Word album, int indekspenyanyi);
 

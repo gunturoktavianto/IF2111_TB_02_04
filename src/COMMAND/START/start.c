@@ -3,8 +3,7 @@ boolean stateWayangWave;
 
 void startconfig()
 {
-    FILE *input=fopen("../../../save/config.txt","r");
-    STARTWORD(input);
+    STARTWORDFILE("../save/config.txt");
     ADVWORD();
     l.Count=WordtoInt(currentWord);
     nextLine();
@@ -32,5 +31,4 @@ void startconfig()
             }
         }
     }
-    printf("di header %d\n",l.Count);
 }

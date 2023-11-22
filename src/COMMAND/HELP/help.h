@@ -1,7 +1,7 @@
 #ifndef help_H
 #define help_H
 
-#include <stdio.h>
+#include "../../ADT_BUATAN/RIWAYAT/riwayat.h"
 
 void InitialHelp();
 // Fungsi untuk menampilkan menu help saat belum memasuki sesi

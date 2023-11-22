@@ -1,7 +1,7 @@
 #ifndef play_H
 #define play_H
 
-#include "../START/start.h"
+#include "../../ADT_BUATAN/RIWAYAT/riwayat.h"
 
 void PlaySong();
 /* I.S. listpenyanyi terdefinisi dan tidak kosong

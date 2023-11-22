@@ -327,5 +327,6 @@ alamat alamatIndeksKe (List l, int idx)
         cnt++;
         P=Next(P);
     }
+    return P;
 }
 /****************** PROSES SEMUA ELEMEN LIST ******************/

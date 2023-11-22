@@ -117,7 +117,7 @@ void dequeueLagu(Queuelagu *q, ElTypeQueue *val){
 /* I.S : Queue terdefinisi */
 /* F.S : Queue terlihat dilayar */
 void displayQueueLagu(Queuelagu q){
-    int i, temp1, temp2;
+    int temp1, temp2;
 	ElTypeQueue val;
 	Queuelagu q1;
 	/*ALGORITMA*/

@@ -30,7 +30,7 @@ void DisplayDaftarAlbum(ListPenyanyi *penyanyi, int indekspenyanyi)
     // ALGORITMA
     if(penyanyi->PenyanyiKe[indekspenyanyi].InfoPenyanyi[indekspenyanyi].Value.Count == Nil)
     {
-        printf("%s belum memiliki album\n", penyanyi->PenyanyiKe[indekspenyanyi].InfoPenyanyi[indekspenyanyi].Key);
+        printf("%s belum memiliki album\n", penyanyi->PenyanyiKe[indekspenyanyi].InfoPenyanyi[indekspenyanyi].Key.TabWord);
     }
     else
     {
@@ -108,7 +108,7 @@ void ListLagu()
     // KAMUS 
     boolean valid = false;
     char inputyn;
-    int i=0, j=1,indekspenyanyi, indeksalbum;
+    int indekspenyanyi, indeksalbum;
     Word command;
     // ALGORTIMA
     printdaftarPenyanyi(&l);
@@ -184,7 +184,7 @@ void startList() // yang dipanggil
         } 
         else if(IsWordEq(toKata("QUIT"), command))
         {
-            printf("\n>> Keluar dari Fungsi");
+            printf("\n>> Keluar dari Fungsi\n");
             valid = true;
         } 
         else

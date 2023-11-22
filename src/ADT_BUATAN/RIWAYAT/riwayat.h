@@ -53,7 +53,7 @@ void Pop(Stack *S, infotypeStack *X);
 /* I.S. S  tidak mungkin kosong */
 /* F.S. X adalah nilai elemen TOP yang lama, TOP berkurang 1 */
 
-Stack copyStack(Stack *input, Stack *hasil);
+Stack copyStack(Stack input, Stack *hasil);
 int NbElmtStack(Stack *S);
 void displayStackUrutan(Stack *S);
 void displayRiwayat(Stack *S);

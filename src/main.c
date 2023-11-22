@@ -1,6 +1,5 @@
-#include <stdlib.h>
-#include <stdio.h>
-
+#include "COMMAND/START/start.h"
+#include "COMMAND/LOAD/load.h"
 #include "console.h"
 
 int main() {
@@ -26,6 +25,8 @@ int main() {
     }
     printf("%d\n",l.Count);
     if (stateWayangWave) {
+        printdaftarPenyanyi(&l);
+        DisplayDaftarAlbum(&l, 1);
         SessionHelp();
         while (stateWayangWave) {
             ListCommand();

@@ -9,6 +9,9 @@
 
 #define NMax 50
 #define BLANK ' '
+#define EOL '\n'
+#define CR '\r'
+#define SC ';'
 
 typedef struct
 {
@@ -25,12 +28,16 @@ void IgnoreBlanks();
    I.S. : currentChar sembarang
    F.S. : currentChar ≠ BLANK atau currentChar = MARK */
 
+void IgnoreCR();
+void IgnoreEOL();
+void IgnoreSC();
+
 void STARTWORD();
 /* I.S. : currentChar sembarang
    F.S. : EndWord = true, dan currentChar = MARK;
           atau EndWord = false, currentWord adalah kata yang sudah diakuisisi,
           currentChar karakter pertama sesudah karakter terakhir kata */
-
+void STARTWORDFILE(char *fileaddress);
 void ADVWORD();
 /* I.S. : currentChar adalah karakter pertama kata yang akan diakuisisi
    F.S. : currentWord adalah kata terakhir yang sudah diakuisisi,

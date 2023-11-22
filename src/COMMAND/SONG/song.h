@@ -1,7 +1,7 @@
 #ifndef song_H
 #define song_H
 
-#include "../START/start.h"
+#include "../../ADT_BUATAN/RIWAYAT/riwayat.h"
 
 void songNext();
 void songPrevious();

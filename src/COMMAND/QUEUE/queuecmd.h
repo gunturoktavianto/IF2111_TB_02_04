@@ -1,6 +1,6 @@
 #ifndef QUEUE_H
 #define QUEUE_H
-#include "../START/start.h"
+#include "../../ADT_BUATAN/RIWAYAT/riwayat.h"
 
 void getCommandQueue();
 void startQueue();

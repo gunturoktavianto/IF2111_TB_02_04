@@ -1,7 +1,8 @@
 #ifndef quit_H_
 #define quit_H_
 
-#include "../START/start.h"
+#include "../../ADT_BUATAN/RIWAYAT/riwayat.h"
+#include "../SAVE/save.h"
 
 void startQuit();
 

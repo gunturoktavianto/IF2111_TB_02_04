@@ -92,13 +92,13 @@ void PlayPlaylist(){
     /*Initial State*/
     /*playlist tidak kosong*/
     if(!IsEmptyArrayDin(daftarPlaylist)){
-        int IDPlaylist;
+
         printf("Masukkan ID Playlist: ");
-        scanf("%d",IDPlaylist);
+        int IDPlaylist = WordtoInt(GetInput());
         while(IDPlaylist > LengthArrayDin(daftarPlaylist) && IDPlaylist < 0){
             printf("ID Playlist INVALID\n");
             printf("Masukkan ID Playlist: ");
-            scanf("%d",IDPlaylist);
+            IDPlaylist = WordtoInt(GetInput());
         }
         printf("Memutar playlist \"%s\".\n", daftarPlaylist.A[IDPlaylist].NamaPlaylist.TabWord);
     
@@ -106,7 +106,7 @@ void PlayPlaylist(){
 
         /* Final State */
         /*queue berisi semua lagu dalam playlist*/
-        clearQueue();
+        CreateQueueLagu(&q);
         // masukin playlist ke queuelagu
         queueKnownPlaylist(daftarPlaylist, &q, IDPlaylist);
 
