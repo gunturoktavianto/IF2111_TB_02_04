@@ -188,7 +188,7 @@ Word GetWords()
     Word temp;
     for (int i=0; i<NMax; i++) temp.TabWord[i]='\0';
     temp.Length=0;
-    while(currentChar!='\n')
+    while(currentChar!=';')
     {
         ADVWORD();
         for (int i=0; i<currentWord.Length; i++)
@@ -196,7 +196,7 @@ Word GetWords()
             temp.TabWord[temp.Length]=currentWord.TabWord[i];
             temp.Length++;
         }
-        if (currentChar!='\n') {temp.TabWord[temp.Length]=' '; temp.Length++;}
+        if (currentChar!=';') {temp.TabWord[temp.Length]=' '; temp.Length++;}
     }
     return temp;
 }
