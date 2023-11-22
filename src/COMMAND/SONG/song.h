@@ -6,5 +6,6 @@
 void songNext();
 void songPrevious();
 void startSong();
+void getCommandSong();
 
 #endif

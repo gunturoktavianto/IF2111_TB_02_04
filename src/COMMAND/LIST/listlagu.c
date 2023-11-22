@@ -179,6 +179,7 @@ void startList() // yang dipanggil
         } 
         else if(IsWordEq(toKata("LIST PLAYLIST"), command))
         {
+            printf("Daftar Playlist Pengguna :\n");
             DisplayDaftarPlaylist(daftarPlaylist);
             valid = true;
         } 

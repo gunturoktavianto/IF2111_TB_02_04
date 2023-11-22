@@ -2,14 +2,14 @@
 
 // Fungsi untuk menampilkan menu help saat belum memasuki sesi
 void InitialHelp() {
-    printf("=====[ Menu Help WayangWave ]=====\n");
+    printf("=====[ WayangWave Menu ]=====\n");
     printf("1. START -> Untuk masuk sesi baru\n");
     printf("2. LOAD -> Untuk memulai sesi berdasarkan file konfigurasi\n");
 }
 
 // Fungsi untuk menampilkan menu help setelah memasuki sesi
 void SessionHelp() {
-    printf("=====[ Menu Help WayangWave ]=====\n");
+    printf("=====[ WayangWave Menu ]=====\n");
     printf("1. LIST -> Untuk menampilkan daftar lagu, playlist,  penyanyi, album dari penyanyi, dan lagu yang ada di album tersebut.\n");
     printf("2. PLAY -> Untuk memulai suatu lagu, terdapat dua jenis command untuk PLAY yaitu SONG dan PLAYLIST.\n");
     printf("3. QUEUE -> Untuk memanipulasi queue lagu yang memiliki 5 tipe command, yaitu SONG, PLAYLIST, SWAP, REMOVE, dan CLEAR\n");

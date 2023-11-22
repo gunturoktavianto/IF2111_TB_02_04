@@ -23,7 +23,6 @@ int main() {
         if (IsWordEq(toKata("START"), command)) {startconfig(); stateWayangWave=true;}
         else {load(); stateWayangWave=true;};
     }
-    printf("%d\n",l.Count);
     if (stateWayangWave) {
         SessionHelp();
         while (stateWayangWave) {
