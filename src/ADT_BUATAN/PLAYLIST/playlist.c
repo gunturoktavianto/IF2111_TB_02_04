@@ -328,4 +328,19 @@ alamat alamatIndeksKe (List l, int idx)
     }
     return P;
 }
+
+int NbElmtPlaylist (List L){
+    /* Mengirimkan banyaknya elemen list; mengirimkan 0 jika list kosong */
+    int count = 0;
+    if (!IsEmptyLinkedList(L)){
+        alamat P = First(L);
+        while (Next(P) != Nil)
+        {
+            count++;
+            P = Next(P);
+        }
+        count++;
+    }
+    return count;
+}
 /****************** PROSES SEMUA ELEMEN LIST ******************/

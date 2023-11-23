@@ -169,7 +169,7 @@ void DelAfter (List *L, alamat *Pdel, alamat Prec);
 /*      Pdel adalah alamat elemen list yang dihapus  */
 
 /****************** PROSES SEMUA ELEMEN LIST ******************/
-int NbElmt (List L);
+int NbElmtPlaylist (List L);
 /* Mengirimkan banyaknya elemen list; mengirimkan 0 jika list kosong */
 
 void DisplayDaftarPlaylist();

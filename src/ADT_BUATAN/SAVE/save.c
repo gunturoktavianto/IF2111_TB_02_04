@@ -82,8 +82,3 @@ void save() { //isi parameter sesuai variabel yang ada di bawah
     fclose(fpointer);
     
 }
-
-int main() {
-    save();
-    return 0;
-}

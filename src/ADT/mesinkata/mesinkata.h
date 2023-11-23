@@ -32,7 +32,7 @@ void IgnoreCR();
 void IgnoreEOL();
 void IgnoreSC();
 
-void STARTWORD();
+void STARTWORD(FILE *input);
 /* I.S. : currentChar sembarang
    F.S. : EndWord = true, dan currentChar = MARK;
           atau EndWord = false, currentWord adalah kata yang sudah diakuisisi,
@@ -52,7 +52,7 @@ void CopyWord();
           currentChar = BLANK atau currentChar = MARK;
           currentChar adalah karakter sesudah karakter terakhir yang diakuisisi.
           Jika panjang kata melebihi NMax, maka sisa kata "dipotong" */
-void STARTWORDLOAD();
+void STARTWORDLOAD(FILE *input);
 /* I.S. : currentChar sembarang
    F.S. : EndWord = true, dan currentChar = MARK;
           atau EndWord = false, currentWord adalah kata yang sudah diakuisisi,
@@ -84,6 +84,7 @@ Word toKata(char *str);
 Word GetInput();
 /*  Fungsi untuk menginput Word*/
 
+Word GetInputs();
 boolean IsWordNumber (Word kata);
 /* Mengecek Word adalah angka atau bukan*/
 

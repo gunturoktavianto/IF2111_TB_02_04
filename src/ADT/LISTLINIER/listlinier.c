@@ -241,21 +241,6 @@
 //     printf("]");
 // }
 
-// int NbElmtLL (ListLL L){
-// /* Mengirimkan banyaknya elemen list; mengirimkan 0 jika list kosong */
-//     int count = 0;
-//     if (!IsEmptyLL(L)){
-//         address P = First(L);
-//         while (Next(P) != Nil)
-//         {
-//             count++;
-//             P = Next(P);
-//         }
-//         count++;
-//     }
-//     return count;
-// }
-
 // /*** Prekondisi untuk Max/Min/rata-rata : List tidak kosong ***/
 // infotypeLL MaxLL (ListLL L){
 // /* Mengirimkan nilai Info(P) yang maksimum */

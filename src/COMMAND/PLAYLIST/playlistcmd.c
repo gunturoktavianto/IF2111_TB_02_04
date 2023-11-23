@@ -124,7 +124,7 @@ void addPlaylistSong()
     printf("\nMasukkan ID Playlist yang dipilih : ");
     Word idplaylist = GetInput();
     int idpl;
-    boolean valid = false;
+    valid = false;
     while(!valid){
         if (IsWordNumber(idplaylist)){
             idpl = WordtoInt(idplaylist);
@@ -261,16 +261,16 @@ void swapPlaylist()
     int x, y;
     Word idx1, idx2;
     idx1 = GetInput();
-    boolean valid = false;
+    valid = false;
     while(!valid){
         if(IsWordNumber(idx1)){
             x = WordtoInt(idx1);
-            if(x > 0 && x <= NbElmt(daftarPlaylist.A[id-1])){
+            if(x > 0 && x <= NbElmtPlaylist(daftarPlaylist.A[id-1])){
                 printf("Masukkan urutan lagu kedua yang mau ditukar: ");
                 idx2 = GetInput();
                 if(IsWordNumber(idx2)){
                     y = WordtoInt(idx2);
-                    if((y > 0 && y <= NbElmt(daftarPlaylist.A[id-1])) && y != x){
+                    if((y > 0 && y <= NbElmtPlaylist(daftarPlaylist.A[id-1])) && y != x){
                         valid = true;
                         break;
                     }
