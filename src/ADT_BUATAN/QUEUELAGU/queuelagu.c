@@ -117,7 +117,7 @@ void dequeueLagu(Queuelagu *q, ElTypeQueue *val){
 /* I.S : Queue terdefinisi */
 /* F.S : Queue terlihat dilayar */
 void displayQueueLagu(Queuelagu q){
-	int i, temp1, temp2;
+	int temp1, temp2;
 	ElTypeQueue val;
 	Queuelagu q1;
 	/*ALGORITMA*/
@@ -210,7 +210,7 @@ void transferReverseQueueLagu(Queuelagu* q1, Queuelagu* q2){
 
 void queueKnownPlaylist(ArrayDin L, Queuelagu *Q, int id) {
 /* Fungsi untuk menambahkan playlist ke dalam queue tanpa menampilkan input dan output */
-    alamat P = First(L.A[id-1]); //Pake ADT Dilla
+    alamat P = First(L.A[id]); //Pake ADT Dilla
     while (P != Nil) {
         enqueueLagu(Q, P->infolagu);
         P = P->next;

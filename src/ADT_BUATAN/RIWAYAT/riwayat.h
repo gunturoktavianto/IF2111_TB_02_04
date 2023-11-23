@@ -63,4 +63,7 @@ void ReplaceCS(Stack *S, Lagu L);
 /* Mengganti currentsong dengan Lagu L*/
 /* Jika tidak Nil, menempatkan currentsong pada stack riwayat paling atas*/
 
+void ReversedStack(Stack *S);
+/* Membalikan seluruh isi stack S */
+
 #endif

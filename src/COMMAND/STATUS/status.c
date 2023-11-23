@@ -7,33 +7,37 @@ boolean IsPlaylistinQueue(Queuelagu ql){
 	int i=0;
 	ElTypeQueue val;
 	/*ALGORITMA*/
-	while (IDX_HEAD(ql) != IDX_UNDEF)
-	{
 	    dequeueLagu(&ql, &val);
-
         /* MASIH SALAH*/
         /* 1. MENCARI PLAYLIST DENGAN ELEMEN PERTAMA = CURRENTSONG*/
-        if (i==0){
-            int j=0;
-            while(!IsWordEq(currentsong.nama, Info(First(daftarPlaylist.A[j])).nama) && (j<daftarPlaylist.Neff)){
-                if(j == daftarPlaylist.Neff-1 && !IsWordEq(currentsong.nama, Info(First(daftarPlaylist.A[j+1])).nama)){
-                    return false;
-                }
-                j++;
+        boolean found = false;
+        int iD=0;
+        for(iD=0; iD<LengthArrayDin(daftarPlaylist); iD++){
+            if(SearchPlaylist(daftarPlaylist.A[iD],val)!=Nil){
+                found = true;
+                break;
             }
-            currentplaylist = daftarPlaylist.A[j];
         }
-        /* 2. MEMERIKSA KESELURUHAN ISI QUEUE APAKAH SAMA DENGAN PLAYLIST SEBELUMNYA*/
-        else if (i>0 && SearchPlaylist(currentplaylist, val) == Nil){
-            return false;
-        }
-        i++;
-	}
-    return true;
+        if(found){
+            enqueueLagu(&ql, val);
+            if(lengthQueueLagu(ql)!=NbElmtPlaylist(daftarPlaylist.A[iD])) return false;
+            else
+            {
+                int cnt=0;
+                for (i=1; i<=NbElmtPlaylist(daftarPlaylist.A[iD]); i++)
+                {
+                    if (isInQueueLagu(ql, LaguIndeksKe(daftarPlaylist.A[iD],i))) {cnt++;}
+                }
+                if(cnt==NbElmtPlaylist(daftarPlaylist.A[iD])) {currentplaylist=daftarPlaylist.A[iD];return true;}
+                return false;
+            }
+        } 
+        else return false;
 }
 
 /* MAIN SECTION */
 void startStatus(){
+    displayQueueLagu(q);
     Word namacp = toKata("currentplaylist");
     CreateEmptyPlaylist(namacp, &currentplaylist);
     /* I.S. Tidak ada lagu yang diputar */
@@ -47,7 +51,7 @@ void startStatus(){
         } else{
             /* I.S. Queue tidak kosong */
             // I.S. Tidak memutar playlist //
-            if (IsPlaylistinQueue(q)){
+            if (!IsPlaylistinQueue(q)){
                 printf("Now Playing:\n%s - %s - %s\n\nQueue:\n", currentsong.penyanyi.TabWord, currentsong.album.TabWord, currentsong.nama.TabWord);
                 /* Queue untuk print*/
                 int i=0;

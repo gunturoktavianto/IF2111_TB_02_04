@@ -15,7 +15,7 @@ CFLAGS = -Wall -Werror -std=c11
 # ../src/ADT_BUATAN/PLAYLIST/playlist.c ../src/ADT_BUATAN/PLAYLIST/driver_playlist.c
 # ../src/ADT_BUATAN/QUEUELAGU/queuelagu.c ../src/ADT_BUATAN/QUEUELAGU/driver_queuelagu.c
 # ../src/ADT_BUATAN/RIWAYAT/riwayat.c ../src/ADT_BUATAN/RIWAYAT/driver_riwayat.c
-SRC_MAIN = ../src/ADT/mesinkata/mesinkata.c ../src/ADT/mesinkata/mesinkarakter.c ../src/ADT_BUATAN/LAGU/lagu.c ../src/ADT_BUATAN/ALBUM/album.c ../src/ADT_BUATAN/PENYANYI/penyanyi.c ../src/ADT_BUATAN/PLAYLIST/playlist.c ../src/ADT_BUATAN/QUEUELAGU/queuelagu.c ../src/ADT_BUATAN/RIWAYAT/riwayat.c ../src/COMMAND/HELP/help.c ../src/COMMAND/LIST/listlagu.c ../src/COMMAND/LOAD/load.c ../src/COMMAND/PLAY/play.c ../src/COMMAND/PLAYLIST/playlistcmd.c ../src/COMMAND/QUEUE/queuecmd.c ../src/COMMAND/SONG/song.c ../src/COMMAND/START/start.c ../src/COMMAND/STATUS/status.c ../src/console.c ../src/main.c 
+SRC_MAIN = ../src/ADT/mesinkata/mesinkata.c ../src/ADT/mesinkata/mesinkarakter.c ../src/ADT_BUATAN/LAGU/lagu.c ../src/ADT_BUATAN/ALBUM/album.c ../src/ADT_BUATAN/PENYANYI/penyanyi.c ../src/ADT_BUATAN/PLAYLIST/playlist.c ../src/ADT_BUATAN/QUEUELAGU/queuelagu.c ../src/ADT_BUATAN/RIWAYAT/riwayat.c ../src/COMMAND/HELP/help.c ../src/COMMAND/LIST/listlagu.c ../src/COMMAND/LOAD/load.c ../src/COMMAND/PLAY/play.c ../src/COMMAND/PLAYLIST/playlistcmd.c ../src/COMMAND/QUEUE/queuecmd.c ../src/COMMAND/QUIT/quit.c ../src/COMMAND/SAVE/save.c ../src/COMMAND/SONG/song.c ../src/COMMAND/START/start.c ../src/COMMAND/STATUS/status.c ../src/console.c ../src/main.c 
 
 OBJ_MAIN = $(SRC_MAIN:.c=.o)
 

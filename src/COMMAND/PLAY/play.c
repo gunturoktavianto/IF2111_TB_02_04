@@ -8,7 +8,6 @@ void startPlay()
     printf("    1. PLAY SONG -> untuk memainkan lagu berdasarkan masukan detail lagu\n");
     printf("    2. PLAY PLAYLIST -> untuk memainkan lagu berdasarkan id playlist\n");
     printf("    3. PLAY QUIT -> untuk keluar dari fungsi PLAY\n\n");
-    printf("> SILAHKAN MASUKAN COMMAND: ");
     getCommandPlay();
 }
 
@@ -99,7 +98,6 @@ void PlaySong(){
     CreateQueueLagu(&q);
     // // Update currentsong
     currentsong = l.PenyanyiKe[idxp].InfoPenyanyi[idxp].Value.InfoAlbum[idxa].Value.InfoLagu[idxl-1];
-    printf("%s\n",currentsong.nama.TabWord);
 }
 
 void PlayPlaylist(){
@@ -128,35 +126,38 @@ void PlayPlaylist(){
                 idplaylist = GetInput();
             }
         }
-        printf("Memutar playlist \"%s\".\n", daftarPlaylist.A[IDPlaylist-1].NamaPlaylist.TabWord);
-    
+        if (!IsEmptyLinkedList(daftarPlaylist.A[IDPlaylist-1])){
+            printf("Memutar playlist \"%s\".\n", daftarPlaylist.A[IDPlaylist-1].NamaPlaylist.TabWord);
+        
 
 
-        /* Final State */
-        /*queue berisi semua lagu dalam playlist*/
-        CreateQueueLagu(&q);
-        // masukin playlist ke queuelagu
-        queueKnownPlaylist(daftarPlaylist, &q, IDPlaylist-1);
+            /* Final State */
+            /*queue berisi semua lagu dalam playlist*/
+            CreateQueueLagu(&q);
+            // masukin playlist ke queuelagu
+            queueKnownPlaylist(daftarPlaylist, &q, IDPlaylist-1);
 
-        /*currentsong menjadi lagu urutan pertama dalam playlist*/
-        ReplaceCS(&r, daftarPlaylist.A[IDPlaylist-1].First->infolagu);
-        // hapus el pertama queueLagu untuk menempati currentsong 
-        dequeueLagu(&q, &currentsong);
+            /*currentsong menjadi lagu urutan pertama dalam playlist*/
+            songNext();
 
-        /* isi riwayat lagu (keseluruhan) sama dengan queue, tetapi dengan urutan yang di-reverse. */
-        // Pembuatan queue sementara yang sudah di-reverse
-        Queuelagu reversedPlaylist, temp;
-        CreateQueueLagu(&reversedPlaylist);
-        CreateQueueLagu(&temp);
-        copyQueueLagu(&q, &temp);
-        transferReverseQueueLagu(&temp, &reversedPlaylist);
+            /* isi riwayat lagu (keseluruhan) sama dengan queue, tetapi dengan urutan yang di-reverse. */
+            // Pembuatan queue sementara yang sudah di-reverse
+            /* Jika tidak di reverse, Top = 1*/
+            Queuelagu temp;
+            CreateQueueLagu(&temp);
+            copyQueueLagu(&q, &temp);
+            /* Jika di reverse, Top != 1*/
+            // Queuelagu reversedPlaylist;
+            // CreateQueueLagu(&reversedPlaylist);
+            // transferReverseQueueLagu(&temp, &reversedPlaylist);
 
-        // mengisi riwayat lagu dengan queue yang sudah di-reverse
-        while(!isEmptyQueueLagu(reversedPlaylist)){
-            ElTypeQueue val;
-            dequeueLagu(&reversedPlaylist, &val);
-            Push(&r,val);
-        }
+            // mengisi riwayat lagu dengan queue yang sudah di-reverse
+            while(!isEmptyQueueLagu(temp)){
+                ElTypeQueue val;
+                dequeueLagu(&temp, &val);
+                Push(&r,val);
+            }
+        } else{printf("\nPlaylist %d Kosong.\n", IDPlaylist);}
     }
-    else{printf("\nPlaylist Kosong.\n");}
+    else{printf("\nDaftar playlist Kosong.\n");}
 }

@@ -2,14 +2,6 @@
 #include "mesinkarakter.c"
 int main()
 {
-    START(stdin);
-    while(currentChar!=';') {
-        printf("%c", currentChar);
-        ADV();
-    }
-    START(stdin);
-    while(currentChar!=';') {
-        printf("%c", currentChar);
-        ADV();
-    }
+    Word w=GetInput();
+    printf("%c",w.TabWord[0]);
 }

@@ -17,7 +17,9 @@ void load()
         }
         dir[8 + i] = '\0';
         input =fopen(dir,"r");
-        if (input == NULL) printf("File tidak ditemukan. Silahkan coba lagi!\n");
+        if (input == NULL) {
+            printf("File tidak ditemukan. Silahkan coba lagi!\n");
+            printf("Save file tidak ditemukan. WayangWave gagal dijalankan.\n");}
     } while (input==NULL);
         STARTWORDFILE(dir);
         ADVWORD();
@@ -91,7 +93,7 @@ void load()
 
             Push(&r, MakeLagu(penyanyiRiwayat, albumRiwayat, laguRiwayat));
         }
-
+        ReversedStack(&r);
         ADVWORD();
         jumlahPlaylist = WordtoInt(currentWord); //Jumlah playlist
         nextLine();
@@ -113,4 +115,5 @@ void load()
                 InsVLast(&daftarPlaylist.A[i], MakeLagu(penyanyiPlaylist, albumPlaylist, laguPlaylist));
             }
         }
+    printf("Save file berhasil dibaca. WayangWave berhasil dijalankan.\n");
 }

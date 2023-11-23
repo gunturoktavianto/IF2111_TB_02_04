@@ -3,7 +3,7 @@
 
 #include "../../ADT_BUATAN/RIWAYAT/riwayat.h"
 
-int SearchIndexAlbum(ListPenyanyi *penyanyi, Word album, int indekspenyanyi);
+int SearchIndexAlbum(Word album, int indekspenyanyi);
 
 void DisplayDaftarPlaylist(ArrayDin Arr);
 

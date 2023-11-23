@@ -158,3 +158,29 @@ void ReplaceCS(Stack *S, Lagu L){
         Push(S, currentsong);
     currentsong = L;
 }
+
+void ReversedStack(Stack *S) {
+    /* Membalikan seluruh isi stack S */
+    // Create a temporary stack
+    Stack temp, temp1;
+    CreateStack(&temp);
+    CreateStack(&temp1);
+
+    infotypeStack x;
+    while (!IsEmptyStack(*S)) {
+        Pop(S, &x);
+        Push(&temp, x);
+    }
+
+    // Copy temp ke temp1
+    while (!IsEmptyStack(temp)) {
+        Pop(&temp, &x);
+        Push(&temp1, x);
+    }
+
+    // Copy temp1 ke S
+    while (!IsEmptyStack(temp1)) {
+        Pop(&temp1, &x);
+        Push(S, x);
+    }
+}

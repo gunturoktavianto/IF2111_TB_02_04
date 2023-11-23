@@ -85,7 +85,7 @@ void InsertAtArrayDin(ArrayDin *array, List el, IdxType i);
  */
 void DeleteAtArrayDin(ArrayDin *array, IdxType i);
 
-boolean IsEmptyPlaylist (List L);
+boolean IsEmptyLinkedList (List L);
 /* Mengirim true jika list kosong */
 
 /****************** PEMBUATAN LIST KOSONG ******************/
@@ -174,5 +174,6 @@ int NbElmtPlaylist (List L);
 
 void DisplayDaftarPlaylist();
 void DisplayLaguPlaylist(List L);
+Lagu LaguIndeksKe (List l, int idx);
 alamat alamatIndeksKe (List l, int idx);
 #endif

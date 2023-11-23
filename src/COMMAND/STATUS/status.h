@@ -1,7 +1,7 @@
 #ifndef status_H
 #define status_H
-
 #include "../../ADT_BUATAN/RIWAYAT/riwayat.h"
+extern List currentplaylist;
 
 boolean IsPlaylistinQueue(Queuelagu ql);
 /* I.S. queue terdefinisi

@@ -316,6 +316,18 @@ void DisplayLaguPlaylist(List L)
     }
 }
 
+Lagu LaguIndeksKe (List l, int idx)
+{
+    alamat P=First(l);
+    int cnt=0;
+    while(P!=Nil)
+    {
+        if(cnt==idx-1) return Info(P);
+        cnt++;
+        P=Next(P);
+    }
+    return Info(P);
+}
 alamat alamatIndeksKe (List l, int idx)
 {
     alamat P=First(l);

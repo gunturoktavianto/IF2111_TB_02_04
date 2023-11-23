@@ -331,7 +331,7 @@ void deletePlaylist()
     if(LengthArrayDin(daftarPlaylist)==0) printf("Belum ada playlist yang dibuat.\n");
     else
     {
-        int id; Word w;
+        int id=0; 
         printf("Daftar Playlist Pengguna :\n");
         DisplayDaftarPlaylist(daftarPlaylist);
         printf("\nMasukkan ID Playlist yang dipilih : ");

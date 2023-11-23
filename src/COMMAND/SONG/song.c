@@ -16,7 +16,6 @@ void songNext()
         {
             // Push(riwayat, currentsong);
             printf("Queue kosong, memutar kembali lagu \n\"%s\" oleh \"%s\"", currentsong.nama.TabWord, currentsong.penyanyi.TabWord);
-            printf("\nCURRENT SONG : \"%s\" di album \"%s\" oleh \"%s\"", currentsong.nama.TabWord, currentsong.album.TabWord, currentsong.penyanyi.TabWord);
         }
     }
 
@@ -26,9 +25,8 @@ void songNext()
         // lagudiputars = lagudiputarq;
          // tadinya mikir lagu yang bakal diputar di tambahin ke riwayat
         Push(&r, currentsong);
-        printf("Memutar lagu selanjutnya\n\"%s\" oleh \"%s\"", song.nama.TabWord, song.penyanyi.TabWord);
+        printf("Memutar lagu selanjutnya\n\"%s\" oleh \"%s\"\n", song.nama.TabWord, song.penyanyi.TabWord);
         currentsong = song;
-        printf("\nCURRENT SONG : \"%s\" di album \"%s\" oleh \"%s\"", currentsong.nama.TabWord, currentsong.album.TabWord, currentsong.penyanyi.TabWord);
         // displayQueueLagu(queueLagu);
         // displayRiwayat(&r);
     }
@@ -43,6 +41,7 @@ void songPrevious()
     // ALGORITMA
     if(IsEmptyStack(r))
     {
+        printf("\ncurrent song length: %d\n",currentsong.penyanyi.Length );
         if(currentsong.penyanyi.Length == 0 && currentsong.album.Length == 0 && currentsong.nama.Length == 0)
         {
             printf(">> Riwayat lagu kamu kosong, dan tidak ada lagu yang dimainkan saat ini. Silahkan masukkan fungsi lain");
@@ -50,7 +49,7 @@ void songPrevious()
         else
         {
             printf("Riwayat lagu kosong, memutar kembali lagu\n\"%s\" oleh \"%s\"\n", currentsong.nama.TabWord, currentsong.penyanyi.TabWord); // memainkan lagu
-            printf("\nCURRENT SONG : \"%s\" di album \"%s\" oleh \"%s\"", currentsong.nama.TabWord, currentsong.album.TabWord, currentsong.penyanyi.TabWord);
+            printf("\n\nCURRENT SONG : \"%s\" di album \"%s\" oleh \"%s\"", currentsong.nama.TabWord, currentsong.album.TabWord, currentsong.penyanyi.TabWord);
             // displayQueueLagu(*queueLagu);
             // displayRiwayat(riwayat);
         }
@@ -69,11 +68,13 @@ void songPrevious()
             }
         }
         printf("Memutar lagu sebelumnya \n\"%s\" oleh \"%s\"", song.nama.TabWord, song.penyanyi.TabWord);
-        if(currentsong.penyanyi.Length != 0 && currentsong.album.Length != 0 && currentsong.nama.Length != 0) Push(&r, currentsong);
+        printf("%d\n",currentsong.nama.Length);
+        // if(currentsong.penyanyi.Length != 0 && currentsong.album.Length != 0 && currentsong.nama.Length != 0){
+        //     Push(&r, currentsong);}
         currentsong = song;
-        printf("\nCURRENT SONG : \"%s\" di album \"%s\" oleh \"%s\"\n", currentsong.nama.TabWord, currentsong.album.TabWord, currentsong.penyanyi.TabWord);
-        // displayQueueLagu(queueLagu);
-        // displayRiwayat(&riwayat);
+        printf("\nCURRENT SONG : \"%s\" di album \"%s\" oleh \"%s\"\n\n", currentsong.nama.TabWord, currentsong.album.TabWord, currentsong.penyanyi.TabWord);
+        printf("last: \n");
+        displayRiwayat(&r);
     }
 }
 
@@ -83,7 +84,7 @@ void startSong()
     printf("----TERDAPAT DUA FUNGSI YANG BISA DIAKSES---- \n");
     printf("    1. SONG NEXT \n");
     printf("    2. SONG PREVIOUS \n");
-    printf("    3. QUIT SONG \n");
+    printf("    3. SONG QUIT \n");
     getCommandSong();
 }
 void getCommandSong()
@@ -92,7 +93,7 @@ void getCommandSong()
     boolean state = true;
     while(state)
     {
-        printf("> SILAHKAN MASUKAN COMMAND: ");
+        printf("\n> SILAHKAN MASUKAN COMMAND: ");
         Word command = GetInput();
         if (IsWordEq(toKata("SONG NEXT"), command))
         {
@@ -104,7 +105,7 @@ void getCommandSong()
             songPrevious();
             state = true;
         } 
-        else if(IsWordEq(toKata("QUIT SONG"), command))
+        else if(IsWordEq(toKata("SONG QUIT"), command))
         {
             printf("\n>> Keluar dari Fungsi");
             state = false;
