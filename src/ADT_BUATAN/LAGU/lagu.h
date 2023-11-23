@@ -9,7 +9,7 @@ Deklarasi stack yang dengan implementasi array eksplisit-statik rata kiri
 
 
 #define Nil 0
-#define MaxEl 30
+#define MaxEl 10
 
 typedef struct {
     Word nama;
@@ -23,7 +23,7 @@ typedef int address;
 typedef struct
 {
     infotype InfoLagu[MaxEl];
-    int Count;
+    address Count;
 } SetLagu;
 
 extern Lagu currentsong;

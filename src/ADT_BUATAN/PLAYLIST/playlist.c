@@ -328,4 +328,16 @@ alamat alamatIndeksKe (List l, int idx)
     }
     return P;
 }
+
+int NbElmtPlaylist(List Playlist)
+{
+    alamat p=First(Playlist);
+    int cnt=0;
+    while(p!=Nil)
+    {
+        cnt++; 
+        p=Next(p);
+    }
+    return cnt;
+}
 /****************** PROSES SEMUA ELEMEN LIST ******************/

@@ -6,8 +6,7 @@
 
 #include "../QUEUELAGU/queuelagu.h"
 
-typedef Lagu infotypeStack;
-typedef int address;   /* indeks tabel */
+typedef Lagu infotypeStack; 
 
 /* Contoh deklarasi variabel bertype stack dengan ciri TOP : */
 /* Versi I : dengan menyimpan tabel dan alamat top secara eksplisit*/

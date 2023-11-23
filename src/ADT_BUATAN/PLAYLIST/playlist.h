@@ -175,4 +175,5 @@ int NbElmt (List L);
 void DisplayDaftarPlaylist();
 void DisplayLaguPlaylist(List L);
 alamat alamatIndeksKe (List l, int idx);
+int NbElmtPlaylist();
 #endif

@@ -12,9 +12,7 @@ Deklarasi stack yang dengan implementasi array eksplisit-statik rata kiri
 
 
 // typedef int bool;
-typedef Word keytype;
-typedef Album valuetypePenyanyi;
-typedef int address;    
+typedef Album valuetypePenyanyi; 
 
 typedef struct {
     keytype Key;//NamaPenyanyi
@@ -22,13 +20,13 @@ typedef struct {
 } infotypePenyanyi;
 
 typedef struct {
-	infotypePenyanyi InfoPenyanyi[10];
+	infotypePenyanyi InfoPenyanyi[MaxEl];
 	address Count;
 } Penyanyi;
 
 typedef struct
 {
-    Penyanyi PenyanyiKe[10];
+    Penyanyi PenyanyiKe[MaxEl];
     int Count;
 } ListPenyanyi;
 
