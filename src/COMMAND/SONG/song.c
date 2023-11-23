@@ -27,8 +27,6 @@ void songNext()
         Push(&r, currentsong);
         printf("Memutar lagu selanjutnya\n\"%s\" oleh \"%s\"\n", song.nama.TabWord, song.penyanyi.TabWord);
         currentsong = song;
-        // displayQueueLagu(queueLagu);
-        // displayRiwayat(&r);
     }
 }
 
@@ -49,9 +47,6 @@ void songPrevious()
         else
         {
             printf("Riwayat lagu kosong, memutar kembali lagu\n\"%s\" oleh \"%s\"\n", currentsong.nama.TabWord, currentsong.penyanyi.TabWord); // memainkan lagu
-            printf("\n\nCURRENT SONG : \"%s\" di album \"%s\" oleh \"%s\"", currentsong.nama.TabWord, currentsong.album.TabWord, currentsong.penyanyi.TabWord);
-            // displayQueueLagu(*queueLagu);
-            // displayRiwayat(riwayat);
         }
        
     }   
@@ -72,9 +67,6 @@ void songPrevious()
         // if(currentsong.penyanyi.Length != 0 && currentsong.album.Length != 0 && currentsong.nama.Length != 0){
         //     Push(&r, currentsong);}
         currentsong = song;
-        printf("\nCURRENT SONG : \"%s\" di album \"%s\" oleh \"%s\"\n\n", currentsong.nama.TabWord, currentsong.album.TabWord, currentsong.penyanyi.TabWord);
-        printf("last: \n");
-        displayRiwayat(&r);
     }
 }
 

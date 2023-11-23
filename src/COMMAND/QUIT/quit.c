@@ -9,7 +9,8 @@ void startQuit() {
         command=GetInput();
         if ((command.Length == 1)&&(command.TabWord[0] == 'Y' || command.TabWord[0] == 'N')){
             if (command.TabWord[0] == 'Y') {
-            startSave();
+            command=GetInput();
+            startSave(command);
             }
             state = true;
             printf("Kamu keluar dari WayangWave.\nDadah ^_^/\n");

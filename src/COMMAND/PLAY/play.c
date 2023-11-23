@@ -138,7 +138,11 @@ void PlayPlaylist(){
             queueKnownPlaylist(daftarPlaylist, &q, IDPlaylist-1);
 
             /*currentsong menjadi lagu urutan pertama dalam playlist*/
-            songNext();
+            // songNext();  
+            Lagu song;
+            dequeueLagu(&q, &song);
+            Push(&r, currentsong);
+            currentsong = song;
 
             /* isi riwayat lagu (keseluruhan) sama dengan queue, tetapi dengan urutan yang di-reverse. */
             // Pembuatan queue sementara yang sudah di-reverse

@@ -154,7 +154,7 @@ alamat SearchPlaylist (List L, infotype X)
     alamat P=First(L);
     while (P!=Nil)
     {
-        if(Info(P).nama.TabWord==X.nama.TabWord) return P;
+        if(IsWordEq(Info(P).nama,X.nama)) return P;
         P=Next(P);
     }
     return Nil;

@@ -10,11 +10,11 @@ void getCommandPlaylist()
         if(IsWordEq(command, toKata("PLAYLIST CREATE"))) {createPlaylist(); state=true;}
         else if(IsWordEq(command, toKata("PLAYLIST ADD SONG"))) {addPlaylistSong(); state=true;}
         else if(IsWordEq(command,toKata("PLAYLIST ADD ALBUM"))) {addPlaylistAlbum(); state=true;}
-        else if(IsWordEq(command,toKata("PLAYLIST SWAP"))) {swapPlaylist(); state=true;}
-        else if(IsWordEq(command,toKata("PLAYLIST REMOVE"))) {removePlaylist(); state=true;}
+        else if(IsWordEq(AccessCommand(command, 0),toKata("PLAYLIST")), IsWordEq(AccessCommand(command,1),toKata("SWAP"))) {swapPlaylist(command); state=true;}
+        else if(IsWordEq(AccessCommand(command,0),toKata("PLAYLIST")) && IsWordEq(AccessCommand(command,1),toKata("REMOVE"))) {removePlaylist(command); state=true;}
         else if (IsWordEq(command,toKata("PLAYLIST DELETE"))) {deletePlaylist(); state=true;}
         else if (IsWordEq(command,toKata("PLAYLIST QUIT"))) {state=false;}
-        else printf("> COMMAND TIDAK VALID SILAHKAN MASUKAN ULANG: ");   
+        else printf("> COMMAND TIDAK VALID SILAHKAN MASUKAN ULANG!\n");   
     }
 }
 
@@ -232,97 +232,65 @@ void addPlaylistAlbum()
         printf("Album dengan judul \"%s\" sudah ditambahkan ke dalam pada playlist pengguna \"%s\".",l.PenyanyiKe[idxp].InfoPenyanyi[idxp].Value.InfoAlbum[idxa].Key.TabWord, daftarPlaylist.A[idpl-1].NamaPlaylist.TabWord);
     }
 }
-void swapPlaylist()
+void swapPlaylist(Word command)
 {
-    printf("Daftar Playlist Pengguna :\n");
-    DisplayDaftarPlaylist(daftarPlaylist);
-    printf("Masukkan id playlist:");
-    Word idplaylist = GetInput();
-    int id;
-    boolean valid = false;
-    while(!valid){
-        if (IsWordNumber(idplaylist)){
-            id = WordtoInt(idplaylist);
-            if (id <= LengthArrayDin(daftarPlaylist) && id > 0){valid = true;}
-            else{
-                printf("ID Playlist tidak ditemukan.\n");
-                printf("\nMasukkan ID Playlist yang dipilih : ");
-                idplaylist = GetInput();
-            }
-        }
-        else{
-            printf("ID Playlist tidak ditemukan.\n");
-            printf("\nMasukkan ID Playlist  yang dipilih : ");
-            idplaylist = GetInput();
-        }
+    Word idplaylist = AccessCommand(command,2);
+    Word idx1=AccessCommand(command,3);
+    int idPlaylist=WordtoInt(idplaylist);
+    Word idx2=AccessCommand(command,4);
+    if (!IsWordNumber(idplaylist) || !IsWordNumber(idx1) || !IsWordNumber(idx2))
+    {
+        printf("Command invalid.\n");
     }
-    DisplayLaguPlaylist(daftarPlaylist.A[id-1]);
-    printf("Masukkan urutan lagu pertama yang mau ditukar: ");
-    int x, y;
-    Word idx1, idx2;
-    idx1 = GetInput();
-    valid = false;
-    while(!valid){
-        if(IsWordNumber(idx1)){
-            x = WordtoInt(idx1);
-            if(x > 0 && x <= NbElmtPlaylist(daftarPlaylist.A[id-1])){
-                printf("Masukkan urutan lagu kedua yang mau ditukar: ");
-                idx2 = GetInput();
-                if(IsWordNumber(idx2)){
-                    y = WordtoInt(idx2);
-                    if((y > 0 && y <= NbElmtPlaylist(daftarPlaylist.A[id-1])) && y != x){
-                        valid = true;
-                        break;
-                    }
-                    else{
-                    printf("urutan kedua invalid.\n");
-                    printf("Masukkan urutan lagu kedua yang mau ditukar: ");
-                    idx2 = GetInput();
-                    }
-                }
-                else{
-                    printf("urutan kedua invalid.\n");
-                    printf("Masukkan urutan lagu kedua yang mau ditukar: ");
-                    idx2 = GetInput();
-                }
-            }
-            else{
-                printf("urutan pertama invalid.\n");
-                printf("Masukkan urutan lagu pertama yang mau ditukar: ");
-                idx1 = GetInput();
-            }
-        }
-        else{
-            printf("urutan pertama invalid.\n");
-            printf("Masukkan urutan lagu pertama yang mau ditukar: ");
-            idx1 = GetInput();
-        }
+    else if (idPlaylist<1 ||idPlaylist>LengthArrayDin(daftarPlaylist))
+    {
+        printf("Tidak ada playlist dengan playlist ID %d\n",idPlaylist);
     }
-    Lagu tukarx, tukary;
-    alamat adrx,adry;
-    adrx=alamatIndeksKe(daftarPlaylist.A[id-1], x-1);
-    adry=alamatIndeksKe(daftarPlaylist.A[id-1], y-1);
-    tukarx=Info(adrx);
-    tukary=Info(adry);
-    Info(adrx)=tukary;
-    Info(adry)=tukarx;
+    else if (alamatIndeksKe(daftarPlaylist.A[idPlaylist-1],WordtoInt(idx1))==Nil)
+    {
+        printf("Tidak ada lagu dengan urutan %d di playlist \"%s\"\n",WordtoInt(idx1),daftarPlaylist.A[idPlaylist-1].NamaPlaylist.TabWord);
+    }
+    else if (alamatIndeksKe(daftarPlaylist.A[idPlaylist-1],WordtoInt(idx2))==Nil)
+    {
+        printf("Tidak ada lagu dengan urutan %d di playlist \"%s\"\n",WordtoInt(idx2),daftarPlaylist.A[idPlaylist-1].NamaPlaylist.TabWord);
+    }
+    else
+    {
+        Lagu tukarx, tukary;
+        alamat adrx,adry;
+        int x=WordtoInt(idx1);
+        int y=WordtoInt(idx2);
+        int id=WordtoInt(idplaylist);
+        adrx=alamatIndeksKe(daftarPlaylist.A[id-1], x-1);
+        adry=alamatIndeksKe(daftarPlaylist.A[id-1], y-1);
+        tukarx=Info(adrx);
+        tukary=Info(adry);
+        Info(adrx)=tukary;
+        Info(adry)=tukarx;
+        printf("Berhasil menukar lagu dengan nama \"%s\" dengan \"%s\" di playlist \"%s\"\n",Info(adry).nama.TabWord,Info(adrx).nama.TabWord, daftarPlaylist.A[id-1].NamaPlaylist.TabWord);
+    }
 }
 
-void removePlaylist()
+void removePlaylist(Word command)
 {
-    int id;
-    id=WordtoInt(GetInput());
-    if(id>LengthArrayDin(daftarPlaylist)) printf("Tidak ada playlist dengan ID %d.",id);
-    int n=WordtoInt(GetWords());
-    alamat Loc=First(daftarPlaylist.A[id]);
-    if(Loc==Nil) printf("Tidak ada lagu dengan urutan %d di playlist “%s”!",n,daftarPlaylist.A[id].NamaPlaylist.TabWord);
-    if(n==1) DelFirst(&daftarPlaylist.A[id],&Loc);
-    else 
+    if(!IsWordNumber(AccessCommand(command,2)) || !IsWordNumber(AccessCommand(command,3))) printf("Command invalid.\n");
+    else
     {
-        alamat Prec,Loc;
-        Loc=alamatIndeksKe(daftarPlaylist.A[id], n);
-        Prec=alamatIndeksKe(daftarPlaylist.A[id], n-1);
-        DelAfter(&daftarPlaylist.A[id], &Loc, Prec);
+        int id=WordtoInt((AccessCommand(command,2)));
+        if(id>LengthArrayDin(daftarPlaylist)) printf("Tidak ada playlist dengan ID %d.",id);
+        int n=WordtoInt(AccessCommand(command,3));
+        alamat Loc=First(daftarPlaylist.A[id-1]);
+        if(Loc==Nil || n>NbElmtPlaylist(daftarPlaylist.A[id-1])) printf("Tidak ada lagu dengan urutan %d di playlist \"%s\"!",n,daftarPlaylist.A[id-1].NamaPlaylist.TabWord);
+        else if(n==1) DelFirst(&daftarPlaylist.A[id-1],&Loc);
+        else 
+        {
+            alamat Prec,Loc;
+            Loc=alamatIndeksKe(daftarPlaylist.A[id-1], n);
+            Lagu dihapus=LaguIndeksKe(daftarPlaylist.A[id-1],n);
+            Prec=alamatIndeksKe(daftarPlaylist.A[id-1], n-1);
+            DelAfter(&daftarPlaylist.A[id-1], &Loc, Prec);
+            printf("Lagu \"%s\" oleh \"%s\" telah dihapus dari playlist\"%s\"!\n",dihapus.nama.TabWord,dihapus.penyanyi.TabWord, daftarPlaylist.A[id-1].NamaPlaylist.TabWord);
+        }
     }
 }
 

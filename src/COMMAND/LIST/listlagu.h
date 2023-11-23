@@ -13,6 +13,8 @@ void DisplayDaftarLagu(SetLagu lagu, Word namaalbum);
 
 char yesorno ();
 
+void ListPlaylist();
+
 void ListLagu();
 
 void startList();

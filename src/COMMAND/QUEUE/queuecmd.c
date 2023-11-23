@@ -11,7 +11,7 @@ void getCommandQueue()
         Word command=GetInput();
         if(IsWordEq(command, toKata("QUEUE SONG"))) {queueSong(); state=true;}
         else if(IsWordEq(command, toKata("QUEUE PLAYLIST"))) {queuePlaylist(); state=true;}
-        else if(IsWordEq(command,toKata("QUEUE SWAP"))) {swapSongs(); state=true;}
+        else if(IsWordEq(AccessCommand(command,0),toKata("QUEUE")) && IsWordEq(AccessCommand(command,1),toKata("SWAP"))) {swapSongs(command); state=true;}
         else if(IsWordEq(command,toKata("QUEUE REMOVE"))) {removeSong(); state=true;}
         else if(IsWordEq(command,toKata("QUEUE CLEAR"))) {clearQueue(); state=true;}
         else if (IsWordEq(command,toKata("QUEUE QUIT"))) {state=false;}
@@ -32,10 +32,9 @@ void startQueue()
     getCommandQueue();
 }
 void queueSong() {
-    printf(">> QUEUE SONG;\n");
     // menampilkan penyanyi, disimpan dalam ADT penyanyi, berperan juga sebagai key
     int i=0;
-    printf("Daftar Penyanyi :\n");
+    printf("\nDaftar Penyanyi :\n");
     while(i<l.Count){
         printf("  %d. %s\n", i+1, l.PenyanyiKe[i].InfoPenyanyi[i].Key.TabWord);
         i++;
@@ -106,7 +105,7 @@ void queueSong() {
 
 // Fungsi untuk menambahkan playlist ke dalam queue
 void queuePlaylist() {
-    printf("Daftar Playlist Pengguna :\n");
+    printf("\nDaftar Playlist Pengguna :\n");
     DisplayDaftarPlaylist(daftarPlaylist);
     printf("Masukkan ID Playlist: ");
     Word kata = GetInput();
@@ -144,19 +143,16 @@ void queuePlaylist() {
 }
 
 // Fungsi untuk menukar lagu pada urutan x dan y dalam queue
-void swapSongs() {
-    printf(">> QUEUE SWAP;\n");
-    printf("Masukkan index lagu pertama yang ingin dihapus dari queue : ");
+void swapSongs(Word command) {
     int x, y;
     Word idx1, idx2;
-    idx1 = GetInput();
+    idx1 = AccessCommand(command,2);
+    idx2 = AccessCommand(command,3);
     boolean valid = false;
     while(!valid){
         if(IsWordNumber(idx1)){
             x = WordtoInt(idx1);
             if(x > 0 && x <= lengthQueueLagu(q)){
-                printf("Masukkan index lagu kedua yang ingin dihapus dari queue : ");
-                idx2 = GetInput();
                 if(IsWordNumber(idx2)){
                     y = WordtoInt(idx2);
                     if((y > 0 && y <= lengthQueueLagu(q)) && y != x){
@@ -247,8 +243,7 @@ void swapSongs() {
 
 // Fungsi untuk menghapus lagu dari queue berdasarkan ID
 void removeSong() {
-    printf(">> QUEUE REMOVE;\n");
-    printf("Masukkan urutan lagu yang ingin dihapus dari queue : ");
+    printf("\nMasukkan urutan lagu yang ingin dihapus dari queue : ");
     Word idlagu = GetInput();
     int idxl;
     boolean valid = false;
@@ -289,7 +284,6 @@ void removeSong() {
 
 // Fungsi untuk mengosongkan queue
 void clearQueue() {
-    printf(">> QUEUE CLEAR;\n");
     CreateQueueLagu(&q);
-    printf("Queue berhasil dikosongkan.\n");
+    printf("\nQueue berhasil dikosongkan.\n");
 }

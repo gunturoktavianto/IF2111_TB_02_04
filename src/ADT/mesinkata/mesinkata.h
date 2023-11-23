@@ -92,4 +92,5 @@ char* wordToString(Word word);
 
 Word concatWord(Word w1, Word w2);
 
+Word AccessCommand(Word comm, int Idx);
 #endif

@@ -1,18 +1,15 @@
 #include "save.h"
-void startSave() { //isi parameter sesuai variabel yang ada di bawah
-    printf("Masukkan nama file save :");
-    Word filesave=GetInput();
+void startSave(Word filesave) { //isi parameter sesuai variabel yang ada di bawah
     FILE *fpointer;
     Word maindir;
     int jumlahPenyanyi, jumlahAlbum, jumlahLagu, jumlahDiQueue, jumlahDiRiwayat;
     int jumlahPlaylist, jumlahLaguPlaylist;
     char* namaPlaylist;
-
+    maindir=toKata("../save/");
     // ubah variabel maindir jadi word dulu dan assign ke variabel baru
     // misalkan: maindirWord = wordToString(maindir);
-    fpointer = fopen(wordToString(concatWord(maindir, filesave)), "w"); 
+    fpointer = fopen(wordToString(concatWord(maindir, AccessCommand(filesave,1))), "w"); 
     jumlahPenyanyi=l.Count;
-    fprintf(fpointer, "%d\n", jumlahPenyanyi);
     Word namaPenyanyi;
     Word namaAlbum;
     Word namaLagu;

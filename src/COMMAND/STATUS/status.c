@@ -7,37 +7,35 @@ boolean IsPlaylistinQueue(Queuelagu ql){
 	int i=0;
 	ElTypeQueue val;
 	/*ALGORITMA*/
-	    dequeueLagu(&ql, &val);
-        /* MASIH SALAH*/
-        /* 1. MENCARI PLAYLIST DENGAN ELEMEN PERTAMA = CURRENTSONG*/
-        boolean found = false;
-        int iD=0;
-        for(iD=0; iD<LengthArrayDin(daftarPlaylist); iD++){
-            if(SearchPlaylist(daftarPlaylist.A[iD],val)!=Nil){
-                found = true;
-                break;
-            }
+    /* MASIH SALAH*/
+    /* 1. MENCARI PLAYLIST DENGAN ELEMEN PERTAMA = CURRENTSONG*/
+    boolean found = false;
+    int iD=0;
+    for(iD=0; iD<LengthArrayDin(daftarPlaylist); iD++){
+        if(SearchPlaylist(daftarPlaylist.A[iD],currentsong)!=Nil){
+            found = true;
+            break;
         }
-        if(found){
-            enqueueLagu(&ql, val);
-            if(lengthQueueLagu(ql)!=NbElmtPlaylist(daftarPlaylist.A[iD])) return false;
-            else
+    }
+    if(found){
+        enqueueLagu(&ql, currentsong);
+        if(lengthQueueLagu(ql)!=NbElmtPlaylist(daftarPlaylist.A[iD])) return false;
+        else
+        {
+            int cnt=0;
+            for (i=1; i<=NbElmtPlaylist(daftarPlaylist.A[iD]); i++)
             {
-                int cnt=0;
-                for (i=1; i<=NbElmtPlaylist(daftarPlaylist.A[iD]); i++)
-                {
-                    if (isInQueueLagu(ql, LaguIndeksKe(daftarPlaylist.A[iD],i))) {cnt++;}
-                }
-                if(cnt==NbElmtPlaylist(daftarPlaylist.A[iD])) {currentplaylist=daftarPlaylist.A[iD];return true;}
-                return false;
+                if (isInQueueLagu(ql, LaguIndeksKe(daftarPlaylist.A[iD],i))) {cnt++;}
             }
-        } 
-        else return false;
+            if(cnt==NbElmtPlaylist(daftarPlaylist.A[iD])) {currentplaylist=daftarPlaylist.A[iD];return true;}
+            return false;
+        }
+    } 
+    else return false;
 }
 
 /* MAIN SECTION */
 void startStatus(){
-    displayQueueLagu(q);
     Word namacp = toKata("currentplaylist");
     CreateEmptyPlaylist(namacp, &currentplaylist);
     /* I.S. Tidak ada lagu yang diputar */
@@ -68,18 +66,19 @@ void startStatus(){
             } else{
                 /* I.S. Sedang memutar playlist */
                 printf("Current Playlist: %s\n\nNow Playing:\n%s - %s - %s\n\nQueue:\n",currentplaylist.NamaPlaylist.TabWord, currentsong.penyanyi.TabWord, currentsong.album.TabWord, currentsong.nama.TabWord);
+                int i=0;
+                ElTypeQueue val;
+                Queuelagu qq;
+                CreateQueueLagu(&qq);
+                copyQueueLagu(&q, &qq);
+                while (IDX_HEAD(qq) != IDX_UNDEF)
+                {
+                    dequeueLagu(&qq, &val);
+                    printf("%d. %s - %s - %s\n", i+1, val.penyanyi.TabWord, val.album.TabWord, val.nama.TabWord);
+                    i++;
                 }
-            int i=0;
-            ElTypeQueue val;
-            Queuelagu qq;
-            CreateQueueLagu(&qq);
-            copyQueueLagu(&q, &qq);
-            while (IDX_HEAD(qq) != IDX_UNDEF)
-            {
-                dequeueLagu(&qq, &val);
-                printf("%d. %s - %s - %s\n", i+1, val.penyanyi.TabWord, val.album.TabWord, val.nama.TabWord);
-                i++;
-            }
+                }
+            //displayQueueLagu(q);
             }
         }
 }

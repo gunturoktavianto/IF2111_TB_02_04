@@ -103,6 +103,37 @@ char yesorno ()
     return input;
 }
 
+void ListPlaylist(){
+    boolean valid = false;
+    printf("Daftar Playlist Pengguna :\n");
+    DisplayDaftarPlaylist(daftarPlaylist);
+    printf("Ingin melihat lagu yang ada?(Y/N): ");
+    char inputyn = yesorno();
+    if(inputyn == 'Y' || inputyn == 'y')
+    {
+        printf("Masukkan ID Playlist: ");
+        Word idplaylist = GetInput();
+        int IDPlaylist;
+        boolean valid = false;
+        while(!valid){
+            if (IsWordNumber(idplaylist)){
+                IDPlaylist = WordtoInt(idplaylist);
+                if (IDPlaylist <= LengthArrayDin(daftarPlaylist) && IDPlaylist > 0){valid = true;}
+                else{
+                    printf("ID Playlist INVALID\n");
+                    printf("Masukkan ID Playlist: ");
+                    idplaylist = GetInput();
+                }
+            }
+            else{
+                printf("ID Playlist INVALID\n");
+                printf("Masukkan ID Playlist: ");
+                idplaylist = GetInput();
+            }
+        } DisplayLaguPlaylist(daftarPlaylist.A[IDPlaylist-1]);
+    } 
+}
+
 void ListLagu()
 {
     // KAMUS 
@@ -177,8 +208,7 @@ void startList() // yang dipanggil
         } 
         else if(IsWordEq(toKata("LIST PLAYLIST"), command))
         {
-            printf("Daftar Playlist Pengguna :\n");
-            DisplayDaftarPlaylist(daftarPlaylist);
+            ListPlaylist();
         } 
         else if(IsWordEq(toKata("LIST QUIT"), command))
         {
