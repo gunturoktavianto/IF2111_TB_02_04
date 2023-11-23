@@ -39,13 +39,13 @@ void IgnoreSC()
         ADV();
 }
 
-void STARTWORD()
+void STARTWORD(FILE *input)
 /* I.S. : currentChar sembarang
    F.S. : EndWord = true, dan currentChar = MARK;
           atau EndWord = false, currentWord adalah kata yang sudah diakuisisi,
           currentChar karakter pertama sesudah karakter terakhir kata */
 {
-    START();
+    START(input);
     IgnoreBlanks();
     IgnoreCR();
     if(currentChar==MARK) EndWord=true;
@@ -113,7 +113,7 @@ void STARTWORDLOAD(FILE *input)
     START(input);
     
     if(currentChar==MARK) EndWord=true;
-    else {EndWord=false;}
+    else {EndWord=false; ADVWORDLOAD();}
 }
 void ADVWORDLOAD()
 /* I.S. : currentChar adalah karakter pertama kata yang akan diakuisisi
@@ -228,9 +228,21 @@ Word toKata(char *str) {
 
 Word GetInput()
 {
-    STARTWORD(stdin);
-    Word w=GetWords();
-    return w;
+    FILE *input=stdin;
+    STARTWORD(input);
+    Word temp;
+    temp.Length=0;
+    int i=0;
+    while(currentChar!=';') 
+    {
+        temp.TabWord[i]=currentChar;
+        ADV();
+        i++;
+        temp.Length++;
+    }
+    temp.TabWord[temp.Length]='\0';
+    ADV();
+    return temp;
 }
 
 boolean IsWordNumber (Word kata) {

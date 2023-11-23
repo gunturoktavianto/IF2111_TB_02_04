@@ -2,7 +2,14 @@
 #include "mesinkarakter.c"
 int main()
 {
-    Word namaPenyanyi=GetInput();
-    Word s=namaPenyanyi;
-    printf("%s",s.TabWord);
+    START(stdin);
+    while(currentChar!=';') {
+        printf("%c", currentChar);
+        ADV();
+    }
+    START(stdin);
+    while(currentChar!=';') {
+        printf("%c", currentChar);
+        ADV();
+    }
 }
