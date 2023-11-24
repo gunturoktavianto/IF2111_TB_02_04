@@ -39,7 +39,7 @@ void songPrevious()
     // ALGORITMA
     if(IsEmptyStack(r))
     {
-        printf("\ncurrent song length: %d\n",currentsong.penyanyi.Length );
+        // printf("\ncurrent song length: %d\n",currentsong.penyanyi.Length );
         if(currentsong.penyanyi.Length == 0 && currentsong.album.Length == 0 && currentsong.nama.Length == 0)
         {
             printf(">> Riwayat lagu kamu kosong, dan tidak ada lagu yang dimainkan saat ini. Silahkan masukkan fungsi lain");
