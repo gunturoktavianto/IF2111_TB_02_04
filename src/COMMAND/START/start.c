@@ -29,7 +29,7 @@ void startconfig()
                 l.PenyanyiKe[i].InfoPenyanyi[i].Value.InfoAlbum[j].Value.InfoLagu[k].penyanyi=l.PenyanyiKe[i].InfoPenyanyi[i].Key;
                 nextLine();
             }
-            printf("File konfigurasi aplikasi berhasil dibaca. WayangWave berhasil dijalankan.\n");
         }
     }
+    printf("File konfigurasi aplikasi berhasil dibaca. WayangWave berhasil dijalankan.\n");
 }
