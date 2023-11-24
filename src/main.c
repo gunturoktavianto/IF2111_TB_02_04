@@ -2,7 +2,10 @@
 #include "COMMAND/LOAD/load.h"
 #include "console.h"
 
+
+
 int main() {
+    welcome();
     stateWayangWave = false;
     CreateEmptyListPenyanyi(&l);
     CreateQueueLagu(&q);
