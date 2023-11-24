@@ -20,7 +20,7 @@ int main() {
                 InitialHelp();
             }
             else if (!IsWordEq(toKata("START"), command) && !IsWordEq(toKata("LOAD"), command)) {
-                printf("Command tidak valid. Mesin WayangWave belum dijalankan!\nGunakan command START / LOAD untuk memulai\n\n");
+                printf("Command tidak valid. Mesin WayangWave belum dijalankan!\nGunakan command START/LOAD/HELP untuk memulai\n\n");
             }
         } while (!IsWordEq(toKata("START"), command) && !IsWordEq(toKata("LOAD"), command));
 
