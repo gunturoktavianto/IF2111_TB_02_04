@@ -1,5 +1,5 @@
 #include "save.h"
-void startSave(Word filesave) { //isi parameter sesuai variabel yang ada di bawah
+void startSave(Word filesave) {
     FILE *fpointer;
     Word maindir;
     int jumlahPenyanyi, jumlahAlbum, jumlahLagu, jumlahDiQueue, jumlahDiRiwayat;

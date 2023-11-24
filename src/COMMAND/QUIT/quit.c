@@ -1,4 +1,5 @@
 #include "quit.h"
+#include "../save/save.h"
 
 void startQuit() {
     Word command;
