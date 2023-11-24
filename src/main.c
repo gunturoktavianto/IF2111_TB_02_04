@@ -11,9 +11,9 @@ int main() {
     CreateQueueLagu(&q);
     CreateStack(&r);
     Word command;
+    
     while (!stateWayangWave) {
         do {
-            printf("=====[ Selamat datang di WayangWave ]=====\n");
             printf("> ENTER COMMAND: ");
             command=GetInput();
             if (IsWordEq(toKata("HELP"), command)){

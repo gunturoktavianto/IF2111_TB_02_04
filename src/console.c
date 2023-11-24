@@ -51,16 +51,28 @@ void image()
     char *filename = "../bin/welcome.txt";
     FILE *fptr = NULL;
     fptr = fopen(filename,"r");
- 
+    printf(CYN);
     print_image(fptr);
  
     fclose(fptr);
+
+}
+
+void image2(){
+    char *filename2 = "../bin/selamatdatang.txt";
+    FILE *fptr2 = NULL;
+    fptr2 = fopen(filename2,"r");
+    printf(GRN);
+    
+    print_image(fptr2);
+ 
+    fclose(fptr2);
+    printf(RESET);
 }
  
 void print_image(FILE *fptr)
 {
     char read_string[MAX_LEN];
-    printf(CYN);
     while(fgets(read_string,sizeof(read_string),fptr) != NULL)
         printf("%s",read_string);
     printf(RESET);
@@ -69,5 +81,12 @@ void print_image(FILE *fptr)
 void welcome(){
     loading();
     image();
+    image2();
     printf("\n\n");
+    printf("=====[ Ketik");
+    printf(YEL);
+    printf(" HELP ");
+    printf(RESET);
+    printf("untuk memulai ]=====\n");
+
 }

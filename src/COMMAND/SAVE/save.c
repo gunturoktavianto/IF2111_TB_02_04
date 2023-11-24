@@ -79,5 +79,7 @@ void startSave(Word filesave) {
         }
     }
     fclose(fpointer);
+    printf(GRN);
     printf("File berhasil disimpan!\n");
+    printf(RESET);
 }

@@ -41,6 +41,11 @@ void welcome();
 */
 
 void image();
+void image2();
 
 void print_image(FILE *fptr);
+/* Menampilkan image
+    I.S. Sembarang
+    F.S. Image ditampilkan
+*/
 #endif
