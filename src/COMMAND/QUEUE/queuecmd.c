@@ -69,9 +69,9 @@ void queueSong() {
 
     // menampilkan lagu dari album X, disimpan dalam ADT set
     printf("Daftar Lagu Album %s oleh %s :\n", namaalbum.Key.TabWord, namapenyanyi.Key.TabWord);
-    while(i<l.PenyanyiKe[idxp].InfoPenyanyi[idxp].Value.Count){
-        printf("  %d. %s\n", i+1, l.PenyanyiKe[idxp].InfoPenyanyi[idxp].Value.InfoAlbum[idxa].Value.InfoLagu[i].nama.TabWord);
-        i++;
+        while(i<l.PenyanyiKe[idxp].InfoPenyanyi[idxp].Value.InfoAlbum[idxa].Value.Count){
+            printf("  %d. %s\n", i+1, l.PenyanyiKe[idxp].InfoPenyanyi[idxp].Value.InfoAlbum[idxa].Value.InfoLagu[i].nama.TabWord);
+            i++;
     } i=0;
 
     // mencari lagu
