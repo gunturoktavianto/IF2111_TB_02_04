@@ -303,23 +303,17 @@ void DisplayDaftarPlaylist()
         printf("    %d. %s\n",i+1,daftarPlaylist.A[i].NamaPlaylist.TabWord);
     }
 }
-
 void DisplayLaguPlaylist(List L)
 {
     printf("Daftar lagu pada playlist %s:\n",L.NamaPlaylist.TabWord);
-    if(IsEmptyLinkedList(L)) printf("Kamu tidak memiliki lagu di playlist ini\n");
-    else
+    alamat P=First(L);
+    int i=1;
+    while(P!=Nil)
     {
-        alamat P=First(L);
-        int i=1;
-        while(P!=Nil)
-        {
-            printf("%d. %s\n",i,Info(P).nama.TabWord);
-            P=Next(P);
-            i++;
-        }
+        printf("%d. %s\n",i,Info(P).nama.TabWord);
+        P=Next(P);
+        i++;
     }
-   
 }
 
 Lagu LaguIndeksKe (List l, int idx)
@@ -340,7 +334,7 @@ alamat alamatIndeksKe (List l, int idx)
     int cnt=0;
     while(P!=Nil)
     {
-        if(cnt==idx) return P;
+        if(cnt==idx-1) return P;
         cnt++;
         P=Next(P);
     }

@@ -25,8 +25,8 @@ void startPlaylist()
     printf("1. PLAYLIST CREATE -> untuk membuat playlist baru\n");
     printf("2. PLAYLIST ADD SONG -> untuk menambah lagu baru ke playlist\n");
     printf("3. PLAYLIST ADD ALBUM -> untuk menambah album ke playlist\n");
-    printf("4. PLAYLIST SWAP -> untuk menukar urutan lagu pada playlist\n");
-    printf("5. PLAYLIST REMOVE -> untuk menghapus lagu dari playlist\n");
+    printf("4. PLAYLIST SWAP <id> <x> <y>-> untuk menukar urutan lagu x dan y pada playlist di indeks id\n");
+    printf("5. PLAYLIST REMOVE <id> <n>-> untuk menghapus lagu dari playlist di indeks id dengan urutan n\n");
     printf("6. PLAYLIST DELETE -> untuk menghapus playlist\n");
     printf("7. PLAYLIST QUIT -> untuk keluar dari fungsi playlist\n\n");
     getCommandPlaylist();
@@ -55,11 +55,12 @@ void createPlaylist()
     printf("Playlist %s berhasil dibuat!\nSilakan masukkan lagu - lagu artis terkini kesayangan Anda!\n", x.TabWord);
 }
 void addPlaylistSong()
-{
-    // printdaftarPenyanyi(l);
-    // printf("Masukkan Nama Penyanyi yang dipilih : ");
-    if (IsEmptyArrayDin(daftarPlaylist)) printf("Kamu tidak memiliki playlist.\n");
-    else {
+{   
+    if(LengthArrayDin(daftarPlaylist)==0) printf("Belum ada playlist yang dibuat.\n");
+    else{
+
+        // printdaftarPenyanyi(l);
+        // printf("Masukkan Nama Penyanyi yang dipilih : ");
         int i=0;
         printf("Daftar Penyanyi :\n");
         while(i<l.Count){
@@ -96,12 +97,13 @@ void addPlaylistSong()
 
         // menampilkan lagu dari album X, disimpan dalam ADT set
         printf("Daftar Lagu Album %s oleh %s :\n", namaalbum.Key.TabWord, namapenyanyi.Key.TabWord);
-        while(i<l.PenyanyiKe[idxp].InfoPenyanyi[idxp].Value.Count){
+        while(i<l.PenyanyiKe[idxp].InfoPenyanyi[idxp].Value.InfoAlbum[idxa].Value.Count){
             printf("  %d. %s\n", i+1, l.PenyanyiKe[idxp].InfoPenyanyi[idxp].Value.InfoAlbum[idxa].Value.InfoLagu[i].nama.TabWord);
             i++;
         } i=0;
 
         // mencari lagu
+        printf("\nMasukkan ID Lagu  yang dipilih : ");
         Word idlagu = GetInput();
         int idxl;
         boolean valid = false;
@@ -146,19 +148,21 @@ void addPlaylistSong()
         alamat P = SearchPlaylist(daftarPlaylist.A[idpl-1], l.PenyanyiKe[idxp].InfoPenyanyi[idxp].Value.InfoAlbum[idxa].Value.InfoLagu[idxl]);
         if (P == Nil){
             InsVLast (&daftarPlaylist.A[idpl-1], l.PenyanyiKe[idxp].InfoPenyanyi[idxp].Value.InfoAlbum[idxa].Value.InfoLagu[idxl]);
-            printf("Lagu dengan judul \"%s\" pada album \"%s\" oleh penyanyi \"%s\" berhasil ditambahkan ke dalam playlist \"%s\".\n",l.PenyanyiKe[idxp].InfoPenyanyi[idxp].Value.InfoAlbum[idxa].Value.InfoLagu[idxl-1].nama.TabWord, l.PenyanyiKe[idxp].InfoPenyanyi[idxp].Value.InfoAlbum[idxa].Key.TabWord, l.PenyanyiKe[idxp].InfoPenyanyi[idxp].Value.InfoAlbum[idxa].Value.InfoLagu[idxl-1].nama.TabWord, daftarPlaylist.A[idpl-1].NamaPlaylist.TabWord);
+            printf("Lagu dengan judul \"%s\" pada album \"%s\" oleh penyanyi \"%s\" berhasil ditambahkan ke dalam playlist \"%s\".",l.PenyanyiKe[idxp].InfoPenyanyi[idxp].Value.InfoAlbum[idxa].Value.InfoLagu[idxl-1].nama.TabWord, l.PenyanyiKe[idxp].InfoPenyanyi[idxp].Value.InfoAlbum[idxa].Key.TabWord, l.PenyanyiKe[idxp].InfoPenyanyi[idxp].Value.InfoAlbum[idxa].Value.InfoLagu[idxl-1].nama.TabWord, daftarPlaylist.A[idpl-1].NamaPlaylist.TabWord);
         }
         else{
             printf("Lagu dengan judul \"%s\" pada album \"%s\" oleh penyanyi \"%s\" sudah ditambahkan ke dalam playlist \"%s\".",l.PenyanyiKe[idxp].InfoPenyanyi[idxp].Value.InfoAlbum[idxa].Value.InfoLagu[idxl-1].nama.TabWord, l.PenyanyiKe[idxp].InfoPenyanyi[idxp].Value.InfoAlbum[idxa].Key.TabWord, l.PenyanyiKe[idxp].InfoPenyanyi[idxp].Value.InfoAlbum[idxa].Value.InfoLagu[idxl-1].nama.TabWord, daftarPlaylist.A[idpl-1].NamaPlaylist.TabWord);
         }
     }
+
 }
 
 void addPlaylistAlbum()
 {
-    if (IsEmptyArrayDin(daftarPlaylist)) printf("Kamu tidak memiliki playlist.\n");
-    // menampilkan penyanyi, disimpan dalam ADT penyanyi, berperan juga sebagai key
+    if(LengthArrayDin(daftarPlaylist)==0) printf("Belum ada playlist yang dibuat.\n");
     else{
+
+        // menampilkan penyanyi, disimpan dalam ADT penyanyi, berperan juga sebagai key
         int i=0;
         printf("Daftar Penyanyi :\n");
         while(i<l.Count){
@@ -231,10 +235,10 @@ void addPlaylistAlbum()
             }
         }
         if (found){
-            printf("Album dengan judul \"%s\" berhasil ditambahkan ke dalam pada playlist pengguna \"%s\".\n",l.PenyanyiKe[idxp].InfoPenyanyi[idxp].Value.InfoAlbum[idxa].Key.TabWord, daftarPlaylist.A[idpl-1].NamaPlaylist.TabWord);
+            printf("Album dengan judul \"%s\" berhasil ditambahkan ke dalam pada playlist pengguna \"%s\".",l.PenyanyiKe[idxp].InfoPenyanyi[idxp].Value.InfoAlbum[idxa].Key.TabWord, daftarPlaylist.A[idpl-1].NamaPlaylist.TabWord);
         }
         else{
-            printf("Album dengan judul \"%s\" sudah ditambahkan ke dalam pada playlist pengguna \"%s\".\n",l.PenyanyiKe[idxp].InfoPenyanyi[idxp].Value.InfoAlbum[idxa].Key.TabWord, daftarPlaylist.A[idpl-1].NamaPlaylist.TabWord);
+            printf("Album dengan judul \"%s\" sudah ditambahkan ke dalam pada playlist pengguna \"%s\".",l.PenyanyiKe[idxp].InfoPenyanyi[idxp].Value.InfoAlbum[idxa].Key.TabWord, daftarPlaylist.A[idpl-1].NamaPlaylist.TabWord);
         }
     }
 }
@@ -267,8 +271,8 @@ void swapPlaylist(Word command)
         int x=WordtoInt(idx1);
         int y=WordtoInt(idx2);
         int id=WordtoInt(idplaylist);
-        adrx=alamatIndeksKe(daftarPlaylist.A[id-1], x-1);
-        adry=alamatIndeksKe(daftarPlaylist.A[id-1], y-1);
+        adrx=alamatIndeksKe(daftarPlaylist.A[id-1], x);
+        adry=alamatIndeksKe(daftarPlaylist.A[id-1], y);
         tukarx=Info(adrx);
         tukary=Info(adry);
         Info(adrx)=tukary;
@@ -279,25 +283,29 @@ void swapPlaylist(Word command)
 
 void removePlaylist(Word command)
 {
-    if(!IsWordNumber(AccessCommand(command,2)) || !IsWordNumber(AccessCommand(command,3))) printf("Command invalid.\n");
-    else
-    {
-        int id=WordtoInt((AccessCommand(command,2)));
-        if(id>LengthArrayDin(daftarPlaylist)) printf("Tidak ada playlist dengan ID %d.",id);
-        int n=WordtoInt(AccessCommand(command,3));
-        alamat Loc=First(daftarPlaylist.A[id-1]);
-        if(Loc==Nil || n>NbElmtPlaylist(daftarPlaylist.A[id-1])) printf("Tidak ada lagu dengan urutan %d di playlist \"%s\"!",n,daftarPlaylist.A[id-1].NamaPlaylist.TabWord);
-        else if(n==1) DelFirst(&daftarPlaylist.A[id-1],&Loc);
-        else 
+    // if(LengthArrayDin(daftarPlaylist)==0) printf("Belum ada playlist yang dibuat.\n");
+    // else{
+
+        if(!IsWordNumber(AccessCommand(command,2)) || !IsWordNumber(AccessCommand(command,3))) printf("Command invalid.\n");
+        else
         {
-            alamat Prec,Loc;
-            Loc=alamatIndeksKe(daftarPlaylist.A[id-1], n);
-            Lagu dihapus=LaguIndeksKe(daftarPlaylist.A[id-1],n);
-            Prec=alamatIndeksKe(daftarPlaylist.A[id-1], n-1);
-            DelAfter(&daftarPlaylist.A[id-1], &Loc, Prec);
-            printf("Lagu \"%s\" oleh \"%s\" telah dihapus dari playlist\"%s\"!\n",dihapus.nama.TabWord,dihapus.penyanyi.TabWord, daftarPlaylist.A[id-1].NamaPlaylist.TabWord);
+            int id=WordtoInt((AccessCommand(command,2)));
+            int n=WordtoInt(AccessCommand(command,3));
+            alamat Loc=First(daftarPlaylist.A[id-1]);
+            if(id<=0 || id>LengthArrayDin(daftarPlaylist)) printf("Tidak ada playlist dengan ID %d.",id);
+            else if(Loc==Nil || n>NbElmtPlaylist(daftarPlaylist.A[id-1])) printf("Tidak ada lagu dengan urutan %d di playlist \"%s\"!\n",n,daftarPlaylist.A[id-1].NamaPlaylist.TabWord);
+            else if(n==1) DelFirst(&daftarPlaylist.A[id-1],&Loc);
+            else 
+            {
+                alamat Prec,Loc;
+                Loc=alamatIndeksKe(daftarPlaylist.A[id-1], n);
+                Lagu dihapus=LaguIndeksKe(daftarPlaylist.A[id-1],n);
+                Prec=alamatIndeksKe(daftarPlaylist.A[id-1], n-1);
+                DelAfter(&daftarPlaylist.A[id-1], &Loc, Prec);
+                printf("Lagu \"%s\" oleh \"%s\" telah dihapus dari playlist \"%s\"!\n",dihapus.nama.TabWord,dihapus.penyanyi.TabWord, daftarPlaylist.A[id-1].NamaPlaylist.TabWord);
+            }
         }
-    }
+    // }
 }
 
 void deletePlaylist()
@@ -328,7 +336,7 @@ void deletePlaylist()
                 idplaylist = GetInput();
             }
         }
+        printf("Playlist ID %d dengan judul '%s' berhasil dihapus.\n",idpl, daftarPlaylist.A[idpl-1].NamaPlaylist.TabWord);
         DeleteAtArrayDin(&daftarPlaylist, idpl-1);
-        printf("Playlist ID %d dengan judul '%s' berhasil dihapus.\n",idpl, daftarPlaylist.A[id-1].NamaPlaylist.TabWord);
     }
 }
