@@ -95,11 +95,17 @@ void queueSong() {
             idlagu = GetInput();
         }
     }
-
-    enqueueLagu(&q, l.PenyanyiKe[idxp].InfoPenyanyi[idxp].Value.InfoAlbum[idxa].Value.InfoLagu[idxl-1]);
-
-    /* Final State */
+    if (currentsong.nama.Length == 0){
+        Lagu val;
+        enqueueLagu(&q, l.PenyanyiKe[idxp].InfoPenyanyi[idxp].Value.InfoAlbum[idxa].Value.InfoLagu[idxl-1]);
+        dequeueLagu(&q, &val);
+        currentsong = val;
+    }
+    else{
+        enqueueLagu(&q, l.PenyanyiKe[idxp].InfoPenyanyi[idxp].Value.InfoAlbum[idxa].Value.InfoLagu[idxl-1]);
+    }
     printf("Berhasil menambahkan lagu \"%s\" oleh \"%s\" ke queue.\n", l.PenyanyiKe[idxp].InfoPenyanyi[idxp].Value.InfoAlbum[idxa].Value.InfoLagu[idxl-1].nama.TabWord, namapenyanyi.Key.TabWord);
+    /* Final State */
 }
 
 
@@ -133,9 +139,20 @@ void queuePlaylist() {
         printf("\n");
         alamat P = First(daftarPlaylist.A[idxpl-1]); //Pake ADT Dilla
         if (P != Nil){
-            while (P != Nil) {
-                enqueueLagu(&q, P->infolagu);
-                P = P->next;
+            if (currentsong.nama.Length == 0){
+                while (P != Nil) {
+                    enqueueLagu(&q, P->infolagu);
+                    P = P->next;
+                }
+                Lagu val;
+                dequeueLagu(&q, &val);
+                currentsong = val;
+            }
+            else{
+                while (P != Nil) {
+                    enqueueLagu(&q, P->infolagu);
+                    P = P->next;
+                }
             }
             printf("Berhasil menambahkan playlist \"%s\" ke queue.\n", daftarPlaylist.A[idxpl-1].NamaPlaylist.TabWord); 
         }

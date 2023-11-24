@@ -112,41 +112,6 @@ void dequeueLagu(Queuelagu *q, ElTypeQueue *val){
 	}
 }
 
-/* *** Display Queue *** */
-/* Prosedur untuk menampilkan Queue secara transversal*/
-/* I.S : Queue terdefinisi */
-/* F.S : Queue terlihat dilayar */
-void displayQueueLagu(Queuelagu q){
-	int temp1, temp2;
-	ElTypeQueue val;
-	Queuelagu q1;
-	/*ALGORITMA*/
-	if (isEmptyQueueLagu(q))
-	{
-	printf("[]\n");
-	printf("Queue kosong\n");
-	}
-	else
-	{
-	temp1 = IDX_HEAD(q);
-	temp2 = IDX_TAIL(q);
-	int i = 1;
-	while (IDX_HEAD(q) != IDX_UNDEF)
-	{
-	dequeueLagu(&q, &val);
-	enqueueLagu(&q1, val);
-	printf("%d. %s - %s - %s\n", i, val.penyanyi.TabWord,val.nama.TabWord,val.album.TabWord);
-	i++;
-	}
-	while (IDX_HEAD(q1) != IDX_UNDEF){
-	dequeueLagu(&q1, &val);
-	enqueueLagu(&q, val);
-	}
-	IDX_HEAD(q) = temp1;
-	IDX_TAIL(q) = temp2;
-	}
-}
-
 /* Proses: Menyalin isi dari queueInput ke queueOutput */
 /* I.S : queueInput mungkin kosong, tabel penampung elemen queueInput TIDAK penuh */
 /* F.S : queueOutput memiliki isi queue yang sama */

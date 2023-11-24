@@ -56,12 +56,6 @@ void enqueueLagu(Queuelagu *q, ElTypeQueue val);
 		 q mungkin kosong */
 void dequeueLagu(Queuelagu *q, ElTypeQueue *val);
 
-/* *** Display Queue *** */
-/* Prosedur untuk menampilkan Queue secara transversal*/
-/* I.S : Queue terdefinisi */
-/* F.S : Queue terlihat dilayar */
-void displayQueueLagu(Queuelagu q);
-
 /* Proses: Menyalin isi dari queueInput ke queueOutput */
 /* I.S : queueInput mungkin kosong, tabel penampung elemen queueInput TIDAK penuh */
 /* F.S : queueOutput memiliki isi queue yang sama */
