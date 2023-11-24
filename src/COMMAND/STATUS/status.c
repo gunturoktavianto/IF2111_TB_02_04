@@ -40,7 +40,7 @@ void startStatus(){
     CreateEmptyPlaylist(namacp, &currentplaylist);
     /* I.S. Tidak ada lagu yang diputar */
     if(currentsong.nama.Length==0){
-        printf("Now Playing:\nNo songs have been played yet. Please search for a song to begin playback.\n\nQueue:\nYour queue is empty.\n");
+       printf("Now Playing:\nNo songs have been played yet. Please search for a song to begin playback.\n\nQueue:\nYour queue is empty.\n");
     } else{
         /* I.S. Ada lagu yang diputar */
         // I.S. Queue kosong
