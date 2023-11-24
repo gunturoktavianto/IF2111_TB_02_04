@@ -283,29 +283,25 @@ void swapPlaylist(Word command)
 
 void removePlaylist(Word command)
 {
-    // if(LengthArrayDin(daftarPlaylist)==0) printf("Belum ada playlist yang dibuat.\n");
-    // else{
-
-        if(!IsWordNumber(AccessCommand(command,2)) || !IsWordNumber(AccessCommand(command,3))) printf("Command invalid.\n");
-        else
+    if(!IsWordNumber(AccessCommand(command,2)) || !IsWordNumber(AccessCommand(command,3))) printf("Command invalid.\n");
+    else
+    {
+        int id=WordtoInt((AccessCommand(command,2)));
+        int n=WordtoInt(AccessCommand(command,3));
+        alamat Loc=First(daftarPlaylist.A[id-1]);
+        if(id<=0 || id>LengthArrayDin(daftarPlaylist)) printf("Tidak ada playlist dengan ID %d.",id);
+        else if(Loc==Nil || n>NbElmtPlaylist(daftarPlaylist.A[id-1])) printf("Tidak ada lagu dengan urutan %d di playlist \"%s\"!\n",n,daftarPlaylist.A[id-1].NamaPlaylist.TabWord);
+        else if(n==1) DelFirst(&daftarPlaylist.A[id-1],&Loc);
+        else 
         {
-            int id=WordtoInt((AccessCommand(command,2)));
-            int n=WordtoInt(AccessCommand(command,3));
-            alamat Loc=First(daftarPlaylist.A[id-1]);
-            if(id<=0 || id>LengthArrayDin(daftarPlaylist)) printf("Tidak ada playlist dengan ID %d.",id);
-            else if(Loc==Nil || n>NbElmtPlaylist(daftarPlaylist.A[id-1])) printf("Tidak ada lagu dengan urutan %d di playlist \"%s\"!\n",n,daftarPlaylist.A[id-1].NamaPlaylist.TabWord);
-            else if(n==1) DelFirst(&daftarPlaylist.A[id-1],&Loc);
-            else 
-            {
-                alamat Prec,Loc;
-                Loc=alamatIndeksKe(daftarPlaylist.A[id-1], n);
-                Lagu dihapus=LaguIndeksKe(daftarPlaylist.A[id-1],n);
-                Prec=alamatIndeksKe(daftarPlaylist.A[id-1], n-1);
-                DelAfter(&daftarPlaylist.A[id-1], &Loc, Prec);
-                printf("Lagu \"%s\" oleh \"%s\" telah dihapus dari playlist \"%s\"!\n",dihapus.nama.TabWord,dihapus.penyanyi.TabWord, daftarPlaylist.A[id-1].NamaPlaylist.TabWord);
-            }
+            alamat Prec,Loc;
+            Loc=alamatIndeksKe(daftarPlaylist.A[id-1], n);
+            Lagu dihapus=LaguIndeksKe(daftarPlaylist.A[id-1],n);
+            Prec=alamatIndeksKe(daftarPlaylist.A[id-1], n-1);
+            DelAfter(&daftarPlaylist.A[id-1], &Loc, Prec);
+            printf("Lagu \"%s\" oleh \"%s\" telah dihapus dari playlist \"%s\"!\n",dihapus.nama.TabWord,dihapus.penyanyi.TabWord, daftarPlaylist.A[id-1].NamaPlaylist.TabWord);
         }
-    // }
+    }
 }
 
 void deletePlaylist()
