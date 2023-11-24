@@ -25,8 +25,8 @@ void startQueue()
     printf("----TERDAPAT LIMA FUNGSI YANG BISA DIAKSES---- \n");
     printf("1. QUEUE SONG -> untuk menambahkan lagu ke dalam queue\n");
     printf("2. QUEUE PLAYLIST -> untuk menambahkan lagu yang ada dalam playlist ke dalam queue\n");
-    printf("3. QUEUE SWAP -> untuk menukar lagu pada urutan ke x dan juga urutan ke y\n");
-    printf("4. QUEUE REMOVE -> untuk menghapus lagu dari queue\n");
+    printf("3. QUEUE SWAP <x> <y> -> untuk menukar lagu pada urutan ke x dan juga urutan ke y\n");
+    printf("4. QUEUE REMOVE <id> -> untuk menghapus lagu dari queue\n");
     printf("5. QUEUE CLEAR -> untuk mengosongkan queue\n");
     printf("6. QUEUE QUIT -> untuk keluar dari fungsi queue\n");
     getCommandQueue();
