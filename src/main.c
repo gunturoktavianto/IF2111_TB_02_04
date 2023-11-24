@@ -19,13 +19,13 @@ int main() {
             if (IsWordEq(toKata("HELP"), command)){
                 InitialHelp();
             }
-            else if (!IsWordEq(toKata("START"), command) && !IsWordEq(toKata("LOAD"), command)) {
+            else if (!IsWordEq(toKata("START"), command) && !IsWordEq(toKata("LOAD"), AccessCommand(command,0))) {
                 printf("Command tidak valid. Mesin WayangWave belum dijalankan!\nGunakan command START/LOAD/HELP untuk memulai\n\n");
             }
-        } while (!IsWordEq(toKata("START"), command) && !IsWordEq(toKata("LOAD"), command));
+        } while (!IsWordEq(toKata("START"), command) && !IsWordEq(toKata("LOAD"), AccessCommand(command,0)));
 
         if (IsWordEq(toKata("START"), command)) {startconfig(); stateWayangWave=true;}
-        else {load(); stateWayangWave=true;};
+        else {load(command); stateWayangWave=true;};
     }
     if (stateWayangWave) {
         SessionHelp();

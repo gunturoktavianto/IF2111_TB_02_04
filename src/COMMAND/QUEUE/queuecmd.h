@@ -10,7 +10,7 @@ void queuePlaylist();
 // Fungsi untuk menukar lagu pada urutan x dan y dalam queue
 void swapSongs();
 // Fungsi untuk menghapus lagu dari queue berdasarkan ID
-void removeSong();
+void removeSong(Word command);
 
 // Fungsi untuk mengosongkan queue
 void clearQueue();

@@ -11,8 +11,8 @@ void getCommandQueue()
         Word command=GetInput();
         if(IsWordEq(command, toKata("QUEUE SONG"))) {queueSong(); state=true;}
         else if(IsWordEq(command, toKata("QUEUE PLAYLIST"))) {queuePlaylist(); state=true;}
-        else if(IsWordEq(AccessCommand(command,0),toKata("QUEUE")) && IsWordEq(AccessCommand(command,1),toKata("SWAP"))) {swapSongs(command); state=true;}
-        else if(IsWordEq(command,toKata("QUEUE REMOVE"))) {removeSong(); state=true;}
+        else if(IsWordEq(command, toKata("QUEUE SWAP"))) {swapSongs(); state=true;}
+        else if(IsWordEq(AccessCommand(command,0),toKata("QUEUE")) && IsWordEq(AccessCommand(command,1),toKata("REMOVE"))) {removeSong(command); state=true;}
         else if(IsWordEq(command,toKata("QUEUE CLEAR"))) {clearQueue(); state=true;}
         else if (IsWordEq(command,toKata("QUEUE QUIT"))) {state=false;}
         else printf("> COMMAND TIDAK VALID SILAHKAN MASUKAN ULANG!\n");   
@@ -25,7 +25,7 @@ void startQueue()
     printf("----TERDAPAT LIMA FUNGSI YANG BISA DIAKSES---- \n");
     printf("1. QUEUE SONG -> untuk menambahkan lagu ke dalam queue\n");
     printf("2. QUEUE PLAYLIST -> untuk menambahkan lagu yang ada dalam playlist ke dalam queue\n");
-    printf("3. QUEUE SWAP <x> <y> -> untuk menukar lagu pada urutan ke x dan juga urutan ke y\n");
+    printf("3. QUEUE SWAP-> untuk menukar lagu pada urutan ke x dan juga urutan ke y\n");
     printf("4. QUEUE REMOVE <id> -> untuk menghapus lagu dari queue\n");
     printf("5. QUEUE CLEAR -> untuk mengosongkan queue\n");
     printf("6. QUEUE QUIT -> untuk keluar dari fungsi queue\n");
@@ -164,14 +164,16 @@ void queuePlaylist() {
 }
 
 // Fungsi untuk menukar lagu pada urutan x dan y dalam queue
-void swapSongs(Word command) {
+void swapSongs() {
     if (isEmptyQueueLagu(q)){
         printf("Queue kosong.\n");
     } else {
         int x, y;
         Word idx1, idx2;
-        idx1 = AccessCommand(command,2);
-        idx2 = AccessCommand(command,3);
+        printf("Masukkan index lagu pertama yang ingin dihapus dari queue : ");
+        idx1 = GetInput();
+        printf("Masukkan index lagu kedua yang ingin dihapus dari queue : ");
+        idx2 = GetInput();
         boolean valid = false;
         if (isEmptyQueueLagu(q)){
             printf("Queue kosong. Tidak ada lagu yang dapat ditukar.\n");
@@ -219,7 +221,7 @@ void swapSongs(Word command) {
             {
                 temp.nama.TabWord[i] = q.buffer[x-1].nama.TabWord[i];
             }
-            temp.nama.TabWord[temp.album.Length]='\0';
+            temp.nama.TabWord[temp.nama.Length]='\0';
             for (i = 0; i < temp.album.Length; i++)
             {
                 temp.album.TabWord[i] = q.buffer[x-1].album.TabWord[i];
@@ -260,7 +262,7 @@ void swapSongs(Word command) {
                 q.buffer[y-1].album.TabWord[i] = temp.album.TabWord[i];
             }
             q.buffer[y-1].album.TabWord[q.buffer[y-1].album.Length]='\0';
-            for (i = 0; i < q.buffer[y-1].nama.Length; i++)
+            for (i = 0; i < q.buffer[y-1].penyanyi.Length; i++)
             {
                 q.buffer[y-1].penyanyi.TabWord[i] = temp.penyanyi.TabWord[i];
             }
@@ -271,48 +273,45 @@ void swapSongs(Word command) {
 }
 
 // Fungsi untuk menghapus lagu dari queue berdasarkan ID
-void removeSong() {
+void removeSong(Word command) {
     if (isEmptyQueueLagu(q)){
         printf("Queue kosong.\n");
     } else {
-        
-    printf("\nMasukkan urutan lagu yang ingin dihapus dari queue : ");
-    Word idlagu = GetInput();
+    Word idlagu = AccessCommand(command,2);
     int idxl;
     boolean valid = false;
-    while(!valid){
-        if (IsWordNumber(idlagu)){
-            idxl = WordtoInt(idlagu);
-            if (idxl > 0 && idxl <= lengthQueueLagu(q)){valid = true;}
-            else{
-                printf("Urutan lagu invalid");
-                printf("Masukkan urutan lagu yang ingin dihapus dari queue : \n");
-                idlagu = GetInput();
-            }
-        }
-        else{
-            printf("Urutan lagu invalid\n");
-            printf("Masukkan urutan lagu yang ingin dihapus dari queue : \n");
-            idlagu = GetInput();
-        }
-    }
-        printf("\n");
-        printf("Lagu \"%s\" oleh \"%s\" telah dihapus dari queue!\n", q.buffer[idxl-1].nama.TabWord, q.buffer[idxl-1].penyanyi.TabWord);
-        Queuelagu temp;
-        CreateQueueLagu(&temp);
-        ElTypeQueue  val;
-        dequeueLagu(&q, &val);
-        enqueueLagu(&temp, val);
-        while (!isInQueueLagu(temp,q.buffer[idxl-1])){
+    if (IsWordNumber(idlagu)){
+        idxl = WordtoInt(idlagu);
+        if (idxl > 0 && idxl <= lengthQueueLagu(q))
+        {
+            printf("Lagu \"%s\" oleh \"%s\" telah dihapus dari queue!\n", q.buffer[idxl-1].nama.TabWord, q.buffer[idxl-1].penyanyi.TabWord);
+            Queuelagu temp;
+            CreateQueueLagu(&temp);
+            ElTypeQueue  val;
             dequeueLagu(&q, &val);
             enqueueLagu(&temp, val);
+            while (!isInQueueLagu(temp,q.buffer[idxl-1])){
+                dequeueLagu(&q, &val);
+                enqueueLagu(&temp, val);
+            }
+            dequeueLagu(&temp,&val);
+            while (!isEmptyQueueLagu(temp)){
+                dequeueLagu(&temp, &val);
+                enqueueLagu(&q, val);
+            }
         }
-        dequeueLagu(&temp,&val);
-        while (!isEmptyQueueLagu(temp)){
-            dequeueLagu(&temp, &val);
-            enqueueLagu(&q, val);
+        else 
+        {
+            printf("Invalid command\n");
         }
     }
+        else
+        {
+            printf("Invalid command\n");
+        }
+        printf("\n");
+        
+}
 }
 
 
