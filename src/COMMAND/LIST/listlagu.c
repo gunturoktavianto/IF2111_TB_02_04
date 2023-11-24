@@ -158,7 +158,7 @@ void ListLagu()
         infotypePenyanyi command;
         while(valid == false)
         {
-            printf("\nPilih penyanyi untuk melihat album mereka:  ");
+            printf("\nPilih penyanyi untuk melihat album mereka: ");
             command.Key = GetInput(); 
             if(IsMemberListPenyanyi(&l, command)){valid = true;}
             else{printf("\nNama Penyanyi tidak ditemukan.\n");}
