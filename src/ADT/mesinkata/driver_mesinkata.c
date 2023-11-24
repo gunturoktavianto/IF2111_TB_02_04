@@ -1,5 +1,4 @@
 #include "mesinkata.c"
-#include "mesinkarakter.c"
 
 int main() {
     FILE *inputFile;

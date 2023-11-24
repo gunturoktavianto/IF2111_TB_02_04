@@ -29,15 +29,33 @@ void IgnoreBlanks();
    F.S. : currentChar ≠ BLANK atau currentChar = MARK */
 
 void IgnoreCR();
+/* Mengabaikan satu atau beberapa BLANK
+   I.S. : currentChar sembarang
+   F.S. : currentChar ≠ \r */
+
 void IgnoreEOL();
+/* Mengabaikan satu atau beberapa BLANK
+   I.S. : currentChar sembarang
+   F.S. : currentChar ≠ \n */
+
 void IgnoreSC();
+/* Mengabaikan satu atau beberapa BLANK
+   I.S. : currentChar sembarang
+   F.S. : currentChar ≠ ; */
 
 void STARTWORD(FILE *input);
 /* I.S. : currentChar sembarang
    F.S. : EndWord = true, dan currentChar = MARK;
           atau EndWord = false, currentWord adalah kata yang sudah diakuisisi,
           currentChar karakter pertama sesudah karakter terakhir kata */
+
 void STARTWORDFILE(char *fileaddress);
+/* I.S. : currentChar sembarang
+   F.S. : EndWord = true, dan currentChar = MARK;
+          atau EndWord = false, currentWord adalah kata yang sudah diakuisisi,
+          currentChar karakter pertama sesudah karakter terakhir kata 
+   KHUSUS UNTUK MEMBACA FILE */
+
 void ADVWORD();
 /* I.S. : currentChar adalah karakter pertama kata yang akan diakuisisi
    F.S. : currentWord adalah kata terakhir yang sudah diakuisisi,
@@ -74,23 +92,39 @@ void CopyWordLoad();
           Jika panjang kata melebihi NMax, maka sisa kata "dipotong" */
 
 void nextLine();
+/* Membaca ke bari selanjutnya */
+
 int stringLength(char *str);
+/* Menghitung panjang dari sebuah string */
+
 int WordtoInt(Word w);
+/* Menkonversi word ke dalam int */
+
 Word GetWords();
+/* Membaca kata */
+
 boolean IsWordEq (Word kata1, Word kata2);
+/* Membandingkan tipe data bentukan Word */
+
 Word toKata(char *str); 
 /*  Fungsi yang menerima sebuah paramater str bertipe string
     Kemudian mengembalikan elemen bertipe Word yang merupakan hasil transformasi string str */
+
 Word GetInput();
-/*  Fungsi untuk menginput Word*/
+/*  Fungsi untuk menginput Word */
 
 Word GetInputs();
+/*  Fungsi untuk menginput Word */
+
 boolean IsWordNumber (Word kata);
 /* Mengecek Word adalah angka atau bukan*/
 
 char* wordToString(Word word);
+/* Konversi word menjadi string (arr of char) */
 
 Word concatWord(Word w1, Word w2);
+/* Menggabungkan dua kata menjadi satu */
 
 Word AccessCommand(Word comm, int Idx);
+/* Menerima dua jenis inputan */
 #endif

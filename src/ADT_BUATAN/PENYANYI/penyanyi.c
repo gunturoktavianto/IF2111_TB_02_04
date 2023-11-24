@@ -1,4 +1,5 @@
 #include "penyanyi.h"
+
 ListPenyanyi l;
 /* *** Konstruktor/Kreator *** */
 void CreateEmptyPenyanyi(Penyanyi *M){

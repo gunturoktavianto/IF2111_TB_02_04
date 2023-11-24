@@ -54,10 +54,16 @@ void Pop(Stack *S, infotypeStack *X);
 /* F.S. X adalah nilai elemen TOP yang lama, TOP berkurang 1 */
 
 Stack copyStack(Stack input, Stack *hasil);
-int NbElmtStack(Stack *S);
-void displayStackUrutan(Stack *S);
-void displayRiwayat(Stack *S);
+/* Meduplikat stack */
 
+int NbElmtStack(Stack *S);
+/* Mengirimkan jumlah elemen dari sebuah stack */
+
+void displayStackUrutan(Stack *S);
+/* Menampilkan stack sesuai urutan */
+
+void displayRiwayat(Stack *S);
+/* Menampilkan daftar riwayat */
 
 void ReplaceCS(Stack *S, Lagu L);
 /* Mengganti currentsong dengan Lagu L*/

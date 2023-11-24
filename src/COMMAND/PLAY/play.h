@@ -19,7 +19,9 @@ void PlayPlaylist();
 */
 
 void startPlay();
+/* Menjalankan fungsi play */
 
 void getCommandPlay();
+/* Kumpulan command fungsi play */
 
 #endif

@@ -173,7 +173,14 @@ int NbElmtPlaylist (List L);
 /* Mengirimkan banyaknya elemen list; mengirimkan 0 jika list kosong */
 
 void DisplayDaftarPlaylist();
+/* Menampilkan daftar playlist */
+
 void DisplayLaguPlaylist(List L);
+/* Menampilkan lagu dari playlist tertentu */
+
 Lagu LaguIndeksKe (List l, int idx);
+/* Mencari lagu dari index ke idx */
+
 alamat alamatIndeksKe (List l, int idx);
+/* Mencari alamat dari index ke idx */
 #endif

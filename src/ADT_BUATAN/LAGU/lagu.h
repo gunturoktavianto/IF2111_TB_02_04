@@ -1,6 +1,5 @@
 #ifndef lagu_H
 #define lagu_H
-#include <stdio.h>
 #include "../../ADT/mesinkata/mesinkata.h"
 
 /* MODUL SetLagu
@@ -27,6 +26,7 @@ typedef struct
 } SetLagu;
 
 extern Lagu currentsong;
+
 /* Definisi SetLagu S kosong : S.Count = Nil */
 /* S.Count = jumlah element SetLagu */
 /* S.Elements = tempat penyimpanan element SetLagu */
@@ -73,4 +73,5 @@ Lagu MakeLagu(Word nama, Word album, Word penyanyi);
 
 SetLagu MakeSetLagu(int jumlahlagu);
 /* Mengisi SetLagu*/
+
 #endif

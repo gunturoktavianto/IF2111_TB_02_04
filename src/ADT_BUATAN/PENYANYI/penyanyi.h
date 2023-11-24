@@ -12,8 +12,8 @@ typedef Album valuetypePenyanyi;
 typedef int address;    
 
 typedef struct {
-    keytype Key;//NamaPenyanyi
-        valuetypePenyanyi Value;//SetAlbum
+    keytype Key;
+        valuetypePenyanyi Value;
 } infotypePenyanyi;
 
 typedef struct {
@@ -112,4 +112,5 @@ int IdxLagu(ListPenyanyi *S, int idxp, int idxa, Word kl);
 /* I.S. ListPenyanyi tidak kosong, index penyanyi dan Nama Album terdefinisi
    F.S. index album*/
 void printdaftarPenyanyi(ListPenyanyi *S);
+/* Mencetak keseluruhan isi daftar penyanyi */
 #endif
