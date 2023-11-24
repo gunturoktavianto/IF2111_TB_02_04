@@ -10,6 +10,7 @@ void startQuit() {
         command=GetInput();
         if ((command.Length == 1)&&(command.TabWord[0] == 'Y' || command.TabWord[0] == 'N')){
             if (command.TabWord[0] == 'Y') {
+            printf("Masukkan nama file penyimpanan: ");
             command=GetInput();
             startSave(command);
             }
