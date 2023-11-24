@@ -7,11 +7,6 @@
 Deklarasi stack yang dengan implementasi array eksplisit-statik rata kiri
 */
 
-// #define false 0
-// #define true 1
-
-
-// typedef int bool;
 typedef Word keytype;
 typedef Album valuetypePenyanyi;
 typedef int address;    

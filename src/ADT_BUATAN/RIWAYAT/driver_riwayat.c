@@ -20,7 +20,4 @@ int main(){
     Pop(&riwayat, &X);
     printf("song = %s, %s, %s", X.album.TabWord, X.nama.TabWord, X.penyanyi.TabWord);
    
-    // displayRiwayat(&riwayat);
-    // Pop(&riwayat, &X);
-    // displayRiwayat(&riwayat);   
 }
