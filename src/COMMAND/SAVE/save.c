@@ -79,4 +79,5 @@ void startSave(Word filesave) { //isi parameter sesuai variabel yang ada di bawa
         }
     }
     fclose(fpointer);
+    printf("File berhasil disimpan!\n");
 }

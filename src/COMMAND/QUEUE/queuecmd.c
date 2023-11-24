@@ -151,7 +151,6 @@ void swapSongs(Word command) {
     if (isEmptyQueueLagu(q)){
         printf("Queue kosong.\n");
     } else {
-
         int x, y;
         Word idx1, idx2;
         idx1 = AccessCommand(command,2);
