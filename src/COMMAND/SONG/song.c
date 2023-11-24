@@ -24,7 +24,7 @@ void songNext()
         dequeueLagu(&q, &song);
         // lagudiputars = lagudiputarq;
          // tadinya mikir lagu yang bakal diputar di tambahin ke riwayat
-        Push(&r, currentsong);
+        if(currentsong.penyanyi.Length != 0 && currentsong.album.Length != 0 && currentsong.nama.Length != 0) Push(&r, currentsong);
         printf("Memutar lagu selanjutnya\n\"%s\" oleh \"%s\"\n", song.nama.TabWord, song.penyanyi.TabWord);
         currentsong = song;
     }
@@ -63,7 +63,7 @@ void songPrevious()
             }
         }
         printf("Memutar lagu sebelumnya \n\"%s\" oleh \"%s\"", song.nama.TabWord, song.penyanyi.TabWord);
-        printf("%d\n",currentsong.nama.Length);
+        // printf("%d\n",currentsong.nama.Length);
         // if(currentsong.penyanyi.Length != 0 && currentsong.album.Length != 0 && currentsong.nama.Length != 0){
         //     Push(&r, currentsong);}
         currentsong = song;
