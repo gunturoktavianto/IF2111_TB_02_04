@@ -90,7 +90,7 @@ char yesorno ()
             }
             else if(input == 'N' || input == 'n')
             {
-                printf("\n>> Keluar dari Fitur Fungsi LIST");
+                
                 valid = true;
             }
             else
@@ -105,11 +105,13 @@ char yesorno ()
 
 void ListPlaylist(){
     boolean valid = false;
-    printf("Daftar Playlist Pengguna :\n");
-    DisplayDaftarPlaylist(daftarPlaylist);
+    
+    
     if (IsEmptyArrayDin(daftarPlaylist)) printf("Kamu tidak memiliki playlist.\n");
     else
     {
+        printf("Daftar Playlist Pengguna :\n");
+        DisplayDaftarPlaylist(daftarPlaylist);
         printf("Ingin melihat lagu yang ada?(Y/N): ");
         char inputyn = yesorno();
         if(inputyn == 'Y' || inputyn == 'y')

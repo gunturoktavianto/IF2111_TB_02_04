@@ -14,7 +14,6 @@ int main() {
             InitialHelp();
             printf("> ENTER COMMAND: ");
             command=GetInput();
-
             if (!IsWordEq(toKata("START"), command) && !IsWordEq(toKata("LOAD"), command)) {
                 printf("Command tidak valid. Mesin WayangWave belum dijalankan!\nGunakan command START / LOAD untuk memulai\n\n");
             }
