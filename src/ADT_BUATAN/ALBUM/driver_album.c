@@ -3,65 +3,41 @@
 //
 Album album;
 
+#include <stdio.h>
+
 int main() {
-    // Kamus lokal
-    int i=0,N;
+    Album myAlbum;
+    CreateEmptyAlbum(&myAlbum);
 
-    // Generalisasi 
-    CreateEmptyAlbum(&album);
+    printf("Is Album Empty? %s\n", IsEmptyAlbum(myAlbum) ? "Yes" : "No");
 
-    // input sebanyak jumlah album
-    printf("Jumlah album yang ingin dimasukkan: ");
-    scanf("%d",&N);
-    while(i<N){
-        char strkey[30]; 
-        printf("Input nama album ke-%d: ", i+1);
-        scanf(" %[^\n]",strkey);
-        album.InfoAlbum[i].Key=toKata(strkey);
-        album.InfoAlbum[i].Key.TabWord[stringLength(strkey)] = '\0';
-        album.Count++;
-        i++;
-    }
+    keytype albumKey = toKata("MyAlbum");
+    valuetypeAlbum songSet = MakeSetLagu(3);
 
-    // Print the Album
-    printf("\nAlbum setelah input: \n");
-    PrintAlbum(album);
+    InsertAlbum(&myAlbum, albumKey, songSet);
 
-    // Buat lagu dummy
-    SetLagu lagu;
-    CreateEmptySetLagu(&lagu);
-    lagu.Count = 1;
-    lagu.InfoLagu[0].penyanyi = toKata("OLIV");
-    lagu.InfoLagu[0].album = toKata("BOSSCHA");
-    lagu.InfoLagu[0].nama = toKata("RUNGKAD");
+    printf("Is '%s' in the Album? %s\n", albumKey.TabWord,
+           IsMemberAlbum(myAlbum, albumKey) ? "Yes" : "No");
 
-    // Initialize value here
-    InsertAlbum(&album, toKata("HARTA"), lagu);
+    valuetypeAlbum retrievedSet = ValueAlbum(myAlbum, albumKey);
+    printf("Number of songs in '%s' album: %d\n", albumKey.TabWord, retrievedSet.Count);
 
-    printf("\nAlbum setelah insert: \n");
-    PrintAlbum(album);
+    printf("\n Album:\n");
+    PrintAlbum(myAlbum);
 
-    // Test IsMemberAlbum
-    if (IsMemberAlbum(album, toKata("HARTA"))) {
-        printf("\nTest IsMemberAlbum: Passed\n");
-    } else {
-        printf("\nTest IsMemberAlbum: Failed\n");
-    }
+    keytype albumKeyToDelete = toKata("NonExistentAlbum");
+    printf("\nDeleting '%s' album...\n", albumKeyToDelete.TabWord);
+    DeleteAlbum(&myAlbum, albumKeyToDelete);
 
-    // Test DeleteAlbum
-    DeleteAlbum(&album, toKata("HARTA"));
+    printf("\nAlbum after deletion:\n");
+    PrintAlbum(myAlbum);
 
-    // Test IsEmptyAlbum again
-    if (IsEmptyAlbum(album)) {
-        printf("Album kosong\n\n");
-    } else {
-        printf("Album tidak kosong\n\n");
-    }
+    Album newAlbum = MakeAlbum(MakeSetLagu(2), 2);
 
+    //  the new Album
+    printf("\nNew Album:\n");
+    PrintAlbum(newAlbum);
 
-    // Test MakeAlbum
-    Album make = MakeAlbum(lagu, 3);
-    PrintAlbum(make);
-    
     return 0;
 }
+

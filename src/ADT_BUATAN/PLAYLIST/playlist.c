@@ -355,4 +355,3 @@ int NbElmtPlaylist (List L){
     }
     return count;
 }
-/****************** PROSES SEMUA ELEMEN LIST ******************/
