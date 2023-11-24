@@ -90,7 +90,7 @@ char yesorno ()
             }
             else if(input == 'N' || input == 'n')
             {
-                printf("\n>> Keluar dari Fungsi LIST");
+                printf("\n>> Keluar dari Fitur Fungsi LIST");
                 valid = true;
             }
             else
@@ -107,31 +107,35 @@ void ListPlaylist(){
     boolean valid = false;
     printf("Daftar Playlist Pengguna :\n");
     DisplayDaftarPlaylist(daftarPlaylist);
-    printf("Ingin melihat lagu yang ada?(Y/N): ");
-    char inputyn = yesorno();
-    if(inputyn == 'Y' || inputyn == 'y')
+    if (IsEmptyArrayDin(daftarPlaylist)) printf("Kamu tidak memiliki playlist.\n");
+    else
     {
-        printf("Masukkan ID Playlist: ");
-        Word idplaylist = GetInput();
-        int IDPlaylist;
-        boolean valid = false;
-        while(!valid){
-            if (IsWordNumber(idplaylist)){
-                IDPlaylist = WordtoInt(idplaylist);
-                if (IDPlaylist <= LengthArrayDin(daftarPlaylist) && IDPlaylist > 0){valid = true;}
+        printf("Ingin melihat lagu yang ada?(Y/N): ");
+        char inputyn = yesorno();
+        if(inputyn == 'Y' || inputyn == 'y')
+        {
+            printf("Masukkan ID Playlist: ");
+            Word idplaylist = GetInput();
+            int IDPlaylist;
+            boolean valid = false;
+            while(!valid){
+                if (IsWordNumber(idplaylist)){
+                    IDPlaylist = WordtoInt(idplaylist);
+                    if (IDPlaylist <= LengthArrayDin(daftarPlaylist) && IDPlaylist > 0){valid = true;}
+                    else{
+                        printf("ID Playlist INVALID\n");
+                        printf("Masukkan ID Playlist: ");
+                        idplaylist = GetInput();
+                    }
+                }
                 else{
                     printf("ID Playlist INVALID\n");
                     printf("Masukkan ID Playlist: ");
                     idplaylist = GetInput();
                 }
-            }
-            else{
-                printf("ID Playlist INVALID\n");
-                printf("Masukkan ID Playlist: ");
-                idplaylist = GetInput();
-            }
-        } DisplayLaguPlaylist(daftarPlaylist.A[IDPlaylist-1]);
-    } 
+            } DisplayLaguPlaylist(daftarPlaylist.A[IDPlaylist-1]);
+        } 
+    }
 }
 
 void ListLagu()
@@ -141,6 +145,7 @@ void ListLagu()
     char inputyn;
     int indekspenyanyi;
     Word namaalbum;
+    
     // ALGORTIMA
     printdaftarPenyanyi(&l);
     // mencari penyanyi
@@ -191,13 +196,14 @@ void startList() // yang dipanggil
 {
     // KAMUS
     Word command;
+    boolean state=true;
     printf("====[ SELAMAT DATANG DI FUNGSI LIST ]====\n");
     printf("----TERDAPAT DUA FUNGSI YANG BISA DIAKSES---- \n");
     printf("        1. LIST DEFAULT\n");
     printf("        2. LIST PLAYLIST \n");
     printf("        3. LIST QUIT \n");
 
-    boolean state=true;
+    
     while(state)
     {
         printf("> SILAHKAN MASUKAN COMMAND: ");
